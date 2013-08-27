@@ -2,7 +2,7 @@
 import globalvars
 import mysql.connector
 
-def run():
+def get():
   cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
   cursor = cnx.cursor()
   sql = ( 'SELECT * FROM update_log '
