@@ -11,7 +11,7 @@ app.secret_key = 'Ovaphlow'
 
 @app.route('/')
 def index_page():
-  return index.get()
+  return index.get1()
 
 @app.route('/daoru', methods=['get', 'post'])
 def daoru_page():

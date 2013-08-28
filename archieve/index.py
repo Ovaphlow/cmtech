@@ -16,3 +16,7 @@ def get():
   }
   template = globalvars.jinja_env.get_template('template/index.html')
   return template.render(template_param)
+
+def get1():
+  template = globalvars.jinja_env.get_template('template/index.html')
+  return template.render()
