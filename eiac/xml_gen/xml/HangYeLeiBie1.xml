@@ -1,0 +1,1898 @@
+<?xml version="1.0" ?>
+<root>
+  <Tier1 name="01农业">
+    <Tier2 name="011谷物及其他作物的种植">
+      <Tier3>0111谷物的种植</Tier3>
+      <Tier3>0112薯类的种植</Tier3>
+      <Tier3>0113油料的种植</Tier3>
+      <Tier3>0114豆类的种植</Tier3>
+      <Tier3>0115棉花的种植</Tier3>
+      <Tier3>0116麻类的种植</Tier3>
+      <Tier3>0117糖料的种植</Tier3>
+      <Tier3>0118烟草的种植</Tier3>
+      <Tier3>0119其他作物的种植</Tier3>
+    </Tier2>
+    <Tier2 name="012蔬菜、园艺作物的种植">
+      <Tier3>0121蔬菜的种植</Tier3>
+      <Tier3>0122花卉的种植</Tier3>
+      <Tier3>0123其他园艺作物的种植</Tier3>
+    </Tier2>
+    <Tier2 name="013水果、坚果、饮料和香料作物的种植">
+      <Tier3>0131水果、坚果的种植</Tier3>
+      <Tier3>0132茶及其他饮料作物的种植</Tier3>
+      <Tier3>0133香料作物的种植</Tier3>
+    </Tier2>
+    <Tier2 name="014中药材的种植">
+      <Tier3>0140中药材的种植</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="02林业">
+    <Tier2 name="021林木的培育和种植">
+      <Tier3>0211育种和育苗</Tier3>
+      <Tier3>0212造林</Tier3>
+      <Tier3>0213林木的抚育和管理</Tier3>
+    </Tier2>
+    <Tier2 name="022木材和竹材的采运">
+      <Tier3>0221木材的采运</Tier3>
+      <Tier3>0222竹材的采运</Tier3>
+    </Tier2>
+    <Tier2 name="023林产品的采集">
+      <Tier3>0230林产品的采集</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="03畜牧业">
+    <Tier2 name="031牲畜的饲养">
+      <Tier3>0310牲畜的饲养</Tier3>
+    </Tier2>
+    <Tier2 name="032猪的饲养">
+      <Tier3>0320猪的饲养</Tier3>
+    </Tier2>
+    <Tier2 name="033家禽的饲养">
+      <Tier3>0330家禽的饲养</Tier3>
+    </Tier2>
+    <Tier2 name="034狩猎和捕捉动物">
+      <Tier3>0340狩猎和捕捉动物</Tier3>
+    </Tier2>
+    <Tier2 name="039其他畜牧业">
+      <Tier3>0390其他畜牧业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="04渔业">
+    <Tier2 name="041海洋渔业">
+      <Tier3>0411海水养殖</Tier3>
+      <Tier3>0412海洋捕捞</Tier3>
+    </Tier2>
+    <Tier2 name="042内陆渔业">
+      <Tier3>0421内陆养殖</Tier3>
+      <Tier3>0422内陆捕捞</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="05农、林、牧、渔服务业">
+    <Tier2 name="051农业服务业">
+      <Tier3>0511灌溉服务</Tier3>
+      <Tier3>0512农产品初加工服务</Tier3>
+      <Tier3>0519其他农业服务</Tier3>
+    </Tier2>
+    <Tier2 name="052林业服务业">
+      <Tier3>0520林业服务业</Tier3>
+    </Tier2>
+    <Tier2 name="053畜牧服务业">
+      <Tier3>0531兽医服务</Tier3>
+      <Tier3>0539其他畜牧服务</Tier3>
+    </Tier2>
+    <Tier2 name="054渔业服务业">
+      <Tier3>0540渔业服务业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="06煤炭开采和洗选业">
+    <Tier2 name="061烟煤和无烟煤的开采洗选">
+      <Tier3>0610烟煤和无烟煤的开采洗选</Tier3>
+    </Tier2>
+    <Tier2 name="062褐煤的开采洗选">
+      <Tier3>0620褐煤的开采洗选</Tier3>
+    </Tier2>
+    <Tier2 name="069其他煤炭采选">
+      <Tier3>0690其他煤炭采选</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="07石油和天然气开采业">
+    <Tier2 name="071天然原油和天然气开采">
+      <Tier3>0710天然原油和天然气开采</Tier3>
+    </Tier2>
+    <Tier2 name="079与石油和天然气开采有关的服务活动">
+      <Tier3>0790与石油和天然气开采有关的服务活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="08黑色金属矿采选业">
+    <Tier2 name="081铁矿采选">
+      <Tier3>0810铁矿采选</Tier3>
+    </Tier2>
+    <Tier2 name="089其他黑色金属矿采选">
+      <Tier3>0890其他黑色金属矿采选</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="09有色金属矿采选业">
+    <Tier2 name="091常用有色金属矿采选">
+      <Tier3>0911铜矿采选</Tier3>
+      <Tier3>0912铅锌矿采选</Tier3>
+      <Tier3>0913镍钴矿采选</Tier3>
+      <Tier3>0914锡矿采选</Tier3>
+      <Tier3>0915锑矿采选</Tier3>
+      <Tier3>0916铝矿采选</Tier3>
+      <Tier3>0917镁矿采选</Tier3>
+      <Tier3>0919其他常用有色金属矿采选</Tier3>
+    </Tier2>
+    <Tier2 name="092贵金属矿采选">
+      <Tier3>0921金矿采选</Tier3>
+      <Tier3>0922银矿采选</Tier3>
+      <Tier3>0929其他贵金属矿采选</Tier3>
+    </Tier2>
+    <Tier2 name="093稀有稀土金属矿采选">
+      <Tier3>0931钨钼矿采选</Tier3>
+      <Tier3>0932稀土金属矿采选</Tier3>
+      <Tier3>0933放射性金属矿采选</Tier3>
+      <Tier3>0939其他稀有金属矿采选</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="10非金属矿采选业">
+    <Tier2 name="101土砂石开采">
+      <Tier3>1011石灰石、石膏开采</Tier3>
+      <Tier3>1012建筑装饰用石开采</Tier3>
+      <Tier3>1013耐火土石开采</Tier3>
+      <Tier3>1019粘土及其他土砂石开采</Tier3>
+    </Tier2>
+    <Tier2 name="102化学矿采选">
+      <Tier3>1020化学矿采选</Tier3>
+    </Tier2>
+    <Tier2 name="103采盐">
+      <Tier3>1030采盐</Tier3>
+    </Tier2>
+    <Tier2 name="109石棉及其他非金属矿采选">
+      <Tier3>1091石棉、云母矿采选</Tier3>
+      <Tier3>1092石墨、滑石采选</Tier3>
+      <Tier3>1093宝石、玉石开采</Tier3>
+      <Tier3>1099其他非金属矿采选</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="11其他采矿业">
+    <Tier2 name="110其他采矿业">
+      <Tier3>1100其他采矿业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="13农副食品加工业">
+    <Tier2 name="131谷物磨制">
+      <Tier3>1310谷物磨制</Tier3>
+    </Tier2>
+    <Tier2 name="132饲料加工">
+      <Tier3>1320饲料加工</Tier3>
+    </Tier2>
+    <Tier2 name="133植物油加工">
+      <Tier3>1331食用植物油加工</Tier3>
+      <Tier3>1332非食用植物油加工</Tier3>
+    </Tier2>
+    <Tier2 name="134制糖">
+      <Tier3>1340制糖</Tier3>
+    </Tier2>
+    <Tier2 name="135屠宰及肉类加工">
+      <Tier3>1351畜禽屠宰</Tier3>
+      <Tier3>1352肉制品及副产品加工</Tier3>
+    </Tier2>
+    <Tier2 name="136水产品加工">
+      <Tier3>1361水产品冷冻加工</Tier3>
+      <Tier3>1362鱼糜制品及水产品干腌制加工</Tier3>
+      <Tier3>1363水产饲料制造</Tier3>
+      <Tier3>1364鱼油提取及制品的制造</Tier3>
+      <Tier3>1369其他水产品加工</Tier3>
+    </Tier2>
+    <Tier2 name="137蔬菜、水果和坚果加工">
+      <Tier3>1370蔬菜、水果和坚果加工</Tier3>
+    </Tier2>
+    <Tier2 name="139其他农副食品加工">
+      <Tier3>1391淀粉及淀粉制品的制造</Tier3>
+      <Tier3>1392豆制品制造</Tier3>
+      <Tier3>1393蛋品加工</Tier3>
+      <Tier3>1399其他未列明的农副食品加工</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="14食品制造业">
+    <Tier2 name="141焙烤食品制造">
+      <Tier3>1411糕点、面包制造</Tier3>
+      <Tier3>1419饼干及其他焙烤食品制造</Tier3>
+    </Tier2>
+    <Tier2 name="142糖果、巧克力及蜜饯制造">
+      <Tier3>1421糖果、巧克力制造</Tier3>
+      <Tier3>1422蜜饯制作</Tier3>
+    </Tier2>
+    <Tier2 name="143方便食品制造">
+      <Tier3>1431米、面制品制造</Tier3>
+      <Tier3>1432速冻食品制造</Tier3>
+      <Tier3>1439方便面及其他方便食品制造</Tier3>
+    </Tier2>
+    <Tier2 name="144液体乳及乳制品制造">
+      <Tier3>1440液体乳及乳制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="145罐头制造">
+      <Tier3>1451肉、禽类罐头制造</Tier3>
+      <Tier3>1452水产品罐头制造</Tier3>
+      <Tier3>1453蔬菜、水果罐头制造</Tier3>
+      <Tier3>1459其他罐头食品制造</Tier3>
+    </Tier2>
+    <Tier2 name="146调味品、发酵制品制造">
+      <Tier3>1461味精制造</Tier3>
+      <Tier3>1462酱油、食醋及类似制品的制造</Tier3>
+      <Tier3>1469其他调味品、发酵制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="149其他食品制造">
+      <Tier3>1491营养、保健食品制造</Tier3>
+      <Tier3>1492冷冻饮品及食用冰制造</Tier3>
+      <Tier3>1493盐加工</Tier3>
+      <Tier3>1494食品及饲料添加剂制造</Tier3>
+      <Tier3>1499其他未列明的食品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="15饮料制造业">
+    <Tier2 name="151酒精制造">
+      <Tier3>1510酒精制造</Tier3>
+    </Tier2>
+    <Tier2 name="152酒的制造">
+      <Tier3>1521白酒制造</Tier3>
+      <Tier3>1522啤酒制造</Tier3>
+      <Tier3>1523黄酒制造</Tier3>
+      <Tier3>1524葡萄酒制造</Tier3>
+      <Tier3>1529其他酒制造</Tier3>
+    </Tier2>
+    <Tier2 name="153软饮料制造">
+      <Tier3>1531碳酸饮料制造</Tier3>
+      <Tier3>1532瓶（罐）装饮用水制造</Tier3>
+      <Tier3>1533果菜汁及果菜汁饮料制造</Tier3>
+      <Tier3>1534含乳饮料和植物蛋白饮料制造</Tier3>
+      <Tier3>1535固体饮料制造</Tier3>
+      <Tier3>1539茶饮料及其他软饮料制造</Tier3>
+    </Tier2>
+    <Tier2 name="154精制茶加工">
+      <Tier3>1540精制茶加工</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="16烟草制品业">
+    <Tier2 name="161烟叶复烤">
+      <Tier3>1610烟叶复烤</Tier3>
+    </Tier2>
+    <Tier2 name="162卷烟制造">
+      <Tier3>1620卷烟制造</Tier3>
+    </Tier2>
+    <Tier2 name="169其他烟草制品加工">
+      <Tier3>1690其他烟草制品加工</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="17纺织业">
+    <Tier2 name="171棉、化纤纺织及印染精加工">
+      <Tier3>1711棉、化纤纺织加工</Tier3>
+      <Tier3>1712棉、化纤印染精加工</Tier3>
+    </Tier2>
+    <Tier2 name="172毛纺织和染整精加工">
+      <Tier3>1721毛条加工</Tier3>
+      <Tier3>1722毛纺织</Tier3>
+      <Tier3>1723毛染整精加工</Tier3>
+    </Tier2>
+    <Tier2 name="173麻纺织">
+      <Tier3>1730麻纺织</Tier3>
+    </Tier2>
+    <Tier2 name="174丝绢纺织及精加工">
+      <Tier3>1741缫丝加工</Tier3>
+      <Tier3>1742绢纺和丝织加工</Tier3>
+      <Tier3>1743丝印染精加工</Tier3>
+    </Tier2>
+    <Tier2 name="175纺织制成品制造">
+      <Tier3>1751棉及化纤制品制造</Tier3>
+      <Tier3>1752毛制品制造</Tier3>
+      <Tier3>1753麻制品制造</Tier3>
+      <Tier3>1754丝制品制造</Tier3>
+      <Tier3>1755绳、索、缆的制造</Tier3>
+      <Tier3>1756纺织带和帘子布制造</Tier3>
+      <Tier3>1757无纺布制造</Tier3>
+      <Tier3>1759其他纺织制成品制造</Tier3>
+    </Tier2>
+    <Tier2 name="176针织品、编织品及其制品制造">
+      <Tier3>1761棉、化纤针织品及编织品制造</Tier3>
+      <Tier3>1762毛针织品及编织品制造</Tier3>
+      <Tier3>1763丝针织品及编织品制造</Tier3>
+      <Tier3>1769其他针织品及编织品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="18纺织服装、鞋、帽制造业">
+    <Tier2 name="181纺织服装制造">
+      <Tier3>1810纺织服装制造</Tier3>
+    </Tier2>
+    <Tier2 name="182纺织面料鞋的制造">
+      <Tier3>1820纺织面料鞋的制造</Tier3>
+    </Tier2>
+    <Tier2 name="183制帽">
+      <Tier3>1830制帽</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="19皮革、毛皮、羽毛(绒)及其制品业">
+    <Tier2 name="191皮革鞣制加工">
+      <Tier3>1910皮革鞣制加工</Tier3>
+    </Tier2>
+    <Tier2 name="192皮革制品制造">
+      <Tier3>1921皮鞋制造</Tier3>
+      <Tier3>1922皮革服装制造</Tier3>
+      <Tier3>1923皮箱、包(袋)制造</Tier3>
+      <Tier3>1924皮手套及皮装饰制品制造</Tier3>
+      <Tier3>1929其他皮革制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="193毛皮鞣制及制品加工">
+      <Tier3>1931毛皮鞣制加工</Tier3>
+      <Tier3>1932毛皮服装加工</Tier3>
+      <Tier3>1939其他毛皮制品加工</Tier3>
+    </Tier2>
+    <Tier2 name="194羽毛(绒)加工及制品制造">
+      <Tier3>1941羽毛(绒)加工</Tier3>
+      <Tier3>1942羽毛(绒)制品加工</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="20木材加工及木、竹、藤、棕、草制品业">
+    <Tier2 name="201锯材、木片加工">
+      <Tier3>2011锯材加工</Tier3>
+      <Tier3>2012木片加工</Tier3>
+    </Tier2>
+    <Tier2 name="202人造板制造">
+      <Tier3>2021胶合板制造</Tier3>
+      <Tier3>2022纤维板制造</Tier3>
+      <Tier3>2023刨花板制造</Tier3>
+      <Tier3>2029其他人造板、材制造</Tier3>
+    </Tier2>
+    <Tier2 name="203木制品制造">
+      <Tier3>2031建筑用木料及木材组件加工</Tier3>
+      <Tier3>2032木容器制造</Tier3>
+      <Tier3>2039软木制品及其他木制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="204竹、藤、棕、草制品制造">
+      <Tier3>2040竹、藤、棕、草制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="21家具制造业">
+    <Tier2 name="211木质家具制造">
+      <Tier3>2110木质家具制造</Tier3>
+    </Tier2>
+    <Tier2 name="212竹、藤家具制造">
+      <Tier3>2120竹、藤家具制造</Tier3>
+    </Tier2>
+    <Tier2 name="213金属家具制造">
+      <Tier3>2130金属家具制造</Tier3>
+    </Tier2>
+    <Tier2 name="214塑料家具制造">
+      <Tier3>2140塑料家具制造</Tier3>
+    </Tier2>
+    <Tier2 name="219其他家具制造">
+      <Tier3>2190其他家具制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="22造纸及纸制品业">
+    <Tier2 name="221纸浆制造">
+      <Tier3>2210纸浆制造</Tier3>
+    </Tier2>
+    <Tier2 name="222造纸">
+      <Tier3>2221机制纸及纸板制造</Tier3>
+      <Tier3>2222手工纸制造</Tier3>
+      <Tier3>2223加工纸制造</Tier3>
+    </Tier2>
+    <Tier2 name="223纸制品制造">
+      <Tier3>2231纸和纸板容器的制造</Tier3>
+      <Tier3>2239其他纸制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="23印刷业和记录媒介的复制">
+    <Tier2 name="231印刷">
+      <Tier3>2311书、报、刊印刷</Tier3>
+      <Tier3>2312本册印制</Tier3>
+      <Tier3>2319包装装潢及其他印刷</Tier3>
+    </Tier2>
+    <Tier2 name="232装订及其他印刷服务活动">
+      <Tier3>2320装订及其他印刷服务活动</Tier3>
+    </Tier2>
+    <Tier2 name="233记录媒介的复制">
+      <Tier3>2330记录媒介的复制</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="24文教体育用品制造业">
+    <Tier2 name="241文化用品制造">
+      <Tier3>2411文具制造</Tier3>
+      <Tier3>2412笔的制造</Tier3>
+      <Tier3>2413教学用模型及教具制造</Tier3>
+      <Tier3>2414墨水、墨汁制造</Tier3>
+      <Tier3>2419其他文化用品制造</Tier3>
+    </Tier2>
+    <Tier2 name="242体育用品制造">
+      <Tier3>2421球类制造</Tier3>
+      <Tier3>2422体育器材及配件制造</Tier3>
+      <Tier3>2423训练健身器材制造</Tier3>
+      <Tier3>2424运动防护用具制造</Tier3>
+      <Tier3>2429其他体育用品制造</Tier3>
+    </Tier2>
+    <Tier2 name="243乐器制造">
+      <Tier3>2431中乐器制造</Tier3>
+      <Tier3>2432西乐器制造</Tier3>
+      <Tier3>2433电子乐器制造</Tier3>
+      <Tier3>2439其他乐器及零件制造</Tier3>
+    </Tier2>
+    <Tier2 name="244玩具制造">
+      <Tier3>2440玩具制造</Tier3>
+    </Tier2>
+    <Tier2 name="245游艺器材及娱乐用品制造">
+      <Tier3>2451露天游乐场所游乐设备制造</Tier3>
+      <Tier3>2452游艺用品及室内游艺器材制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="25石油加工、炼焦及核燃料加工业">
+    <Tier2 name="251精炼石油产品的制造">
+      <Tier3>2511原油加工及石油制品制造</Tier3>
+      <Tier3>2512人造原油生产</Tier3>
+    </Tier2>
+    <Tier2 name="252炼焦">
+      <Tier3>2520炼焦</Tier3>
+    </Tier2>
+    <Tier2 name="253核燃料加工">
+      <Tier3>2530核燃料加工</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="26化学原料及化学制品制造业">
+    <Tier2 name="261基础化学原料制造">
+      <Tier3>2611无机酸制造</Tier3>
+      <Tier3>2612无机碱制造</Tier3>
+      <Tier3>2613无机盐制造</Tier3>
+      <Tier3>2614有机化学原料制造</Tier3>
+      <Tier3>2619其他基础化学原料制造</Tier3>
+    </Tier2>
+    <Tier2 name="262肥料制造">
+      <Tier3>2621氮肥制造</Tier3>
+      <Tier3>2622磷肥制造</Tier3>
+      <Tier3>2623钾肥制造</Tier3>
+      <Tier3>2624复混肥料制造</Tier3>
+      <Tier3>2625有机肥料及微生物肥料制造</Tier3>
+      <Tier3>2629其他肥料制造</Tier3>
+    </Tier2>
+    <Tier2 name="263农药制造">
+      <Tier3>2631化学农药制造</Tier3>
+      <Tier3>2632生物化学农药及微生物农药制造</Tier3>
+    </Tier2>
+    <Tier2 name="264涂料、油墨、颜料及类似产品制造">
+      <Tier3>2641涂料制造</Tier3>
+      <Tier3>2642油墨及类似产品制造</Tier3>
+      <Tier3>2643颜料制造</Tier3>
+      <Tier3>2644染料制造</Tier3>
+      <Tier3>2645密封用填料及类似品制造</Tier3>
+    </Tier2>
+    <Tier2 name="265合成材料制造">
+      <Tier3>2651初级形态的塑料及合成树脂制造</Tier3>
+      <Tier3>2652合成橡胶制造</Tier3>
+      <Tier3>2653合成纤维单(聚合)体的制造</Tier3>
+      <Tier3>2659其他合成材料制造</Tier3>
+    </Tier2>
+    <Tier2 name="266专用化学产品制造">
+      <Tier3>2661化学试剂和助剂制造</Tier3>
+      <Tier3>2662专项化学用品制造</Tier3>
+      <Tier3>2663林产化学产品制造</Tier3>
+      <Tier3>2664炸药及火工产品制造</Tier3>
+      <Tier3>2665信息化学品制造</Tier3>
+      <Tier3>2666环境污染处理专用药剂材料制造</Tier3>
+      <Tier3>2667动物胶制造</Tier3>
+      <Tier3>2669其他专用化学产品制造</Tier3>
+    </Tier2>
+    <Tier2 name="267日用化学产品制造">
+      <Tier3>2671肥皂及合成洗涤剂制造</Tier3>
+      <Tier3>2672化妆品制造</Tier3>
+      <Tier3>2673口腔清洁用品制造</Tier3>
+      <Tier3>2674香料、香精制造</Tier3>
+      <Tier3>2679其他日用化学产品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="27医药制造业">
+    <Tier2 name="271化学药品原药制造">
+      <Tier3>2710化学药品原药制造</Tier3>
+    </Tier2>
+    <Tier2 name="272化学药品制剂制造">
+      <Tier3>2720化学药品制剂制造</Tier3>
+    </Tier2>
+    <Tier2 name="273中药饮片加工">
+      <Tier3>2730中药饮片加工</Tier3>
+    </Tier2>
+    <Tier2 name="274中成药制造">
+      <Tier3>2740中成药制造</Tier3>
+    </Tier2>
+    <Tier2 name="275兽用药品制造">
+      <Tier3>2750兽用药品制造</Tier3>
+    </Tier2>
+    <Tier2 name="276生物、生化制品的制造">
+      <Tier3>2760生物、生化制品的制造</Tier3>
+    </Tier2>
+    <Tier2 name="277卫生材料及医药用品制造">
+      <Tier3>2770卫生材料及医药用品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="28化学纤维制造业">
+    <Tier2 name="281纤维素纤维原料及纤维制造">
+      <Tier3>2811化纤浆粕制造</Tier3>
+      <Tier3>2812人造纤维（纤维素纤维）制造</Tier3>
+    </Tier2>
+    <Tier2 name="282合成纤维制造">
+      <Tier3>2821锦纶纤维制造</Tier3>
+      <Tier3>2822涤纶纤维制造</Tier3>
+      <Tier3>2823腈纶纤维制造</Tier3>
+      <Tier3>2824维纶纤维制造</Tier3>
+      <Tier3>2829其他合成纤维制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="29橡胶制品业">
+    <Tier2 name="291轮胎制造">
+      <Tier3>2911车辆、飞机及工程机械轮胎制造</Tier3>
+      <Tier3>2912力车胎制造</Tier3>
+      <Tier3>2913轮胎翻新加工</Tier3>
+    </Tier2>
+    <Tier2 name="292橡胶板、管、带的制造">
+      <Tier3>2920橡胶板、管、带的制造</Tier3>
+    </Tier2>
+    <Tier2 name="293橡胶零件制造">
+      <Tier3>2930橡胶零件制造</Tier3>
+    </Tier2>
+    <Tier2 name="294再生橡胶制造">
+      <Tier3>2940再生橡胶制造</Tier3>
+    </Tier2>
+    <Tier2 name="295日用及医用橡胶制品制造">
+      <Tier3>2950日用及医用橡胶制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="296橡胶靴鞋制造">
+      <Tier3>2960橡胶靴鞋制造</Tier3>
+    </Tier2>
+    <Tier2 name="299其他橡胶制品制造">
+      <Tier3>2990其他橡胶制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="30塑料制品业">
+    <Tier2 name="301塑料薄膜制造">
+      <Tier3>3010塑料薄膜制造</Tier3>
+    </Tier2>
+    <Tier2 name="302塑料板、管、型材的制造">
+      <Tier3>3020塑料板、管、型材的制造</Tier3>
+    </Tier2>
+    <Tier2 name="303塑料丝、绳及编织品的制造">
+      <Tier3>3030塑料丝、绳及编织品的制造</Tier3>
+    </Tier2>
+    <Tier2 name="304泡沫塑料制造">
+      <Tier3>3040泡沫塑料制造</Tier3>
+    </Tier2>
+    <Tier2 name="305塑料人造革、合成革制造">
+      <Tier3>3050塑料人造革、合成革制造</Tier3>
+    </Tier2>
+    <Tier2 name="306塑料包装箱及容器制造">
+      <Tier3>3060塑料包装箱及容器制造</Tier3>
+    </Tier2>
+    <Tier2 name="307塑料零件制造">
+      <Tier3>3070塑料零件制造</Tier3>
+    </Tier2>
+    <Tier2 name="308日用塑料制造">
+      <Tier3>3081塑料鞋制造</Tier3>
+      <Tier3>3082日用塑料杂品制造</Tier3>
+    </Tier2>
+    <Tier2 name="309其他塑料制品制造">
+      <Tier3>3090其他塑料制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="31非金属矿物制品业">
+    <Tier2 name="311水泥、石灰和石膏的制造">
+      <Tier3>3111水泥制造</Tier3>
+      <Tier3>3112石灰和石膏制造</Tier3>
+    </Tier2>
+    <Tier2 name="312水泥及石膏制品制造">
+      <Tier3>3121水泥制品制造</Tier3>
+      <Tier3>3122砼结构构件制造</Tier3>
+      <Tier3>3123石棉水泥制品制造</Tier3>
+      <Tier3>3124轻质建筑材料制造</Tier3>
+      <Tier3>3129其他水泥制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="313砖瓦、石材及其他建筑材料制造">
+      <Tier3>3131粘土砖瓦及建筑砌块制造</Tier3>
+      <Tier3>3132建筑陶瓷制品制造</Tier3>
+      <Tier3>3133建筑用石加工</Tier3>
+      <Tier3>3134防水建筑材料制造</Tier3>
+      <Tier3>3135隔热和隔音材料制造</Tier3>
+      <Tier3>3139其他建筑材料制造</Tier3>
+    </Tier2>
+    <Tier2 name="314玻璃及玻璃制品制造">
+      <Tier3>3141平板玻璃制造</Tier3>
+      <Tier3>3142技术玻璃制品制造</Tier3>
+      <Tier3>3143光学玻璃制造</Tier3>
+      <Tier3>3144玻璃仪器制造</Tier3>
+      <Tier3>3145日用玻璃制品及玻璃包装容器制造</Tier3>
+      <Tier3>3146玻璃保温容器制造</Tier3>
+      <Tier3>3147玻璃纤维及制品制造</Tier3>
+      <Tier3>3148玻璃纤维增强塑料制品制造</Tier3>
+      <Tier3>3149其他玻璃制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="315陶瓷制品制造">
+      <Tier3>3151卫生陶瓷制品制造</Tier3>
+      <Tier3>3152特种陶瓷制品制造</Tier3>
+      <Tier3>3153日用陶瓷制品制造</Tier3>
+      <Tier3>3159园林、陈设艺术及其他陶瓷制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="316耐火材料制品制造">
+      <Tier3>3161石棉制品制造</Tier3>
+      <Tier3>3162云母制品制造</Tier3>
+      <Tier3>3169耐火陶瓷制品及其他耐火材料制造</Tier3>
+    </Tier2>
+    <Tier2 name="319石墨及其他非金属矿物制品制造">
+      <Tier3>3191石墨及碳素制品制造</Tier3>
+      <Tier3>3199其他非金属矿物制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="32黑色金属冶炼及压延加工业">
+    <Tier2 name="321炼铁">
+      <Tier3>3210炼铁</Tier3>
+    </Tier2>
+    <Tier2 name="322炼钢">
+      <Tier3>3220炼钢</Tier3>
+    </Tier2>
+    <Tier2 name="323钢压延加工">
+      <Tier3>3230钢压延加工</Tier3>
+    </Tier2>
+    <Tier2 name="324铁合金冶炼">
+      <Tier3>3240铁合金冶炼</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="33有色金属冶炼及压延加工业">
+    <Tier2 name="331常用有色金属冶炼">
+      <Tier3>3311铜冶炼</Tier3>
+      <Tier3>3312铅锌冶炼</Tier3>
+      <Tier3>3313镍钴冶炼</Tier3>
+      <Tier3>3314锡冶炼</Tier3>
+      <Tier3>3315锑冶炼</Tier3>
+      <Tier3>3316铝冶炼</Tier3>
+      <Tier3>3317镁冶炼</Tier3>
+      <Tier3>3319其他常用有色金属冶炼</Tier3>
+    </Tier2>
+    <Tier2 name="332贵金属冶炼">
+      <Tier3>3321金冶炼</Tier3>
+      <Tier3>3322银冶炼</Tier3>
+      <Tier3>3329其他贵金属冶炼</Tier3>
+    </Tier2>
+    <Tier2 name="333稀有稀土金属冶炼">
+      <Tier3>3331钨钼冶炼</Tier3>
+      <Tier3>3332稀土金属冶炼</Tier3>
+      <Tier3>3339其他稀有金属冶炼</Tier3>
+    </Tier2>
+    <Tier2 name="334有色金属合金制造">
+      <Tier3>3340有色金属合金制造</Tier3>
+    </Tier2>
+    <Tier2 name="335有色金属压延加工">
+      <Tier3>3351常用有色金属压延加工</Tier3>
+      <Tier3>3352贵金属压延加工</Tier3>
+      <Tier3>3353稀有稀土金属压延加工</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="34金属制品业">
+    <Tier2 name="341结构性金属制品制造">
+      <Tier3>3411金属结构制造</Tier3>
+      <Tier3>3412金属门窗制造</Tier3>
+    </Tier2>
+    <Tier2 name="342金属工具制造">
+      <Tier3>3421切削工具制造</Tier3>
+      <Tier3>3422手工具制造</Tier3>
+      <Tier3>3423农用及园林用金属工具制造</Tier3>
+      <Tier3>3424刀剪及类似日用金属工具制造</Tier3>
+      <Tier3>3429其他金属工具制造</Tier3>
+    </Tier2>
+    <Tier2 name="343集装箱及金属包装容器制造">
+      <Tier3>3431集装箱制造</Tier3>
+      <Tier3>3432金属压力容器制造</Tier3>
+      <Tier3>3433金属包装容器制造</Tier3>
+    </Tier2>
+    <Tier2 name="344金属丝绳及其制品的制造">
+      <Tier3>3440金属丝绳及其制品的制造</Tier3>
+    </Tier2>
+    <Tier2 name="345建筑、安全用金属制品制造">
+      <Tier3>3451建筑、家具用金属配件制造</Tier3>
+      <Tier3>3452建筑装饰及水暖管道零件制造</Tier3>
+      <Tier3>3453安全、消防用金属制品制造</Tier3>
+      <Tier3>3459其他建筑、安全用金属制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="346金属表面处理及热处理加工">
+      <Tier3>3460金属表面处理及热处理加工</Tier3>
+    </Tier2>
+    <Tier2 name="347搪瓷制品制造">
+      <Tier3>3471工业生产配套用搪瓷制品制造</Tier3>
+      <Tier3>3472搪瓷卫生洁具制造</Tier3>
+      <Tier3>3479搪瓷日用品及其他搪瓷制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="348不锈钢及类似日用金属制品制造">
+      <Tier3>3481金属制厨房调理及卫生器具制造</Tier3>
+      <Tier3>3482金属制厨用器皿及餐具制造</Tier3>
+      <Tier3>3489其他日用金属制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="349其他金属制品制造">
+      <Tier3>3491铸币及贵金属制实验室用品制造</Tier3>
+      <Tier3>3499其他未列明的金属制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="35通用设备制造业">
+    <Tier2 name="351锅炉及原动机制造">
+      <Tier3>3511锅炉及辅助设备制造</Tier3>
+      <Tier3>3512内燃机及配件制造</Tier3>
+      <Tier3>3513汽轮机及辅机制造</Tier3>
+      <Tier3>3514水轮机及辅机制造</Tier3>
+      <Tier3>3519其他原动机制造</Tier3>
+    </Tier2>
+    <Tier2 name="352金属加工机械制造">
+      <Tier3>3521金属切削机床制造</Tier3>
+      <Tier3>3522金属成形机床制造</Tier3>
+      <Tier3>3523铸造机械制造</Tier3>
+      <Tier3>3524金属切割及焊接设备制造</Tier3>
+      <Tier3>3525机床附件制造</Tier3>
+      <Tier3>3529其他金属加工机械制造</Tier3>
+    </Tier2>
+    <Tier2 name="353起重运输设备制造">
+      <Tier3>3530起重运输设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="354泵、阀门、压缩机及类似机械的制造">
+      <Tier3>3541泵及真空设备制造</Tier3>
+      <Tier3>3542气体压缩机械制造</Tier3>
+      <Tier3>3543阀门和旋塞的制造</Tier3>
+      <Tier3>3544液压和气压动力机械及元件制造</Tier3>
+    </Tier2>
+    <Tier2 name="355轴承、齿轮、传动和驱动部件的制造">
+      <Tier3>3551轴承制造</Tier3>
+      <Tier3>3552齿轮、传动和驱动部件制造</Tier3>
+    </Tier2>
+    <Tier2 name="356烘炉、熔炉及电炉制造">
+      <Tier3>3560烘炉、熔炉及电炉制造</Tier3>
+    </Tier2>
+    <Tier2 name="357风机、衡器、包装设备等通用设备制造">
+      <Tier3>3571风机、风扇制造</Tier3>
+      <Tier3>3572气体、液体分离及纯净设备制造</Tier3>
+      <Tier3>3573制冷、空调设备制造</Tier3>
+      <Tier3>3574风动和电动工具制造</Tier3>
+      <Tier3>3575喷枪及类似器具制造</Tier3>
+      <Tier3>3576包装专用设备制造</Tier3>
+      <Tier3>3577衡器制造</Tier3>
+      <Tier3>3579其他通用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="358通用零部件制造及机械修理">
+      <Tier3>3581金属密封件制造</Tier3>
+      <Tier3>3582紧固件、弹簧制造</Tier3>
+      <Tier3>3583机械零部件加工及设备修理</Tier3>
+      <Tier3>3589其他通用零部件制造</Tier3>
+    </Tier2>
+    <Tier2 name="359金属铸、锻加工">
+      <Tier3>3591钢铁铸件制造</Tier3>
+      <Tier3>3592锻件及粉末冶金制品制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="36专用设备制造业">
+    <Tier2 name="361矿山、冶金、建筑专用设备制造">
+      <Tier3>3611采矿、采石设备制造</Tier3>
+      <Tier3>3612石油钻采专用设备制造</Tier3>
+      <Tier3>3613建筑工程用机械制造</Tier3>
+      <Tier3>3614建筑材料生产专用机械制造</Tier3>
+      <Tier3>3615冶金专用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="362化工、木材、非金属加工专用设备制造">
+      <Tier3>3621炼油、化工生产专用设备制造</Tier3>
+      <Tier3>3622橡胶加工专用设备制造</Tier3>
+      <Tier3>3623塑料加工专用设备制造</Tier3>
+      <Tier3>3624木材加工机械制造</Tier3>
+      <Tier3>3625模具制造</Tier3>
+      <Tier3>3629其他非金属加工专用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="363食品、饮料、烟草及饲料生产专用设备制造　　　">
+      <Tier3>3631食品、饮料、烟草工业专用设备制造</Tier3>
+      <Tier3>3632农副食品加工专用设备制造</Tier3>
+      <Tier3>3633饲料生产专用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="364印刷、制药、日化生产专用设备制造">
+      <Tier3>3641制浆和造纸专用设备制造</Tier3>
+      <Tier3>3642印刷专用设备制造</Tier3>
+      <Tier3>3643日用化工专用设备制造</Tier3>
+      <Tier3>3644制药专用设备制造</Tier3>
+      <Tier3>3645照明器具生产专用设备制造</Tier3>
+      <Tier3>3646玻璃、陶瓷和搪瓷制品生产专用设备制造</Tier3>
+      <Tier3>3649其他日用品生产专用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="365纺织、服装和皮革工业专用设备制造">
+      <Tier3>3651纺织专用设备制造</Tier3>
+      <Tier3>3652皮革、毛皮及其制品加工专用设备制造</Tier3>
+      <Tier3>3653缝纫机械制造</Tier3>
+      <Tier3>3659其他服装加工专用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="366电子和电工机械专用设备制造">
+      <Tier3>3661电工机械专用设备制造</Tier3>
+      <Tier3>3662电子工业专用设备制造</Tier3>
+      <Tier3>3663武器弹药制造</Tier3>
+      <Tier3>3669航空、航天及其他专用设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="367农、林、牧、渔专用机械制造">
+      <Tier3>3671拖拉机制造</Tier3>
+      <Tier3>3672机械化农业及园艺机具制造</Tier3>
+      <Tier3>3673营林及木竹采伐机械制造</Tier3>
+      <Tier3>3674畜牧机械制造</Tier3>
+      <Tier3>3675渔业机械制造</Tier3>
+      <Tier3>3676农林牧渔机械配件制造</Tier3>
+      <Tier3>3679其他农林牧渔业机械制造及机械修理</Tier3>
+    </Tier2>
+    <Tier2 name="368医疗仪器设备及器械制造">
+      <Tier3>3681医疗诊断、监护及治疗设备制造</Tier3>
+      <Tier3>3682口腔科用设备及器具制造</Tier3>
+      <Tier3>3683实验室及医用消毒设备和器具的制造</Tier3>
+      <Tier3>3684医疗、外科及兽医用器械制造</Tier3>
+      <Tier3>3685机械治疗及病房护理设备制造</Tier3>
+      <Tier3>3686假肢、人工器官及植（介）入器械制造</Tier3>
+      <Tier3>3689其他医疗设备及器械制造</Tier3>
+    </Tier2>
+    <Tier2 name="369环保、社会公共安全及其他专用设备制造">
+      <Tier3>3691环境污染防治专用设备制造</Tier3>
+      <Tier3>3692地质勘查专用设备制造</Tier3>
+      <Tier3>3693邮政专用机械及器材制造</Tier3>
+      <Tier3>3694商业、饮食、服务业专用设备制造</Tier3>
+      <Tier3>3695社会公共安全设备及器材制造</Tier3>
+      <Tier3>3696交通安全及管制专用设备制造</Tier3>
+      <Tier3>3697水资源专用机械制造</Tier3>
+      <Tier3>3699其他专用设备制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="37交通运输设备制造业">
+    <Tier2 name="371铁路运输设备制造">
+      <Tier3>3711铁路机车车辆及动车组制造</Tier3>
+      <Tier3>3712工矿有轨专用车辆制造</Tier3>
+      <Tier3>3713铁路机车车辆配件制造</Tier3>
+      <Tier3>3714铁路专用设备及器材、配件制造</Tier3>
+      <Tier3>3719其他铁路设备制造及设备修理</Tier3>
+    </Tier2>
+    <Tier2 name="372汽车制造">
+      <Tier3>3721汽车整车制造</Tier3>
+      <Tier3>3722改装汽车制造</Tier3>
+      <Tier3>3723电车制造</Tier3>
+      <Tier3>3724汽车车身、挂车的制造</Tier3>
+      <Tier3>3725汽车零部件及配件制造</Tier3>
+      <Tier3>3726汽车修理</Tier3>
+    </Tier2>
+    <Tier2 name="373摩托车制造">
+      <Tier3>3731摩托车整车制造</Tier3>
+      <Tier3>3732摩托车零部件及配件制造</Tier3>
+    </Tier2>
+    <Tier2 name="374自行车制造">
+      <Tier3>3741脚踏自行车及残疾人座车制造</Tier3>
+      <Tier3>3742助动自行车制造</Tier3>
+    </Tier2>
+    <Tier2 name="375船舶及浮动装置制造">
+      <Tier3>3751金属船舶制造</Tier3>
+      <Tier3>3752非金属船舶制造</Tier3>
+      <Tier3>3753娱乐船和运动船的建造和修理</Tier3>
+      <Tier3>3754船用配套设备制造</Tier3>
+      <Tier3>3755船舶修理及拆船</Tier3>
+      <Tier3>3759航标器材及其他浮动装置的制造</Tier3>
+    </Tier2>
+    <Tier2 name="376航空航天器制造">
+      <Tier3>3761飞机制造及修理</Tier3>
+      <Tier3>3762航天器制造</Tier3>
+      <Tier3>3769其他飞行器制造</Tier3>
+    </Tier2>
+    <Tier2 name="379交通器材及其他交通运输设备制造">
+      <Tier3>3791潜水及水下救捞装备制造</Tier3>
+      <Tier3>3792交通管理用金属标志及设施制造</Tier3>
+      <Tier3>3799其他交通运输设备制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="39电气机械及器材制造业">
+    <Tier2 name="391电机制造">
+      <Tier3>3911发电机及发电机组制造</Tier3>
+      <Tier3>3912电动机制造</Tier3>
+      <Tier3>3919微电机及其他电机制造</Tier3>
+    </Tier2>
+    <Tier2 name="392输配电及控制设备制造">
+      <Tier3>3921变压器、整流器和电感器制造</Tier3>
+      <Tier3>3922电容器及其配套设备制造</Tier3>
+      <Tier3>3923配电开关控制设备制造</Tier3>
+      <Tier3>3924电力电子元器件制造</Tier3>
+      <Tier3>3929其他输配电及控制设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="393电线、电缆、光缆及电工器材制造">
+      <Tier3>3931电线电缆制造</Tier3>
+      <Tier3>3932光纤、光缆制造</Tier3>
+      <Tier3>3933绝缘制品制造</Tier3>
+      <Tier3>3939其他电工器材制造</Tier3>
+    </Tier2>
+    <Tier2 name="394电池制造">
+      <Tier3>3940电池制造</Tier3>
+    </Tier2>
+    <Tier2 name="395家用电力器具制造">
+      <Tier3>3951家用制冷电器具制造</Tier3>
+      <Tier3>3952家用空气调节器制造</Tier3>
+      <Tier3>3953家用通风电器具制造</Tier3>
+      <Tier3>3954家用厨房电器具制造</Tier3>
+      <Tier3>3955家用清洁卫生电器具制造</Tier3>
+      <Tier3>3956家用美容、保健电器具制造</Tier3>
+      <Tier3>3957家用电力器具专用配件制造</Tier3>
+      <Tier3>3959其他家用电力器具制造</Tier3>
+    </Tier2>
+    <Tier2 name="396非电力家用器具制造">
+      <Tier3>3961燃气、太阳能及类似能源的器具制造</Tier3>
+      <Tier3>3969其他非电力家用器具制造</Tier3>
+    </Tier2>
+    <Tier2 name="397照明器具制造">
+      <Tier3>3971电光源制造</Tier3>
+      <Tier3>3972照明灯具制造</Tier3>
+      <Tier3>3979灯用电器附件及其他照明器具制造</Tier3>
+    </Tier2>
+    <Tier2 name="399其他电气机械及器材制造">
+      <Tier3>3991车辆专用照明及电气信号设备装置制造</Tier3>
+      <Tier3>3999其他未列明的电气机械制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="40通信设备、计算机及其他电子设备制造业">
+    <Tier2 name="401通信设备制造">
+      <Tier3>4011通信传输设备制造</Tier3>
+      <Tier3>4012通信交换设备制造</Tier3>
+      <Tier3>4013通信终端设备制造</Tier3>
+      <Tier3>4014移动通信及终端设备制造</Tier3>
+      <Tier3>4019其他通信设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="402雷达及配套设备制造">
+      <Tier3>4020雷达及配套设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="403广播电视设备制造">
+      <Tier3>4031广播电视节目制作及发射设备制造</Tier3>
+      <Tier3>4032广播电视接收设备及器材制造</Tier3>
+      <Tier3>4039应用电视设备及其他广播电视设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="404电子计算机制造">
+      <Tier3>4041电子计算机整机制造</Tier3>
+      <Tier3>4042计算机网络设备制造</Tier3>
+      <Tier3>4043电子计算机外部设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="405电子器件制造">
+      <Tier3>4051电子真空器件制造</Tier3>
+      <Tier3>4052半导体分立器件制造</Tier3>
+      <Tier3>4053集成电路制造</Tier3>
+      <Tier3>4059光电子器件及其他电子器件制造</Tier3>
+    </Tier2>
+    <Tier2 name="406电子元件制造">
+      <Tier3>4061电子元件及组件制造</Tier3>
+      <Tier3>4062印制电路板制造</Tier3>
+    </Tier2>
+    <Tier2 name="407家用视听设备制造">
+      <Tier3>4071家用影视设备制造</Tier3>
+      <Tier3>4072家用音响设备制造</Tier3>
+    </Tier2>
+    <Tier2 name="409其他电子设备制造">
+      <Tier3>4090其他电子设备制造</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="41仪器仪表及文化、办公用机械制造业">
+    <Tier2 name="411通用仪器仪表制造">
+      <Tier3>4111工业自动控制系统装置制造</Tier3>
+      <Tier3>4112电工仪器仪表制造</Tier3>
+      <Tier3>4113绘图、计算及测量仪器制造</Tier3>
+      <Tier3>4114实验分析仪器制造</Tier3>
+      <Tier3>4115试验机制造</Tier3>
+      <Tier3>4119供应用仪表及其他通用仪器制造</Tier3>
+    </Tier2>
+    <Tier2 name="412专用仪器仪表制造">
+      <Tier3>4121环境监测专用仪器仪表制造</Tier3>
+      <Tier3>4122汽车及其他用计数仪表制造</Tier3>
+      <Tier3>4123导航、气象及海洋专用仪器制造</Tier3>
+      <Tier3>4124农林牧渔专用仪器仪表制造</Tier3>
+      <Tier3>4125地质勘探和地震专用仪器制造</Tier3>
+      <Tier3>4126教学专用仪器制造</Tier3>
+      <Tier3>4127核子及核辐射测量仪器制造</Tier3>
+      <Tier3>4128电子测量仪器制造</Tier3>
+      <Tier3>4129其他专用仪器制造</Tier3>
+    </Tier2>
+    <Tier2 name="413钟表与计时仪器制造">
+      <Tier3>4130钟表与计时仪器制造</Tier3>
+    </Tier2>
+    <Tier2 name="414光学仪器及眼镜制造">
+      <Tier3>4141光学仪器制造</Tier3>
+      <Tier3>4142眼镜制造</Tier3>
+    </Tier2>
+    <Tier2 name="415文化、办公用机械制造">
+      <Tier3>4151电影机械制造</Tier3>
+      <Tier3>4152幻灯及投影设备制造</Tier3>
+      <Tier3>4153照相机及器材制造</Tier3>
+      <Tier3>4154复印和胶印设备制造</Tier3>
+      <Tier3>4155计算器及货币专用设备制造</Tier3>
+      <Tier3>4159其他文化、办公用机械制造</Tier3>
+    </Tier2>
+    <Tier2 name="419其他仪器仪表的制造及修理">
+      <Tier3>4190其他仪器仪表的制造及修理</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="42工艺品及其他制造业">
+    <Tier2 name="421工艺美术品制造">
+      <Tier3>4211雕塑工艺品制造</Tier3>
+      <Tier3>4212金属工艺品制造</Tier3>
+      <Tier3>4213漆器工艺品制造</Tier3>
+      <Tier3>4214花画工艺品制造</Tier3>
+      <Tier3>4215天然植物纤维编织工艺品制造</Tier3>
+      <Tier3>4216抽纱刺绣工艺品制造</Tier3>
+      <Tier3>4217地毯、挂毯制造</Tier3>
+      <Tier3>4218珠宝首饰及有关物品的制造</Tier3>
+      <Tier3>4219其他工艺美术品制造</Tier3>
+    </Tier2>
+    <Tier2 name="422日用杂品制造">
+      <Tier3>4221制镜及类似品加工</Tier3>
+      <Tier3>4222鬃毛加工、制刷及清扫工具的制造</Tier3>
+      <Tier3>4229其他日用杂品制造</Tier3>
+    </Tier2>
+    <Tier2 name="423煤制品制造">
+      <Tier3>4230煤制品制造</Tier3>
+    </Tier2>
+    <Tier2 name="424核辐射加工">
+      <Tier3>4240核辐射加工</Tier3>
+    </Tier2>
+    <Tier2 name="429其他未列明的制造业">
+      <Tier3>4290其他未列明的制造业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="43废弃资源和废旧材料回收加工业">
+    <Tier2 name="431金属废料和碎屑的加工处理">
+      <Tier3>4310金属废料和碎屑的加工处理</Tier3>
+    </Tier2>
+    <Tier2 name="432非金属废料和碎屑的加工处理">
+      <Tier3>4320非金属废料和碎屑的加工处理</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="44电力、热力的生产和供应业">
+    <Tier2 name="441电力生产">
+      <Tier3>4411火力发电</Tier3>
+      <Tier3>4412水力发电</Tier3>
+      <Tier3>4413核力发电</Tier3>
+      <Tier3>4419其他能源发电</Tier3>
+    </Tier2>
+    <Tier2 name="442电力供应">
+      <Tier3>4420电力供应</Tier3>
+    </Tier2>
+    <Tier2 name="443热力生产和供应">
+      <Tier3>4430热力生产和供应</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="45燃气生产和供应业">
+    <Tier2 name="450燃气生产和供应业">
+      <Tier3>4500燃气生产和供应业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="46水的生产和供应业">
+    <Tier2 name="461自来水的生产和供应">
+      <Tier3>4610自来水的生产和供应</Tier3>
+    </Tier2>
+    <Tier2 name="462污水处理及其再生利用">
+      <Tier3>4620污水处理及其再生利用</Tier3>
+    </Tier2>
+    <Tier2 name="469其他水的处理、利用与分配">
+      <Tier3>4690其他水的处理、利用与分配</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="47房屋和土木工程建筑业">
+    <Tier2 name="471房屋工程建筑">
+      <Tier3>4710房屋工程建筑</Tier3>
+    </Tier2>
+    <Tier2 name="472土木工程建筑">
+      <Tier3>4721铁路、道路、隧道和桥梁工程建筑</Tier3>
+      <Tier3>4722水利和港口工程建筑</Tier3>
+      <Tier3>4723工矿工程建筑</Tier3>
+      <Tier3>4724架线和管道工程建筑</Tier3>
+      <Tier3>4729其他土木工程建筑</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="48建筑安装业">
+    <Tier2 name="480建筑安装业">
+      <Tier3>4800建筑安装业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="49建筑装饰业">
+    <Tier2 name="490建筑装饰业">
+      <Tier3>4900建筑装饰业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="50其他建筑业">
+    <Tier2 name="501工程准备">
+      <Tier3>5010工程准备</Tier3>
+    </Tier2>
+    <Tier2 name="502提供施工设备服务">
+      <Tier3>5020提供施工设备服务</Tier3>
+    </Tier2>
+    <Tier2 name="509其他未列明的建筑活动">
+      <Tier3>5090其他未列明的建筑活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="51铁路运输业">
+    <Tier2 name="511铁路旅客运输">
+      <Tier3>5110铁路旅客运输</Tier3>
+    </Tier2>
+    <Tier2 name="512铁路货物运输">
+      <Tier3>5120铁路货物运输</Tier3>
+    </Tier2>
+    <Tier2 name="513铁路运输辅助活动">
+      <Tier3>5131客运火车站</Tier3>
+      <Tier3>5132货运火车站</Tier3>
+      <Tier3>5139其他铁路运输辅助活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="52道路运输业">
+    <Tier2 name="521公路旅客运输">
+      <Tier3>5210公路旅客运输</Tier3>
+    </Tier2>
+    <Tier2 name="522道路货物运输">
+      <Tier3>5220道路货物运输</Tier3>
+    </Tier2>
+    <Tier2 name="523道路运输辅助活动">
+      <Tier3>5231客运汽车站</Tier3>
+      <Tier3>5232公路管理与养护</Tier3>
+      <Tier3>5239其他道路运输辅助活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="53城市公共交通业">
+    <Tier2 name="531公共电汽车客运">
+      <Tier3>5310公共电汽车客运</Tier3>
+    </Tier2>
+    <Tier2 name="532轨道交通">
+      <Tier3>5320轨道交通</Tier3>
+    </Tier2>
+    <Tier2 name="533出租车客运">
+      <Tier3>5330出租车客运</Tier3>
+    </Tier2>
+    <Tier2 name="534城市轮渡">
+      <Tier3>5340城市轮渡</Tier3>
+    </Tier2>
+    <Tier2 name="539其他城市公共交通">
+      <Tier3>5390其他城市公共交通</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="54水上运输业">
+    <Tier2 name="541水上旅客运输">
+      <Tier3>5411远洋旅客运输</Tier3>
+      <Tier3>5412沿海旅客运输</Tier3>
+      <Tier3>5413内河旅客运输</Tier3>
+    </Tier2>
+    <Tier2 name="542水上货物运输">
+      <Tier3>5421远洋货物运输</Tier3>
+      <Tier3>5422沿海货物运输</Tier3>
+      <Tier3>5423内河货物运输</Tier3>
+    </Tier2>
+    <Tier2 name="543水上运输辅助活动">
+      <Tier3>5431客运港口</Tier3>
+      <Tier3>5432货运港口</Tier3>
+      <Tier3>5439其他水上运输辅助活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="55航空运输业">
+    <Tier2 name="551航空客货运输">
+      <Tier3>5511航空旅客运输</Tier3>
+      <Tier3>5512航空货物运输</Tier3>
+    </Tier2>
+    <Tier2 name="552通用航空服务">
+      <Tier3>5520通用航空服务</Tier3>
+    </Tier2>
+    <Tier2 name="553航空运输辅助活动">
+      <Tier3>5531机场</Tier3>
+      <Tier3>5532空中交通管理</Tier3>
+      <Tier3>5539其他航空运输辅助活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="56管道运输业">
+    <Tier2 name="560管道运输业">
+      <Tier3>5600管道运输业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="57装卸搬运和其他运输服务业">
+    <Tier2 name="571装卸搬运">
+      <Tier3>5710装卸搬运</Tier3>
+    </Tier2>
+    <Tier2 name="572运输代理服务">
+      <Tier3>5720运输代理服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="58仓储业">
+    <Tier2 name="581谷物、棉花等农产品仓储">
+      <Tier3>5810谷物、棉花等农产品仓储</Tier3>
+    </Tier2>
+    <Tier2 name="589其他仓储">
+      <Tier3>5890其他仓储</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="59邮政业">
+    <Tier2 name="591国家邮政">
+      <Tier3>5910国家邮政</Tier3>
+    </Tier2>
+    <Tier2 name="599其他寄递服务">
+      <Tier3>5990其他寄递服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="60电信和其他信息传输服务业">
+    <Tier2 name="601电信">
+      <Tier3>6011固定电信服务</Tier3>
+      <Tier3>6012移动电信服务</Tier3>
+      <Tier3>6019其他电信服务</Tier3>
+    </Tier2>
+    <Tier2 name="602互联网信息服务">
+      <Tier3>6020互联网信息服务</Tier3>
+    </Tier2>
+    <Tier2 name="603广播电视传输服务">
+      <Tier3>6031有线广播电视传输服务</Tier3>
+      <Tier3>6032无线广播电视传输服务</Tier3>
+    </Tier2>
+    <Tier2 name="604卫星传输服务">
+      <Tier3>6040卫星传输服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="61计算机服务业">
+    <Tier2 name="611计算机系统服务">
+      <Tier3>6110计算机系统服务</Tier3>
+    </Tier2>
+    <Tier2 name="612数据处理">
+      <Tier3>6120数据处理</Tier3>
+    </Tier2>
+    <Tier2 name="613计算机维修">
+      <Tier3>6130计算机维修</Tier3>
+    </Tier2>
+    <Tier2 name="619其他计算机服务">
+      <Tier3>6190其他计算机服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="62软件业">
+    <Tier2 name="621公共软件服务">
+      <Tier3>6211基础软件服务</Tier3>
+      <Tier3>6212应用软件服务</Tier3>
+    </Tier2>
+    <Tier2 name="629其他软件服务">
+      <Tier3>6290其他软件服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="63批发业">
+    <Tier2 name="631农畜产品批发">
+      <Tier3>6311谷物、豆及薯类批发</Tier3>
+      <Tier3>6312种子、饲料批发</Tier3>
+      <Tier3>6313棉、麻批发</Tier3>
+      <Tier3>6314牲畜批发</Tier3>
+      <Tier3>6319其他农畜产品批发</Tier3>
+    </Tier2>
+    <Tier2 name="632食品、饮料及烟草制品批发">
+      <Tier3>6321米、面制品及食用油批发</Tier3>
+      <Tier3>6322糕点、糖果及糖批发</Tier3>
+      <Tier3>6323果品、蔬菜批发</Tier3>
+      <Tier3>6324肉、禽、蛋及水产品批发</Tier3>
+      <Tier3>6325盐及调味品批发</Tier3>
+      <Tier3>6326饮料及茶叶批发</Tier3>
+      <Tier3>6327烟草制品批发</Tier3>
+      <Tier3>6329其他食品批发</Tier3>
+    </Tier2>
+    <Tier2 name="633纺织、服装及日用品批发">
+      <Tier3>6331纺织品、针织品及原料批发</Tier3>
+      <Tier3>6332服装批发</Tier3>
+      <Tier3>6333鞋帽批发</Tier3>
+      <Tier3>6334厨房、卫生间用具及日用杂货批发</Tier3>
+      <Tier3>6335化妆品及卫生用品批发</Tier3>
+      <Tier3>6339其他日用品批发</Tier3>
+    </Tier2>
+    <Tier2 name="634文化、体育用品及器材批发">
+      <Tier3>6341文具用品批发</Tier3>
+      <Tier3>6342体育用品批发</Tier3>
+      <Tier3>6343图书批发</Tier3>
+      <Tier3>6344报刊批发</Tier3>
+      <Tier3>6345音像制品及电子出版物批发</Tier3>
+      <Tier3>6346首饰、工艺品及收藏品批发</Tier3>
+      <Tier3>6349其他文化用品批发</Tier3>
+    </Tier2>
+    <Tier2 name="635医药及医疗器材批发">
+      <Tier3>6351西药批发</Tier3>
+      <Tier3>6352中药材及中成药批发</Tier3>
+      <Tier3>6353医疗用品及器材批发</Tier3>
+    </Tier2>
+    <Tier2 name="636矿产品、建材及化工产品批发">
+      <Tier3>6361煤炭及制品批发</Tier3>
+      <Tier3>6362石油及制品批发</Tier3>
+      <Tier3>6363非金属矿及制品批发</Tier3>
+      <Tier3>6364金属及金属矿批发</Tier3>
+      <Tier3>6365建材批发</Tier3>
+      <Tier3>6366化肥批发</Tier3>
+      <Tier3>6367农药批发</Tier3>
+      <Tier3>6368农用薄膜批发</Tier3>
+      <Tier3>6369其他化工产品批发</Tier3>
+    </Tier2>
+    <Tier2 name="637机械设备、五金交电及电子产品批发">
+      <Tier3>6371农业机械批发</Tier3>
+      <Tier3>6372汽车、摩托车及零配件批发</Tier3>
+      <Tier3>6373五金、交电批发</Tier3>
+      <Tier3>6374家用电器批发</Tier3>
+      <Tier3>6375计算机、软件及辅助设备批发</Tier3>
+      <Tier3>6376通讯及广播电视设备批发</Tier3>
+      <Tier3>6379其他机械设备及电子产品批发</Tier3>
+    </Tier2>
+    <Tier2 name="638贸易经纪与代理">
+      <Tier3>6380贸易经纪与代理</Tier3>
+    </Tier2>
+    <Tier2 name="639其他批发">
+      <Tier3>6391再生物资回收与批发</Tier3>
+      <Tier3>6399其他未列明的批发</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="65零售业">
+    <Tier2 name="651综合零售">
+      <Tier3>6511百货零售</Tier3>
+      <Tier3>6512超级市场零售</Tier3>
+      <Tier3>6519其他综合零售</Tier3>
+    </Tier2>
+    <Tier2 name="652食品、饮料及烟草制品专门零售">
+      <Tier3>6521粮油零售</Tier3>
+      <Tier3>6522糕点、面包零售</Tier3>
+      <Tier3>6523果品、蔬菜零售</Tier3>
+      <Tier3>6524肉、禽、蛋及水产品零售</Tier3>
+      <Tier3>6525饮料及茶叶零售</Tier3>
+      <Tier3>6526烟草制品零售</Tier3>
+      <Tier3>6529其他食品零售</Tier3>
+    </Tier2>
+    <Tier2 name="653纺织、服装及日用品专门零售">
+      <Tier3>6531纺织品及针织品零售</Tier3>
+      <Tier3>6532服装零售</Tier3>
+      <Tier3>6533鞋帽零售</Tier3>
+      <Tier3>6534钟表、眼镜零售</Tier3>
+      <Tier3>6535化妆品及卫生用品零售</Tier3>
+      <Tier3>6539其他日用品零售</Tier3>
+    </Tier2>
+    <Tier2 name="654文化、体育用品及器材专门零售">
+      <Tier3>6541文具用品零售</Tier3>
+      <Tier3>6542体育用品零售</Tier3>
+      <Tier3>6543图书零售</Tier3>
+      <Tier3>6544报刊零售</Tier3>
+      <Tier3>6545音像制品及电子出版物零售</Tier3>
+      <Tier3>6546珠宝首饰零售</Tier3>
+      <Tier3>6547工艺美术品及收藏品零售</Tier3>
+      <Tier3>6548照相器材零售</Tier3>
+      <Tier3>6549其他文化用品零售</Tier3>
+    </Tier2>
+    <Tier2 name="655医药及医疗器材专门零售">
+      <Tier3>6551药品零售</Tier3>
+      <Tier3>6552医疗用品及器材零售</Tier3>
+    </Tier2>
+    <Tier2 name="656汽车、摩托车、燃料及零配件专门零售">
+      <Tier3>6561汽车零售</Tier3>
+      <Tier3>6562汽车零配件零售</Tier3>
+      <Tier3>6563摩托车及零配件零售</Tier3>
+      <Tier3>6564机动车燃料零售</Tier3>
+    </Tier2>
+    <Tier2 name="657家用电器及电子产品专门零售">
+      <Tier3>6571家用电器零售</Tier3>
+      <Tier3>6572计算机、软件及辅助设备零售</Tier3>
+      <Tier3>6573通信设备零售</Tier3>
+      <Tier3>6579其他电子产品零售</Tier3>
+    </Tier2>
+    <Tier2 name="658五金、家具及室内装修材料专门零售">
+      <Tier3>6581五金零售</Tier3>
+      <Tier3>6582家具零售</Tier3>
+      <Tier3>6583涂料零售</Tier3>
+      <Tier3>6589其他室内装修材料零售</Tier3>
+    </Tier2>
+    <Tier2 name="659无店铺及其他零售">
+      <Tier3>6591流动货摊零售</Tier3>
+      <Tier3>6592邮购及电子销售</Tier3>
+      <Tier3>6593生活用燃料零售</Tier3>
+      <Tier3>6594花卉零售</Tier3>
+      <Tier3>6595旧货零售</Tier3>
+      <Tier3>6599其他未列明的零售</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="66住宿业">
+    <Tier2 name="661旅游饭店">
+      <Tier3>6610旅游饭店</Tier3>
+    </Tier2>
+    <Tier2 name="662一般旅馆">
+      <Tier3>6620一般旅馆</Tier3>
+    </Tier2>
+    <Tier2 name="669其他住宿服务">
+      <Tier3>6690其他住宿服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="67餐饮业">
+    <Tier2 name="671正餐服务">
+      <Tier3>6710正餐服务</Tier3>
+    </Tier2>
+    <Tier2 name="672快餐服务">
+      <Tier3>6720快餐服务</Tier3>
+    </Tier2>
+    <Tier2 name="673饮料及冷饮服务">
+      <Tier3>6730饮料及冷饮服务</Tier3>
+    </Tier2>
+    <Tier2 name="679其他餐饮服务">
+      <Tier3>6790其他餐饮服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="68银行业">
+    <Tier2 name="681中央银行">
+      <Tier3>6810中央银行</Tier3>
+    </Tier2>
+    <Tier2 name="682商业银行">
+      <Tier3>6820商业银行</Tier3>
+    </Tier2>
+    <Tier2 name="689其他银行">
+      <Tier3>6890其他银行</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="69证券业">
+    <Tier2 name="691证券市场管理">
+      <Tier3>6910证券市场管理</Tier3>
+    </Tier2>
+    <Tier2 name="692证券经纪与交易">
+      <Tier3>6920证券经纪与交易</Tier3>
+    </Tier2>
+    <Tier2 name="693证券投资">
+      <Tier3>6930证券投资</Tier3>
+    </Tier2>
+    <Tier2 name="694证券分析与咨询">
+      <Tier3>6940证券分析与咨询</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="70保险业">
+    <Tier2 name="701人寿保险">
+      <Tier3>7010人寿保险</Tier3>
+    </Tier2>
+    <Tier2 name="702非人寿保险">
+      <Tier3>7020非人寿保险</Tier3>
+    </Tier2>
+    <Tier2 name="703保险辅助服务">
+      <Tier3>7030保险辅助服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="71其他金融活动">
+    <Tier2 name="711金融信托与管理">
+      <Tier3>7110金融信托与管理</Tier3>
+    </Tier2>
+    <Tier2 name="712金融租赁">
+      <Tier3>7120金融租赁</Tier3>
+    </Tier2>
+    <Tier2 name="713财务公司">
+      <Tier3>7130财务公司</Tier3>
+    </Tier2>
+    <Tier2 name="714邮政储蓄">
+      <Tier3>7140邮政储蓄</Tier3>
+    </Tier2>
+    <Tier2 name="715典当">
+      <Tier3>7150典当</Tier3>
+    </Tier2>
+    <Tier2 name="719其他未列明的金融活动">
+      <Tier3>7190其他未列明的金融活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="72房地产业">
+    <Tier2 name="721房地产开发经营">
+      <Tier3>7210房地产开发经营</Tier3>
+    </Tier2>
+    <Tier2 name="722物业管理">
+      <Tier3>7220物业管理</Tier3>
+    </Tier2>
+    <Tier2 name="723房地产中介服务">
+      <Tier3>7230房地产中介服务</Tier3>
+    </Tier2>
+    <Tier2 name="729其他房地产活动">
+      <Tier3>7290其他房地产活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="73租赁业">
+    <Tier2 name="731机械设备租赁">
+      <Tier3>7311汽车租赁</Tier3>
+      <Tier3>7312农业机械租赁</Tier3>
+      <Tier3>7313建筑工程机械与设备租赁</Tier3>
+      <Tier3>7314计算机及通讯设备租赁</Tier3>
+      <Tier3>7319其他机械与设备租赁</Tier3>
+    </Tier2>
+    <Tier2 name="732文化及日用品出租">
+      <Tier3>7321图书及音像制品出租</Tier3>
+      <Tier3>7329其他文化及日用品出租</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="74商务服务业">
+    <Tier2 name="741企业管理服务">
+      <Tier3>7411企业管理机构</Tier3>
+      <Tier3>7412投资与资产管理</Tier3>
+      <Tier3>7419其他企业管理服务</Tier3>
+    </Tier2>
+    <Tier2 name="742法律服务">
+      <Tier3>7421律师及相关的法律服务</Tier3>
+      <Tier3>7422公证服务</Tier3>
+      <Tier3>7429其他法律服务</Tier3>
+    </Tier2>
+    <Tier2 name="743咨询与调查">
+      <Tier3>7431会计、审计及税务服务</Tier3>
+      <Tier3>7432市场调查</Tier3>
+      <Tier3>7433社会经济咨询</Tier3>
+      <Tier3>7439其他专业咨询</Tier3>
+    </Tier2>
+    <Tier2 name="744广告业">
+      <Tier3>7440广告业</Tier3>
+    </Tier2>
+    <Tier2 name="745知识产权服务">
+      <Tier3>7450知识产权服务</Tier3>
+    </Tier2>
+    <Tier2 name="746职业中介服务">
+      <Tier3>7460职业中介服务</Tier3>
+    </Tier2>
+    <Tier2 name="747市场管理">
+      <Tier3>7470市场管理</Tier3>
+    </Tier2>
+    <Tier2 name="748旅行社">
+      <Tier3>7480旅行社</Tier3>
+    </Tier2>
+    <Tier2 name="749其他商务服务">
+      <Tier3>7491会议及展览服务</Tier3>
+      <Tier3>7492包装服务</Tier3>
+      <Tier3>7493保安服务</Tier3>
+      <Tier3>7494办公服务</Tier3>
+      <Tier3>7499其他未列明的商务服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="75研究与试验发展">
+    <Tier2 name="751自然科学研究与试验发展">
+      <Tier3>7510自然科学研究与试验发展</Tier3>
+    </Tier2>
+    <Tier2 name="752工程和技术研究与试验发展">
+      <Tier3>7520工程和技术研究与试验发展</Tier3>
+    </Tier2>
+    <Tier2 name="753农业科学研究与试验发展">
+      <Tier3>7530农业科学研究与试验发展</Tier3>
+    </Tier2>
+    <Tier2 name="754医学研究与试验发展">
+      <Tier3>7540医学研究与试验发展</Tier3>
+    </Tier2>
+    <Tier2 name="755社会人文科学研究与试验发展">
+      <Tier3>7550社会人文科学研究与试验发展</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="76专业技术服务业">
+    <Tier2 name="761气象服务">
+      <Tier3>7610气象服务</Tier3>
+    </Tier2>
+    <Tier2 name="762地震服务">
+      <Tier3>7620地震服务</Tier3>
+    </Tier2>
+    <Tier2 name="763海洋服务">
+      <Tier3>7630海洋服务</Tier3>
+    </Tier2>
+    <Tier2 name="764测绘服务">
+      <Tier3>7640测绘服务</Tier3>
+    </Tier2>
+    <Tier2 name="765技术检测">
+      <Tier3>7650技术检测</Tier3>
+    </Tier2>
+    <Tier2 name="766环境监测">
+      <Tier3>7660环境监测</Tier3>
+    </Tier2>
+    <Tier2 name="767工程技术与规划管理">
+      <Tier3>7671工程管理服务</Tier3>
+      <Tier3>7672工程勘察设计</Tier3>
+      <Tier3>7673规划管理</Tier3>
+    </Tier2>
+    <Tier2 name="769其他专业技术服务">
+      <Tier3>7690其他专业技术服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="77科技交流和推广服务业">
+    <Tier2 name="771技术推广服务">
+      <Tier3>7710技术推广服务</Tier3>
+    </Tier2>
+    <Tier2 name="772科技中介服务">
+      <Tier3>7720科技中介服务</Tier3>
+    </Tier2>
+    <Tier2 name="779其他科技服务">
+      <Tier3>7790其他科技服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="78地质勘查业">
+    <Tier2 name="781矿产地质勘查">
+      <Tier3>7811能源矿产地质勘查</Tier3>
+      <Tier3>7812固体矿产地质勘查</Tier3>
+      <Tier3>7819其他矿产地质勘查</Tier3>
+    </Tier2>
+    <Tier2 name="782基础地质勘查">
+      <Tier3>7820基础地质勘查</Tier3>
+    </Tier2>
+    <Tier2 name="783地质勘查技术服务">
+      <Tier3>7830地质勘查技术服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="79水利管理业">
+    <Tier2 name="791防洪管理">
+      <Tier3>7910防洪管理</Tier3>
+    </Tier2>
+    <Tier2 name="792水资源管理">
+      <Tier3>7921水库管理</Tier3>
+      <Tier3>7922调水、引水管理</Tier3>
+      <Tier3>7929其他水资源管理</Tier3>
+    </Tier2>
+    <Tier2 name="799其他水利管理">
+      <Tier3>7990其他水利管理</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="80环境管理业">
+    <Tier2 name="801自然保护">
+      <Tier3>8011自然保护区管理</Tier3>
+      <Tier3>8012野生动植物保护</Tier3>
+      <Tier3>8019其他自然保护</Tier3>
+    </Tier2>
+    <Tier2 name="802环境治理">
+      <Tier3>8021城市市容管理</Tier3>
+      <Tier3>8022城市环境卫生管理</Tier3>
+      <Tier3>8023水污染治理</Tier3>
+      <Tier3>8024危险废物治理</Tier3>
+      <Tier3>8029其他环境治理</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="81公共设施管理业">
+    <Tier2 name="811市政公共设施管理">
+      <Tier3>8110市政公共设施管理</Tier3>
+    </Tier2>
+    <Tier2 name="812城市绿化管理">
+      <Tier3>8120城市绿化管理</Tier3>
+    </Tier2>
+    <Tier2 name="813游览景区管理">
+      <Tier3>8131风景名胜区管理</Tier3>
+      <Tier3>8132公园管理</Tier3>
+      <Tier3>8139其他游览景区管理</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="82居民服务业">
+    <Tier2 name="821家庭服务">
+      <Tier3>8210家庭服务</Tier3>
+    </Tier2>
+    <Tier2 name="822托儿所">
+      <Tier3>8220托儿所</Tier3>
+    </Tier2>
+    <Tier2 name="823洗染服务">
+      <Tier3>8230洗染服务</Tier3>
+    </Tier2>
+    <Tier2 name="824理发及美容保健服务">
+      <Tier3>8240理发及美容保健服务</Tier3>
+    </Tier2>
+    <Tier2 name="825洗浴服务">
+      <Tier3>8250洗浴服务</Tier3>
+    </Tier2>
+    <Tier2 name="826婚姻服务">
+      <Tier3>8260婚姻服务</Tier3>
+    </Tier2>
+    <Tier2 name="827殡葬服务">
+      <Tier3>8270殡葬服务</Tier3>
+    </Tier2>
+    <Tier2 name="828摄影扩印服务">
+      <Tier3>8280摄影扩印服务</Tier3>
+    </Tier2>
+    <Tier2 name="829其他居民服务">
+      <Tier3>8290其他居民服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="83其他服务业">
+    <Tier2 name="831修理与维护">
+      <Tier3>8311汽车、摩托车维护与保养</Tier3>
+      <Tier3>8312办公设备维修</Tier3>
+      <Tier3>8313家用电器修理</Tier3>
+      <Tier3>8319其他日用品修理</Tier3>
+    </Tier2>
+    <Tier2 name="832清洁服务">
+      <Tier3>8321建筑物清洁服务</Tier3>
+      <Tier3>8329其他清洁服务</Tier3>
+    </Tier2>
+    <Tier2 name="839其他未列明的服务">
+      <Tier3>8390其他未列明的服务</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="84教育">
+    <Tier2 name="841学前教育">
+      <Tier3>8410学前教育</Tier3>
+    </Tier2>
+    <Tier2 name="842初等教育">
+      <Tier3>8420初等教育</Tier3>
+    </Tier2>
+    <Tier2 name="843中等教育">
+      <Tier3>8431初中教育</Tier3>
+      <Tier3>8432高中教育</Tier3>
+      <Tier3>8433中等专业教育</Tier3>
+      <Tier3>8434职业中学教育</Tier3>
+      <Tier3>8435技工学校教育</Tier3>
+      <Tier3>8439其他中等教育</Tier3>
+    </Tier2>
+    <Tier2 name="844高等教育">
+      <Tier3>8441普通高等教育</Tier3>
+      <Tier3>8442成人高等教育</Tier3>
+    </Tier2>
+    <Tier2 name="849其他教育">
+      <Tier3>8491职业技能培训</Tier3>
+      <Tier3>8492特殊教育</Tier3>
+      <Tier3>8499其他未列明的教育</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="85卫生">
+    <Tier2 name="851医院">
+      <Tier3>8511综合医院</Tier3>
+      <Tier3>8512中医医院</Tier3>
+      <Tier3>8513中西医结合医院</Tier3>
+      <Tier3>8514民族医院</Tier3>
+      <Tier3>8515专科医院</Tier3>
+      <Tier3>8516疗养院</Tier3>
+    </Tier2>
+    <Tier2 name="852卫生院及社区医疗活动">
+      <Tier3>8520卫生院及社区医疗活动</Tier3>
+    </Tier2>
+    <Tier2 name="853门诊部医疗活动">
+      <Tier3>8530门诊部医疗活动</Tier3>
+    </Tier2>
+    <Tier2 name="854计划生育技术服务活动">
+      <Tier3>8540计划生育技术服务活动</Tier3>
+    </Tier2>
+    <Tier2 name="855妇幼保健活动">
+      <Tier3>8550妇幼保健活动</Tier3>
+    </Tier2>
+    <Tier2 name="856专科疾病防治活动">
+      <Tier3>8560专科疾病防治活动</Tier3>
+    </Tier2>
+    <Tier2 name="857疾病预防控制及防疫活动">
+      <Tier3>8570疾病预防控制及防疫活动</Tier3>
+    </Tier2>
+    <Tier2 name="859其他卫生活动">
+      <Tier3>8590其他卫生活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="86社会保障业">
+    <Tier2 name="860社会保障业">
+      <Tier3>8600社会保障业</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="87社会福利业">
+    <Tier2 name="871提供住宿的社会福利">
+      <Tier3>8711干部休养所</Tier3>
+      <Tier3>8712收养收容服务</Tier3>
+    </Tier2>
+    <Tier2 name="872不提供住宿的社会福利">
+      <Tier3>8720不提供住宿的社会福利</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="88新闻出版业">
+    <Tier2 name="881新闻业">
+      <Tier3>8810新闻业</Tier3>
+    </Tier2>
+    <Tier2 name="882出版业">
+      <Tier3>8821图书出版</Tier3>
+      <Tier3>8822报纸出版</Tier3>
+      <Tier3>8823期刊出版</Tier3>
+      <Tier3>8824音像制品出版</Tier3>
+      <Tier3>8825电子出版物出版</Tier3>
+      <Tier3>8829其他出版</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="89广播、电视、电影和音像业">
+    <Tier2 name="891广播">
+      <Tier3>8910广播</Tier3>
+    </Tier2>
+    <Tier2 name="892电视">
+      <Tier3>8920电视</Tier3>
+    </Tier2>
+    <Tier2 name="893电影">
+      <Tier3>8931电影制作与发行</Tier3>
+      <Tier3>8932电影放映</Tier3>
+    </Tier2>
+    <Tier2 name="894音像制作">
+      <Tier3>8940音像制作</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="90文化艺术业">
+    <Tier2 name="901文艺创作与表演">
+      <Tier3>9010文艺创作与表演</Tier3>
+    </Tier2>
+    <Tier2 name="902艺术表演场馆">
+      <Tier3>9020艺术表演场馆</Tier3>
+    </Tier2>
+    <Tier2 name="903图书馆与档案馆">
+      <Tier3>9031图书馆</Tier3>
+      <Tier3>9032档案馆</Tier3>
+    </Tier2>
+    <Tier2 name="904文物及文化保护">
+      <Tier3>9040文物及文化保护</Tier3>
+    </Tier2>
+    <Tier2 name="905博物馆">
+      <Tier3>9050博物馆</Tier3>
+    </Tier2>
+    <Tier2 name="906烈士陵园、纪念馆">
+      <Tier3>9060烈士陵园、纪念馆</Tier3>
+    </Tier2>
+    <Tier2 name="907群众文化活动">
+      <Tier3>9070群众文化活动</Tier3>
+    </Tier2>
+    <Tier2 name="908文化艺术经纪代理">
+      <Tier3>9080文化艺术经纪代理</Tier3>
+    </Tier2>
+    <Tier2 name="909其他文化艺术">
+      <Tier3>9090其他文化艺术</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="91体育">
+    <Tier2 name="911体育组织">
+      <Tier3>9110体育组织</Tier3>
+    </Tier2>
+    <Tier2 name="912体育场馆">
+      <Tier3>9120体育场馆</Tier3>
+    </Tier2>
+    <Tier2 name="919其他体育">
+      <Tier3>9190其他体育</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="92娱乐业">
+    <Tier2 name="921室内娱乐活动">
+      <Tier3>9210室内娱乐活动</Tier3>
+    </Tier2>
+    <Tier2 name="922游乐园">
+      <Tier3>9220游乐园</Tier3>
+    </Tier2>
+    <Tier2 name="923休闲健身娱乐活动">
+      <Tier3>9230休闲健身娱乐活动</Tier3>
+    </Tier2>
+    <Tier2 name="929其他娱乐活动">
+      <Tier3>9290其他娱乐活动</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="93中国共产党机关">
+    <Tier2 name="930中国共产党机关">
+      <Tier3>9300中国共产党机关</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="94国家机构">
+    <Tier2 name="941国家权力机构">
+      <Tier3>9410国家权力机构</Tier3>
+    </Tier2>
+    <Tier2 name="942国家行政机构">
+      <Tier3>9421综合事务管理机构</Tier3>
+      <Tier3>9422对外事务管理机构</Tier3>
+      <Tier3>9423公共安全管理机构</Tier3>
+      <Tier3>9424社会事务管理机构</Tier3>
+      <Tier3>9425经济事务管理机构</Tier3>
+      <Tier3>9426政府事务管理机构</Tier3>
+      <Tier3>9427行政监督检查机构</Tier3>
+    </Tier2>
+    <Tier2 name="943人民法院和人民检察院">
+      <Tier3>9431人民法院</Tier3>
+      <Tier3>9432人民检察院</Tier3>
+    </Tier2>
+    <Tier2 name="949其他国家机构">
+      <Tier3>9490其他国家机构</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="95人民政协和民主党派">
+    <Tier2 name="951人民政协">
+      <Tier3>9510人民政协</Tier3>
+    </Tier2>
+    <Tier2 name="952民主党派">
+      <Tier3>9520民主党派</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="96群众团体、社会团体和宗教组织">
+    <Tier2 name="961群众团体">
+      <Tier3>9611工会</Tier3>
+      <Tier3>9612妇联</Tier3>
+      <Tier3>9613共青团</Tier3>
+      <Tier3>9619其他群众团体</Tier3>
+    </Tier2>
+    <Tier2 name="962社会团体">
+      <Tier3>9621专业性团体</Tier3>
+      <Tier3>9622行业性团体</Tier3>
+      <Tier3>9629其他社会团体</Tier3>
+    </Tier2>
+    <Tier2 name="963宗教组织">
+      <Tier3>9630宗教组织</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="97基层群众自治组织">
+    <Tier2 name="971社区自治组织">
+      <Tier3>9710社区自治组织</Tier3>
+    </Tier2>
+    <Tier2 name="972村民自治组织">
+      <Tier3>9720村民自治组织</Tier3>
+    </Tier2>
+  </Tier1>
+  <Tier1 name="98国际组织">
+    <Tier2 name="980国际组织">
+      <Tier3>9800国际组织</Tier3>
+    </Tier2>
+  </Tier1>
+</root>

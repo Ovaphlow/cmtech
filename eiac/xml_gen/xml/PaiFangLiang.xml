@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<root>
+  <Tier1 name="排放量">
+    <Tier2>实际排放浓度(1)</Tier2>
+    <Tier2>允许排放浓度(2)</Tier2>
+    <Tier2>实际排放总量(3)</Tier2>
+    <Tier2>核定排放总量(4)</Tier2>
+    <Tier2>预测排放浓度(5)</Tier2>
+    <Tier2>允许排放浓度(6)</Tier2>
+    <Tier2>产生量(7)</Tier2>
+    <Tier2>自身消减量(8)</Tier2>
+    <Tier2>预测排放总量(9)</Tier2>
+    <Tier2>核定排放总量(10)</Tier2>
+    <Tier2>以新带老消减量(11)</Tier2>
+    <Tier2>区域平衡替代本工程消减量(12)</Tier2>
+    <Tier2>预测排放总量(13)</Tier2>
+    <Tier2>核定排放总量(14)</Tier2>
+    <Tier2>排放增减量(15)</Tier2>
+  </Tier1>
+  <Tier1 name="主要污染物">
+    <Tier2>废水</Tier2>
+    <Tier2>化学需氧量</Tier2>
+    <Tier2>氨氮</Tier2>
+    <Tier2>石油类</Tier2>
+    <Tier2>废气</Tier2>
+    <Tier2>二氧化硫</Tier2>
+    <Tier2>烟尘</Tier2>
+    <Tier2>工业粉末</Tier2>
+    <Tier2>氮氧化合物</Tier2>
+    <Tier2>工业固体废物</Tier2>
+    <Tier2>其它相关</Tier2>
+  </Tier1>
+</root>

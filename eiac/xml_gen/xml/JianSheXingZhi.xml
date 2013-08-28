@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<root>
+  <name cat='单选'>新建</name>
+  <name cat='单选'>改扩建</name>
+  <name cat='单选'>技术改造</name>
+  <name cat='多选'>变更</name>
+  <name cat='多选'>退回重报</name>
+</root>

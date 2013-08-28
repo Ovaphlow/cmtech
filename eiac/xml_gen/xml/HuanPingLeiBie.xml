@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<root>
+  <Tier1 name="环评类别">
+    <Tier2>轻工纺织化纤</Tier2>
+    <Tier2>化工石化医药</Tier2>
+    <Tier2>冶金机电</Tier2>
+    <Tier2>建材火电</Tier2>
+    <Tier2>农林水利</Tier2>
+    <Tier2>采掘</Tier2>
+    <Tier2>交通运输</Tier2>
+    <Tier2>社会区域</Tier2>
+    <Tier2>海洋工程</Tier2>
+    <Tier2>输变电及广电通讯</Tier2>
+    <Tier2>核工业</Tier2>
+    <Tier2>环境管理</Tier2>
+    <Tier2>其他</Tier2>
+  </Tier1>
+</root>

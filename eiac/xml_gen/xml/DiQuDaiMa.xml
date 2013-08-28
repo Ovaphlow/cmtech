@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<root>
+  <DiQu name="哈尔滨市">
+    <Loc>市辖区</Loc>
+    <Loc>道里区</Loc>
+    <Loc>南岗区</Loc>
+    <Loc>道外区</Loc>
+    <Loc>香坊区</Loc>
+    <Loc>动力区</Loc>
+    <Loc>平房区</Loc>
+    <Loc>松北区</Loc>
+    <Loc>呼兰区</Loc>
+    <Loc>依兰县</Loc>
+    <Loc>方正县</Loc>
+    <Loc>宾县</Loc>
+    <Loc>巴彦县</Loc>
+    <Loc>木兰县</Loc>
+    <Loc>通河县</Loc>
+    <Loc>延寿县</Loc>
+    <Loc>阿城市</Loc>
+    <Loc>双城市</Loc>
+    <Loc>尚志市</Loc>
+    <Loc>五常市</Loc>
+  </DiQu>
+  <DiQu name="齐齐哈尔市">
+    <Loc>市辖区</Loc>
+    <Loc>龙沙区</Loc>
+    <Loc>建华区</Loc>
+    <Loc>铁锋区</Loc>
+    <Loc>昂昂溪区</Loc>
+    <Loc>富拉尔基区</Loc>
+    <Loc>碾子山区</Loc>
+    <Loc>梅里斯达斡尔族区</Loc>
+    <Loc>龙江县</Loc>
+    <Loc>依安县</Loc>
+    <Loc>泰来县</Loc>
+    <Loc>甘南县</Loc>
+    <Loc>富裕县</Loc>
+    <Loc>克山县</Loc>
+    <Loc>克东县</Loc>
+    <Loc>拜泉县</Loc>
+    <Loc>讷河市</Loc>
+  </DiQu>
+  <DiQu name="鸡西市">
+    <Loc>市辖区</Loc>
+    <Loc>鸡冠区</Loc>
+    <Loc>恒山区</Loc>
+    <Loc>滴道区</Loc>
+    <Loc>梨树区</Loc>
+    <Loc>城子河区</Loc>
+    <Loc>麻山区</Loc>
+    <Loc>鸡东县</Loc>
+    <Loc>虎林市</Loc>
+    <Loc>密山市</Loc>
+  </DiQu>
+  <DiQu name="鹤岗市">
+    <Loc>市辖区</Loc>
+    <Loc>向阳区</Loc>
+    <Loc>工农区</Loc>
+    <Loc>南山区</Loc>
+    <Loc>兴安区</Loc>
+    <Loc>东山区</Loc>
+    <Loc>兴山区</Loc>
+    <Loc>萝北县</Loc>
+    <Loc>绥滨县</Loc>
+  </DiQu>
+  <DiQu name="双鸭山市">
+    <Loc>市辖区</Loc>
+    <Loc>尖山区</Loc>
+    <Loc>岭东区</Loc>
+    <Loc>四方台区</Loc>
+    <Loc>宝山区</Loc>
+    <Loc>集贤县</Loc>
+    <Loc>友谊县</Loc>
+    <Loc>宝清县</Loc>
+    <Loc>饶河县</Loc>
+  </DiQu>
+  <DiQu name="大庆市">
+    <Loc>市辖区</Loc>
+    <Loc>萨尔图区</Loc>
+    <Loc>龙凤区</Loc>
+    <Loc>让胡路区</Loc>
+    <Loc>红岗区</Loc>
+    <Loc>大同区</Loc>
+    <Loc>肇州县</Loc>
+    <Loc>肇源县</Loc>
+    <Loc>林甸县</Loc>
+    <Loc>杜尔伯特蒙古族自治县</Loc>
+  </DiQu>
+  <DiQu name="伊春市">
+    <Loc>市辖区</Loc>
+    <Loc>伊春区</Loc>
+    <Loc>南岔区</Loc>
+    <Loc>友好区</Loc>
+    <Loc>西林区</Loc>
+    <Loc>翠峦区</Loc>
+    <Loc>新青区</Loc>
+    <Loc>美溪区</Loc>
+    <Loc>金山屯区</Loc>
+    <Loc>五营区</Loc>
+    <Loc>乌马河区</Loc>
+    <Loc>汤旺河区</Loc>
+    <Loc>带岭区</Loc>
+    <Loc>乌伊岭区</Loc>
+    <Loc>红星区</Loc>
+    <Loc>上甘岭区</Loc>
+    <Loc>嘉荫县</Loc>
+    <Loc>铁力市</Loc>
+  </DiQu>
+  <DiQu name="七台河市">
+    <Loc>市辖区</Loc>
+    <Loc>新兴区</Loc>
+    <Loc>桃山区</Loc>
+    <Loc>茄子河区</Loc>
+    <Loc>勃利县</Loc>
+  </DiQu>
+  <DiQu name="牡丹江市">
+    <Loc>市辖区</Loc>
+    <Loc>东安区</Loc>
+    <Loc>阳明区</Loc>
+    <Loc>爱民区</Loc>
+    <Loc>西安区</Loc>
+    <Loc>东宁县</Loc>
+    <Loc>林口县</Loc>
+    <Loc>绥芬河市</Loc>
+    <Loc>海林市</Loc>
+    <Loc>宁安市</Loc>
+    <Loc>穆棱市</Loc>
+  </DiQu>
+  <DiQu name="黑河市">
+    <Loc>市辖区</Loc>
+    <Loc>爱辉区</Loc>
+    <Loc>嫩江县</Loc>
+    <Loc>逊克县</Loc>
+    <Loc>孙吴县</Loc>
+    <Loc>北安市</Loc>
+    <Loc>五大连池市</Loc>
+  </DiQu>
+  <DiQu name="绥化市">
+    <Loc>市辖区</Loc>
+    <Loc>北林区</Loc>
+    <Loc>望奎县</Loc>
+    <Loc>兰西县</Loc>
+    <Loc>青冈县</Loc>
+    <Loc>庆安县</Loc>
+    <Loc>明水县</Loc>
+    <Loc>绥棱县</Loc>
+    <Loc>安达市</Loc>
+    <Loc>肇东市</Loc>
+    <Loc>海伦市</Loc>
+  </DiQu>
+  <DiQu name="大兴安岭地区">
+    <Loc>加格达奇区</Loc>
+    <Loc>松岭区</Loc>
+    <Loc>新林区</Loc>
+    <Loc>呼中区</Loc>
+    <Loc>呼玛县</Loc>
+    <Loc>塔河县</Loc>
+    <Loc>漠河县</Loc>
+  </DiQu>
+</root>

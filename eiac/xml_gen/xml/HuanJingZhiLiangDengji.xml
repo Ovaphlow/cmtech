@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<root>
+  <Tier1 name="环境空气">
+    <Tier2>无</Tier2>
+    <Tier2>一级标准</Tier2>
+    <Tier2>二级标准</Tier2>
+    <Tier2>三级标准</Tier2>
+  </Tier1>
+  <Tier1 name="地表水">
+    <Tier2>无</Tier2>
+    <Tier2>I类</Tier2>
+    <Tier2>II类</Tier2>
+    <Tier2>III类</Tier2>
+    <Tier2>IV类</Tier2>
+    <Tier2>V类</Tier2>
+    <Tier2>劣V类</Tier2>
+  </Tier1>
+  <Tier1 name="地下水">
+    <Tier2>无</Tier2>
+    <Tier2>I类</Tier2>
+    <Tier2>II类</Tier2>
+    <Tier2>III类</Tier2>
+    <Tier2>IV类</Tier2>
+    <Tier2>V类</Tier2>
+  </Tier1>
+  <Tier1 name="环境噪声">
+    <Tier2>无</Tier2>
+    <Tier2>0类</Tier2>
+    <Tier2>1类</Tier2>
+    <Tier2>2类</Tier2>
+    <Tier2>3类</Tier2>
+    <Tier2>4类</Tier2>
+  </Tier1>
+  <Tier1 name="海水">
+    <Tier2>无</Tier2>
+    <Tier2>第一类</Tier2>
+    <Tier2>第二类</Tier2>
+    <Tier2>第三类</Tier2>
+    <Tier2>第四类</Tier2>
+  </Tier1>
+  <Tier1 name="土壤">
+    <Tier2>无</Tier2>
+    <Tier2>I级</Tier2>
+    <Tier2>II级</Tier2>
+    <Tier2>III级</Tier2>
+  </Tier1>
+  <Tier1 name="其它">
+    <Tier2>无</Tier2>
+  </Tier1>
+</root>

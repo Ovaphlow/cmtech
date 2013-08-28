@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<root>
+  <Tier1 name="环境敏感特征">
+    <Tier2>自然保护区</Tier2>
+    <Tier2>风景名胜区</Tier2>
+    <Tier2>饮用水水源保护区</Tier2>
+    <Tier2>基本农田保护区</Tier2>
+    <Tier2>水土流失重点防护区</Tier2>
+    <Tier2>沙化地封禁保护区</Tier2>
+    <Tier2>森林公园</Tier2>
+    <Tier2>地质公园</Tier2>
+    <Tier2>重要湿地</Tier2>
+    <Tier2>基本草原</Tier2>
+    <Tier2>文物保护单位</Tier2>
+    <Tier2>珍稀动植物栖息地</Tier2>
+    <Tier2>世界自然文化遗产</Tier2>
+    <Tier2>重点流失</Tier2>
+    <Tier2>重点湖泊</Tier2>
+    <Tier2>两控区</Tier2>
+  </Tier1>
