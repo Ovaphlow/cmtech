@@ -12,5 +12,7 @@ cnx_cfg = {
   'database': 'cm_archieve',
 }
 
+G_UPLOAD_PATH = 'static/upload'
+
 def get_time():
   return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))

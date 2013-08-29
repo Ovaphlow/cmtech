@@ -3,29 +3,31 @@ from flask import Flask, request
 import os
 import globalvars
 import index, daoru, luru
+from werkzeug import secure_filename
 
 app = Flask(__name__)
 app.host = '0.0.0.0'
 app.debug = True
 app.secret_key = 'Ovaphlow'
+app.config['UPLOAD_FOLDER'] = globalvars.G_UPLOAD_PATH
 
 @app.route('/')
 def index_page():
-  return index.get1()
+  return index.get()
 
-@app.route('/daoru', methods=['get', 'post'])
+@app.route('/daoru', methods=['GET', 'POST'])
 def daoru_page():
-  if request.method == 'get':
-    return daoru.get()
-  else:
+  if request.method == 'POST':
     return daoru.post()
-
-@app.route('/luru', methods=['get', 'post'])
-def luru_page():
-  if request.method == 'get':
-    return luru.get()
   else:
+    return daoru.get()
+
+@app.route('/luru', methods=['GET', 'POST'])
+def luru_page():
+  if request.method == 'POST':
     return luru.post()
+  else:
+    return luru.get()
 
 if __name__ == '__main__':
   app.run()
