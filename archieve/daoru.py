@@ -20,19 +20,37 @@ def post():
   return template.render()
 
 def import_xls(file_path):
-  print file_path
   xls = xlrd.open_workbook(file_path, 'rb')
   sh = xls.sheets()[0]
-  print sh.name
   cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
   cursor = cnx.cursor()
   for row in range(1, sh.nrows):
-    sql = ( 'INSERT INTO dangan '
-            'VALUES('
-            '%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-    param = ( 0, sh.cell(row, 3).value, sh.cell(row, 0).value,
-              sh.cell(row, 1).value, sh.cell(row, 2).value, '',
-              '', sh.cell(row, 4).value, sh.cell(row, 5).value,
-              sh.cell(row, 6).value, 0, 0)
+    if sh.cell(row, 6).value != u'已调入':
+      continue
+    sql = 'SELECT id FROM dangan WHERE DangAnHao=%s'
+    param = (sh.cell(row, 3).value,)
     cursor.execute(sql, param)
+    data = cursor.fetchall()
+    if cursor.rowcount == 0:
+      sql = ( 'INSERT INTO dangan '
+              'VALUES('
+              '%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
+      param = ( 0, sh.cell(row, 3).value, sh.cell(row, 0).value,
+                sh.cell(row, 1).value, sh.cell(row, 2).value, '',
+                '', sh.cell(row, 4).value, sh.cell(row, 5).value,
+                sh.cell(row, 6).value, 0, 0)
+      cursor.execute(sql, param)
+    else:
+      sql = ( 'UPDATE dangan '
+              'SET '
+              'DangAnHao=%s, ShenFenZheng=%s, XingMing=%s,'
+              'XingBie=%s, RenYuanLeiBie=%s, CunDangRiQi=%s,'
+              'CunDangZhuangTai=%s '
+              'WHERE id=%s')
+      param = ( sh.cell(row, 3).value, sh.cell(row, 0).value,
+                sh.cell(row, 1).value, sh.cell(row, 2).value,
+                sh.cell(row, 4).value, sh.cell(row, 5).value,
+                sh.cell(row, 6).value, data[0][0])
+      cursor.execute(sql, param)
+
   cnx.commit()

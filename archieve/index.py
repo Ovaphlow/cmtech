@@ -1,12 +1,13 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
+from flask import request, redirect
 
 def get():
-  cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
-  cursor = cnx.cursor()
   sql = ( 'SELECT * FROM update_log '
           'ORDER BY id DESC')
+  cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+  cursor = cnx.cursor()
   cursor.execute(sql)
   data = cursor.fetchall()
   cursor.close()
@@ -17,6 +18,14 @@ def get():
   template = globalvars.jinja_env.get_template('template/index.html')
   return template.render(template_param)
 
-def get1():
-  template = globalvars.jinja_env.get_template('template/index.html')
-  return template.render()
+def post():
+  sql = 'SELECT id FROM dangan WHERE DangAnHao=%s OR ShenFenZheng=%s'
+  param = (request.form['id'], request.form['id'])
+  cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+  cursor = cnx.cursor()
+  cursor.execute(sql, param)
+  data = cursor.fetchall()
+  if cursor.rowcount == 0:
+    return redirect('/luru')
+  else:
+    return redirect('/dangan?id=' + str(data[0][0]))
