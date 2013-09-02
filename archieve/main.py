@@ -32,7 +32,7 @@ def luru_page():
   else:
     return luru.get()
 
-@app.route('/dangan')
+@app.route('/dangan/<id>')
 def dangan_page():
   return dangan.get()
 
