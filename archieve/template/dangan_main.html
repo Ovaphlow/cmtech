@@ -10,8 +10,32 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <dl class="dl-horizontal">
-          <dt>...</dt>
-          <dd>...</dd>
+          <dt><h3>档案号</h3></dt>
+          <dd><h3 class="text-danger"><strong>{{ row[1] }}</strong></h3></dd>
+          <dt><h3>身份证</h3></dt>
+          <dd><h3 class="text-danger"><strong>{{ row[2] }}</strong></h3></dd>
+          <dt><h3>姓名</h3></dt>
+          <dd><h3 class="text-primary"><strong>{{ row[3] }}</strong></h3></dd>
+          <h4>
+          <p><dt>性别</dt>
+          <dd>{{ row[4] }}</dd></p>
+          <p><dt>出生日期</dt>
+          <dd>{{ row[5] }}</dd></p>
+          <p><dt>预退休日期</dt>
+          <dd>{{ row[6] }}</dd></p>
+          <p><dt>是否为女管理干部</dt>
+          {% if row[10] == 1 %}
+          <dd>是</dd>
+          {% else %}
+          <dd>否</dd>
+          {% endif %}</p>
+          <p><dt>是否为特殊工种</dt>
+          {% if row[11] == 1 %}
+          <dd>是</dd>
+          {% else %}
+          <dd>否</dd>
+          {% endif %}</p>
+          </h4>
         </dl>
       </div>
     </div>

@@ -3,14 +3,14 @@
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
         <div class="page-header">
-          <h2>录入档案信息 <small> </small></h2>
+          <h2>录入档案信息 <small>基础信息</small></h2>
         </div>
       </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-danger">
         <div class="panel-heading">
-          <h3 class="panel-title"><strong>添加档案信息</strong></h3>
+          <h3 class="panel-title"><strong>档案基础信息</strong></h3>
         </div>
         <div class="panel-body">
           <form
@@ -18,43 +18,43 @@
             role="form"
             action="/luru"
             method="post">
-            <div class="input-group input-group-lg">
+            <p><div class="input-group input-group-lg">
               <span class="input-group-addon"><strong>档案号</strong></span>
               <input type="text" class="form-control input-lg" name="aid">
-            </div>
-            <div class="input-group">
+            </div></p>
+            <p><div class="input-group">
               <span class="input-group-addon">身份证</span>
-              <input type="text" class="form-control" name="idcard">
-            </div>
-            <div class="input-group">
+              <input type="text" class="form-control input-lg" name="idcard">
+            </div></p>
+            <p><div class="input-group">
               <span class="input-group-addon">姓名</span>
-              <input type="text" class="form-control" name="name">
-            </div>
-            <div class="input-group">
+              <input type="text" class="form-control input-lg" name="name">
+            </div></p>
+            <p><div class="input-group">
               <span class="input-group-addon">性别</span>
-              <select type="text" class="form-control" name="gender">
+              <select type="text" class="form-control input-lg" name="gender">
                 <option>男</option>
                 <option>女</option>
               </select>
-            </div>
-            <div class="input-group">
+            </div></p>
+            <p><div class="input-group">
               <span class="input-group-addon">出生日期</span>
-              <input type="date" class="form-control" name="dob">
-            </div>
-            <div class="input-group">
+              <input type="date" class="form-control input-lg" name="dob">
+            </div></p>
+            <p><div class="input-group">
               <span class="input-group-addon">预退休日期</span>
-              <input type="date" class="form-control" name="retiredate">
-            </div>
-            <div class="checkbox">
+              <input type="date" class="form-control input-lg" name="retiredate">
+            </div></p>
+            <p><div class="checkbox">
               <label>
                 <input type="checkbox" name="check" value="female"> 女管理岗位
               </label>
-            </div>
-            <div class="checkbox">
+            </div></p>
+            <p><div class="checkbox">
               <label>
                 <input type="checkbox" name="check" value="stow"> 特殊工种
               </label>
-            </div>
+            </div></p>
             <hr />
             <button type="submit" class="btn btn-danger">确认提交</button>
           </form>

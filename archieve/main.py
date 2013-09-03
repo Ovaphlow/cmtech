@@ -33,8 +33,8 @@ def luru_page():
     return luru.get()
 
 @app.route('/dangan/<id>')
-def dangan_page():
-  return dangan.get()
+def dangan_page(id):
+  return dangan.get(id)
 
 if __name__ == '__main__':
   app.run()

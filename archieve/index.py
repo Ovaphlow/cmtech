@@ -28,4 +28,4 @@ def post():
   if cursor.rowcount == 0:
     return redirect('/luru')
   else:
-    return redirect('/dangan?id=' + str(data[0][0]))
+    return redirect('/dangan/' + str(data[0][0]))
