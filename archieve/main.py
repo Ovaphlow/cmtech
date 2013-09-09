@@ -2,7 +2,7 @@
 from flask import Flask, request
 import os
 import globalvars
-import index, daoru, luru, dangan
+import index, daoru, luru, saomiao, dangan
 from werkzeug import secure_filename
 
 app = Flask(__name__)
@@ -31,6 +31,10 @@ def luru_page():
     return luru.post()
   else:
     return luru.get()
+
+@app.route('/saomiao', methods=['GET', 'POST'])
+def saomiao_page():
+  return saomiao.get()
 
 @app.route('/dangan/<id>')
 def dangan_page(id):
