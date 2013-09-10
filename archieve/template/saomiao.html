@@ -54,6 +54,19 @@
             </div>
           </div>
         </div>
+        <div class="panel-footer">
+          <form
+            class="form-horizontal"
+            role="form"
+            action="/saomiao"
+            method="post"
+            enctype="multipart/form-data">
+            <input type="file" class="form-control" id="file" name="file" value="">
+            <button type="submit" class="btn btn-danger">
+              上传
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 {% endblock %}
