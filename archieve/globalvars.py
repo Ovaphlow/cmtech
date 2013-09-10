@@ -12,7 +12,7 @@ cnx_cfg = {
   'database': 'cm_archieve',
 }
 
-G_UPLOAD_PATH = 'static/upload'
+G_UPLOAD_PATH = 'd:\\1123'
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 
 def get_time():
