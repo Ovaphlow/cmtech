@@ -1,4 +1,5 @@
 # -*- coding=UTF-8 -*-
+
 from flask import Flask, request
 import os
 import globalvars
