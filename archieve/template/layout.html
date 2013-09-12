@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>档案管理</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/css/base-min.css" rel="stylesheet" media="screen">
+  <link href="/static/css/pure-min.css" rel="stylesheet" media="screen">
+  <link rel="shortcut icon" href="static/image/favicon.ico">
+  {% block head %}
+  {% endblock %}
+  <style>
+    body,
+    .pure-g [class *= "pure-u"],
+    .pure-g-r [class *= "pure-u"] {
+        font-family: "微软雅黑", "宋体", "Aria", serif;
+    }
+  </style>
+</head>
+<body style="background-color:dimgrey">
+  <div class="container">
+    <div class="pure-menu pure-menu-open pure-menu-horizontal">
+      <a href="#" class="pure-menu-heading"><strong>成铭科技</strong></a>
+      <ul>
+          <li><a href="#">主页</a></li>
+          <li><a href="#">导入基础数据</a></li>
+          <li><a href="#">录入档案信息</a></li>
+          <li><a href="#">查询统计</a></li>
+          <li><a href="#">系统设置</a></li>
+      </ul>
+    </div>
+  </div>
+  {% block content %}
+  {% endblock %}
+  <div class="container" style="background-color:CornflowerBlue">
+    <div class="pure-g-r">
+      <div class="pure-u-1-5">
+      </div>
+      <div class="pure-u-3-5">
+        <p><small>
+          [技术支持] 电话：18686853420；QQ：2340538
+        </small></p>
+      </div>
+      <div class="pure-u-1-5">
+        <p><a href="#"><small>
+          &copy; 成铭科技 2013
+        </small></a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

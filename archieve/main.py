@@ -3,7 +3,7 @@
 from flask import Flask, request
 import os
 import globalvars
-import index, daoru, luru, saomiao, shangchuan, dangan
+import index, daoru, luru, saomiao, shangchuan, dangan, test
 from werkzeug import secure_filename
 
 app = Flask(__name__)
@@ -50,6 +50,10 @@ def shangchuan_page(id, cat):
 @app.route('/dangan/<id>')
 def dangan_page(id):
   return dangan.get(id)
+
+@app.route('/test')
+def test_page():
+  return test.get()
 
 if __name__ == '__main__':
   app.run()
