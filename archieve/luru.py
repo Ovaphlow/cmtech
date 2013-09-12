@@ -13,13 +13,17 @@ def post():
     s = '1'
   if 'stow' in request.form.getlist('check'):
     t = '1'
-  sql = ( 'INSERT INTO dangan '
+  sql = (
+          'INSERT INTO dangan '
           'VALUES('
-          '%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)')
-  param = ( 0, request.form['aid'], request.form['idcard'],
+          '%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
+        )
+  param = (
+            0, request.form['aid'], request.form['idcard'],
             request.form['name'], request.form['gender'], request.form['dob'],
             request.form['retiredate'], '', '',
-            '', s, t)
+            '', s, t
+          )
   cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
   cursor = cnx.cursor()
   cursor.execute(sql, param)

@@ -5,9 +5,12 @@ import os
 from flask import request
 from werkzeug import secure_filename
 
-def get():
+def get(id):
+  template_param = {
+      'id': id
+    }
   template = globalvars.jinja_env.get_template('template/shangchuan.html')
-  return template.render()
+  return template.render(template_param)
 
 def post():
   files_list = request.files.getlist('file')

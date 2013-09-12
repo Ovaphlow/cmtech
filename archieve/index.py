@@ -4,8 +4,10 @@ import mysql.connector
 from flask import request, redirect
 
 def get():
-  sql = ( 'SELECT * FROM update_log '
-          'ORDER BY id DESC')
+  sql = (
+          'SELECT * FROM update_log '
+          'ORDER BY id DESC'
+        )
   cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
   cursor = cnx.cursor()
   cursor.execute(sql)
