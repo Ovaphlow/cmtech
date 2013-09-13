@@ -13,5 +13,5 @@ def get(id):
   template_param = {
     'row': data[0]
   }
-  template = globalvars.jinja_env.get_template('template/dangan_main.html')
+  template = globalvars.jinja_env.get_template('template/dangan.boot.html')
   return template.render(template_param)

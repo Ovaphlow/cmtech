@@ -5,9 +5,9 @@ from flask import request, redirect
 
 def get():
   sql = (
-          'SELECT * FROM update_log '
-          'ORDER BY id DESC'
-        )
+    'SELECT * FROM update_log '
+    'ORDER BY id DESC'
+  )
   cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
   cursor = cnx.cursor()
   cursor.execute(sql)
@@ -17,7 +17,7 @@ def get():
   template_param = {
     'data': data
   }
-  template = globalvars.jinja_env.get_template('template/index.html')
+  template = globalvars.jinja_env.get_template('template/index.boot.html')
   return template.render(template_param)
 
 def post():

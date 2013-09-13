@@ -41,11 +41,11 @@ def saomiao_page():
     return saomiao.get()
 
 @app.route('/shangchuan/<id>', methods=['GET', 'POST'])
-def shangchuan_page(id, cat):
+def shangchuan_page(id):
   if request.method == 'POST':
     return shangchuan.post(id)
   else:
-    return shangchuan.get()
+    return shangchuan.get(id)
 
 @app.route('/dangan/<id>')
 def dangan_page(id):

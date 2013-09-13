@@ -9,10 +9,10 @@ def get(id):
   template_param = {
       'id': id
     }
-  template = globalvars.jinja_env.get_template('template/shangchuan.html')
+  template = globalvars.jinja_env.get_template('template/shangchuan.boot.html')
   return template.render(template_param)
 
-def post():
+def post(id):
   files_list = request.files.getlist('file')
   for f in files_list:
     if f and globalvars.check_ext(f.filename):
