@@ -6,10 +6,8 @@ from flask import request, render_template
 from werkzeug import secure_filename
 
 def get(id):
-  template_param = {
-    'id': id
-  }
-  return render_template('shangchuan.boot.html', template_param)
+
+  return render_template('shangchuan.boot.html', id=id)
 
 def post(id):
   files_list = request.files.getlist('file')
