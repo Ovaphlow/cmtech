@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import request, redirect
+from flask import request, redirect, render_template
 
 def get():
   sql = (
@@ -17,8 +17,7 @@ def get():
   template_param = {
     'data': data
   }
-  template = globalvars.jinja_env.get_template('template/index.boot.html')
-  return template.render(template_param)
+  return render_template('index.boot.html', data=data)
 
 def post():
   sql = 'SELECT id FROM dangan WHERE DangAnHao=%s OR ShenFenZheng=%s'

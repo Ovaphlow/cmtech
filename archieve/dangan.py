@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import request, redirect
+from flask import request, redirect, render_template
 
 def get(id):
   sql = 'SELECT * FROM dangan WHERE id=%s'
@@ -13,5 +13,4 @@ def get(id):
   template_param = {
     'row': data[0]
   }
-  template = globalvars.jinja_env.get_template('template/dangan.boot.html')
-  return template.render(template_param)
+  return render_template('dangan.boot.html', row=data[0])

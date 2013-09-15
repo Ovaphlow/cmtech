@@ -1,11 +1,10 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import request
+from flask import request, render_template
 
 def get():
-  template = globalvars.jinja_env.get_template('template/luru.boot.html')
-  return template.render()
+  return render_template('luru.boot.html')
 
 def post():
   s, t = '0', '0'
@@ -28,5 +27,4 @@ def post():
   cursor = cnx.cursor()
   cursor.execute(sql, param)
   cnx.commit()
-  template = globalvars.jinja_env.get_template('template/luru.boot.html')
-  return template.render()
+  return render_template('luru.boot.html')

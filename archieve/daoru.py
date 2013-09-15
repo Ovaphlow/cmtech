@@ -3,12 +3,11 @@ import globalvars
 import mysql.connector
 import os
 from werkzeug import secure_filename
-from flask import request
+from flask import request, render_template
 import xlrd
 
 def get():
-  template = globalvars.jinja_env.get_template('template/daoru.boot.html')
-  return template.render()
+  return render_template('daoru.boot.html')
 
 def post():
   f = request.files['file']
@@ -16,8 +15,7 @@ def post():
   file_path = os.path.join(globalvars.G_UPLOAD_PATH, filename)
   f.save(file_path)
   import_xls(file_path)
-  template = globalvars.jinja_env.get_template('template/daoru.boot.html')
-  return template.render()
+  return render_template('daoru.boot.html')
 
 def import_xls(file_path):
   xls = xlrd.open_workbook(file_path, 'rb')

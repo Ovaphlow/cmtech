@@ -1,0 +1,72 @@
+{% extends "base.boot.html" %}
+{% block content %}
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="page-header">
+          <h2>录入档案信息 <small>扫描档案</small></h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><strong>图像</strong></h3>
+        </div>
+        <div class="panel-body">
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><strong>扫描仪</strong></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="btn-group btn-group-xs">
+              <button type="button" class="btn btn-default">开始视频</button>
+              <button type="button" class="btn btn-default">停止视频</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="btn-group btn-group-xs">
+              <button type="button" class="btn btn-default">图像设置</button>
+              <button type="button" class="btn btn-default">自动连拍</button>
+              <button type="button" class="btn btn-default">自动裁切</button>
+              <button type="button" class="btn btn-default">消除噪点</button>
+              <button type="button" class="btn btn-default">自动对焦</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="btn-group">
+              <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-picture"></span>
+                预览
+              </button>
+              <button type="button" class="btn btn-primary">
+                <span class="glyphicon glyphicon-facetime-video"></span>
+                拍照
+              </button>
+              <button type="button" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span>
+                删除文件
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <form
+            class="form-horizontal"
+            role="form"
+            action="/saomiao"
+            method="post"
+            enctype="multipart/form-data">
+            <input type="file" class="form-control" id="file" name="file" value="">
+            <button type="submit" class="btn btn-danger">
+              上传
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

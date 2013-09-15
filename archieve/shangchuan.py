@@ -2,15 +2,14 @@
 import globalvars
 import mysql.connector
 import os
-from flask import request
+from flask import request, render_template
 from werkzeug import secure_filename
 
 def get(id):
   template_param = {
-      'id': id
-    }
-  template = globalvars.jinja_env.get_template('template/shangchuan.boot.html')
-  return template.render(template_param)
+    'id': id
+  }
+  return render_template('shangchuan.boot.html', template_param)
 
 def post(id):
   files_list = request.files.getlist('file')
@@ -18,5 +17,4 @@ def post(id):
     if f and globalvars.check_ext(f.filename):
       filename = secure_filename(f.filename)
       f.save(os.path.join(globalvars.G_UPLOAD_PATH, filename))
-  template = globalvars.jinja_env.get_template('template/shangchuan.html')
-  return template.render()
+  return render_template('shangchuan.boot.html')

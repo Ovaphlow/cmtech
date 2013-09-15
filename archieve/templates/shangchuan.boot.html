@@ -1,0 +1,19 @@
+{% extends "base.boot.html" %}
+{% block title %}录入档案信息 <small>上传档案图片/{{ id }}</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span3 offset1" style="background-color:Lavender">
+        <p class="text-center"><strong>档案信息</strong></p>
+      </div>
+      <div class="span8">
+        <form role="form" action="/shangchuan" method="post" enctype="multipart/form-data">
+          <h3 class="panel-title"><strong>上传文件</strong></h3>
+          <input type="file" name="file">
+          <input type="file" name="file">
+          <button type="submit" class="btn btn-danger">
+            上传
+          </button>
+        </form>
+      </div>
+    </div>
+{% endblock %}
