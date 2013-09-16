@@ -2,22 +2,196 @@
 {% block title %}录入档案信息 <small>上传档案图片/{{ id }}</small>{% endblock %}
 {% block content %}
     <div class="row-fluid">
-      <div class="span3 offset1" style="background-color:Lavender">
-        <p class="text-center"><strong>档案信息</strong></p>
+      <div class="span3 offset1">
+        <span class="label label-info">档案信息</span>
+        <hr>
+        <dl>
+          <dt>档案号</dt>
+          <dd>100000</dd>
+          <dt>姓名</dt>
+          <dd>张三</dd>
+          <dt>身份证</dt>
+          <dd>230101000000000000</dd>
+          <dt>性别</dt>
+          <dd> 1</dd>
+          <dt>出生日期</dt>
+          <dd>19800101</dd>
+        </dl>
       </div>
       <div class="span7">
         <form role="form" action="/_shangchuan" method="post" enctype="multipart/form-data">
           <fieldset>
             <legend>上传文件</legend>
-            <div id="file">
-              <input type="file" name="file">
-              <br>
+            <div class="row-fluid">
+              <p>
+                <button type="submit" class="btn btn-danger">
+                  上传
+                </button>
+              </p>
             </div>
-            <input name="" type="button" value="增加文件" onClick="AddElement()" /> 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-danger">
-                上传
-              </button>
+            <div class="row-fluid">
+              <div class="span4">
+                <div class="accordion" id="accordion1">
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                        类别1
+                      </a>
+                    </div>
+                    <div id="collapse1" class="accordion-body collapse in">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse2">
+                        类别4
+                      </a>
+                    </div>
+                    <div id="collapse2" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse3">
+                        类别7
+                      </a>
+                    </div>
+                    <div id="collapse3" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="accordion" id="accordion2">
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
+                        类别2
+                      </a>
+                    </div>
+                    <div id="collapse4" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse5">
+                        类别5
+                      </a>
+                    </div>
+                    <div id="collapse5" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
+                        类别8
+                      </a>
+                    </div>
+                    <div id="collapse6" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="accordion" id="accordion3">
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse7">
+                        类别3
+                      </a>
+                    </div>
+                    <div id="collapse7" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse8">
+                        类别6
+                      </a>
+                    </div>
+                    <div id="collapse8" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse9">
+                        类别9
+                      </a>
+                    </div>
+                    <div id="collapse9" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        Anim pariatur cliche...
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div id="file1" class="span4">
+                <a href="#" onClick="AddElement('file1','file1')">增加文件</a>
+                <br>
+              </div>
+              <div id="file2" class="span4">
+                <a href="#" onClick="AddElement('file2','file2')">增加文件</a>
+                <br>
+              </div>
+              <div id="file3" class="span4">
+                <a href="#" onClick="AddElement('file3','file3')">增加文件</a>
+                <br>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div id="file4" class="span4">
+                <a href="#" onClick="AddElement('file4','file4')">增加文件</a>
+                <br>
+              </div>
+              <div id="file5" class="span4">
+                <a href="#" onClick="AddElement('file5','file5')">增加文件</a>
+                <br>
+              </div>
+              <div id="file6" class="span4">
+                <a href="#" onClick="AddElement('file6','file6')">增加文件</a>
+                <br>
+              </div>
+            </div>
+            <div class="row-fuild">
+              <div id="file7" class="span4">
+                <a href="#" onClick="AddElement('file7','file7')">增加文件</a>
+                <br>
+              </div>
+              <div id="file8" class="span4">
+                <a href="#" onClick="AddElement('file8','file8')">增加文件</a>
+                <br>
+              </div>
+              <div id="file9" class="span4">
+                <a href="#" onClick="AddElement('file9','file9')">增加文件</a>
+                <br>
+              </div>
             </div>
           </fieldset>
         </form>
