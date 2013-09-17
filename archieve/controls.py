@@ -2,7 +2,7 @@
 import globalvars
 import mysql.connector
 import os
-from flask import request, render_template
+from flask import request, render_template, redirect
 from werkzeug import secure_filename
 
 def _shangchuan():
@@ -52,4 +52,4 @@ def _shangchuan():
       if f and globalvars.check_ext(f.filename):
         filename = secure_filename(f.filename)
         f.save(os.path.join(globalvars.G_UPLOAD_PATH, filename))
-    return render_template('shangchuan.boot.html')
+    return redirect('/')
