@@ -1,72 +1,157 @@
 {% extends "base.boot.html" %}
+{% block bodylib %}onload=" CmCaptureOcx.Initial()"{% endblock %}
 {% block content %}
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1">
+    <div class="row-fluid">
+      <div class="span10 offset1">
         <div class="page-header">
           <h2>录入档案信息 <small>扫描档案</small></h2>
         </div>
       </div>
     </div>
-    <div class="col-md-9">
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title"><strong>图像</strong></h3>
+    <div class="row-fluid">
+      <div class="span8 offset1">
+        <p><span class="label label-info">图像</span></p>
+        <p>
+          <object id="CmCaptureOcx" style="margin-left: 0px; width: 856px; height: 654px" codebase="CmCaptureOcx.ocx"
+            classid="clsid:3CA842C5-9B56-4329-A7CA-35CA77C7128D">
+          </object>
+        </p>
+      </div>
+      <div class="span3">
+        <p><span class="label label-info">扫描仪</span></p>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-small"
+            onclick="KSYQ();Adjust();SetDenoise();CmCaptureOcx.AutoFocus();"
+            id="KSYQ">
+            开始视频
+          </button>
+          <button type="button" class="btn btn-default btn-small"
+            onclick="CmCaptureOcx.Destory();" name="Destory">
+            停止视频
+          </button>
         </div>
-        <div class="panel-body">
+        <br>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-small"
+            onclick="CmCaptureOcx.ShowImageSettingWindow();"
+            name="ShowImageSettingWindow">
+            设置
+          </button>
+          <button type="button" class="btn btn-default btn-small"
+            onclick="SeriesCapture();" name="SeriesCapture">
+            连拍
+          </button>
+          <button type="button" class="btn btn-default btn-small"
+            onclick="SetCropArea();" name="CusCrop">
+            自动裁切
+          </button>
+        </div>
+        <br>
+        <div class="btn-group">
+          <button type="button" class="btn btn-success"
+            onclick="Preview();" name="Preview">
+            预览
+          </button>
+          <button type="button" class="btn btn-primary"
+            onclick="Capture();" name="Capture">
+            拍照
+          </button>
+          <button type="button" class="btn btn-danger"
+            onclick="DeleteFile();" name="DeleteFile">
+            删除文件
+          </button>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="panel panel-danger">
-        <div class="panel-heading">
-          <h3 class="panel-title"><strong>扫描仪</strong></h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="btn-group btn-group-xs">
-              <button type="button" class="btn btn-default">开始视频</button>
-              <button type="button" class="btn btn-default">停止视频</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="btn-group btn-group-xs">
-              <button type="button" class="btn btn-default">图像设置</button>
-              <button type="button" class="btn btn-default">自动连拍</button>
-              <button type="button" class="btn btn-default">自动裁切</button>
-              <button type="button" class="btn btn-default">消除噪点</button>
-              <button type="button" class="btn btn-default">自动对焦</button>
-            </div>
-          </div>
-          <div class="row">
-            <div class="btn-group">
-              <button type="button" class="btn btn-success">
-                <span class="glyphicon glyphicon-picture"></span>
-                预览
-              </button>
-              <button type="button" class="btn btn-primary">
-                <span class="glyphicon glyphicon-facetime-video"></span>
-                拍照
-              </button>
-              <button type="button" class="btn btn-danger">
-                <span class="glyphicon glyphicon-trash"></span>
-                删除文件
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="panel-footer">
-          <form
-            class="form-horizontal"
-            role="form"
-            action="/saomiao"
-            method="post"
-            enctype="multipart/form-data">
-            <input type="file" class="form-control" id="file" name="file" value="">
-            <button type="submit" class="btn btn-danger">
-              上传
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+{% endblock %}
+{% block jslib %}
+  <script language="javascript" type="text/javascript">
+  var nFileCount = 0;
+  var bAdjustMode = 0;
+  var bCropArea = 0;
+  var bSeriesCapture = 0;
+  var bReadBarCode=0;
+  var bSetDenoise = 0;
+  var Width = 0;
+  var Height = 0;
+  var strFile;
+  //拍照
+  function Capture()
+  {
+      strFile = "d:\\test\\Img" + nFileCount;
+      strFile += ".jpg";
+    CmCaptureOcx.CaptureImage(strFile);
+    nFileCount ++;
+  }
+  //自动裁切
+  function Adjust()
+  {
+    if(bAdjustMode == 0)
+    {
+      CmCaptureOcx.AutoCrop(1);
+      bAdjustMode = 1;
+    }
+    else
+    {
+      CmCaptureOcx.AutoCrop(0);
+      bAdjustMode = 0;
+    }
+  }
+  //手动裁切
+  function SetCropArea()
+  {
+    if(bCropArea == 0)
+    { 
+      bCropArea = 1;
+      CmCaptureOcx.CusCrop(bCropArea);
+    }
+    else
+    {
+      bCropArea = 0;
+      CmCaptureOcx.CusCrop(bCropArea);
+    }
+  }
+  //预览
+  function Preview()
+  {
+    CmCaptureOcx.PreviewFile(strFile);
+  }
+  //自动连拍
+  function SeriesCapture()
+  {
+    var path = "d:\\test\\自动连拍\\";
+    CmCaptureOcx.SeriesCapture(1,path);
+  }
+  //删除文件
+  function DeleteFile()
+  {
+    CmCaptureOcx.DeleteFile(strFile);
+  }
+  //消除噪点
+  function SetDenoise()
+  {
+    if(bSetDenoise == 0)
+    { 
+      bSetDenoise = 1;
+      CmCaptureOcx.SetDenoise(bSetDenoise);
+    }
+    else
+    {
+      bSetDenoise = 0;
+      CmCaptureOcx.SetDenoise(bSetDenoise);
+    }
+  }
+  function KSYQ()
+  {
+      //开始视频
+      CmCaptureOcx.Initial();
+      CmCaptureOcx.StartRun(0);
+      //分辨率
+      CmCaptureOcx.SetResolution(4);
+      //图片格式
+      CmCaptureOcx.SetFileType(1);
+      //颜色格式
+      CmCaptureOcx.SetImageColorMode(0);
+  }
+  </script>
 {% endblock %}

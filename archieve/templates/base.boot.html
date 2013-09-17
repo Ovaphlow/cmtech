@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="/static/img/favicon.ico">
   {% block head %}{% endblock %}
 </head>
-<body style="background-color:dimgrey">
+<body style="background-color:dimgrey" {% block bodylib %}{% endblock %}>
   <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="container-fluid" style="background-color:white">
+  <div class="container-fluid" style="background-color:Ivory">
     <div class="row-fluid">
       <div class="span10 offset1">
         <div class="page-header">
@@ -55,11 +55,11 @@
     </div>
   </div>
 
-  <div class="container-fluid" style="background-color:white">
+  <div class="container-fluid" style="background-color:Ivory">
     {% block content %}{% endblock %}
   </div>
 
-  <div class="container-fluid" style="background-color:LightGrey">
+  <div class="container-fluid" style="background-color:Lavender">
     <div class="row-fluid">
       <div class="span6 offset1">
         <p class="text-left text-info">
