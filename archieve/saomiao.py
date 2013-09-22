@@ -5,10 +5,10 @@ import mysql.connector
 from flask import request, render_template
 from werkzeug import secure_filename
 
-def get():
+def get(id):
   return render_template('saomiao.html')
 
-def post():
+def post(id):
   f = request.files['file']
   filename = secure_filename(f.filename)
   print filename

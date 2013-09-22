@@ -58,5 +58,4 @@ def import_xls(file_path):
         sh.cell(row, 6).value, data[0][0]
       )
       cursor.execute(sql, param)
-
   cnx.commit()

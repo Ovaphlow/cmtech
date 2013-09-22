@@ -33,12 +33,12 @@ def luru_page():
   else:
     return luru.get()
 
-@app.route('/saomiao', methods=['GET', 'POST'])
-def saomiao_page():
+@app.route('/saomiao/<id>', methods=['GET', 'POST'])
+def saomiao_page(id):
   if request.method == 'POST':
-    return saomiao.post()
+    return saomiao.post(id)
   else:
-    return saomiao.get()
+    return saomiao.get(id)
 
 @app.route('/_shangchuan', methods=['POST', 'GET'])
 def _shangchuan_page():
