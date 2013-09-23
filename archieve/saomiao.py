@@ -2,14 +2,11 @@
 
 import globalvars
 import mysql.connector
-from flask import request, render_template
+from flask import request, render_template, redirect
 from werkzeug import secure_filename
 
 def get(id):
-  return render_template('saomiao.html')
+  return render_template('saomiao.html', path=id)
 
 def post(id):
-  f = request.files['file']
-  filename = secure_filename(f.filename)
-  print filename
-  return render_template('saomiao.html')
+  return redirect('/shangchuan/%s' % (id))

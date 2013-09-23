@@ -61,6 +61,14 @@
             删除文件
           </button>
         </div>
+        <br><hr>
+        <div class="btn-group">
+          <form action="/saomiao/{{ path }}" method="POST">
+            <button type="submit" class="btn btn-primary">
+              结束扫描并转到上传页面
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 {% endblock %}

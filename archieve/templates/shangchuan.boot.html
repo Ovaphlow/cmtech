@@ -2,23 +2,21 @@
 {% block title %}录入档案信息 <small>上传档案图片/{{ id }}</small>{% endblock %}
 {% block content %}
     <div class="row-fluid">
-      <div class="span3 offset1">
+      <div class="span2 offset1">
         <p class="text-center"><span class="label label-info">档案信息</span></p>
         <hr>
         <dl>
           <dt>档案号</dt>
-          <dd>100000</dd>
+          <dd>{{ row[1] }}</dd>
           <dt>姓名</dt>
-          <dd>张三</dd>
+          <dd>{{ row[3] }}</dd>
           <dt>身份证</dt>
-          <dd>230101000000000000</dd>
+          <dd>{{ row[2] }}</dd>
           <dt>性别</dt>
-          <dd> 1</dd>
-          <dt>出生日期</dt>
-          <dd>19800101</dd>
+          <dd>{{ row[4] }}</dd>
         </dl>
       </div>
-      <div class="span7">
+      <div class="span8">
         <form role="form" action="/_shangchuan" method="post" enctype="multipart/form-data">
           <fieldset>
             <legend>上传文件</legend>
