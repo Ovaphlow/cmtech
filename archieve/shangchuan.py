@@ -20,4 +20,4 @@ def get(id):
         row = data[0]
     else:
         row = None
-    return render_template('shangchuan.boot.html', row = row)
+    return render_template('shangchuan.boot.html', row = row, id = id)

@@ -3,8 +3,10 @@ import globalvars
 import mysql.connector
 from flask import request, render_template, redirect
 
+
 def get():
     return render_template('luru.boot.html')
+
 
 def post():
     s, t = 0, 0
