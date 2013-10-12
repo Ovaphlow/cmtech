@@ -8,8 +8,6 @@ from werkzeug import secure_filename
 def _shangchuan(id):
     if request.method == 'POST':
         file_list = []
-        cnx = mysql.connector.connect(**globalvars.cnx_cfg)
-        cursor = cnx.cursor()
         files_list = request.files.getlist('file1')
         for f in files_list:
             if f and globalvars.check_ext(f.filename):
@@ -83,6 +81,8 @@ def _shangchuan(id):
         fl9 = globalvars.join_file_name(';', file_list)
         sql = 'SELECT COUNT(*) FROM wenjian WHERE id=%s'
         param = (id, )
+        cnx = mysql.connector.connect(**globalvars.cnx_cfg)
+        cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
         if data[0][0] == 0:

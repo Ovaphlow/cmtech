@@ -1,5 +1,6 @@
 # -*- coding=UTF-8 -*-
 #import os
+import mysql.connector
 
 '''
 jinja_env = jinja2.Environment(
@@ -15,7 +16,7 @@ cnx_cfg = {
 
 G_UPLOAD_PATH = 'd:\\archieve'
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
-G_LOCAL_PATH = 'd:\\archieve'
+G_LOCAL_PATH = 'd:\\\\archieve'
 
 
 def get_time():
@@ -31,3 +32,16 @@ def join_file_name(sep, flist):
     s = ''
     s = '{seperator}'.format(seperator=sep).join(flist)
     return s
+
+def get_file_path(id):
+    sql = 'SELECT danganhao FROM dangan WHERE id=%s'
+    param = (id, )
+    cnx = mysql.connector.Connect(**cnx_cfg)
+    cursor = cnx.cursor()
+    cursor.execute(sql, param)
+    data = cursor.fetchall()
+    cursor.close()
+    cnx.close()
+    aid = data[0][0]
+    fp = '%s\\\\%s\\\\' % (G_LOCAL_PATH, aid)
+    return fp

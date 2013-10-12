@@ -1,4 +1,6 @@
 {% extends "base.boot.html" %}
+{% block head %}
+{% endblock %}
 {% block title %}个人档案 <small>基本信息</small>{% endblock %}
 {% block content %}
     <div class="row-fluid">
@@ -43,6 +45,74 @@
           <dd>否</dd>
           {% endif %}
         </dl>
+        <dl class="dl-horizontal">
+          <dt></dt>
+          <dd><a href="{{ link }}" class="btn btn-danger">为该档案添加图片文件</a></dd>
+        </dl>
       </div>
     </div>
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <div id="myCarousel" class="carousel slide">
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <div class="active item">
+              <p class="text-center">
+                <img src="/static/img/5.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/6.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/7.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/8.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/9.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/15.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/16.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/17.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/18.jpg" />
+              </p>
+            </div>
+            <div class="item">
+              <p class="text-center">
+                <img src="/static/img/19.jpg" />
+              </p>
+            </div>
+          </div>
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+      </div>
+    </div>
+{% endblock %}
+{% block jslib %}
 {% endblock %}

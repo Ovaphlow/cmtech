@@ -10,4 +10,8 @@ def get(id):
     cursor = cnx.cursor()
     cursor.execute(sql, param)
     data = cursor.fetchall()
-    return render_template('dangan.boot.html', row=data[0])
+    cursor.close()
+    cnx.close()
+    lp = '/shangchuan/%s' % (id,)
+    print lp
+    return render_template('dangan.boot.html', row=data[0], link=lp)

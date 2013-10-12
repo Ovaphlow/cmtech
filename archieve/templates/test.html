@@ -1,38 +1,29 @@
-{% extends "base.pure.html" %}
+{% extends "base.boot.html" %}
+{% block title %}导入基础数据{% endblock %}
 {% block content %}
-  <div class="container" style="background-color:lightgray">
-    <div class="pure-g-r">
-      <div class="pure-u-1-5"></div>
-      <div class="pure-u-3-5">
-        <h1>档案管理系统<small> 首页</small></h1>
-        <hr>
-      </div>
-      <div class="pure-u-1-5"></div>
-    </div>
-  </div>
-  <div class="container" style="background-color:lavender">
-    <div class="pure-g-r">
-      <div class="pure-u-1-5" style="background-color:thistle">
-          <p>三分之一</p>
-      </div>
-
-      <div class="pure-u-1-5">
-          <p>三分之一</p>
-      </div>
-
-      <div class="pure-u-1-5">
-          <p>三分之一</p>
-      </div>
-
-      <div class="pure-u-1-5">
-          <p>三分之一</p>
-      </div>
-
-      <div class="pure-u-1-5">
-          <p>三分之一</p>
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <form class="form-horizontal" role="form" action="/daoru" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>
+              上传Excel文件到服务器并导入数据
+              <small>
+                文件名只允许英文字符和数字
+              </small>
+            </legend>
+            <label for="file" class="control-label control-label">
+              数据文件
+            </label>
+            <div class="controls">
+              <input type="file" class="form-control" id="file" name="file">
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-danger">
+                确认导入
+              </button>
+            </div>
+          </fieldset>
+        </form>
       </div>
     </div>
-  </div>
-</body>
-</html>
 {% endblock %}

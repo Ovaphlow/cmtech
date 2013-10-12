@@ -1,5 +1,5 @@
 {% extends "base.boot.html" %}
-{% block title %}录入档案信息 <small>上传档案图片/{{ id }}</small>{% endblock %}
+{% block title %}录入档案信息 <small>上传档案图片</small>{% endblock %}
 {% block content %}
     <div class="row-fluid">
       <div class="span2 offset1">
@@ -19,7 +19,14 @@
       <div class="span8">
         <form role="form" action="/_shangchuan/{{ id }}" method="post" enctype="multipart/form-data">
           <fieldset>
-            <legend>上传文件</legend>
+            <legend>
+              上传文件
+              <small>
+                该档案的文件保存目录为 [ {{ filepath }} ]
+                如果图片没有扫描完毕，请返回
+                <a href="{{ link }}">继续扫描档案</a>
+              </small>
+            </legend>
             <div class="row-fluid">
               <p>
                 <button type="submit" class="btn btn-danger">
