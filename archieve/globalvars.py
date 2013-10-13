@@ -1,5 +1,5 @@
 # -*- coding=UTF-8 -*-
-#import os
+import os
 import mysql.connector
 
 '''
@@ -14,9 +14,10 @@ cnx_cfg = {
     'database': 'cm_archieve',
 }
 
-G_UPLOAD_PATH = 'd:\\archieve'
+G_UPLOAD_PATH = 'D:\\srcode\\svn\\archieve\\trunk\\static\\upload'
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
+G_FILE_SERVER_ROOT = '/static/upload'
 
 
 def get_time():
@@ -33,7 +34,8 @@ def join_file_name(sep, flist):
     s = '{seperator}'.format(seperator=sep).join(flist)
     return s
 
-def get_file_path(id):
+def get_aid(id):
+#获取档案号
     sql = 'SELECT danganhao FROM dangan WHERE id=%s'
     param = (id, )
     cnx = mysql.connector.Connect(**cnx_cfg)
@@ -42,6 +44,18 @@ def get_file_path(id):
     data = cursor.fetchall()
     cursor.close()
     cnx.close()
-    aid = data[0][0]
-    fp = '%s\\\\%s\\\\' % (G_LOCAL_PATH, aid)
+    return data[0][0]
+
+def get_file_path(id):
+    fp = '%s\\\\%s\\\\' % (G_LOCAL_PATH, get_aid(id))
     return fp
+
+def get_file_path1(id):
+#获取上传文件地址
+    fp = '%s\\%s\\' % (G_UPLOAD_PATH, get_aid(id))
+    check_path(fp)
+    return fp
+
+def check_path(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
