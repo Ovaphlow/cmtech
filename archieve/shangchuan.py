@@ -35,7 +35,7 @@ def get(id):
 def post(id):
     if request.method == 'POST':
         fp = globalvars.get_file_path1(id)
-        print fp
+        print 'updata:', request.files['updata']
         file_list = []
         files_list = request.files.getlist('file1')
         for f in files_list:

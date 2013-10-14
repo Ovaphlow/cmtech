@@ -38,12 +38,7 @@ def saomiao_page(id):
         return saomiao.post(id)
     else:
         return saomiao.get(id)
-'''
-@app.route('/_shangchuan/<id>', methods=['POST', 'GET'])
-def _shangchuan_page(id):
-    if request.method == 'POST':
-        return controls._shangchuan(id)
-'''
+
 @app.route('/shangchuan/<id>', methods=['POST', 'GET'])
 def shangchuan_page(id):
     if request.method == 'POST':
@@ -51,13 +46,19 @@ def shangchuan_page(id):
     else:
         return shangchuan.get(id)
 
-@app.route('/dangan/<id>')
+@app.route('/dangan/<id>', methods=['POST', 'GET'])
 def dangan_page(id):
-    return dangan.get(id)
+    if request.method == 'POST':
+        return  dangan.post(id)
+    else:
+        return dangan.get(id)
 
-@app.route('/test')
+@app.route('/test', methods=['POST', 'GET'])
 def test_page():
-    return test.get()
+    if request.method == 'POST':
+        return test.post()
+    else:
+        return test.get()
 
 if __name__ == '__main__':
     app.run()
