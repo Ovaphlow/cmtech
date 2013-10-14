@@ -8,5 +8,9 @@ def get():
     return render_template('test.html')
 
 def post():
-    with main.app.test_request_context('/test', method='POST'):
-        print 'updata:', request.files['updata']
+    #print request.data
+    import os
+    with open('d:\\11231.jpg', 'wb') as f:
+        f.write(request.data)
+    f.close()
+    return 'Received: ' + request.data
