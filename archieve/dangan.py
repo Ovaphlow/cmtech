@@ -26,7 +26,7 @@ def get(id):
             strlist.extend(strlist_t)
     while '' in strlist:
         strlist.remove('')
-    lp1 = '/shangchuan/%s' % (id,)
+    lp1 = '/saomiao/%s' % (id,)
     lp2 = '/luru/%s' % (id,)
     return render_template('dangan.boot.html',
         id = id,
