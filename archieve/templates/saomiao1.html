@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>SDK 演示</title>
+
+    <script language="javascript" type="text/javascript">
+    var nFileCount = 0;
+    var bAdjustMode = 0;
+    var bCropArea = 0;
+    var bSeriesCapture = 0;
+    var bReadBarCode=0;
+    var bSetDenoise = 0;
+    var Width = 0;
+    var Height = 0;
+    var strFile;
+    //拍照
+    function Capture()
+    {
+        strFile = "d:\\test\\" + nFileCount;
+        strFile += ".jpg";
+      CmCaptureOcx.CaptureImage(strFile);
+      nFileCount ++;
+    }
+    //自动裁切
+    function Adjust()
+    {
+      if(bAdjustMode == 0)
+      {
+        CmCaptureOcx.AutoCrop(1);
+        bAdjustMode = 1;
+      }
+      else
+      {
+        CmCaptureOcx.AutoCrop(0);
+        bAdjustMode = 0;
+      }
+    }
+    //手动裁切
+    function SetCropArea()
+    {
+      if(bCropArea == 0)
+      { 
+        bCropArea = 1;
+        CmCaptureOcx.CusCrop(bCropArea);
+      }
+      else
+      {
+        bCropArea = 0;
+        CmCaptureOcx.CusCrop(bCropArea);
+      }
+    }
+    //预览
+    function Preview()
+    {
+      CmCaptureOcx.PreviewFile(strFile);
+    }
+    //自动连拍
+    function SeriesCapture()
+    {
+      var path = "d:\\test\\自动连拍\\";
+      CmCaptureOcx.SeriesCapture(1,path);
+    }
+    //删除文件
+    function DeleteFile()
+    {
+      CmCaptureOcx.DeleteFile(strFile);
+    }
+    //消除噪点
+    function SetDenoise()
+    {
+      if(bSetDenoise == 0)
+      { 
+        bSetDenoise = 1;
+        CmCaptureOcx.SetDenoise(bSetDenoise);
+      }
+      else
+      {
+        bSetDenoise = 0;
+        CmCaptureOcx.SetDenoise(bSetDenoise);
+      }
+    }
+    function KSYQ()
+    {
+        //开始视频
+        CmCaptureOcx.Initial();
+        CmCaptureOcx.StartRun(0);
+        //分辨率
+        CmCaptureOcx.SetResolution(4);
+        //图片格式
+        CmCaptureOcx.SetFileType(1);
+        //颜色格式
+        CmCaptureOcx.SetImageColorMode(0);
+    }
+    </script>
+
+</head>
+<body onload=" CmCaptureOcx.Initial()">
+    <center>
+        <p>
+            <object id="CmCaptureOcx" style="margin-left: 5px; width: 856px; height: 654px" codebase="CmCaptureOcx.ocx"
+                classid="clsid:3CA842C5-9B56-4329-A7CA-35CA77C7128D">
+            </object>
+        </p>
+    </center>
+    <center>
+        <p>
+            <input type="button" value=" 开始一切 " onclick="KSYQ();Adjust();SetDenoise();CmCaptureOcx.AutoFocus();"
+                id="KSYQ" /><br />
+            <br />
+            <input type="button" value=" 停止视频 " onclick="CmCaptureOcx.Destory();" name="Destory" />
+            <input type="button" value=" 拍    照 " onclick="Capture();" name="Capture" />
+            <input type="button" value=" 自动连拍 " onclick="SeriesCapture();" name="SeriesCapture" /><br />
+            <input type="button" value=" 手动裁切 " onclick="SetCropArea();" name="CusCrop" />
+            <input type="button" value=" 预    览 " onclick="Preview();" name="Preview" />
+            <input type="button" value=" 删除文件 " onclick="DeleteFile();" name="DeleteFile" />
+            <input type="button" value=" 图像设置 " onclick="CmCaptureOcx.ShowImageSettingWindow();"
+                name="ShowImageSettingWindow" />
+            <br />
+            <br />
+        </p>
+    </center>
+</body>
+</html>

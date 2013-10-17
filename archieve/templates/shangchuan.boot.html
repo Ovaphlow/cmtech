@@ -1,0 +1,211 @@
+{% extends "base.boot.html" %}
+{% block title %}录入档案信息 <small>上传档案图片</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span2 offset1">
+        <p class="text-center"><span class="label label-info">档案信息</span></p>
+        <hr>
+        <dl>
+          <dt>档案号</dt>
+          <dd>{{ row[1] }}</dd>
+          <dt>姓名</dt>
+          <dd>{{ row[3] }}</dd>
+          <dt>身份证</dt>
+          <dd>{{ row[2] }}</dd>
+          <dt>性别</dt>
+          <dd>{{ row[4] }}</dd>
+        </dl>
+      </div>
+      <div class="span8">
+        <form role="form" action="/shangchuan/{{ id }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>
+              上传文件
+              <small>
+                该档案的文件保存目录为 [ {{ filepath }} ]
+                如果图片没有扫描完毕，请返回
+                <a href="{{ link }}">继续扫描档案</a>
+              </small>
+            </legend>
+            <div class="row-fluid">
+              <p>
+                <button type="submit" class="btn btn-danger">
+                  上传
+                </button>
+              </p>
+            </div>
+            <div class="row-fluid">
+              <div class="span4">
+                <div class="accordion" id="accordion1">
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1">
+                        就业类
+                      </a>
+                    </div>
+                    <div id="collapse1" class="accordion-body collapse in">
+                      <div class="accordion-inner">
+                        <div id="cat_1">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_1','file1')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse2">
+                        历次调转介绍信
+                      </a>
+                    </div>
+                    <div id="collapse2" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_2">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_2','file4')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse3">
+                        学历材料
+                      </a>
+                    </div>
+                    <div id="collapse3" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_3">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_3','file7')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="accordion" id="accordion2">
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse4">
+                        职工历年调整工资审批表
+                      </a>
+                    </div>
+                    <div id="collapse4" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_4">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_4','file2')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse5">
+                        养老保险转移单与解除关系备案登记表
+                      </a>
+                    </div>
+                    <div id="collapse5" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_5">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_5','file5')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse6">
+                        入党、团及职务变动
+                      </a>
+                    </div>
+                    <div id="collapse6" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_6">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_6','file8')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="accordion" id="accordion3">
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse7">
+                        职工登记表
+                      </a>
+                    </div>
+                    <div id="collapse7" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_7">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_7','file3')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse8">
+                        职称材料
+                      </a>
+                    </div>
+                    <div id="collapse8" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_8">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_8','file6')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-group">
+                    <div class="accordion-heading">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse9">
+                        其它
+                      </a>
+                    </div>
+                    <div id="collapse9" class="accordion-body collapse">
+                      <div class="accordion-inner">
+                        <div id="cat_9">
+                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_9','file9')">
+                            增加
+                          </button>
+                          <br>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+{% endblock %}
+{% block jslib %}
+  <script src="/static/js/funx.js"></script>
+{% endblock %}
