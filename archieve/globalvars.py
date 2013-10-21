@@ -2,10 +2,12 @@
 import os
 import mysql.connector
 
+
 '''
 jinja_env = jinja2.Environment(
   loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 '''
+
 
 cnx_cfg = {
     'user': 'cmtech',
@@ -14,10 +16,12 @@ cnx_cfg = {
     'database': 'cm_archieve',
 }
 
+
 G_UPLOAD_PATH = 'D:\\srcode\\svn\\archieve\\trunk\\static\\upload'
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'
+SCRIPT_ROOT = 'http://localhost:5000'
 
 
 def get_time():
@@ -59,3 +63,11 @@ def get_file_path1(id):
 def check_path(path):
     if not os.path.exists(path):
         os.makedirs(path)
+
+        
+def rotate_image(file_path):
+    print file_path
+    import Image
+    img = Image.open(file_path)
+    img_t = img.transpose(Image.ROTATE_270)
+    img_t.save(file_path)

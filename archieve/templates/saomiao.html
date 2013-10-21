@@ -20,8 +20,26 @@
           <dt>性别</dt>
           <dd>{{ row[4] }}</dd>
         </dl>
+        <hr />
+        <a href=/dangan/{{ id }} class=btn>扫描结束</a>
       </div>
       <div class="span9">
+        请选择类别
+        <select name=c value=1>
+          <option value=1>就业类</option>
+          <option value=2>职工历年调整工资审批表</option>
+          <option value=3>职工登记表</option>
+          <option value=4>历次调转介绍信</option>
+          <option value=5>养老保险转移单与解除关系备案登记表</option>
+          <option value=6>职称材料</option>
+          <option value=7>学历材料</option>
+          <option value=8>入党、团及职务变动</option>
+          <option value=9>其它</option>
+        </select>
+        <input id=b type=hidden size=5 name=b value=11231.jpg>
+        <span id=result></span>
+        <br />
+        <input type="hidden" name="URL" id="URL" value="{{ SCRIPT_ROOT }}/_upload_image_file/{{ id }}">
         <p class="text-center">
           <object id="CmCaptureOcx" style="margin-left: 0px; width: 856px; height: 654px" codebase="CmCaptureOcx.ocx"
             classid="clsid:3CA842C5-9B56-4329-A7CA-35CA77C7128D">
@@ -65,12 +83,9 @@
           删除文件
         </button>
         <hr/>
-        <form action="/saomiao/{{ id }}" method="POST">
-          <input type="hidden" name="URL" id="URL" value="http://localhost:5000/saomiao/{{ id }}">
-          <button type="button" class="btn btn-success btn-block" onClick="UpdataFile();" name="Updata">
-            保存并上传
-          </button>
-        </form>
+        <button type="button" class="btn btn-success btn-block" onClick="UpdataFile();" name="Updata">
+          保存并上传
+        </button>
       </div>
     </div>
 {% endblock %}
@@ -90,6 +105,8 @@
   {
     strFile = "{{ filepath }}" + nFileCount;
     strFile += ".jpg";
+    document.getElementById('b').value = strFile
+    document.getElementById('URL').value = '{{ SCRIPT_ROOT }}/_upload_image_file?id={{ id }}&cat=' + $('select[name="c"]').val();
     CmCaptureOcx.CaptureImage(strFile);
     nFileCount ++;
   }

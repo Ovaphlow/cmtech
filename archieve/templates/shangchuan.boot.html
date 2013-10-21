@@ -1,5 +1,6 @@
 {% extends "base.boot.html" %}
 {% block title %}录入档案信息 <small>上传档案图片</small>{% endblock %}
+{% block bodylib %}onload="showFlash();"{% endblock %}
 {% block content %}
     <div class="row-fluid">
       <div class="span2 offset1">
@@ -46,9 +47,41 @@
                     <div id="collapse1" class="accordion-body collapse in">
                       <div class="accordion-inner">
                         <div id="cat_1">
-                          <button class="btn btn-mini btn-success" type="button" onClick="AddElement('cat_1','file1')">
-                            增加
-                          </button>
+                          <div id="divFlash">
+        加载中...
+    </div>
+
+    <script type="text/javascript">
+		function showFlash() {
+			var params = {
+				serverUrl: "/shangchuan/{{ id }}",
+				jsFunction: "flashReturn",
+				imageWidth:100
+			}
+			swfobject.embedSWF("mFileUpload.swf", "divFlash", "300", "30", "10.0.0", "expressInstall.swf", params);
+		}
+
+		function flashReturn(type, str) {
+			var divReturn = document.getElementById('divReturn');
+			var span = document.createElement('span');
+			span.innerHTML = '<b style="color:blue;">' + type + "</b>-" + str + "<br>";
+			divReturn.appendChild(span);
+		}
+		
+		function setPara()
+		{
+			var swf = document.getElementById('divFlash');
+			if(!swf.isBusy())
+			{
+				swf.setPara('labelFormat','(%)');
+			}
+		}
+	</script>
+                            <div>
+        
+    </div>
+    <div id="divReturn">
+    </div>
                           <br>
                         </div>
                       </div>
