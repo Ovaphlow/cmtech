@@ -4,6 +4,7 @@ import mysql.connector
 from flask import render_template, request, redirect
 
 def get(id):
+    cat = request.args.get('cat', '0')
     sql = 'SELECT * FROM dangan WHERE id=%s'
     param = (id,)
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
@@ -12,20 +13,16 @@ def get(id):
     data = cursor.fetchall()
     dob = data[0][5].split('-')
     dor = data[0][6].split('-')
-    sql = 'SELECT * FROM wenjian WHERE id=%s'
-    param = (id,)
+    if cat == '0':
+        sql = 'SELECT * FROM wenjian WHERE aid=%s'
+        param = (id,)
+    else:
+        sql = 'SELECT * FROM wenjian WHERE aid=%s AND LeiBie=%s'
+        param = (id, cat)
     cursor.execute(sql, param)
     data1 = cursor.fetchall()
     cursor.close()
     cnx.close()
-    row1 = data1[0]
-    strlist = []
-    for i in range(1, 10):
-        if not row1[i] == None:
-            strlist_t = row1[i].split(';')
-            strlist.extend(strlist_t)
-    while '' in strlist:
-        strlist.remove('')
     lp1 = '/saomiao/%s' % (id,)
     lp2 = '/luru/%s' % (id,)
     return render_template('dangan.boot.html',
@@ -34,10 +31,11 @@ def get(id):
         link1 = lp1,
         link2 = lp2,
         fs_root = globalvars.G_FILE_SERVER_ROOT,
-        filelist = strlist,
         aid = globalvars.get_aid(id),
+        data1 = data1,
         dob = dob,
-        dor = dor
+        dor = dor,
+        cat = cat
     )
 
 def post(id):
@@ -56,18 +54,18 @@ def post(id):
         request.form['dor-month'],
         request.form['dor-date']
     )
-    sql = (
-        'UPDATE dangan '
-        'SET '
-        'ChuShengRiQi=%s,YuTuiXiuRiQi=%s,NvGuanLiGangWei=%s,TeShuGongZhong=%s '
-        'WHERE id=%s'
-    )
-    param = (
-        dob, dor, s, t, id
-    )
+    sql = '''
+        UPDATE dangan
+        SET
+        ChuShengRiQi=%s,YuTuiXiuRiQi=%s,NvGuanLiGangWei=%s,TeShuGongZhong=%s
+        WHERE id=%s
+    '''
+    param = (dob, dor, s, t, id)
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cursor = cnx.cursor()
     cursor.execute(sql, param)
     cnx.commit()
-    aid = cursor.lastrowid
+    cursor.close()
+    cnx.close()
+    #aid = cursor.lastrowid
     return redirect('/dangan/%s' % (id))

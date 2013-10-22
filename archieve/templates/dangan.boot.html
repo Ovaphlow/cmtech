@@ -75,20 +75,77 @@
     </div>
     <div class="row-fluid">
       <div class="span8 offset2">
+        <form action=/dangan/{{ id }} method=get class="form-horizontal">
+          <p class=text-center>
+            <select name=cat value=1 id=selCat onChange=selOnChange()>
+              {% if cat == '0' %}
+              <option value=0 selected>所有</option>
+              {% else %}
+              <option value=0>所有</option>
+              {% endif %}
+              {% if cat == '1' %}
+              <option value=1 selected>就业类</option>
+              {% else %}
+              <option value=1>就业类</option>
+              {% endif %}
+              {% if cat == '2' %}
+              <option value=2 selected>职工历年调整工资审批表</option>
+              {% else %}
+              <option value=2>职工历年调整工资审批表</option>
+              {% endif %}
+              {% if cat == '3' %}
+              <option value=3 selected>职工登记表</option>
+              {% else %}
+              <option value=3>职工登记表</option>
+              {% endif %}
+              {% if cat == '4' %}
+              <option value=4 selected>历次调转介绍信</option>
+              {% else %}
+              <option value=4>历次调转介绍信</option>
+              {% endif %}
+              {% if cat == '5' %}
+              <option value=5 selected>养老保险转移单与解除关系备案登记表</option>
+              {% else %}
+              <option value=5>养老保险转移单与解除关系备案登记表</option>
+              {% endif %}
+              {% if cat == '6' %}
+              <option value=6 selected>职称材料</option>
+              {% else %}
+              <option value=6>职称材料</option>
+              {% endif %}
+              {% if cat == '7' %}
+              <option value=7 selected>学历材料</option>
+              {% else %}
+              <option value=7>学历材料</option>
+              {% endif %}
+              {% if cat == '8' %}
+              <option value=8 selected>入党、团及职务变动</option>
+              {% else %}
+              <option value=8>入党、团及职务变动</option>
+              {% endif %}
+              {% if cat == '9' %}
+              <option value=9 selected>其它</option>
+              {% else %}
+              <option value=9>其它</option>
+              {% endif %}
+            </select>
+            <button type="submit" class="btn">确认</button>
+          </p>
+        </form>
         <div id="myCarousel" class="carousel slide" data-interval="false">
           <!-- Carousel items -->
           <div class="carousel-inner">
-          {% for f in filelist %}
-            {% if f == filelist[0] %}
+          {% for row1 in data1 %}
+            {% if row1 == data1[0] %}
             <div class="active item">
             {% else %}
             <div class="item">
             {% endif %}
+              <div class="carousel-caption">
+                <h4>{{ row1[3] }}</h4>
+              </div>
               <p class="text-center">
-                <div class="carousel-caption">
-                    <h4>{{ f }}</h4>
-                </div>
-                <img src="{{ fs_root }}/{{ aid }}/{{ f }}" />
+                <img src="{{ fs_root }}/{{ aid }}/{{ row1[3] }}" />
               </p>
             </div>
           {% endfor %}

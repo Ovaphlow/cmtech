@@ -1,29 +1,46 @@
-{% extends "base.boot.html" %}
-{% block title %}导入基础数据{% endblock %}
-{% block content %}
-    <div class="row-fluid">
-      <div class="span8 offset2">
-        <form class="form-horizontal" role="form" action="/daoru" method="post" enctype="multipart/form-data">
-          <fieldset>
-            <legend>
-              上传Excel文件到服务器并导入数据
-              <small>
-                文件名只允许英文字符和数字
-              </small>
-            </legend>
-            <label for="file" class="control-label control-label">
-              数据文件
-            </label>
-            <div class="controls">
-              <input type="file" class="form-control" id="file" name="file">
-            </div>
-            <div class="form-actions">
-              <button type="submit" class="btn btn-danger">
-                确认导入
-              </button>
-            </div>
-          </fieldset>
-        </form>
-      </div>
-    </div>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>多文件上传</title>
+	<script type="text/javascript" src="/static/swf/swfobject.js"></script>
+</head>
+<body onload="showFlash();">
+
+	<div id="divFlash">
+		加载中...
+	</div>
+	<script type="text/javascript">
+		function showFlash() {
+			var params = {
+				serverUrl: "/test?id=1&cat=5",
+				jsFunction: "flashReturn",
+        imageWidth: 0,
+        imageHeight: 0
+			}
+			swfobject.embedSWF("/static/swf/mFileUpload.swf", "divFlash", "300", "30", "10.0.0", "/static/swf/expressInstall.swf", params);
+		}
+
+		function flashReturn(type, str) {
+			var divReturn = document.getElementById('divReturn');
+			var span = document.createElement('span');
+			span.innerHTML = '<b style="color:blue;">' + type + "</b>-" + str + "<br>";
+			divReturn.appendChild(span);
+		}
+
+		function setPara()
+		{
+			var swf = document.getElementById('divFlash');
+			if(!swf.isBusy())
+			{
+				swf.setPara('labelFormat','(%)');
+			}
+		}
+	</script>
+	<div>
+	<input type="button" value="设 置" onclick="setPara();" />
+	</div>
+	<div id="divReturn">
+
+	</div>
+</body>
+</html>

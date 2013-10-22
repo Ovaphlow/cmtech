@@ -1,9 +1,9 @@
 # -*- coding=UTF-8 -*-
-
 import globalvars
 from flask import request, render_template, redirect
 from werkzeug import secure_filename
 import mysql.connector
+
 
 def get(id):
     sql = (
@@ -24,11 +24,15 @@ def get(id):
     cursor.close()
     cnx.close()
     fp = globalvars.get_file_path(id)
-    return render_template('saomiao.html', filepath=fp, row=row, id=id)
+    return render_template('saomiao.html', filepath=fp, row=row, id=id,
+        SCRIPT_ROOT=globalvars.SCRIPT_ROOT
+    )
+
 
 def post(id):
     #print request.data
     import os
+    p = globalvars.get_file_path1(id)
     with open('d:\\11231.jpg', 'wb') as f:
         f.write(request.data)
     f.close()
