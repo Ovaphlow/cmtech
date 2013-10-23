@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>多文件上传</title>
-	<script type="text/javascript" src="/static/swf/swfobject.js"></script>
+	<script type="text/javascript" src="swfobject.js"></script>
 </head>
 <body onload="showFlash();">
 
@@ -12,12 +12,11 @@
 	<script type="text/javascript">
 		function showFlash() {
 			var params = {
-				serverUrl: "/test?id=1",
+				serverUrl: "saveImage.aspx?aaa=love&id=123",
 				jsFunction: "flashReturn",
-        imageWidth: 0,
-        imageHeight: 0
+				imageWidth:100
 			}
-			swfobject.embedSWF("/static/swf/mFileUpload.swf", "divFlash", "300", "30", "10.0.0", "/static/swf/expressInstall.swf", params);
+			swfobject.embedSWF("mFileUpload.swf", "divFlash", "300", "30", "10.0.0", "expressInstall.swf", params);
 		}
 
 		function flashReturn(type, str) {
@@ -26,13 +25,13 @@
 			span.innerHTML = '<b style="color:blue;">' + type + "</b>-" + str + "<br>";
 			divReturn.appendChild(span);
 		}
-
+		
 		function setPara()
 		{
 			var swf = document.getElementById('divFlash');
 			if(!swf.isBusy())
 			{
-				swf.setPara('labelFormat','(%)');
+				swf.setPara('labelFormat','{%}');
 			}
 		}
 	</script>
@@ -40,7 +39,7 @@
 	<input type="button" value="设 置" onclick="setPara();" />
 	</div>
 	<div id="divReturn">
-
+	
 	</div>
 </body>
 </html>

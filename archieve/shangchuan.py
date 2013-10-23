@@ -34,6 +34,8 @@ def get(id):
 
 def post(id):
     if request.method == 'POST':
+        print 'request.files', request.files
+
         fp = globalvars.get_file_path1(id)
         file_list = []
         files_list = request.files.getlist('file1')
@@ -45,6 +47,7 @@ def post(id):
         fl1 = globalvars.join_file_name(';', file_list)
         file_list = []
         files_list = request.files.getlist('file2')
+        print files_list[0]
         for f in files_list:
             if f and globalvars.check_ext(f.filename):
                 filename = secure_filename(f.filename)
@@ -119,7 +122,7 @@ def post(id):
                 'VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
             )
             param = (id, fl1, fl2, fl3, fl4, fl5, fl6, fl7, fl8, fl9)
-            cursor.execute(sql, param)
+            #cursor.execute(sql, param)
         else:
             sql = (
                 'UPDATE wenjian '
@@ -129,8 +132,8 @@ def post(id):
                 'WHERE id=%s'
             )
             param = (fl1, fl2, fl3, fl4, fl5, fl6, fl7, fl8, fl9, id)
-            cursor.execute(sql, param)
-        cnx.commit()
+            #cursor.execute(sql, param)
+        #cnx.commit()
         cursor.close()
         cnx.close()
         return redirect('/shangchuan/%s' % (id,))
