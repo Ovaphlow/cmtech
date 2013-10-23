@@ -38,6 +38,7 @@ def join_file_name(sep, flist):
     s = '{seperator}'.format(seperator=sep).join(flist)
     return s
 
+
 def get_aid(id):
 #获取档案号
     sql = 'SELECT danganhao FROM dangan WHERE id=%s'
@@ -50,9 +51,11 @@ def get_aid(id):
     cnx.close()
     return data[0][0]
 
+
 def get_file_path(id):
     fp = '%s\\\\%s\\\\' % (G_LOCAL_PATH, get_aid(id))
     return fp
+
 
 def get_file_path1(id):
 #获取上传文件地址
@@ -60,11 +63,12 @@ def get_file_path1(id):
     check_path(fp)
     return fp
 
+
 def check_path(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
-        
+
 def rotate_image(file_path):
     print file_path
     import Image

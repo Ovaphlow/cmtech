@@ -2,6 +2,7 @@
 from flask import Flask, request
 import globalvars
 import index, daoru, luru, saomiao, shangchuan, dangan, test, controls
+import tsgz, nglgw, chaxun_teshu
 from werkzeug import secure_filename
 
 
@@ -72,6 +73,21 @@ def test_page():
 def _upload_image_file():
     if request.method == 'POST':
         return controls.upload_image_file()
+
+
+@app.route('/chaxun/tsgz', methods=['GET'])
+def tsgz_page():
+    return tsgz.get()
+
+
+@app.route('/chaxun/nglgw', methods=['GET'])
+def nglgw_page():
+    return nglgw.get()
+
+
+@app.route('/chaxun/dytx', methods=['GET'])
+def dytx_pate():
+    return chaxun_teshu.dytx_get()
 
 
 if __name__ == '__main__':
