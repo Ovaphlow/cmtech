@@ -1,0 +1,43 @@
+{% extends "base.boot.html" %}
+{% block head %}
+{% endblock %}
+{% block title %}查询 <small>特殊工种</small>{% endblock %}
+{% block content %}
+
+<div class=row-fluid>
+  <div class="span8 offset2">
+    <table class="table tabel-hover">
+      <caption>特殊工种</caption>
+      <thead>
+        <tr>
+          <th>档案号</th>
+          <th>身份证</th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>出生日期</th>
+          <th>预退休日期</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <td>{{ row[5] }}</td>
+          <td>{{ row[6] }}</td>
+          <td>
+            <a href=/dangan/{{ row[0] }}>查看档案</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+{% block jslib %}
+{% endblock %}
