@@ -35,10 +35,11 @@ def get(id):
 
 
 def post(id):
+    #print 'upload path:', globalvars.G_UPLOAD_PATH
     #print 'headers', request.headers
     cat = request.args.get('cat', '1')
     #print 'id', id
-    print id, cat
+    #print id, cat
     #print 'request.value', request.values
     aid = globalvars.get_aid(id)
     fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
@@ -55,7 +56,7 @@ def post(id):
                 VALUES(0,%s,%s,%s)
             '''
             param = (id, cat, fn)
-            print id, cat, fn
+            #print id, cat, fn
             cursor.execute(sql, param)
     cnx.commit()
     return '[%s]上传完成'  % (fn)

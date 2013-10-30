@@ -17,7 +17,7 @@ cnx_cfg = {
 }
 
 
-G_UPLOAD_PATH = 'D:\\srcode\\svn\\archieve\\trunk\\static\\upload'
+G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'

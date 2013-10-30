@@ -3,6 +3,7 @@ import globalvars
 import mysql.connector
 from flask import request, redirect, render_template
 
+
 def get():
     sql = (
         'SELECT * FROM update_log '
@@ -15,6 +16,7 @@ def get():
     cursor.close()
     cnx.close()
     return render_template('index.boot.html', data=data)
+
 
 def post():
     sql = 'SELECT id FROM dangan WHERE DangAnHao=%s OR ShenFenZheng=%s'
