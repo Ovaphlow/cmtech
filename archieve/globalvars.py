@@ -21,7 +21,6 @@ G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'
-SCRIPT_ROOT = 'http://localhost:5000'
 
 
 def get_time():
