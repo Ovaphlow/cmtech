@@ -39,7 +39,7 @@
         <input id=b type=hidden size=5 name=b value=11231.jpg>
         <span id=result></span>
         <br />
-        <input type="hidden" name="URL" id="URL" value="{{ SCRIPT_ROOT }}_upload_image_file/{{ id }}">
+        <input type="hidden" name="URL" id="URL" value="{{ url_root }}_upload_image_file/{{ id }}">
         <p class="text-center">
           <object id="CmCaptureOcx" style="margin-left: 0px; width: 856px; height: 654px" codebase="CmCaptureOcx.ocx"
             classid="clsid:3CA842C5-9B56-4329-A7CA-35CA77C7128D">
@@ -108,7 +108,7 @@
     strFile = "{{ filepath }}" + nFileCount;
     strFile += ".jpg";
     document.getElementById('b').value = strFile
-    document.getElementById('URL').value = '{{ SCRIPT_ROOT }}/_upload_image_file?id={{ id }}&cat=' + $('select[name="c"]').val();
+    document.getElementById('URL').value = '{{ url_root }}_upload_image_file?id={{ id }}&cat=' + $('select[name="c"]').val();
     CmCaptureOcx.CaptureImage(strFile);
     nFileCount ++;
   }
@@ -172,9 +172,11 @@
   }
   function UpdataFile()
   {
-    alert(strFile);
+    //alert(strFile);
     //var Url = document.getElementById("URL").value;
     //CmCaptureOcx.UpdataFile(Url,strFile,0);
+    CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat=1","d:\\archieve\\01010938\\0.jpg",0);
+    CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat=1","d:\\archieve\\01010938\\1.jpg",0);
   }
   function KSYQ()
   {

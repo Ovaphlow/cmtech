@@ -16,6 +16,7 @@ def upload_image_file():
     file_time = time.localtime()
     file_name = '%s.jpg' % (time.strftime('%Y%m%d%H%M%S', file_time))
     fp = '%s\\%s' % (fp, file_name)
+    print fp
     with open(fp, 'wb') as f:
         f.write(request.data)
     f.close()

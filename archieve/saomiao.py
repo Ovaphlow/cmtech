@@ -6,6 +6,7 @@ import mysql.connector
 
 
 def get(id):
+    url_root = request.url_root
     sql = (
         'SELECT * FROM dangan '
         'WHERE id=%s'
@@ -25,7 +26,7 @@ def get(id):
     cnx.close()
     fp = globalvars.get_file_path(id)
     return render_template('saomiao.html', filepath=fp, row=row, id=id,
-        SCRIPT_ROOT=request.url_root
+        url_root=url_root
     )
 
 
