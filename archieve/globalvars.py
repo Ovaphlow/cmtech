@@ -69,7 +69,6 @@ def check_path(path):
 
 
 def rotate_image(file_path):
-    print file_path
     import Image
     img = Image.open(file_path)
     img_t = img.transpose(Image.ROTATE_270)

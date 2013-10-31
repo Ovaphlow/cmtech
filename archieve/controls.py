@@ -4,17 +4,20 @@ import mysql.connector
 import os
 from flask import request, redirect, jsonify
 from werkzeug import secure_filename
-import time
+import datetime
 
 
 def upload_image_file():
     id = request.args.get('id', '')
     cat = request.args.get('cat', '')
+    #print 'request.files:', request.files
+    #print 'request.value:', request.values
+    #print 'request.files[]', request.files['Filedata']
     aid = globalvars.get_aid(id)
     fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
     globalvars.check_path(fp)
-    file_time = time.localtime()
-    file_name = '%s.jpg' % (time.strftime('%Y%m%d%H%M%S', file_time))
+    file_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+    file_name = '%s.jpg' % (file_time)
     fp = '%s\\%s' % (fp, file_name)
     with open(fp, 'wb') as f:
         f.write(request.data)
