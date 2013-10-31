@@ -10,9 +10,6 @@ import datetime
 def upload_image_file():
     id = request.args.get('id', '')
     cat = request.args.get('cat', '')
-    #print 'request.files:', request.files
-    #print 'request.value:', request.values
-    #print 'request.files[]', request.files['Filedata']
     aid = globalvars.get_aid(id)
     fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
     globalvars.check_path(fp)
