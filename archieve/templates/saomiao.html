@@ -1,5 +1,5 @@
-{% extends "base.boot.html" %}
-{% block bodylib %}onload=" CmCaptureOcx.Initial()"{% endblock %}
+﻿{% extends "base.boot.html" %}
+{% block bodylib %}onload=" CmCaptureOcx.Initial();KSYQ();Adjust();SetDenoise();CmCaptureOcx.AutoFocus();"{% endblock %}
 {% block content %}
     <div class="row-fluid">
       <div class="span10 offset1">
@@ -25,7 +25,7 @@
       </div>
       <div class="span9">
         请选择类别
-        <select name=c value=1>
+        <select name="c" value="1" id="LB" onchange="show();">
           <option value=1>就业类</option>
           <option value=2>职工历年调整工资审批表</option>
           <option value=3>职工登记表</option>
@@ -101,16 +101,25 @@
   var bSetDenoise = 0;
   var Width = 0;
   var Height = 0;
-  var strFile;
+    var strFile;
+  var LBID;
+  var LBvalue=1;
+  var SZS=0;
+  var SZ=new Array();
   //拍照
   function Capture()
   {
-    strFile = "{{ filepath }}" + nFileCount;
+  var ss= nFileCount+".jpg";
+    SZ[SZS] =ss
+    //alert(ss);
+    //alert(SZ);
+    strFile = "d:\\archieve\\01010938\\" + nFileCount;
     strFile += ".jpg";
     document.getElementById('b').value = strFile
-    document.getElementById('URL').value = '{{ url_root }}_upload_image_file?id={{ id }}&cat=' + $('select[name="c"]').val();
+    document.getElementById('URL').value = 'http://localhost:5000/_upload_image_file?id=1&cat=' + $('select[name="c"]').val();
     CmCaptureOcx.CaptureImage(strFile);
     nFileCount ++;
+    SZS++;
   }
   //自动裁切
   function Adjust()
@@ -170,13 +179,37 @@
       CmCaptureOcx.SetDenoise(bSetDenoise);
     }
   }
+ function show(){		
+   if(SZ.length!=0)
+  {
+     for (var i=0;i<SZ.length;i++)
+   {
+   CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat="+LBvalue+"","d:\\archieve\\01010938\\"+SZ[i]+"",0);
+   alert(LBvalue+"/"+SZ[i]);
+   }
+   SZ.length = 0
+   SZS=0;
+  }
+  LBID=document.getElementById('LB');
+  LBvalue=LB.options[LB.selectedIndex].value;	
+
+//  alert(LBvalue);
+   }
   function UpdataFile()
   {
     //alert(strFile);
     //var Url = document.getElementById("URL").value;
     //CmCaptureOcx.UpdataFile(Url,strFile,0);
-    CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat=1","d:\\archieve\\01010938\\0.jpg",0);
-    CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat=1","d:\\archieve\\01010938\\1.jpg",0);
+    //alert(LBvalue);
+    //alert(SZ.length);
+   for (var i=0;i<SZ.length;i++)
+   {
+   CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat="+LBvalue+"","d:\\archieve\\01010938\\"+SZ[i]+"",0);
+   alert(LBvalue+"/"+SZ[i]);
+   }
+   SZ.length = 0
+   SZS=0;
+//    CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat=1","d:\\archieve\\01010938\\1.jpg",0);
   }
   function KSYQ()
   {
