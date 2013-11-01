@@ -1,8 +1,8 @@
 # -*- coding=UTF-8 -*-
-from flask import Flask, request
+from flask import Flask, request, render_template
 import globalvars
 import index, daoru, luru, saomiao, shangchuan, dangan, test, controls
-import tsgz, nglgw, chaxun_teshu
+import tsgz, nglgw, chaxun_teshu, login
 from werkzeug import secure_filename
 
 
@@ -11,6 +11,19 @@ app.host = '0.0.0.0'
 app.debug = True
 app.secret_key = 'Ovaphlow'
 app.config['UPLOAD_FOLDER'] = globalvars.G_UPLOAD_PATH
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+    if request.method == 'POST':
+        return login.post()
+    else:
+        return login.get()
+
+
+@app.route('/logout')
+def logout_page():
+    return controls.logout()
 
 
 @app.route('/', methods=['GET', 'POST'])

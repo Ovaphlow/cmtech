@@ -1,10 +1,12 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 
 
 def dytx_get():
+    if not 'id' in session:
+        return redirect('/login')
     import time
     t = time.localtime()
     time_str = time.strftime('%Y-%m', t)

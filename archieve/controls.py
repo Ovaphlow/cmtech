@@ -2,9 +2,15 @@
 import globalvars
 import mysql.connector
 import os
-from flask import request, redirect, jsonify
+from flask import request, redirect, jsonify, session
 from werkzeug import secure_filename
 import datetime
+
+
+def logout():
+    session.pop('id', None)
+    session.pop('zhanghao', None)
+    return redirect('/login')
 
 
 def upload_image_file():

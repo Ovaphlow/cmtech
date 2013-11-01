@@ -1,10 +1,12 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import request, redirect, render_template
+from flask import request, redirect, render_template, session, escape
 
 
 def get():
+    if not 'id' in session:
+        return redirect('/login')
     sql = (
         'SELECT * FROM update_log '
         'ORDER BY id DESC'

@@ -3,10 +3,12 @@ import globalvars
 import mysql.connector
 import os
 from werkzeug import secure_filename
-from flask import request, render_template
+from flask import request, render_template, session
 import xlrd
 
 def get():
+    if not 'id' in session:
+        return redirect('/login')
     return render_template('daoru.boot.html')
 
 def post():

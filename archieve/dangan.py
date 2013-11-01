@@ -1,9 +1,11 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 
 def get(id):
+    if not 'id' in session:
+        return redirect('/login')
     cat = request.args.get('cat', '0')
     sql = 'SELECT * FROM dangan WHERE id=%s'
     param = (id,)

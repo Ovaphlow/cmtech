@@ -1,11 +1,13 @@
 # -*- coding=UTF-8 -*-
 import globalvars
-from flask import request, render_template, redirect
+from flask import request, render_template, redirect, session
 from werkzeug import secure_filename
 import mysql.connector
 
 
 def get(id):
+    if not 'id' in session:
+        return redirect('/login')
     url_root = request.url_root
     sql = (
         'SELECT * FROM dangan '

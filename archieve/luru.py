@@ -1,10 +1,12 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import request, render_template, redirect
+from flask import request, render_template, redirect, session
 
 
 def get():
+    if not 'id' in session:
+        return redirect('/login')
     return render_template('luru.boot.html')
 
 
