@@ -27,7 +27,6 @@ def get(id):
     cursor.close()
     cnx.close()
     fp = globalvars.get_file_path(id)
-    print url_root
     return render_template('saomiao.html', filepath=fp, row=row, id=id,
         url_root=url_root
     )
