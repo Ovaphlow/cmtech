@@ -113,10 +113,10 @@
     SZ[SZS] =ss
     //alert(ss);
     //alert(SZ);
-    strFile = "d:\\archieve\\01010938\\" + nFileCount;
+    strFile = {{ fp }} + nFileCount;
     strFile += ".jpg";
     document.getElementById('b').value = strFile
-    document.getElementById('URL').value = 'http://localhost:5000/_upload_image_file?id=1&cat=' + $('select[name="c"]').val();
+    document.getElementById('URL').value = '{{ url_root }}_upload_image_file?id={{ id }}&cat=' + $('select[name="c"]').val();
     CmCaptureOcx.CaptureImage(strFile);
     nFileCount ++;
     SZS++;
@@ -184,7 +184,7 @@
   {
      for (var i=0;i<SZ.length;i++)
    {
-   CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat="+LBvalue+"","d:\\archieve\\01010938\\"+SZ[i]+"",0);
+   CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"",{{ fp }}+SZ[i]+"",0);
    alert(LBvalue+"/"+SZ[i]);
    }
    SZ.length = 0
@@ -204,12 +204,11 @@
     //alert(SZ.length);
    for (var i=0;i<SZ.length;i++)
    {
-   CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat="+LBvalue+"","d:\\archieve\\01010938\\"+SZ[i]+"",0);
+   CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"",{{ fp }}+SZ[i]+"",0);
    alert(LBvalue+"/"+SZ[i]);
    }
    SZ.length = 0
    SZS=0;
-//    CmCaptureOcx.UpdataFile("http://localhost:5000/_upload_image_file?id=1&cat=1","d:\\archieve\\01010938\\1.jpg",0);
   }
   function KSYQ()
   {
