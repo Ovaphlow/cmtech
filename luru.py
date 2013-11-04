@@ -16,21 +16,18 @@ def post():
         s = 1
     if 'stow' in request.form.getlist('check'):
         t = 1
-    dob = '%s-%s-%s' % (
-        request.form['dob-year'],
-        request.form['dob-month'],
-        request.form['dob-date']
-    )
-    dor = '%s-%s-%s' % (
-        request.form['dor-year'],
-        request.form['dor-month'],
-        request.form['dor-date']
-    )
-    sql = (
-        'INSERT INTO dangan '
-        'VALUES('
-        '%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'
-    )
+    dob = request.form['idcard'][6:14]
+    dob = '%s-%s-%s' % (dob[0:4], dob[4:6], dob[6:8])
+    dor_y = dob[0:4]
+    if request.form['gender'] == u'男':
+        dor = '%s-%s-%s' % (int(dor_y) + 60, dob[5:7], dob[8:10])
+    else:
+        dor = '%s-%s-%s' % (int(dor_y) + 50, dob[5:7], dob[8:10])
+    sql = '''
+        INSERT INTO dangan
+        VALUES(
+        %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    '''
     param = (
         0, request.form['aid'], request.form['idcard'],
         request.form['name'], request.form['gender'], dob,
@@ -42,4 +39,6 @@ def post():
     cursor.execute(sql, param)
     cnx.commit()
     aid = cursor.lastrowid
+    cursor.close()
+    cnx.close()
     return redirect('/saomiao/%s' % (aid))
