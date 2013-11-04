@@ -113,7 +113,7 @@
     SZ[SZS] =ss
     //alert(ss);
     //alert(SZ);
-    strFile = {{ fp }} + nFileCount;
+    strFile = "{{ filepath }}" + nFileCount;
     strFile += ".jpg";
     document.getElementById('b').value = strFile
     document.getElementById('URL').value = '{{ url_root }}_upload_image_file?id={{ id }}&cat=' + $('select[name="c"]').val();
