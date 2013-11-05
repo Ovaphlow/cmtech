@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, escape
 
 def get(id):
     if not 'id' in session:
@@ -66,8 +66,9 @@ def post(id):
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cursor = cnx.cursor()
     cursor.execute(sql, param)
+    cursor.execute(sql1, param1)
     cnx.commit()
     cursor.close()
     cnx.close()
-    #aid = cursor.lastrowid
+    globalvars.caozuo_jilu(escape(session['id']), u'修改档案信息', id)
     return redirect('/dangan/%s' % (id))

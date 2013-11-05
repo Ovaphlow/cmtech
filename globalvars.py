@@ -73,3 +73,22 @@ def rotate_image(file_path):
     img = Image.open(file_path)
     img_t = img.transpose(Image.ROTATE_270)
     img_t.save(file_path)
+
+
+def caozuo_jilu(id, caozuo, neirong):
+    import datetime
+    date = datetime.datetime.now().strftime('%Y-%m-%d')
+    time = datetime.datetime.now().strftime('%HH%MM%SS')
+    sql = '''
+        INSERT INTO caozuo_jilu
+        (yh_id, CaoZuo, NeiRong, RiQi, ShiJian)
+        VALUES(%s,%s,%s,%s,%s)
+    '''
+    uid = int(id)
+    param = (uid, caozuo, neirong, date, time)
+    cnx = mysql.connector.Connect(**cnx_cfg)
+    cursor = cnx.cursor()
+    cursor.execute(sql, param)
+    cnx.commit()
+    cursor.close()
+    cnx.close()

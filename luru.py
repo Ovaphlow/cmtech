@@ -1,7 +1,7 @@
 # -*- coding=UTF-8 -*-
 import globalvars
 import mysql.connector
-from flask import request, render_template, redirect, session
+from flask import request, render_template, redirect, session, escape
 
 
 def get():
@@ -34,6 +34,7 @@ def post():
         dor, '', '',
         '', s, t
     )
+    import datetime
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cursor = cnx.cursor()
     cursor.execute(sql, param)
@@ -41,4 +42,5 @@ def post():
     aid = cursor.lastrowid
     cursor.close()
     cnx.close()
+    globalvars.caozuo_jilu(escape(session['id']), u'添加档案信息', aid)
     return redirect('/saomiao/%s' % (aid))

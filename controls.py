@@ -2,7 +2,7 @@
 import globalvars
 import mysql.connector
 import os
-from flask import request, redirect, jsonify, session
+from flask import request, redirect, jsonify, session, escape
 from werkzeug import secure_filename
 import datetime
 
@@ -34,8 +34,10 @@ def upload_image_file():
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cursor = cnx.cursor()
     cursor.execute(sql, param)
+    cursor.execute(sql1, param1)
     cnx.commit()
     cursor.close()
     cnx.close()
     globalvars.rotate_image(fp)
+    globalvars.caozuo_jilu(escape(session['id']), u'上传图片', fp)
     return '完成'

@@ -2,7 +2,7 @@
 import globalvars
 import os
 import mysql.connector
-from flask import request, render_template, redirect, session
+from flask import request, render_template, redirect, session, escape
 from werkzeug import secure_filename
 
 
