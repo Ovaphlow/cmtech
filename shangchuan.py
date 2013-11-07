@@ -60,5 +60,6 @@ def post(id):
             param = (id, cat, fn)
             #print id, cat, fn
             cursor.execute(sql, param)
+            globalvars.caozuo_jilu(escape(session['id']), u'批量上传', fn)
     cnx.commit()
     return '[%s]上传完成'  % (fn)

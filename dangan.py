@@ -3,6 +3,7 @@ import globalvars
 import mysql.connector
 from flask import render_template, request, redirect, session, escape
 
+
 def get(id):
     if not 'id' in session:
         return redirect('/login')
@@ -39,6 +40,7 @@ def get(id):
         dor = dor,
         cat = cat
     )
+
 
 def post(id):
     s, t = 0, 0

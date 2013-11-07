@@ -3,6 +3,7 @@ import globalvars
 import mysql.connector
 from flask import render_template, request, redirect, session
 
+
 def get():
     if not 'id' in session:
         return redirect('/login')
@@ -12,6 +13,7 @@ def get():
     cursor.execute(sql)
     data = cursor.fetchall()
     return render_template('nglgw.html', data=data)
+
 
 def post():
     pass

@@ -6,10 +6,12 @@ from werkzeug import secure_filename
 from flask import request, render_template, session
 import xlrd
 
+
 def get():
     if not 'id' in session:
         return redirect('/login')
     return render_template('daoru.boot.html')
+
 
 def post():
     f = request.files['file']
@@ -18,6 +20,7 @@ def post():
     f.save(file_path)
     import_xls(file_path)
     return render_template('daoru.boot.html')
+
 
 def import_xls(file_path):
     xls = xlrd.open_workbook(file_path, 'rb')
