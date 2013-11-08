@@ -42,5 +42,5 @@ def post():
     aid = cursor.lastrowid
     cursor.close()
     cnx.close()
-    globalvars.caozuo_jilu(escape(session['id']), u'添加档案信息', aid)
+    #globalvars.caozuo_jilu(escape(session['id']), u'添加档案信息', aid)
     return redirect('/saomiao/%s' % (aid))

@@ -71,7 +71,7 @@ def import_xls(file_path):
                 sh.cell(row, 6).value, dob, dor, data[0][0]
             )
             cursor.execute(sql, param)
-        globalvars.caozuo_jilu(escape(session['id']), u'导入数据', 'excel')
+        #globalvars.caozuo_jilu(escape(session['id']), u'导入数据', 'excel')
     cnx.commit()
     cursor.close()
     cnx.close()
