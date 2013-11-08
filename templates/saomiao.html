@@ -61,7 +61,7 @@
           name="ShowImageSettingWindow">
           设置
         </button>
-        <button type="button" class="btn btn-block"
+        <button type="button" class="btn btn-block disabled"
           onclick="SeriesCapture();" name="SeriesCapture">
           连拍
         </button>
@@ -139,7 +139,7 @@
   function SetCropArea()
   {
     if(bCropArea == 0)
-    { 
+    {
       bCropArea = 1;
       CmCaptureOcx.CusCrop(bCropArea);
     }
@@ -169,7 +169,7 @@
   function SetDenoise()
   {
     if(bSetDenoise == 0)
-    { 
+    {
       bSetDenoise = 1;
       CmCaptureOcx.SetDenoise(bSetDenoise);
     }
@@ -179,19 +179,19 @@
       CmCaptureOcx.SetDenoise(bSetDenoise);
     }
   }
- function show(){		
+ function show(){
    if(SZ.length!=0)
   {
      for (var i=0;i<SZ.length;i++)
    {
    CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"","{{ filepath }}"+SZ[i]+"",0);
-   alert(LBvalue+"/"+SZ[i]);
+   //alert(LBvalue+"/"+SZ[i]);
    }
    SZ.length = 0
    SZS=0;
   }
   LBID=document.getElementById('LB');
-  LBvalue=LB.options[LB.selectedIndex].value;	
+  LBvalue=LB.options[LB.selectedIndex].value;
 
 //  alert(LBvalue);
    }
@@ -205,7 +205,7 @@
    for (var i=0;i<SZ.length;i++)
    {
    CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"","{{ filepath }}"+SZ[i]+"",0);
-   alert(LBvalue+"/"+SZ[i]);
+   //alert(LBvalue+"/"+SZ[i]);
    }
    SZ.length = 0
    SZS=0;
