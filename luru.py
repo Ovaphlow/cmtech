@@ -7,7 +7,7 @@ from flask import request, render_template, redirect, session, escape
 def get():
     if not 'id' in session:
         return redirect('/login')
-    return render_template('luru.boot.html')
+    return render_template('luru.html')
 
 
 def post():

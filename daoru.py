@@ -10,7 +10,7 @@ import xlrd
 def get():
     if not 'id' in session:
         return redirect('/login')
-    return render_template('daoru.boot.html')
+    return render_template('daoru.html')
 
 
 def post():
@@ -19,7 +19,7 @@ def post():
     file_path = os.path.join(globalvars.G_UPLOAD_PATH, filename)
     f.save(file_path)
     import_xls(file_path)
-    return render_template('daoru.boot.html')
+    return render_template('daoru.html')
 
 
 def import_xls(file_path):

@@ -27,7 +27,7 @@ def get(id):
     cnx.close()
     fp = globalvars.get_file_path(id)
     lp = '/saomiao/%s' % (id,)
-    return render_template('shangchuan.boot.html',
+    return render_template('shangchuan.html',
         row=row,
         id=id,
         filepath=fp,

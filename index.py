@@ -17,7 +17,7 @@ def get():
     data = cursor.fetchall()
     cursor.close()
     cnx.close()
-    return render_template('index.boot.html', data=data)
+    return render_template('index.html', data=data)
 
 
 def post():

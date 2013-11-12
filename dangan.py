@@ -28,7 +28,7 @@ def get(id):
     cnx.close()
     lp1 = '/saomiao/%s' % (id,)
     lp2 = '/luru/%s' % (id,)
-    return render_template('dangan.boot.html',
+    return render_template('dangan.html',
         id = id,
         row = data[0],
         link1 = lp1,
