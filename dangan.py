@@ -68,7 +68,6 @@ def post(id):
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cursor = cnx.cursor()
     cursor.execute(sql, param)
-    cursor.execute(sql1, param1)
     cnx.commit()
     cursor.close()
     cnx.close()
