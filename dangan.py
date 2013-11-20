@@ -72,5 +72,4 @@ def post(id):
     cursor.close()
     cnx.close()
     globalvars.caozuo_jilu(escape(session['id']), u'修改档案信息', id)
-    print '12213'
     return redirect('/dangan/%s' % (id))
