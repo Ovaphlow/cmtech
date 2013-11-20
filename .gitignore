@@ -1,5 +1,5 @@
 archieve/static/upload/*
-
+.idea/*
 #python
 *.pyc
 
