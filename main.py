@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template
 import globalvars
 import index, daoru, luru, saomiao, shangchuan, dangan, test, controls
-import tsgz, nglgw, chaxun_teshu, login
+import tsgz, nglgw, chaxun_teshu, login, chaxun
 from werkzeug import secure_filename
 
 
@@ -86,6 +86,14 @@ def test_page():
 def _upload_image_file():
     if request.method == 'POST':
         return controls.upload_image_file()
+
+
+@app.route('/chaxun', methods=['POST', 'GET'])
+def chaxun_page():
+    if request.method == 'POST':
+        return chaxun.post()
+    else:
+        return chaxun.get()
 
 
 @app.route('/chaxun/tsgz', methods=['GET'])
