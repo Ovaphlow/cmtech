@@ -10,9 +10,9 @@ jinja_env = jinja2.Environment(
 
 
 cnx_cfg = {
-    'user': 'cmtech',
-    'password': 'cmtech.1123',
-    'host': '125.211.221.215',
+    'user': 'root',
+    'password': 'dsdfjk',
+    'host': '127.0.0.1',
     'database': 'cm_archieve',
 }
 
