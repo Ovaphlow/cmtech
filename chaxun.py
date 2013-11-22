@@ -5,8 +5,12 @@ from flask import render_template, request, redirect, session, escape
 
 
 def get():
-    pass
+    return render_template('chaxun.html')
 
 
 def post():
-    pass
+    print request.form['DangAnHao']
+    print request.form['ShenFenZheng']
+    print request.form['XingMing']
+    print request.form['XingBie']
+    return render_template('chaxun.html')
