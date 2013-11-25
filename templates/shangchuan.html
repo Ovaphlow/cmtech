@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}录入档案信息 <small>该档案的文件保存目录为 [ {{ filepath }} ]</small>{% endblock %}
+{% block title %}上传档案文件 <small></small>{% endblock %}
 {% block bodylib %}onload="showFlash();"{% endblock %}
 {% block content %}
     <div class="row-fluid">
@@ -16,6 +16,7 @@
           <dt>性别</dt>
           <dd>{{ row[4] }}</dd>
         </dl>
+        <p class="text-center"><a class="btn btn-primary" href="/dangan/{{ id }}">返回</a></p>
       </div>
       <div class="span8">
         <p class=text-center>

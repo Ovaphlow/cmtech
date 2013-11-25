@@ -8,7 +8,7 @@ from werkzeug import secure_filename
 
 app = Flask(__name__)
 app.host = '0.0.0.0'
-app.debug = True
+app.debug = False
 app.secret_key = 'Ovaphlow'
 app.config['UPLOAD_FOLDER'] = globalvars.G_UPLOAD_PATH
 
@@ -109,6 +109,11 @@ def nglgw_page():
 @app.route('/chaxun/dytx', methods=['GET'])
 def dytx_pate():
     return chaxun_teshu.dytx_get()
+
+
+@app.route('/chakan/<pic_id>', methods=['POST', 'GET'])
+def chakan_page():
+    pass
 
 
 if __name__ == '__main__':
