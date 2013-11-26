@@ -2,13 +2,13 @@
 from flask import Flask, request, render_template
 import globalvars
 import index, daoru, luru, saomiao, shangchuan, dangan, test, controls
-import tsgz, nglgw, chaxun_teshu, login, chaxun
+import tsgz, nglgw, chaxun_teshu, login, chaxun, chakan
 from werkzeug import secure_filename
 
 
 app = Flask(__name__)
 app.host = '0.0.0.0'
-app.debug = False
+app.debug = True
 app.secret_key = 'Ovaphlow'
 app.config['UPLOAD_FOLDER'] = globalvars.G_UPLOAD_PATH
 
@@ -112,8 +112,11 @@ def dytx_pate():
 
 
 @app.route('/chakan/<pic_id>', methods=['POST', 'GET'])
-def chakan_page():
-    pass
+def chakan_page(pic_id):
+    if request.method == 'POST':
+        return chakan.post(pic_id)
+    else:
+        return chakan.get(pic_id)
 
 
 if __name__ == '__main__':

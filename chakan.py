@@ -1,12 +1,33 @@
 # -*- coding=UTF-8 -*-
-from flask import render_template, redirect, session
 
 
 def get(pic_id):
+    from flask import session, redirect, render_template
+    import mysql.connector
+    import globalvars
     if not 'id' in session:
         return redirect('/login')
-    return render_template('dangan.html')
+    sql = '''
+        SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,dangan.danganhao
+        FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
+        WHERE wenjian.id=%s
+    '''
+    param = (pic_id,)
+    cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+    cursor = cnx.cursor()
+    cursor.execute(sql, param)
+    data = cursor.fetchall()
+    row = data[0]
+    print row
+    return render_template('chakan.html',
+        fs_root = globalvars.G_FILE_SERVER_ROOT,
+        aid = row[3],
+        row = row
+    )
 
 
 def post(pic_id):
-    pass
+    from flask import render_template, redirect
+    import globalvars
+
+    return redirect('/chakan/%s' % pic_id)
