@@ -1,4 +1,5 @@
 archieve/static/upload/*
+static/upload/*
 .idea/*
 #python
 *.pyc
