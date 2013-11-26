@@ -78,9 +78,9 @@ def rotate_image(file_path):
 def turn_image(file_path):
     import Image
     img = Image.open(file_path)
-    img_t = imt.transpose(Image.ROTATE_180)
-    imt_t.save(file_path)
-
+    img_t = img.transpose(Image.ROTATE_180)
+    img_t.save(file_path)
+    return True
 
 def caozuo_jilu(id, caozuo, neirong):
     import datetime
