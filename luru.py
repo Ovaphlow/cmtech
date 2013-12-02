@@ -17,12 +17,14 @@ def post():
     if 'stow' in request.form.getlist('check'):
         t = 1
     dob = request.form['idcard'][6:14]
+    if int(request.form['idcard'][16:17]) % 2 == 1:
+        gender = u'男'
+    else:
+        gender = u'女'
     dob = '%s-%s-%s' % (dob[0:4], dob[4:6], dob[6:8])
     dor_y = dob[0:4]
-    if request.form['gender'] == u'男':
-        dor = '%s-%s-%s' % (int(dor_y) + 60, dob[5:7], dob[8:10])
-    else:
-        dor = '%s-%s-%s' % (int(dor_y) + 50, dob[5:7], dob[8:10])
+    years = globalvars.get_years(gender, t, s)
+    dor = '%s-%s-%s' % (int(dor_y) + years, dob[5:7], dob[8:10])
     sql = '''
         INSERT INTO dangan
         VALUES(
@@ -30,11 +32,10 @@ def post():
     '''
     param = (
         0, request.form['aid'], request.form['idcard'],
-        request.form['name'], request.form['gender'], dob,
+        request.form['name'], gender, dob,
         dor, '', '',
         '', s, t
     )
-    import datetime
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cursor = cnx.cursor()
     cursor.execute(sql, param)
@@ -42,5 +43,5 @@ def post():
     aid = cursor.lastrowid
     cursor.close()
     cnx.close()
-    #globalvars.caozuo_jilu(escape(session['id']), u'添加档案信息', aid)
+    globalvars.caozuo_jilu(escape(session['id']), u'添加档案信息', aid)
     return redirect('/saomiao/%s' % (aid))

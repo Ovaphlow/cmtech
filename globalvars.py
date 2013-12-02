@@ -82,6 +82,7 @@ def turn_image(file_path):
     img_t.save(file_path)
     return True
 
+
 def caozuo_jilu(id, caozuo, neirong):
     import datetime
     date = datetime.datetime.now().strftime('%Y-%m-%d')
@@ -99,3 +100,20 @@ def caozuo_jilu(id, caozuo, neirong):
     cnx.commit()
     cursor.close()
     cnx.close()
+
+
+def  get_years(gender, te, nv):
+    if gender == u'男':
+        if te == 1:
+            years = 55
+        else:
+            years = 60
+    else:
+        if te == 1:
+            years = 45
+        else:
+            if nv == 1:
+                years =55
+            else:
+                years =50
+    return years
