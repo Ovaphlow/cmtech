@@ -1,28 +1,35 @@
 # -*- coding=UTF-8 -*-
-import globalvars
-import mysql.connector
-import os
-from werkzeug import secure_filename
-from flask import request, render_template, session, escape
-import xlrd
+from flask.views import MethodView
 
 
-def get():
-    if not 'id' in session:
-        return redirect('/login')
-    return render_template('daoru.html')
+class DaoRu(MethodView):
+    def get(self):
+        from flask import render_template, session
 
+        if not 'id' in session:
+            return redirect('/login')
+        return render_template('daoru.html')
 
-def post():
-    f = request.files['file']
-    filename = secure_filename(f.filename)
-    file_path = os.path.join(globalvars.G_UPLOAD_PATH, filename)
-    f.save(file_path)
-    import_xls(file_path)
-    return render_template('daoru.html')
+    def post(self):
+        import os
+
+        from werkzeug import secure_filename
+        from flask import request, render_template
+
+        import globalvars
+
+        f = request.files['file']
+        filename = secure_filename(f.filename)
+        file_path = os.path.join(globalvars.G_UPLOAD_PATH, filename)
+        f.save(file_path)
+        import_xls(file_path)
+        return render_template('daoru.html')
 
 
 def import_xls(file_path):
+    import xlrd
+    import globalvars
+
     xls = xlrd.open_workbook(file_path, 'rb')
     sh = xls.sheets()[0]
     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
@@ -71,7 +78,7 @@ def import_xls(file_path):
                 sh.cell(row, 6).value, dob, dor, data[0][0]
             )
             cursor.execute(sql, param)
-        #globalvars.caozuo_jilu(escape(session['id']), u'导入数据', 'excel')
+            #globalvars.caozuo_jilu(escape(session['id']), u'导入数据', 'excel')
     cnx.commit()
     cursor.close()
     cnx.close()

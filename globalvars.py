@@ -8,14 +8,12 @@ jinja_env = jinja2.Environment(
   loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 '''
 
-
 cnx_cfg = {
-    'user': 'root',
-    'password': 'dsdfjk',
-    'host': '127.0.0.1',
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
     'database': 'cm_archieve',
 }
-
 
 G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
@@ -24,12 +22,12 @@ G_FILE_SERVER_ROOT = '/static/upload'
 
 
 def get_time():
-    return time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
 
 def check_ext(file_name):
     return '.' in file_name and \
-        file_name.rsplit('.', 1)[1] in ALLOWED_EXT
+           file_name.rsplit('.', 1)[1] in ALLOWED_EXT
 
 
 def join_file_name(sep, flist):
@@ -70,6 +68,7 @@ def check_path(path):
 
 def rotate_image(file_path):
     import Image
+
     img = Image.open(file_path)
     img_t = img.transpose(Image.ROTATE_270)
     img_t.save(file_path)
@@ -77,6 +76,7 @@ def rotate_image(file_path):
 
 def turn_image(file_path):
     import Image
+
     img = Image.open(file_path)
     img_t = img.transpose(Image.ROTATE_180)
     img_t.save(file_path)
@@ -85,6 +85,7 @@ def turn_image(file_path):
 
 def caozuo_jilu(id, caozuo, neirong):
     import datetime
+
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     time = datetime.datetime.now().strftime('%HH%MM%SS')
     sql = '''
@@ -102,7 +103,7 @@ def caozuo_jilu(id, caozuo, neirong):
     cnx.close()
 
 
-def  get_years(gender, te, nv):
+def get_years(gender, te, nv):
     if gender == u'男':
         if te == 1:
             years = 55
@@ -113,7 +114,7 @@ def  get_years(gender, te, nv):
             years = 45
         else:
             if nv == 1:
-                years =55
+                years = 55
             else:
-                years =50
+                years = 50
     return years

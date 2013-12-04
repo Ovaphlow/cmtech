@@ -1,19 +1,23 @@
 # -*- coding=UTF-8 -*-
-import globalvars
-import mysql.connector
-import os
-from flask import request, redirect, jsonify, session, escape
-from werkzeug import secure_filename
-import datetime
+from flask.views import MethodView
 
 
-def logout():
-    session.pop('id', None)
-    session.pop('zhanghao', None)
-    return redirect('/login')
+class Logout(MethodView):
+    def get(self):
+        from flask import session, redirect
+
+        session.pop('id', None)
+        session.pop('zhanghao', None)
+        return redirect('/login')
 
 
 def upload_image_file():
+    from flask import request
+    from werkzeug import secure_filename
+    import datetime
+    import mysql.connector
+    import globalvars
+
     id = request.args.get('id', '')
     cat = request.args.get('cat', '')
     aid = globalvars.get_aid(id)
