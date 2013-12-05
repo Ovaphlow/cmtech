@@ -10,12 +10,31 @@ class ChaXun(MethodView):
 
     def post(self):
         from flask import request, render_template
+        import mysql.connector
+        import globalvars
+        import sys
 
-        print request.form['DangAnHao']
-        print request.form['ShenFenZheng']
-        print request.form['XingMing']
-        print request.form['XingBie']
-        return render_template('chaxun.html')
+        reload(sys)
+        sys.setdefaultencoding('utf-8')
+        aid = request.form['DangAnHao']
+        idcard = request.form['ShenFenZheng']
+        name = request.form['XingMing']
+        gender = request.form['XingBie']
+        sql = 'SELECT * FROM dangan WHERE XingBie="'
+        sql = '%s%s"' % (sql, gender)
+        if aid != '':
+            sql = '%s AND DangAnHao LIKE "%s%s%s"' % (sql, '%', aid, '%')
+        if idcard != '':
+            sql = '%s AND ShenFenZheng LIKE "%s%s%s"' % (sql, '%', idcard, '%')
+        if name != '':
+            sql = '%s AND XingMine LIKE "%s%s%s"' % (sql, '%', name, '%')
+        print sql
+        param = (gender,)
+        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cursor = cnx.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        return render_template('chaxun.html', data=data)
 
 
 class DangYueTuiXiu(MethodView):

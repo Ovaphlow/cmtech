@@ -3,7 +3,7 @@ from flask.views import MethodView
 
 
 class DangAn(MethodView):
-    def get(self):
+    def get(self, id):
         from flask import session, redirect, request, render_template
         import mysql.connector
         import globalvars
@@ -44,7 +44,7 @@ class DangAn(MethodView):
                                cat=cat
         )
 
-    def post(self):
+    def post(self, id):
         from flask import request, redirect, session, escape
         import mysql.connector
         import globalvars
