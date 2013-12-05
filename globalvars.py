@@ -1,6 +1,5 @@
 # -*- coding=UTF-8 -*-
 import os
-import mysql.connector
 
 
 '''
@@ -37,7 +36,9 @@ def join_file_name(sep, flist):
 
 
 def get_aid(id):
-#获取档案号
+    #获取档案号
+    import mysql.connector
+
     sql = 'SELECT danganhao FROM dangan WHERE id=%s'
     param = (id, )
     cnx = mysql.connector.Connect(**cnx_cfg)
@@ -85,6 +86,7 @@ def turn_image(file_path):
 
 def caozuo_jilu(id, caozuo, neirong):
     import datetime
+    import mysql.connector
 
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     time = datetime.datetime.now().strftime('%HH%MM%SS')

@@ -5,9 +5,13 @@
 {% block content %}
 <div class="row-fluid">
   <div class="span10 offset1">
-    <form action="" method="POST">
+    <form action="" method="POST" class="form-inline">
       <p class="text-center">
-        <button type="submit" class="btn btn-danger">上下翻转</button>
+        <select name="operate">
+          <option value="turn">上下翻转</option>
+          <option value="delete">删除图片</option>
+        </select>
+        <button type="submit" class="btn btn-danger">确认</button>
       </p>
     </form>
     <p class="text-center">
