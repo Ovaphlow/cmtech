@@ -12,6 +12,7 @@ import controls
 import login
 import chakan
 import chaxun
+import yonghu
 
 
 app = Flask(__name__)
@@ -33,6 +34,7 @@ app.add_url_rule('/_upload_image_file', view_func=controls.UploadImageFile.as_vi
 app.add_url_rule('/chaxun/tsgz', view_func=chaxun.TeShuGongZhong.as_view('tsgz'))
 app.add_url_rule('/chaxun/nglgw', view_func=chaxun.NvGuanLiGangWei.as_view('nglgw'))
 app.add_url_rule('/chaxun/dytx', view_func=chaxun.DangYueTuiXiu.as_view('dytx'))
+app.add_url_rule('/xgmm', view_func=yonghu.XiuGaiMiMa.as_view('xgmm'))
 
 if __name__ == '__main__':
     app.run()
