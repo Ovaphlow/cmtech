@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block head %}
+{% endblock %}
+{% block title %}修改密码 <small></small>{% endblock %}
+{% block content %}
+<div class="row-fluid">
+  <div class="span8 offset2">
+    <form action="" method="POST" class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" for="jiumima">当前密码</label>
+        <div class="controls">
+          <input type="password" name="jiumima" id="jiumima">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="xinmima">新密码</label>
+        <div class="controls">
+          <input type="password" name="xinmima" id="xinmima">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="xinmima2">重复新密码</label>
+        <div class="controls">
+          <input type="password" name="xinmima2" id="xinmima2">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-danger">确认</button>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+</div>
+{% endblock %}
