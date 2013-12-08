@@ -34,7 +34,8 @@ class ShangChuan(MethodView):
                                id=id,
                                filepath=fp,
                                link=lp,
-                               cat=cat
+                               cat=cat,
+                               User=session['user']
         )
 
     def post(self, id):
@@ -66,6 +67,6 @@ class ShangChuan(MethodView):
                 param = (id, cat, fn)
                 #print id, cat, fn
                 cursor.execute(sql, param)
-                #globalvars.caozuo_jilu(escape(session['id']), u'批量上传', fn)
+                globalvars.caozuo_jilu(session['id'], u'批量上传', fn)
         cnx.commit()
         return '[%s]上传完成' % (fn)

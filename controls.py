@@ -7,13 +7,13 @@ class Logout(MethodView):
         from flask import session, redirect
 
         session.pop('id', None)
-        session.pop('zhanghao', None)
+        session.pop('user', None)
         return redirect('/login')
 
 
 class UploadImageFile(MethodView):
     def post(self):
-        from flask import request
+        from flask import request, session
         from werkzeug import secure_filename
         import datetime
         import mysql.connector
@@ -43,5 +43,5 @@ class UploadImageFile(MethodView):
         cursor.close()
         cnx.close()
         globalvars.rotate_image(fp)
-        #globalvars.caozuo_jilu(escape(session['id']), u'上传图片', fp)
+        globalvars.caozuo_jilu(session['id'], u'上传图片', fp)
         return '完成'

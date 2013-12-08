@@ -30,7 +30,7 @@ class SaoMiao(MethodView):
         cnx.close()
         fp = globalvars.get_file_path(id)
         return render_template('saomiao.html', filepath=fp, row=row, id=id,
-                               url_root=url_root
+                               url_root=url_root, User=session['user']
         )
 
     def post(self, id):

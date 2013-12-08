@@ -41,11 +41,12 @@ class DangAn(MethodView):
                                data1=data1,
                                dob=dob,
                                dor=dor,
-                               cat=cat
+                               cat=cat,
+                               User=session['user']
         )
 
     def post(self, id):
-        from flask import request, redirect, session, escape
+        from flask import request, redirect, session
         import mysql.connector
         import globalvars
 
@@ -77,5 +78,5 @@ class DangAn(MethodView):
         cnx.commit()
         cursor.close()
         cnx.close()
-        globalvars.caozuo_jilu(escape(session['id']), u'修改档案信息', id)
+        globalvars.caozuo_jilu(session['id'], u'修改档案信息', id)
         return redirect('/dangan/%s' % (id))

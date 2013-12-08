@@ -17,13 +17,12 @@ class Login(MethodView):
         mi_ma = request.form['mima']
         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cursor = cnx.cursor()
-        sql = 'SELECT COUNT(*),id,ZhangHao FROM user WHERE ZhangHao=%s AND MiMa=%s'
+        sql = 'SELECT COUNT(*),id,MingCheng FROM user WHERE ZhangHao=%s AND MiMa=%s'
         param = (zhang_hao, mi_ma)
         cursor.execute(sql, param)
         data = cursor.fetchall()
-        #print 'count:', data[0][0], 'zhanghao:', data[0][1], 'mima:', data[0][2]
         if data[0][0] == 1:
-            session['zhanghao'] = data[0][2]
+            session['user'] = data[0][2]
             session['id'] = data[0][1]
             return redirect('/')
         else:

@@ -8,13 +8,13 @@ class DaoRu(MethodView):
 
         if not 'id' in session:
             return redirect('/login')
-        return render_template('daoru.html')
+        return render_template('daoru.html', User=session['user'])
 
     def post(self):
         import os
 
         from werkzeug import secure_filename
-        from flask import request, render_template
+        from flask import request, redirect
 
         import globalvars
 
@@ -23,7 +23,7 @@ class DaoRu(MethodView):
         file_path = os.path.join(globalvars.G_UPLOAD_PATH, filename)
         f.save(file_path)
         import_xls(file_path)
-        return render_template('daoru.html')
+        return redirect('/daoru')
 
 
 def import_xls(file_path):

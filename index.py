@@ -21,7 +21,7 @@ class Index(MethodView):
         data = cursor.fetchall()
         cursor.close()
         cnx.close()
-        return render_template('index.html', data=data)
+        return render_template('index.html', data=data, User=session['user'])
 
     def post(self):
         import mysql.connector

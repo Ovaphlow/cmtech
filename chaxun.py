@@ -4,12 +4,12 @@ from flask.views import MethodView
 
 class ChaXun(MethodView):
     def get(self):
-        from flask import render_template
+        from flask import render_template, session
 
-        return render_template('chaxun.html')
+        return render_template('chaxun.html', User=session['user'])
 
     def post(self):
-        from flask import request, render_template
+        from flask import request, render_template, session
         import mysql.connector
         import globalvars
         import sys
@@ -34,7 +34,7 @@ class ChaXun(MethodView):
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        return render_template('chaxun.html', data=data)
+        return render_template('chaxun.html', data=data, User=session['user'])
 
 
 class DangYueTuiXiu(MethodView):
@@ -54,7 +54,7 @@ class DangYueTuiXiu(MethodView):
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        return render_template('dytx.html', data=data)
+        return render_template('dytx.html', data=data, User=session['user'])
 
 
 class TeShuGongZhong(MethodView):
@@ -70,7 +70,7 @@ class TeShuGongZhong(MethodView):
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        return render_template('tsgz.html', data=data)
+        return render_template('tsgz.html', data=data, User=session['user'])
 
 
 class NvGuanLiGangWei(MethodView):
@@ -86,4 +86,4 @@ class NvGuanLiGangWei(MethodView):
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        return render_template('nglgw.html', data=data)
+        return render_template('nglgw.html', data=data, User=session['user'])

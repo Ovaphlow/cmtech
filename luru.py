@@ -8,7 +8,7 @@ class LuRu(MethodView):
 
         if not 'id' in session:
             return redirect('/login')
-        return render_template('luru.html')
+        return render_template('luru.html', User=session['user'])
 
     def post(self):
         from flask import request, redirect
@@ -46,5 +46,5 @@ class LuRu(MethodView):
         aid = cursor.lastrowid
         cursor.close()
         cnx.close()
-        globalvars.caozuo_jilu(escape(session['id']), u'添加档案信息', aid)
+        globalvars.caozuo_jilu(session['id'], u'添加档案信息', aid)
         return redirect('/saomiao/%s' % (aid))
