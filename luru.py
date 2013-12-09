@@ -11,7 +11,8 @@ class LuRu(MethodView):
         return render_template('luru.html', User=session['user'])
 
     def post(self):
-        from flask import request, redirect
+        from flask import request, redirect, session
+        import mysql.connector
         import globalvars
 
         s, t = 0, 0

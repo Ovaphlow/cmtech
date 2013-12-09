@@ -4,7 +4,7 @@ from flask.views import MethodView
 
 class XiuGaiMiMa(MethodView):
     def get(self):
-        from flask import render_template
+        from flask import render_template, session
 
         return render_template('xgmm.html', User=session['user'])
 
