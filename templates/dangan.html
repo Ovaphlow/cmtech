@@ -42,11 +42,12 @@
       <dl class="dl">
         <dt>预退休日期</dt>
         <dd>
-          <input class="input-mini" type="text" name="dor-year" placeholder="年" value="{{ dor[0] }}">
+          <input class="input-mini" type="text" name="dor-year" placeholder="年" value="{{ dor[0] }}" id="dor-year">
           <input class="input-mini" type="text" name="dor-month" placeholder="月" value="{{ dor[1] }}">
           <input class="input-mini" type="text" name="dor-date" placeholder="日" value="{{ dor[2] }}">
         </dd>
       </dl>
+      {% if row[4] == '女' %}
       <dl class="dl">
         <dt>是否为女管理岗位</dt>
         {% if row[10] == 1 %}
@@ -59,6 +60,7 @@
         </dd>
         {% endif %}
       </dl>
+      {% endif %}
       <dl class="dl">
         <dt>是否为特殊工种</dt>
         {% if row[11] == 1 %}
@@ -159,9 +161,33 @@
 <script language="JavaScript">
 function check_stow() {
     //特殊工种
+    var obj = document.getElementById("stow");
+    var checked = obj.checked;
+    var year;
+    var obj_year = document.getElementById("dor-year");
+    year = obj_year.value;
+    //alert(year);
+    if (checked) {
+        obj_year.value = String(Number(year) + 5);
+    }
+    else {
+        obj_year.value = String(Number(year) - 5);
+    }
 }
 function check_female() {
     //女管理岗位
+    var obj = document.getElementById("female");
+    var checked = obj.checked;
+    var year;
+    var obj_year = document.getElementById("dor-year");
+    year = obj_year.value;
+    //alert(year);
+    if (checked) {
+        obj_year.value = String(Number(year) + 5);
+    }
+    else {
+        obj_year.value = String(Number(year) - 5);
+    }
 }
 </script>
 {% endblock %}
