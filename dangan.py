@@ -50,6 +50,12 @@ class DangAn(MethodView):
         import mysql.connector
         import globalvars
 
+        idcard = request.form['shenfenzheng']
+        name = request.form['xingming']
+        if int(idcard[16:17]) % 2 == 1:
+            gender = u'男'
+        else:
+            gender = u'女'
         s, t = 0, 0
         if 'female' in request.form.getlist('check'):
             s = 1
@@ -68,10 +74,12 @@ class DangAn(MethodView):
         sql = '''
             UPDATE dangan
             SET
-            ChuShengRiQi=%s,YuTuiXiuRiQi=%s,NvGuanLiGangWei=%s,TeShuGongZhong=%s
+            ChuShengRiQi=%s,YuTuiXiuRiQi=%s,NvGuanLiGangWei=%s,
+            TeShuGongZhong=%s,XingMing=%s,ShenFenZheng=%s,
+            XingBie=%s
             WHERE id=%s
         '''
-        param = (dob, dor, s, t, id)
+        param = (dob, dor, s, t, name, idcard, gender, id)
         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cursor = cnx.cursor()
         cursor.execute(sql, param)

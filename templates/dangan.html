@@ -10,19 +10,25 @@
       <dt>档案号</dt>
       <dd>{{ row[1] }}</dd>
     </dl>
-    <dl class="dl">
-      <dt>身份证</dt>
-      <dd>{{ row[2] }}</dd>
-    </dl>
-    <dl class="dl">
-      <dt>姓名</dt>
-      <dd>{{ row[3] }}</dd>
-    </dl>
-    <dl class="dl">
-      <dt>性别</dt>
-      <dd>{{ row[4] }}</dd>
-    </dl>
     <form class="form-horizontal" role="form" action="/dangan/{{ id }}" method="post">
+      <dl class="dl">
+        <dt>身份证</dt>
+        <dd>
+          <input type=text name=shenfenzheng value="{{ row[2] }}" />
+        </dd>
+      </dl>
+      <dl class="dl">
+        <dt>姓名</dt>
+        <dd>
+          <input class=input-mini type=text name=xingming value={{ row[3] }} />
+        </dd>
+      </dl>
+      <dl class="dl">
+        <dt>性别</dt>
+        <dd>
+          {{ row[4] }}
+        </dd>
+      </dl>
       <h4>附加信息</h4>
       <hr />
       <dl class="dl">
@@ -45,11 +51,11 @@
         <dt>是否为女管理岗位</dt>
         {% if row[10] == 1 %}
         <dd>
-          <input type="checkbox" name="check" value="female" checked>
+          <input id="female" type="checkbox" name="check" value="female" onClick="check_female()" checked>
         </dd>
         {% else %}
         <dd>
-          <input type="checkbox" name="check" value="female">
+          <input id="female" type="checkbox" name="check" value="female" onClick="check_female()">
         </dd>
         {% endif %}
       </dl>
@@ -57,11 +63,11 @@
         <dt>是否为特殊工种</dt>
         {% if row[11] == 1 %}
         <dd>
-          <input type="checkbox" name="check" value="stow" checked>
+          <input id="stow" type="checkbox" name="check" value="stow" onClick="check_stow()" checked>
         </dd>
         {% else %}
         <dd>
-          <input type="checkbox" name="check" value="stow">
+          <input id="stow" type="checkbox" name="check" value="stow" onClick="check_stow()">
         </dd>
         {% endif %}
       </dl>
@@ -150,4 +156,12 @@
 </div>
 {% endblock %}
 {% block jslib %}
+<script language="JavaScript">
+function check_stow() {
+    //特殊工种
+}
+function check_female() {
+    //女管理岗位
+}
+</script>
 {% endblock %}
