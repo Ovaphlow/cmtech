@@ -1,6 +1,6 @@
 ﻿{% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
-{% block bodylib %}onload=" CmCaptureOcx.Initial();KSYQ();Adjust();SetDenoise();CmCaptureOcx.AutoFocus();"{% endblock %}
+{% block bodylib %}onload=" CmCaptureOcx.Initial();KSYQ();SetDenoise();CmCaptureOcx.AutoFocus();"{% endblock %}
 {% block content %}
     <div class="row-fluid">
       <div class="span10 offset1">
@@ -49,7 +49,7 @@
       </div>
       <div class="span1">
         <button type="button" class="btn btn-block btn-success"
-          onclick="KSYQ();Adjust();SetDenoise();CmCaptureOcx.AutoFocus();"
+          onclick="KSYQ();SetDenoise();CmCaptureOcx.AutoFocus();"
           id="KSYQ">
           开始视频
         </button>
@@ -67,8 +67,12 @@
           连拍
         </button>
         <button type="button" class="btn btn-block"
-          onclick="SetCropArea();" name="CusCrop">
+          onclick="Adjust();" name="AutoCrop">
           自动裁切
+        </button>
+        <button type="button" class="btn btn-block"
+          onclick="SetCropArea();" name="CusCrop">
+          手动裁切
         </button>
         <hr />
         <button type="button" class="btn btn-block btn-info"
