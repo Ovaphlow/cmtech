@@ -28,6 +28,7 @@ class ChaXun(MethodView):
             sql = '%s AND ShenFenZheng LIKE "%s%s%s"' % (sql, '%', idcard, '%')
         if name != '':
             sql = '%s AND XingMing LIKE "%s%s%s"' % (sql, '%', name, '%')
+        sql = '%s LIMIT 100' % (sql,)
         #print sql
         param = (gender,)
         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
