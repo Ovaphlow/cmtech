@@ -4,11 +4,15 @@ from flask.views import MethodView
 
 class LuRu(MethodView):
     def get(self):
-        from flask import session, redirect, render_template
+        from flask import session, redirect, render_template, request
 
         if not 'id' in session:
             return redirect('/login')
-        return render_template('luru.html', User=session['user'])
+        return render_template(
+            'luru.html',
+            User = session['user'],
+            error = request.args.get('err')
+        )
 
     def post(self):
         from flask import request, redirect, session
