@@ -23,11 +23,12 @@ class ChaKan(MethodView):
         cursor.close()
         cnx.close()
         row = data[0]
-        return render_template('chakan.html',
-                               fs_root=globalvars.G_FILE_SERVER_ROOT,
-                               aid=row[3],
-                               row=row,
-                               User=session['user']
+        return render_template(
+            'chakan.html',
+            fs_root = globalvars.G_FILE_SERVER_ROOT,
+            aid = row[3],
+            row = row,
+            User = session['user']
         )
 
     def post(self, pic_id):
