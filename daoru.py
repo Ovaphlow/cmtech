@@ -4,7 +4,7 @@ from flask.views import MethodView
 
 class DaoRu(MethodView):
     def get(self):
-        from flask import render_template, session
+        from flask import render_template, session, redirect
 
         if not 'id' in session:
             return redirect('/login')
@@ -29,6 +29,7 @@ class DaoRu(MethodView):
 def import_xls(file_path):
     import xlrd
     import globalvars
+    import mysql.connector
 
     xls = xlrd.open_workbook(file_path, 'rb')
     sh = xls.sheets()[0]

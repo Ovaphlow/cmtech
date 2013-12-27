@@ -35,10 +35,11 @@ class Index(MethodView):
         data_count = cursor.fetchall()
         cursor.close()
         cnx.close()
-        return render_template('index.html',
-                               data=data,
-                               User=session['user'],
-                               data_count = data_count
+        return render_template(
+            'index.html',
+            data=data,
+            User=session['user'],
+            data_count = data_count
         )
 
     def post(self):

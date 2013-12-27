@@ -14,7 +14,6 @@ class Logout(MethodView):
 class UploadImageFile(MethodView):
     def post(self):
         from flask import request, session
-        from werkzeug import secure_filename
         import datetime
         import mysql.connector
         import globalvars

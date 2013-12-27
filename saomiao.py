@@ -29,12 +29,18 @@ class SaoMiao(MethodView):
         cursor.close()
         cnx.close()
         fp = globalvars.get_file_path(id)
-        return render_template('saomiao.html', filepath=fp, row=row, id=id,
-                               url_root=url_root, User=session['user']
+        return render_template(
+            'saomiao.html',
+            filepath = fp,
+            row = row,
+            id = id,
+            url_root = url_root,
+            User = session['user']
         )
 
     def post(self, id):
         import globalvars
+        from flask import request
 
         p = globalvars.get_file_path1(id)
         with open('d:\\11231.jpg', 'wb') as f:

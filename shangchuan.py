@@ -5,7 +5,7 @@ from flask.views import MethodView
 
 class ShangChuan(MethodView):
     def get(self, id):
-        from flask import session, request, render_template
+        from flask import session, request, render_template, redirect
         import globalvars
         import mysql.connector
 
@@ -29,27 +29,28 @@ class ShangChuan(MethodView):
         cnx.close()
         fp = globalvars.get_file_path(id)
         lp = '/saomiao/%s' % (id,)
-        return render_template('shangchuan.html',
-                               row=row,
-                               id=id,
-                               filepath=fp,
-                               link=lp,
-                               cat=cat,
-                               User=session['user']
+        return render_template(
+            'shangchuan.html',
+            row = row,
+            id = id,
+            filepath = fp,
+            link = lp,
+            cat = cat,
+            User = session['user']
         )
 
     def post(self, id):
-        from flask import request
+        from flask import request, session
         from werkzeug import secure_filename
         import os
         import globalvars
         import mysql.connector
-        #print 'upload path:', globalvars.G_UPLOAD_PATH
-        #print 'headers', request.headers
+        # print 'upload path:', globalvars.G_UPLOAD_PATH
+        # print 'headers', request.headers
         cat = request.args.get('cat', '1')
-        #print 'id', id
-        #print id, cat
-        #print 'request.value', request.values
+        # print 'id', id
+        # print id, cat
+        # print 'request.value', request.values
         aid = globalvars.get_aid(id)
         fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
         globalvars.check_path(fp)
@@ -65,7 +66,7 @@ class ShangChuan(MethodView):
                     VALUES(0,%s,%s,%s)
                 '''
                 param = (id, cat, fn)
-                #print id, cat, fn
+                # print id, cat, fn
                 cursor.execute(sql, param)
                 globalvars.caozuo_jilu(session['id'], u'批量上传', fn)
         cnx.commit()
