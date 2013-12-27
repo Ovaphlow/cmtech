@@ -20,8 +20,20 @@ G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'
 
 
+def connect_db():
+    import mysql.connector
+
+    return mysql.connector.Connect(**cnx_cfg)
+
+
+def close_db(cursor, cnx):
+    cursor.close()
+    cnx.close()
+
+
 def get_time():
     import time
+
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
 
@@ -31,34 +43,34 @@ def check_ext(file_name):
 
 
 def join_file_name(sep, flist):
-    s = ''
-    s = '{seperator}'.format(seperator=sep).join(flist)
+    # s = ''
+    s = '{seperator}'.format(seperator = sep).join(flist)
     return s
 
 
-def get_aid(id):
-    #获取档案号
-    import mysql.connector
-
+def get_aid(rec_id):
+    # 获取档案号
     sql = 'SELECT danganhao FROM dangan WHERE id=%s'
-    param = (id, )
-    cnx = mysql.connector.Connect(**cnx_cfg)
+    param = (rec_id,)
+    # cnx = mysql.connector.Connect(**cnx_cfg)
+    cnx = connect_db()
     cursor = cnx.cursor()
     cursor.execute(sql, param)
     data = cursor.fetchall()
-    cursor.close()
-    cnx.close()
+    # cursor.close()
+    # cnx.close()
+    close_db(cursor, cnx)
     return data[0][0]
 
 
-def get_file_path(id):
-    fp = '%s\\\\%s\\\\' % (G_LOCAL_PATH, get_aid(id))
+def get_file_path(rec_id):
+    fp = '%s\\\\%s\\\\' % (G_LOCAL_PATH, get_aid(rec_id))
     return fp
 
 
-def get_file_path1(id):
-#获取上传文件地址
-    fp = '%s\\%s\\' % (G_UPLOAD_PATH, get_aid(id))
+def get_file_path1(rec_id):
+# 获取上传文件地址
+    fp = '%s\\%s\\' % (G_UPLOAD_PATH, get_aid(rec_id))
     check_path(fp)
     return fp
 
@@ -85,9 +97,9 @@ def turn_image(file_path):
     return True
 
 
-def caozuo_jilu(id, caozuo, neirong):
+def caozuo_jilu(user_id, caozuo, neirong):
     import datetime
-    import mysql.connector
+#     import mysql.connector
 
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     time = datetime.datetime.now().strftime('%HH%MM%SS')
@@ -96,14 +108,16 @@ def caozuo_jilu(id, caozuo, neirong):
         (yh_id, CaoZuo, NeiRong, RiQi, ShiJian)
         VALUES(%s,%s,%s,%s,%s)
     '''
-    uid = int(id)
+    uid = int(user_id)
     param = (uid, caozuo, neirong, date, time)
-    cnx = mysql.connector.Connect(**cnx_cfg)
+    #cnx = mysql.connector.Connect(**cnx_cfg)
+    cnx = connect_db()
     cursor = cnx.cursor()
     cursor.execute(sql, param)
     cnx.commit()
-    cursor.close()
-    cnx.close()
+    close_db()
+#     cursor.close()
+#     cnx.close()
 
 
 def get_years(gender, te, nv):
