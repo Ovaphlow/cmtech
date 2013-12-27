@@ -4,7 +4,7 @@ from flask.views import MethodView
 
 
 class ShangChuan(MethodView):
-    def get(self, id):
+    def get(self, uid):
         from flask import session, request, render_template, redirect
         import globalvars
         import mysql.connector
@@ -16,7 +16,7 @@ class ShangChuan(MethodView):
             SELECT * FROM dangan
             WHERE id=%s
         '''
-        param = (id,)
+        param = (uid,)
         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -27,19 +27,19 @@ class ShangChuan(MethodView):
             row = None
         cursor.close()
         cnx.close()
-        fp = globalvars.get_file_path(id)
-        lp = '/saomiao/%s' % (id,)
+        fp = globalvars.get_file_path(uid)
+        lp = '/saomiao/%s' % (uid,)
         return render_template(
             'shangchuan.html',
             row = row,
-            id = id,
+            id = uid,
             filepath = fp,
             link = lp,
             cat = cat,
             User = session['user']
         )
 
-    def post(self, id):
+    def post(self, uid):
         from flask import request, session
         from werkzeug import secure_filename
         import os

@@ -3,7 +3,7 @@ from flask.views import MethodView
 
 
 class DangAn(MethodView):
-    def get(self, id):
+    def get(self, aid):
         from flask import session, redirect, request, render_template
         import mysql.connector
         import globalvars
@@ -12,7 +12,7 @@ class DangAn(MethodView):
             return redirect('/login')
         cat = request.args.get('cat', '0')
         sql = 'SELECT * FROM dangan WHERE id=%s'
-        param = (id,)
+        param = (aid,)
         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -21,32 +21,32 @@ class DangAn(MethodView):
         dor = data[0][6].split('-')
         if cat == '0':
             sql = 'SELECT * FROM wenjian WHERE aid=%s'
-            param = (id,)
+            param = (aid,)
         else:
             sql = 'SELECT * FROM wenjian WHERE aid=%s AND LeiBie=%s'
-            param = (id, cat)
+            param = (aid, cat)
         cursor.execute(sql, param)
         data1 = cursor.fetchall()
         cursor.close()
         cnx.close()
-        lp1 = '/saomiao/%s' % (id,)
-        lp2 = '/luru/%s' % (id,)
+        lp1 = '/saomiao/%s' % (aid,)
+        lp2 = '/luru/%s' % (aid,)
         return render_template(
             'dangan.html',
-            id=id,
-            row=data[0],
-            link1=lp1,
-            link2=lp2,
-            fs_root=globalvars.G_FILE_SERVER_ROOT,
-            aid=globalvars.get_aid(id),
-            data1=data1,
-            dob=dob,
-            dor=dor,
-            cat=cat,
-            User=session['user']
+            id = aid,
+            row = data[0],
+            link1 = lp1,
+            link2 = lp2,
+            fs_root = globalvars.G_FILE_SERVER_ROOT,
+            aid = globalvars.get_aid(aid),
+            data1 = data1,
+            dob = dob,
+            dor = dor,
+            cat = cat,
+            User = session['user']
         )
 
-    def post(self, id):
+    def post(self, aid):
         from flask import request, redirect, session
         import mysql.connector
         import globalvars
@@ -80,7 +80,7 @@ class DangAn(MethodView):
             XingBie=%s
             WHERE id=%s
         '''
-        param = (dob, dor, s, t, name, idcard, gender, id)
+        param = (dob, dor, s, t, name, idcard, gender, aid)
         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -88,4 +88,4 @@ class DangAn(MethodView):
         cursor.close()
         cnx.close()
         globalvars.caozuo_jilu(session['id'], u'修改档案信息', id)
-        return redirect('/dangan/%s' % (id))
+        return redirect('/dangan/%s' % (aid))
