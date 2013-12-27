@@ -1,3 +1,4 @@
+.settings/*
 archieve/static/upload/*
 static/upload/*
 .idea/*
