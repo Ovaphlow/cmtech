@@ -31,18 +31,19 @@ class DangAn(MethodView):
         cnx.close()
         lp1 = '/saomiao/%s' % (id,)
         lp2 = '/luru/%s' % (id,)
-        return render_template('dangan.html',
-                               id=id,
-                               row=data[0],
-                               link1=lp1,
-                               link2=lp2,
-                               fs_root=globalvars.G_FILE_SERVER_ROOT,
-                               aid=globalvars.get_aid(id),
-                               data1=data1,
-                               dob=dob,
-                               dor=dor,
-                               cat=cat,
-                               User=session['user']
+        return render_template(
+            'dangan.html',
+            id=id,
+            row=data[0],
+            link1=lp1,
+            link2=lp2,
+            fs_root=globalvars.G_FILE_SERVER_ROOT,
+            aid=globalvars.get_aid(id),
+            data1=data1,
+            dob=dob,
+            dor=dor,
+            cat=cat,
+            User=session['user']
         )
 
     def post(self, id):
