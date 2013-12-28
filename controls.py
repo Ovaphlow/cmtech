@@ -2,25 +2,15 @@
 from flask.views import MethodView
 
 
-class Logout(MethodView):
-    def get(self):
-        from flask import session, redirect
-
-        session.pop('id', None)
-        session.pop('user', None)
-        return redirect('/login')
-
-
 class UploadImageFile(MethodView):
     def post(self):
         from flask import request, session
         import datetime
-        import mysql.connector
-        import globalvars
+        import globalvars 
 
-        id = request.args.get('id', '')
+        rec_id = request.args.get('id', '')
         cat = request.args.get('cat', '')
-        aid = globalvars.get_aid(id)
+        aid = globalvars.get_aid(rec_id)
         fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
         globalvars.check_path(fp)
         file_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
@@ -34,13 +24,15 @@ class UploadImageFile(MethodView):
             (aid, LeiBie, WenJianMing)
             VALUES(%s, %s, %s)
         '''
-        param = (id, cat, file_name)
-        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        param = (rec_id, cat, file_name)
+#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         cnx.commit()
-        cursor.close()
-        cnx.close()
+#         cursor.close()
+#         cnx.close()
+        globalvars.close_db(cursor, cnx)
         globalvars.rotate_image(fp)
         globalvars.caozuo_jilu(session['id'], u'上传图片', fp)
         return '完成'

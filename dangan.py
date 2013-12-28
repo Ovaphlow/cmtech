@@ -5,15 +5,16 @@ from flask.views import MethodView
 class DangAn(MethodView):
     def get(self, aid):
         from flask import session, redirect, request, render_template
-        import mysql.connector
+#         import mysql.connector
         import globalvars
 
-        if not 'id' in session:
+        if not 'user_id' in session:
             return redirect('/login')
         cat = request.args.get('cat', '0')
         sql = 'SELECT * FROM dangan WHERE id=%s'
         param = (aid,)
-        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
@@ -27,8 +28,9 @@ class DangAn(MethodView):
             param = (aid, cat)
         cursor.execute(sql, param)
         data1 = cursor.fetchall()
-        cursor.close()
-        cnx.close()
+#         cursor.close()
+#         cnx.close()
+        globalvars.close_db(cursor, cnx)
         lp1 = '/saomiao/%s' % (aid,)
         lp2 = '/luru/%s' % (aid,)
         return render_template(
@@ -43,12 +45,12 @@ class DangAn(MethodView):
             dob = dob,
             dor = dor,
             cat = cat,
-            User = session['user']
+            User = session['user_name']
         )
 
     def post(self, aid):
         from flask import request, redirect, session
-        import mysql.connector
+#         import mysql.connector
         import globalvars
 
         idcard = request.form['shenfenzheng']
@@ -81,11 +83,13 @@ class DangAn(MethodView):
             WHERE id=%s
         '''
         param = (dob, dor, s, t, name, idcard, gender, aid)
-        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         cnx.commit()
-        cursor.close()
-        cnx.close()
-        globalvars.caozuo_jilu(session['id'], u'修改档案信息', id)
+#         cursor.close()
+#         cnx.close()
+        globalvars.close_db(cursor, cnx)
+        globalvars.caozuo_jilu(session['user_id'], u'修改档案信息', id)
         return redirect('/dangan/%s' % (aid))

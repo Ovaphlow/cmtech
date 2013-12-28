@@ -9,7 +9,6 @@ import saomiao
 import shangchuan
 import dangan
 import controls
-import login
 import chakan
 import chaxun
 import yonghu
@@ -24,8 +23,8 @@ app.add_url_rule(
     '/',
     view_func = index.Index.as_view('index')
 )
-app.add_url_rule('/login', view_func = login.Login.as_view('login'))
-app.add_url_rule('/logout', view_func = controls.Logout.as_view('logout'))
+app.add_url_rule('/login', view_func = index.Login.as_view('login'))
+app.add_url_rule('/logout', view_func = index.Logout.as_view('logout'))
 app.add_url_rule('/chaxun', view_func = chaxun.ChaXun.as_view('chaxun'))
 app.add_url_rule('/chakan/<pic_id>', view_func = chakan.ChaKan.as_view('chakan'))
 app.add_url_rule('/daoru', view_func = daoru.DaoRu.as_view('daoru'))

@@ -6,17 +6,17 @@ class LuRu(MethodView):
     def get(self):
         from flask import session, redirect, render_template, request
 
-        if not 'id' in session:
+        if not 'user_id' in session:
             return redirect('/login')
         return render_template(
             'luru.html',
-            User = session['user'],
+            User = session['user_name'],
             error = request.args.get('err')
         )
 
     def post(self):
         from flask import request, redirect, session
-        import mysql.connector
+#         import mysql.connector
         import globalvars
 
         s, t = 0, 0
@@ -44,12 +44,14 @@ class LuRu(MethodView):
             dor, '', '',
             '', s, t
         )
-        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         cnx.commit()
         aid = cursor.lastrowid
-        cursor.close()
-        cnx.close()
-        globalvars.caozuo_jilu(session['id'], u'添加档案信息', aid)
+#         cursor.close()
+#         cnx.close()
+        globalvars.close_db(cursor, cnx)
+        globalvars.caozuo_jilu(session['user_id'], u'添加档案信息', aid)
         return redirect('/saomiao/%s' % (aid))

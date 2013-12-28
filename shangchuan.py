@@ -7,9 +7,9 @@ class ShangChuan(MethodView):
     def get(self, uid):
         from flask import session, request, render_template, redirect
         import globalvars
-        import mysql.connector
+#         import mysql.connector
 
-        if not 'id' in session:
+        if not 'user_id' in session:
             return redirect('/login')
         cat = request.args.get('cat', '1')
         sql = '''
@@ -17,7 +17,8 @@ class ShangChuan(MethodView):
             WHERE id=%s
         '''
         param = (uid,)
-        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
@@ -25,8 +26,9 @@ class ShangChuan(MethodView):
             row = data[0]
         else:
             row = None
-        cursor.close()
-        cnx.close()
+#         cursor.close()
+#         cnx.close()
+        globalvars.close_db(cursor, cnx)
         fp = globalvars.get_file_path(uid)
         lp = '/saomiao/%s' % (uid,)
         return render_template(
@@ -36,7 +38,7 @@ class ShangChuan(MethodView):
             filepath = fp,
             link = lp,
             cat = cat,
-            User = session['user']
+            User = session['user_name']
         )
 
     def post(self, uid):
@@ -44,7 +46,7 @@ class ShangChuan(MethodView):
         from werkzeug import secure_filename
         import os
         import globalvars
-        import mysql.connector
+#         import mysql.connector
         # print 'upload path:', globalvars.G_UPLOAD_PATH
         # print 'headers', request.headers
         cat = request.args.get('cat', '1')
@@ -54,7 +56,8 @@ class ShangChuan(MethodView):
         aid = globalvars.get_aid(id)
         fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
         globalvars.check_path(fp)
-        cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         for f in request.files.getlist('Filedata'):
             if f and globalvars.check_ext(f.filename):
@@ -65,9 +68,9 @@ class ShangChuan(MethodView):
                     INSERT INTO wenjian (id,aid,LeiBie,WenJianMing)
                     VALUES(0,%s,%s,%s)
                 '''
-                param = (id, cat, fn)
-                # print id, cat, fn
+                param = (uid, cat, fn)
                 cursor.execute(sql, param)
-                globalvars.caozuo_jilu(session['id'], u'批量上传', fn)
+                globalvars.caozuo_jilu(session['user_id'], u'批量上传', fn)
         cnx.commit()
+        globalvars.close_db(cursor, cnx)
         return '[%s]上传完成' % (fn)

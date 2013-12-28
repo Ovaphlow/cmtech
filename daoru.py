@@ -6,16 +6,14 @@ class DaoRu(MethodView):
     def get(self):
         from flask import render_template, session, redirect
 
-        if not 'id' in session:
+        if not 'user_id' in session:
             return redirect('/login')
-        return render_template('daoru.html', User=session['user'])
+        return render_template('daoru.html', User=session['user_name'])
 
     def post(self):
         import os
-
         from werkzeug import secure_filename
         from flask import request, redirect
-
         import globalvars
 
         f = request.files['file']
@@ -29,11 +27,12 @@ class DaoRu(MethodView):
 def import_xls(file_path):
     import xlrd
     import globalvars
-    import mysql.connector
+#     import mysql.connector
 
     xls = xlrd.open_workbook(file_path, 'rb')
     sh = xls.sheets()[0]
-    cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+#     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+    cnx = globalvars.connect_db()
     cursor = cnx.cursor()
     for row in range(1, sh.nrows):
         if sh.cell(row, 6).value != u'已调入':
@@ -81,5 +80,6 @@ def import_xls(file_path):
             cursor.execute(sql, param)
             #globalvars.caozuo_jilu(escape(session['id']), u'导入数据', 'excel')
     cnx.commit()
-    cursor.close()
-    cnx.close()
+#     cursor.close()
+#     cnx.close()
+    globalvars.close_db(cursor, cnx)
