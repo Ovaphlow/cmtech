@@ -21,7 +21,7 @@ class XiuGaiMiMa(MethodView):
         if xinmima != xinmima2:
             return redirect('/xgmm')
         sql = 'SELECT * FROM user WHERE id=%s'
-        param = (session['id'],)
+        param = (session['user_id'],)
 #         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
