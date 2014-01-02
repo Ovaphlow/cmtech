@@ -52,13 +52,10 @@ def get_aid(rec_id):
     # 获取档案号
     sql = 'SELECT danganhao FROM dangan WHERE id=%s'
     param = (rec_id,)
-    # cnx = mysql.connector.Connect(**cnx_cfg)
     cnx = connect_db()
     cursor = cnx.cursor()
     cursor.execute(sql, param)
     data = cursor.fetchall()
-    # cursor.close()
-    # cnx.close()
     close_db(cursor, cnx)
     return data[0][0]
 
@@ -99,7 +96,6 @@ def turn_image(file_path):
 
 def caozuo_jilu(user_id, caozuo, neirong):
     import datetime
-#     import mysql.connector
 
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     time = datetime.datetime.now().strftime('%HH%MM%SS')
@@ -110,14 +106,11 @@ def caozuo_jilu(user_id, caozuo, neirong):
     '''
     uid = int(user_id)
     param = (uid, caozuo, neirong, date, time)
-    #cnx = mysql.connector.Connect(**cnx_cfg)
     cnx = connect_db()
     cursor = cnx.cursor()
     cursor.execute(sql, param)
     cnx.commit()
-    close_db()
-#     cursor.close()
-#     cnx.close()
+    close_db(cursor, cnx)
 
 
 def get_years(gender, te, nv):
