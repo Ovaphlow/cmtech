@@ -128,3 +128,9 @@ def get_years(gender, te, nv):
             else:
                 years = 50
     return years
+
+
+def idcard_convert(idcard_15):
+    idcard_18 = ''
+
+    return idcard_18
