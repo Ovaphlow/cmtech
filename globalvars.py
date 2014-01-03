@@ -142,4 +142,3 @@ def idcard_convert(idcard_15):
         i += 1
     idcard_18 = '%s%s' % (idcard_18, ai[sum % 11])
     return idcard_18
-
