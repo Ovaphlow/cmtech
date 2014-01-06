@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>档案管理</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link rel="shortcut icon" href="/static/img/favicon.ico">
+  {% block head %}{% endblock %}
+</head>
+<body style="background-color:dimgrey" {% block bodylib %}{% endblock %}>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#"><strong>哈尔滨市人力资源市场</strong></a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="/">首页</a></li>
+            <li><a href="/daoru">导入基础数据</a></li>
+            <li><a href="/luru">录入档案信息</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                查询统计
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/chaxun">基础数据查询</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header"></li>
+                <li><a href="/chaxun/dytx">指定月份退休人员</a></li>
+                <li><a href="/chaxun/nglgw">女管理岗位</a></li>
+                <li><a href="/chaxun/tsgz">特殊工种</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="/xgmm">{% block user %}{% endblock %}</a></li>
+            <li><a href="/logout">退出</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="background-color:Ivory">
+    <div class="row-fluid">
+      <div class="span10 offset1">
+        <div class="page-header">
+          <h2><p class="text-center">{% block title %}{% endblock %}</p></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="background-color:Ivory">
+    {% block content %}{% endblock %}
+  </div>
+
+  <div class="navbar navbar-bottom navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#"><strong>档案管理系统</strong></a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href=#>[技术支持]电话：18686853420；QQ：2340538</a></li>
+            <li></a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href=#><strong>&copy; 成铭科技 2013</strong></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/static/js/jquery-1.10.2.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  {% block jslib %}
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}档案查阅<br /><small></small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <form class="form-inline" role="form" action="" method="post">
+          <h3>
+            <p class="text-center">
+            请输入查询密码
+            </p>
+          </h3>
+          <p class="text-center">
+            <input class="span8" type="text" name="code">
+          </p>
+          <p class="text-center">
+            <button class="btn btn-primary" type="submit">完成</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 offset2"><p class="text-center">
+        <button class="btn btn-large">1</button>
+        <button class="btn btn-large">2</button>
+        <button class="btn btn-large">3</button><br />
+        <button class="btn btn-large">4</button>
+        <button class="btn btn-large">5</button>
+        <button class="btn btn-large">6</button><br />
+        <button class="btn btn-large">7</button>
+        <button class="btn btn-large">8</button>
+        <button class="btn btn-large">9</button><br />
+        <button class="btn btn-large">0</button>
+        <button class="btn btn-large">X</button><br />
+        <button class="btn btn-large">删除</button></p>
+      </div>
+    </div>
+{% endblock %}
