@@ -85,3 +85,22 @@ class DangAn(MethodView):
         globalvars.close_db(cursor, cnx)
         globalvars.caozuo_jilu(session['user_id'], u'修改档案信息', aid)
         return redirect('/dangan/%s' % (aid))
+
+
+class DeleteArchieve(MethodView):
+    def get(self, archieve_id):
+        from flask import redirect
+        from globalvars import connect_db, close_db
+        sql = '''
+            UPDATE dangan
+            SET
+            ZhuanChu=%s
+            WHERE id=%s
+        '''
+        param = ('1', archieve_id)
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(sql, param)
+        cnx.commit()
+        close_db(cursor, cnx)
+        return redirect('/')
