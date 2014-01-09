@@ -5,7 +5,6 @@ from flask.views import MethodView
 class ChaKan(MethodView):
     def get(self, pic_id):
         from flask import session, redirect, render_template
-#         import mysql.connector
         import globalvars
 
         if not 'user_id' in session:
@@ -16,13 +15,10 @@ class ChaKan(MethodView):
             WHERE wenjian.id=%s
         '''
         param = (pic_id,)
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
-#         cursor.close()
-#         cnx.close()
         globalvars.close_db(cursor, cnx)
         row = data[0]
         return render_template(
@@ -35,35 +31,33 @@ class ChaKan(MethodView):
 
     def post(self, pic_id):
         from flask import redirect, request
-#         import mysql.connector
         import globalvars
         import os
 
         opr = request.form['operate']
         if opr == 'turn':
             sql = '''
-                SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,dangan.danganhao
-                FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
-                WHERE wenjian.id=%s
+                SELECT w.id,w.aid,w.wenjianming,d.danganhao
+                FROM wenjian w INNER JOIN dangan d ON w.aid=d.id
+                WHERE w.id=%s
             '''
             param = (pic_id,)
-#             cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
             cnx = globalvars.connect_db()
             cursor = cnx.cursor()
             cursor.execute(sql, param)
             data = cursor.fetchall()
-#             cursor.close()
-#             cnx.close()
             row = data[0]
-            globalvars.turn_image('%s\%s\%s' % (globalvars.G_UPLOAD_PATH, row[3], row[2]))
+            globalvars.turn_image(
+                '%s\%s\%s' % \
+                (globalvars.G_UPLOAD_PATH, row[3], row[2])
+            )
         elif opr == 'delete':
             sql = '''
-                SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,dangan.danganhao
-                FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
-                WHERE wenjian.id=%s
+                SELECT w.id,w.aid,w.wenjianming,d.danganhao
+                FROM wenjian w INNER JOIN dangan d ON w.aid=d.id
+                WHERE w.id=%s
             '''
             param = (pic_id,)
-#             cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
             cnx = globalvars.connect_db
             cursor = cnx.cursor()
             cursor.execute(sql, param)
@@ -72,8 +66,6 @@ class ChaKan(MethodView):
             param = (pic_id,)
             cursor.execute(sql, param)
             cnx.commit()
-#             cursor.close()
-#             cnx.close()
             row = data[0]
             fp = '%s\%s\%s' % (globalvars.G_UPLOAD_PATH, row[3], row[2])
             if os.path.isfile(fp):
