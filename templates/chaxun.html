@@ -4,22 +4,23 @@
 {% block content %}
 <div class="row-fluid">
   <div class="span8 offset2">
-    <form action="/chaxun" method="POST">
+    <form action="" method="post">
       <input name="DangAnHao" class="span4" type="text" placeholder="档案号">
       <br />
       <input name="ShenFenZheng" class="span4" type="text" placeholder="身份证">
       <input name="XingMing" class="span3" type="text" placeholder="姓名">
       <select name="XingBie" class="span2" type="text" id="gender">
-        <option>男</option>
-        <option>女</option>
+        <option value="0">不限</option>
+        <option value="male">男</option>
+        <option value="female">女</option>
       </select>
       <br />
       <label class="checkbox">
-        <input type="checkbox" name="ngl" value="ngl">
+        <input type="checkbox" name="check" value="ngl">
         女管理岗位
       </label>
       <label class="checkbox">
-        <input type="checkbox" name="stow" value="stow">
+        <input type="checkbox" name="check" value="stow">
         特殊工种
       </label>
       <br />
