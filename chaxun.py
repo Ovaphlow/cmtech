@@ -52,7 +52,11 @@ class ChaXun(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         globalvars.close_db(cursor, cnx)
-        return render_template('chaxun.html', data = data, User = session['user_name'])
+        return render_template(
+            'chaxun.html',
+            data = data,
+            User = session['user_name']
+        )
 
 
 class DangYueTuiXiu(MethodView):
@@ -66,7 +70,8 @@ class DangYueTuiXiu(MethodView):
 
         t = time.localtime()
         time_str = time.strftime('%Y-%m', t)
-        sql = 'SELECT * FROM dangan WHERE YuTuiXiuRiQi LIKE "' + time_str + '%"'
+        sql = 'SELECT * FROM dangan WHERE YuTuiXiuRiQi LIKE "' + \
+            time_str + '%"'
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
