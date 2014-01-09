@@ -35,8 +35,9 @@
           <th>身份证</th>
           <th>姓名</th>
           <th>性别</th>
-          <th>出生日期</th>
           <th>预退休日期</th>
+          <th>特殊工种</th>
+          <th>扫描档案</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -47,8 +48,17 @@
           <td>{{ row[2] }}</td>
           <td>{{ row[3] }}</td>
           <td>{{ row[4] }}</td>
-          <td>{{ row[5] }}</td>
           <td>{{ row[6] }}</td>
+          {% if row[11] == 1 %}
+          <td>是</td>
+          {% else %}
+          <td>否</td>
+          {% endif %}
+          {% if row[13] >0 %}
+          <td>是 ({{ row[13] }})</td>
+          {% else %}
+          <td><p class="text-error">否</p></td>
+          {% endif %}
           <td>
             <a href=/dangan/{{ row[0] }}>查看档案</a>
           </td>

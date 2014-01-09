@@ -14,7 +14,6 @@ class Index(MethodView):
             'SELECT * FROM update_log '
             'ORDER BY id DESC'
         )
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
