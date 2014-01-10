@@ -18,6 +18,8 @@
       <dd>{{ row[1] }}</dd>
     </dl>
     <form class="form-horizontal" role="form" action="/dangan/{{ id }}" method="post">
+      <input type="hidden" name="hidden1" id="hidden1" value="{{ row[4] }}" />
+      <input type="hidden" name="hidden2" id="hidden2" value="{{ dob[0] }}" />
       <dl class="dl">
         <dt>身份证</dt>
         <dd>
