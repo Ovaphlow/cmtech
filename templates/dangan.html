@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
 {% block title %}个人档案<br /><small>基本信息</small>{% endblock %}
 {% block content %}
@@ -43,7 +43,7 @@
       <dl class="dl">
         <dt>出生日期</dt>
         <dd>
-          <input class="input-mini" type="text" name="dob-year" placeholder="年" value="{{ dob[0] }}">
+          <input id="dob-year" onblur="check_year()" class="input-mini" type="text" name="dob-year" placeholder="年" value="{{ dob[0] }}">
           <input class="input-mini" type="text" name="dob-month" placeholder="月" value="{{ dob[1] }}">
           <input class="input-mini" type="text" name="dob-date" placeholder="日" value="{{ dob[2] }}">
         </dd>
@@ -166,6 +166,46 @@
 {% endblock %}
 {% block jslib %}
 <script language="JavaScript">
+function check_year()
+{
+var csrqs =document.getElementById("hidden2").value;
+var dob =document.getElementById("dob-year").value;
+
+var c;
+c=String(Number(csrqs)-Number(dob));
+var nv =document.getElementById("hidden1").value;
+if(nv=="男")
+{
+var obj = document.getElementById("stow");
+var checked = obj.checked;
+if (checked) {
+
+document.getElementById("dor-year").value=String(Number(csrqs)+60-Number(c)-5);
+    }
+    else
+    {
+    document.getElementById("dor-year").value=String(Number(csrqs)+60-Number(c));
+    }
+}
+else
+{
+ var obj = document.getElementById("stow");
+    var checked = obj.checked;
+    var objs = document.getElementById("female");
+    var checkeds = objs.checked;
+    if (checked) {
+        document.getElementById("dor-year").value=String(Number(csrqs)+50-Number(c)-5);
+    }   
+    else if (checkeds) {
+        document.getElementById("dor-year").value=String(Number(csrqs)+50-Number(c)+5);
+    }
+    else {
+        document.getElementById("dor-year").value=String(Number(csrqs)+50-Number(c));
+    }
+}
+}    
+
+
 function check_stow() {
     //特殊工种
     var obj = document.getElementById("stow");
@@ -183,16 +223,16 @@ function check_stow() {
 function check_female() {
     //女管理岗位
     var obj = document.getElementById("female");
-    var checked = obj.checked;
+   var checked = obj.checked;
     var year;
     var obj_year = document.getElementById("dor-year");
     year = obj_year.value;
     if (checked) {
-        obj_year.value = String(Number(year) + 5);
-    }
-    else {
-        obj_year.value = String(Number(year) - 5);
-    }
+       obj_year.value = String(Number(year) + 5);
+   }
+   else {
+       obj_year.value = String(Number(year) - 5);
+  }
 }
 </script>
 {% endblock %}
