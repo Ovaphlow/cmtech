@@ -46,7 +46,7 @@ class ChaXun(MethodView):
         if 'stow' in check:
             sql = '%s AND TeShuGongZhong=1' % (sql,)
         sql = '%s GROUP BY d.id LIMIT 100' % (sql,)
-        print(sql)
+        #print(sql)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
