@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block title %}档案查阅<br /><small></small>{% endblock %}
 {% block content %}
     <div class="row-fluid">
@@ -10,7 +10,7 @@
             </p>
           </h3>
           <p class="text-center">
-            <input class="span8" type="text" name="idcard">
+            <input id="code" class="span8" type="text" name="code">
           </p>
           <p class="text-center">
             <button class="btn btn-primary" type="submit">下一步</button>
@@ -20,18 +20,88 @@
     </div>
     <div class="row-fluid">
       <div class="span8 offset2"><p class="text-center">
-        <button class="btn btn-large">1</button>
-        <button class="btn btn-large">2</button>
-        <button class="btn btn-large">3</button><br />
-        <button class="btn btn-large">4</button>
-        <button class="btn btn-large">5</button>
-        <button class="btn btn-large">6</button><br />
-        <button class="btn btn-large">7</button>
-        <button class="btn btn-large">8</button>
-        <button class="btn btn-large">9</button><br />
-        <button class="btn btn-large">0</button>
-        <button class="btn btn-large">X</button><br />
-        <button class="btn btn-large">删除</button></p>
+         <input id="a1" type="button" value="1" onclick="a()" />
+        <input id="a2" type="button" value="2" onclick="b()" />
+        <input id="a3" type="button" value="3" onclick="c()" />
+        <br />
+        <input id="a4" type="button" value="4" onclick="d()" />
+        <input id="a5" type="button" value="5" onclick="e()" />
+        <input id="a6" type="button" value="6" onclick="f()" />
+        <br />
+        <input id="a7" type="button" value="7" onclick="g()" />
+        <input id="a8" type="button" value="8" onclick="h()" />
+        <input id="a9" type="button" value="9" onclick="i()" />
+        <br />
+        <input id="a0" type="button" value="0" onclick="j()" />
+        <input id="ax" type="button" value="X" onclick="k()" />
+        <br />
+        <input id="ac" type="button" value="删除" onclick="l()" /></p>
       </div>
     </div>
 {% endblock %}
+{% block jslib %}
+  <script language="javascript" type="text/javascript">
+    function a()
+    {       
+    var a=document.getElementById("a1").value;   
+    document.getElementById("code").value+=a;
+    }
+    function b()
+    {   
+    var b=document.getElementById("a2").value;
+    document.getElementById("code").value+=b;
+    }
+    function c()
+    {   
+    var c=document.getElementById("a3").value;
+    document.getElementById("code").value+=c;
+    }
+    function d()
+    {   
+    var d=document.getElementById("a4").value;
+    document.getElementById("code").value+=d;
+    }
+    function e()
+    {   
+    var e=document.getElementById("a5").value;
+    document.getElementById("code").value+=e;
+    }  
+    function f()
+    {   
+    var f=document.getElementById("a6").value;
+    document.getElementById("code").value+=f;
+    }
+    function g()
+    {   
+    var g=document.getElementById("a7").value;
+    document.getElementById("code").value+=g;
+    }
+    function h()
+    {   
+    var h=document.getElementById("a8").value;
+    document.getElementById("code").value+=h;
+    }
+    function i()
+    {   
+    var i=document.getElementById("a9").value;
+    document.getElementById("code").value+=i;
+    }
+    function j()
+    {   
+    var j=document.getElementById("a0").value;
+    document.getElementById("code").value+=j;
+    }
+    function k()
+    {   
+    var k=document.getElementById("ax").value;
+    document.getElementById("code").value+=k;
+    }
+    function l()
+    {   
+    var l=document.getElementById("code").value
+     var ll=l.substring(0,l.length-1);
+     document.getElementById("code").value=ll;
+    }
+    </script>
+{% endblock %}
+
