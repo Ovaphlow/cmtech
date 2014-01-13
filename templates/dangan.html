@@ -44,16 +44,16 @@
         <dt>出生日期</dt>
         <dd>
           <input id="dob-year" onblur="check_year()" class="input-mini" type="text" name="dob-year" placeholder="年" value="{{ dob[0] }}">
-          <input class="input-mini" type="text" name="dob-month" placeholder="月" value="{{ dob[1] }}">
-          <input class="input-mini" type="text" name="dob-date" placeholder="日" value="{{ dob[2] }}">
+          <input id="dob-month" onblur="check_month()" class="input-mini" type="text" name="dob-month" placeholder="月" value="{{ dob[1] }}">
+          <input id="dob-date" onblur="check_date()" class="input-mini" type="text" name="dob-date" placeholder="日" value="{{ dob[2] }}">
         </dd>
       </dl>
       <dl class="dl">
         <dt>预退休日期</dt>
         <dd>
           <input class="input-mini" type="text" name="dor-year" placeholder="年" value="{{ dor[0] }}" id="dor-year">
-          <input class="input-mini" type="text" name="dor-month" placeholder="月" value="{{ dor[1] }}">
-          <input class="input-mini" type="text" name="dor-date" placeholder="日" value="{{ dor[2] }}">
+          <input class="input-mini" type="text" name="dor-month" placeholder="月" value="{{ dor[1] }}" id="dor-month">
+          <input class="input-mini" type="text" name="dor-date" placeholder="日" value="{{ dor[2] }}" id="dor-date">
         </dd>
       </dl>
       {% if row[4] == '女' %}
@@ -204,7 +204,16 @@ else
     }
 }
 }    
-
+function check_month()
+{
+var month =document.getElementById("dob-month").value;
+document.getElementById("dor-month").value=month;
+}
+function check_date()
+{
+var date =document.getElementById("dob-date").value;
+document.getElementById("dor-date").value=date;
+}    
 
 function check_stow() {
     //特殊工种
