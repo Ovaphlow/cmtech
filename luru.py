@@ -16,7 +16,6 @@ class LuRu(MethodView):
 
     def post(self):
         from flask import request, redirect, session
-#         import mysql.connector
         import globalvars
 
         s, t = 0, 0
@@ -24,8 +23,14 @@ class LuRu(MethodView):
             s = 1
         if 'stow' in request.form.getlist('check'):
             t = 1
-        dob = request.form['idcard'][6:14]
-        if int(request.form['idcard'][16:17]) % 2 == 1:
+        print request.form['idcard']
+        if len(request.form['idcard']) == 15:
+            idcard_18 = globalvars.idcard_convert(request.form['idcard'])
+        else:
+            idcard_18 = request.form['idcard']
+        print idcard_18
+        dob = idcard_18[6:14]
+        if int(idcard_18[16:17]) % 2 == 1:
             gender = u'男'
         else:
             gender = u'女'
@@ -35,23 +40,27 @@ class LuRu(MethodView):
         dor = '%s-%s-%s' % (int(dor_y) + years, dob[5:7], dob[8:10])
         sql = '''
             INSERT INTO dangan
-            VALUES(
-            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            (DangAnHao,ShenFenZheng,XingMing,XingBie,ChuShengRiQi,
+            YuTuiXiuRiQi,NvGuanLiGangWei,TeShuGongZhong)
+            VALUES
+            (%(archieve_id)s,%(idcard)s,%(name)s,%(gender)s, %(dob)s,
+            %(dor)s, %(ngl)s, %(stow)s)
         '''
-        param = (
-            0, request.form['aid'], request.form['idcard'],
-            request.form['name'], gender, dob,
-            dor, '', '',
-            '', s, t
-        )
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
+        param = {
+            'archieve_id': request.form['aid'],
+            'idcard': idcard_18,
+            'name': request.form['name'],
+            'gender': gender,
+            'dob': dob,
+            'dor': dor,
+            'ngl': s,
+            'stow': t
+        }
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         cnx.commit()
         aid = cursor.lastrowid
-#         cursor.close()
-#         cnx.close()
         globalvars.close_db(cursor, cnx)
         globalvars.caozuo_jilu(session['user_id'], u'添加档案信息', aid)
         return redirect('/saomiao/%s' % (aid))
