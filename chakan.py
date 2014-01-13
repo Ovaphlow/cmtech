@@ -14,6 +14,20 @@ class ChaKan(MethodView):
             FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
             WHERE wenjian.id=%s
         '''
+        sql_t = '''
+            select *
+            from `cm_archieve`.wenjian
+            where aid=%(archieve_id)s
+            and (
+                id = (
+                    select max(id) from wenjian where id < %(rec_id)s
+                )
+                or id = %(rec_id)s
+                or id = (
+                    select min(id) from wenjian where id > %(rec_id)s
+                )
+            )
+        '''
         param = (pic_id,)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
