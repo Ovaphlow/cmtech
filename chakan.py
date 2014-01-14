@@ -3,7 +3,7 @@ from flask.views import MethodView
 
 
 class ChaKan(MethodView):
-    def get(self, pic_id):
+    def get(self, rec_id):
         from flask import session, redirect, render_template
         import globalvars
 
@@ -14,25 +14,33 @@ class ChaKan(MethodView):
             FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
             WHERE wenjian.id=%s
         '''
+        param = (pic_id,)
         sql_t = '''
-            select *
+            select id
             from `cm_archieve`.wenjian
             where aid=%(archieve_id)s
             and (
                 id = (
-                    select max(id) from wenjian where id < %(rec_id)s
+                    select max(id) from wenjian where id<%(rec_id)s
                 )
                 or id = %(rec_id)s
                 or id = (
-                    select min(id) from wenjian where id > %(rec_id)s
+                    select min(id) from wenjian where id>%(rec_id)s
                 )
             )
         '''
-        param = (pic_id,)
+        param_t = {
+            'archieve_id': globalvars.get_aid(session['user_id']),
+            'rec_id': pic_id
+        }
+        print param_t
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
+        cursor.execute(sql_t, param_t)
+        result = cursor.fetchall()
+        print result
         globalvars.close_db(cursor, cnx)
         row = data[0]
         return render_template(

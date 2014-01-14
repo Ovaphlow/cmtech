@@ -26,7 +26,7 @@ app.add_url_rule(
 app.add_url_rule('/login', view_func = index.Login.as_view('login'))
 app.add_url_rule('/logout', view_func = index.Logout.as_view('logout'))
 app.add_url_rule('/chaxun', view_func = chaxun.ChaXun.as_view('chaxun'))
-app.add_url_rule('/chakan/<pic_id>', view_func = chakan.ChaKan.as_view('chakan'))
+app.add_url_rule('/chakan/<rec_id>', view_func = chakan.ChaKan.as_view('chakan'))
 app.add_url_rule('/daoru', view_func = daoru.DaoRu.as_view('daoru'))
 app.add_url_rule('/luru', view_func = luru.LuRu.as_view('luru'))
 app.add_url_rule('/saomiao/<uid>', view_func = saomiao.SaoMiao.as_view('saomiao'))

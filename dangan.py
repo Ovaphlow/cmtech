@@ -3,7 +3,7 @@ from flask.views import MethodView
 
 
 class DangAn(MethodView):
-    def get(self, aid):
+    def get(self, rec_id):
         from flask import session, redirect, request, render_template
         import globalvars
 
@@ -11,7 +11,7 @@ class DangAn(MethodView):
             return redirect('/login')
         cat = request.args.get('cat', '0')
         sql = 'SELECT * FROM dangan WHERE id=%s'
-        param = (aid,)
+        param = (rec_id,)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -20,18 +20,18 @@ class DangAn(MethodView):
         dor = data[0][6].split('-')
         if cat == '0':
             sql = 'SELECT * FROM wenjian WHERE aid=%s'
-            param = (aid,)
+            param = (rec_id,)
         else:
             sql = 'SELECT * FROM wenjian WHERE aid=%s AND LeiBie=%s'
-            param = (aid, cat)
+            param = (rec_id, cat)
         cursor.execute(sql, param)
         data1 = cursor.fetchall()
         globalvars.close_db(cursor, cnx)
-        lp1 = '/saomiao/%s' % (aid,)
-        lp2 = '/luru/%s' % (aid,)
+        lp1 = '/saomiao/%s' % (rec_id,)
+        lp2 = '/luru/%s' % (rec_id,)
         return render_template(
             'dangan.html',
-            id = aid,
+            id = rec_id,
             row = data[0],
             link1 = lp1,
             link2 = lp2,
