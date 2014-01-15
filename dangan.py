@@ -36,7 +36,7 @@ class DangAn(MethodView):
             link1 = lp1,
             link2 = lp2,
             fs_root = globalvars.G_FILE_SERVER_ROOT,
-            aid = globalvars.get_aid(aid),
+            aid = globalvars.get_aid(rec_id),
             data1 = data1,
             dob = dob,
             dor = dor,
@@ -44,7 +44,7 @@ class DangAn(MethodView):
             User = session['user_name']
         )
 
-    def post(self, aid):
+    def post(self, rec_id):
         from flask import request, redirect, session
         import globalvars
 

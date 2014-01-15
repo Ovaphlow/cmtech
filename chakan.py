@@ -4,11 +4,12 @@ from flask.views import MethodView
 
 class ChaKan(MethodView):
     def get(self, rec_id):
-        from flask import session, redirect, render_template
+        from flask import session, redirect, render_template, request
         import globalvars
 
         if not 'user_id' in session:
             return redirect('/login')
+        pic_id = request.args.get('pic_id', '0')
         sql = '''
             SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,dangan.danganhao
             FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
@@ -23,24 +24,31 @@ class ChaKan(MethodView):
                 id = (
                     select max(id) from wenjian where id<%(rec_id)s
                 )
-                or id = %(rec_id)s
                 or id = (
                     select min(id) from wenjian where id>%(rec_id)s
                 )
             )
         '''
         param_t = {
-            'archieve_id': globalvars.get_aid(session['user_id']),
+            'archieve_id': rec_id,
             'rec_id': pic_id
         }
-        print param_t
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
         cursor.execute(sql_t, param_t)
         result = cursor.fetchall()
-        print result
+        if int(result[0][0]) < int(pic_id):
+            previous_id = result[0][0]
+            if len(result) == 2:
+                previous_id = result[0][0]
+                next_id = result[1][0]
+            else:
+                next_id = None
+        else:
+            previous_id = None
+            next_id = result[0][0]
         globalvars.close_db(cursor, cnx)
         row = data[0]
         return render_template(
@@ -48,7 +56,10 @@ class ChaKan(MethodView):
             fs_root = globalvars.G_FILE_SERVER_ROOT,
             aid = row[3],
             row = row,
-            User = session['user_name']
+            User = session['user_name'],
+            archieve_id = rec_id,
+            previous_id = previous_id,
+            next_id = next_id,
         )
 
     def post(self, pic_id):

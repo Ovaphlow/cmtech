@@ -11,8 +11,12 @@
           <option value="delete">删除图片</option>
         </select>
         <button type="submit" class="btn btn-danger">确认</button>
-        <a href="/chakan/" class="btn">Previous</button>
-        <a href="/chakan/" class="btn">Next</button>
+        {% if previous_id %}
+        <a href="/chakan/{{ archieve_id }}?pic_id={{ previous_id }}" class="btn">上一页</button>
+        {% endif %}
+        {% if next_id %}
+        <a href="/chakan/{{ archieve_id }}?pic_id={{ next_id }}" class="btn">下一页</button>
+        {% endif %}
       </p>
     </form>
     <p class="text-center">

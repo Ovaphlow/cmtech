@@ -34,7 +34,7 @@ app.add_url_rule(
     '/shangchuan/<uid>',
     view_func = shangchuan.ShangChuan.as_view('shangchuan')
 )
-app.add_url_rule('/dangan/<aid>', view_func = dangan.DangAn.as_view('dangan'))
+app.add_url_rule('/dangan/<rec_id>', view_func = dangan.DangAn.as_view('dangan'))
 app.add_url_rule(
     '/_upload_image_file',
     view_func = controls.UploadImageFile.as_view('ulpic')
