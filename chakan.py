@@ -19,26 +19,30 @@ class ChaKan(MethodView):
         sql_t = '''
             select id
             from `cm_archieve`.wenjian
-            where aid=%(archieve_id)s
-            and (
-                id = (
-                    select max(id) from wenjian where id<%(rec_id)s
-                )
-                or id = (
-                    select min(id) from wenjian where id>%(rec_id)s
-                )
+            where id = (
+                select max(id)
+                from wenjian
+                where id<%(rec_id)s
+                and aid=%(archieve_id)s
+            ) or id = (
+                select min(id)
+                from wenjian
+                where id>%(rec_id)s
+                and aid=%(archieve_id)s
             )
         '''
         param_t = {
             'archieve_id': rec_id,
             'rec_id': pic_id
         }
+        print param_t
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
         cursor.execute(sql_t, param_t)
         result = cursor.fetchall()
+        print result
         if int(result[0][0]) < int(pic_id):
             previous_id = result[0][0]
             if len(result) == 2:

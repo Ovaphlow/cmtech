@@ -31,7 +31,7 @@ app.add_url_rule('/daoru', view_func = daoru.DaoRu.as_view('daoru'))
 app.add_url_rule('/luru', view_func = luru.LuRu.as_view('luru'))
 app.add_url_rule('/saomiao/<uid>', view_func = saomiao.SaoMiao.as_view('saomiao'))
 app.add_url_rule(
-    '/shangchuan/<uid>',
+    '/shangchuan/<rec_id>',
     view_func = shangchuan.ShangChuan.as_view('shangchuan')
 )
 app.add_url_rule('/dangan/<rec_id>', view_func = dangan.DangAn.as_view('dangan'))

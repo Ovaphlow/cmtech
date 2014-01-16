@@ -41,7 +41,7 @@ class ShangChuan(MethodView):
             User = session['user_name']
         )
 
-    def post(self, uid):
+    def post(self, rec_id):
         from flask import request, session
         from werkzeug import secure_filename
         import os
@@ -53,7 +53,7 @@ class ShangChuan(MethodView):
         # print 'id', id
         # print id, cat
         # print 'request.value', request.values
-        aid = globalvars.get_aid(id)
+        aid = globalvars.get_aid(rec_id)
         fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
         globalvars.check_path(fp)
 #         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
@@ -68,7 +68,7 @@ class ShangChuan(MethodView):
                     INSERT INTO wenjian (id,aid,LeiBie,WenJianMing)
                     VALUES(0,%s,%s,%s)
                 '''
-                param = (uid, cat, fn)
+                param = (rec_id, cat, fn)
                 cursor.execute(sql, param)
                 globalvars.caozuo_jilu(session['user_id'], u'批量上传', fn)
         cnx.commit()
