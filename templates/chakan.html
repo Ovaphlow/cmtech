@@ -7,7 +7,11 @@
     <form action="" method="POST" class="form-inline">
       <p class="text-center">
         <select name="operate">
+          {% if row[4] == 1 %}
+          <option value="cancel_access">取消导出到用户查询</option>
+          {% else %}
           <option value="access">导出到用户查询</option>
+          {% endif %}
           <option value="turn">上下翻转</option>
           <option value="delete">删除图片</option>
         </select>

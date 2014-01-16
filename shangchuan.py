@@ -7,7 +7,6 @@ class ShangChuan(MethodView):
     def get(self, rec_id):
         from flask import session, request, render_template, redirect
         import globalvars
-#         import mysql.connector
 
         if not 'user_id' in session:
             return redirect('/login')
@@ -17,7 +16,6 @@ class ShangChuan(MethodView):
             WHERE id=%s
         '''
         param = (rec_id,)
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -26,8 +24,6 @@ class ShangChuan(MethodView):
             row = data[0]
         else:
             row = None
-#         cursor.close()
-#         cnx.close()
         globalvars.close_db(cursor, cnx)
         fp = globalvars.get_file_path(rec_id)
         lp = '/saomiao/%s' % (rec_id,)
@@ -46,7 +42,6 @@ class ShangChuan(MethodView):
         from werkzeug import secure_filename
         import os
         import globalvars
-#         import mysql.connector
         # print 'upload path:', globalvars.G_UPLOAD_PATH
         # print 'headers', request.headers
         cat = request.args.get('cat', '1')
@@ -56,7 +51,6 @@ class ShangChuan(MethodView):
         aid = globalvars.get_aid(rec_id)
         fp = '%s\\%s' % (globalvars.G_UPLOAD_PATH, aid)
         globalvars.check_path(fp)
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         for f in request.files.getlist('Filedata'):

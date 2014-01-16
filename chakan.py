@@ -11,7 +11,8 @@ class ChaKan(MethodView):
             return redirect('/login')
         pic_id = request.args.get('pic_id', '0')
         sql = '''
-            SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,dangan.danganhao
+            SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,
+                dangan.danganhao,wenjian.client_access
             FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
             WHERE wenjian.id=%s
         '''
@@ -35,14 +36,12 @@ class ChaKan(MethodView):
             'archieve_id': rec_id,
             'rec_id': pic_id
         }
-        print param_t
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
         cursor.execute(sql_t, param_t)
         result = cursor.fetchall()
-        print result
         if int(result[0][0]) < int(pic_id):
             previous_id = result[0][0]
             if len(result) == 2:
@@ -66,12 +65,13 @@ class ChaKan(MethodView):
             next_id = next_id,
         )
 
-    def post(self, pic_id):
+    def post(self, rec_id):
         from flask import redirect, request
         import globalvars
         import os
 
         opr = request.form['operate']
+        pic_id = request.args.get('pic_id', '')
         if opr == 'turn':
             sql = '''
                 SELECT w.id,w.aid,w.wenjianming,d.danganhao
@@ -88,6 +88,8 @@ class ChaKan(MethodView):
                 '%s\%s\%s' % \
                 (globalvars.G_UPLOAD_PATH, row[3], row[2])
             )
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
         elif opr == 'delete':
             sql = '''
                 SELECT w.id,w.aid,w.wenjianming,d.danganhao
@@ -107,7 +109,39 @@ class ChaKan(MethodView):
             fp = '%s\%s\%s' % (globalvars.G_UPLOAD_PATH, row[3], row[2])
             if os.path.isfile(fp):
                 os.remove(fp)
+            globalvars.close_db(cursor, cnx)
+            return redirect('/dangan/%s' % rec_id)
         elif opr == 'access':
-            pass
-        globalvars.close_db(cursor, cnx)
-        return redirect('/dangan/%s' % row[1])
+            sql = '''
+                UPDATE wenjian
+                SET client_access=%(client_access)s
+                WHERE id=%(pic_id)s
+            '''
+            param = {
+                'client_access': 1,
+                'pic_id': pic_id,
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'cancel_access':
+            sql = '''
+                UPDATE wenjian
+                SET client_access=%(client_access)s
+                WHERE id=%(pic_id)s
+            '''
+            param = {
+                'client_access': 0,
+                'pic_id': pic_id,
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        else:
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
