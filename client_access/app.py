@@ -1,6 +1,6 @@
 # -*- coding=UTF-8 -*-
 from flask import Flask
-import index
+import index, archieve
 
 app = Flask(__name__)
 app.host = '0.0.0.0'
@@ -13,6 +13,10 @@ app.add_url_rule(
 app.add_url_rule(
     '/code',
     view_func = index.Code.as_view('code')
+)
+app.add_url_rule(
+    '/archieve',
+    view_func = archieve.Archieve.as_view('archieve')
 )
 
 
