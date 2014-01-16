@@ -107,5 +107,7 @@ class ChaKan(MethodView):
             fp = '%s\%s\%s' % (globalvars.G_UPLOAD_PATH, row[3], row[2])
             if os.path.isfile(fp):
                 os.remove(fp)
+        elif opr == 'accccess':
+            pass
         globalvars.close_db(cursor, cnx)
         return redirect('/dangan/%s' % row[1])
