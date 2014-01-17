@@ -4,9 +4,10 @@
 {% block content %}
 <div class="row-fluid">
   <p class="text-center">
-    <a href="{{ link1 }}" class="btn btn-success">扫描该档案</a>
-    <a href="/shangchuan/{{ id }}" class="btn btn-primary">上传该档案</a>
-    <a href="/delete_archieve/{{ id }}" class="btn btn-inverse">档案转出</a>
+    <a href="{{ link1 }}" class="btn btn-primary">扫描该档案</a>
+    <a href="/shangchuan/{{ id }}" class="btn btn-success">上传该档案</a>
+    <a href="/gen_code/{{ id }}" class="btn btn-inverse">查询密码({{ row[13] }})</a>
+    <a href="/delete_archieve/{{ id }}" class="btn btn-danger">档案转出</a>
   </p>
 </div>
 <div class="row-fluid">
@@ -195,7 +196,7 @@ else
     var checkeds = objs.checked;
     if (checked) {
         document.getElementById("dor-year").value=String(Number(csrqs)+50-Number(c)-5);
-    }   
+    }
     else if (checkeds) {
         document.getElementById("dor-year").value=String(Number(csrqs)+50-Number(c)+5);
     }
@@ -203,7 +204,7 @@ else
         document.getElementById("dor-year").value=String(Number(csrqs)+50-Number(c));
     }
 }
-}    
+}
 function check_month()
 {
 var month =document.getElementById("dob-month").value;
@@ -213,7 +214,7 @@ function check_date()
 {
 var date =document.getElementById("dob-date").value;
 document.getElementById("dor-date").value=date;
-}    
+}
 
 function check_stow() {
     //特殊工种

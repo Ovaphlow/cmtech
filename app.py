@@ -47,6 +47,10 @@ app.add_url_rule(
     '/delete_archieve/<archieve_id>',
     view_func = dangan.DeleteArchieve.as_view('delete_archieve')
 )
+app.add_url_rule(
+    '/gen_code/<archieve_id>',
+    view_func = controls.GenCode.as_view('gen_code')
+)
 
 if __name__ == '__main__':
     app.run()

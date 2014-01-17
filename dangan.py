@@ -6,12 +6,22 @@ class DangAn(MethodView):
     def get(self, rec_id):
         from flask import session, redirect, request, render_template
         import globalvars
+        import datetime
 
         if not 'user_id' in session:
             return redirect('/login')
         cat = request.args.get('cat', '0')
-        sql = 'SELECT * FROM dangan WHERE id=%s'
-        param = (rec_id,)
+        sql = '''
+            SELECT d.*,c.code
+            FROM dangan d LEFT JOIN access_code c
+            ON d.shenfenzheng=c.archieve_id
+            WHERE d.id=%(archieve_id)s and c.date=%(date)s
+            ORDER BY c.id DESC LIMIT 1
+        '''
+        param = {
+            'archieve_id': rec_id,
+            'date': datetime.datetime.now().strftime('%Y-%m-%d'),
+        }
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
