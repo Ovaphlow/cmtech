@@ -20,7 +20,6 @@ class Archieve(MethodView):
         cursor.execute(sql, param)
         result = cursor.fetchall()
         g_vars.close_db(cursor, cnx)
-        print result
         return render_template(
             'archieve.html',
             row = result[0],
@@ -30,7 +29,6 @@ class Archieve(MethodView):
         from flask import redirect, request, session
         import g_vars
 
-        print request.form['idcard']
         sql = '''
             SELECT COUNT(*) FROM access_code
             WHERE archieve_id=%s AND date=%s
@@ -41,9 +39,7 @@ class Archieve(MethodView):
         cursor.execute(sql, param)
         result = cursor.fetchall()
         if result[0][0] == 1:
-            print('success:', result[0][0])
             session['idcard'] = request.form['idcard']
             return redirect('/code')
         else:
-            print('err:', result[0][0])
             return redirect('/')
