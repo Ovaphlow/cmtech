@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
 {% block title %}个人档案<br /><small></small>{% endblock %}
 {% block content %}
@@ -25,8 +25,27 @@
       </p>
     </form>
     <p class="text-center">
-      <img src="{{ fs_root }}/{{ aid }}/{{ row[2] }}" />
+    <input type="button" value="缩小" onclick="small1()" />
+    <input type="button" value="放大" onclick="big1()" />
+    <br />
+    <img alt="" border="0" name="images1" src="{{ fs_root }}/{{ aid }}/{{ row[2] }}" onclick="javascript:window.open(this.src);"
+        style="cursor: pointer;" onload="return imgzoom(this,600);" />
     </p>
   </div>
 </div>
 {% endblock %}
+{% block jslib %}
+  <script language="javascript" type="text/javascript">
+  function small1(){
+var height1=images1.height
+var width1=images1.width
+images1.height=height1/1.5
+images1.width=width1/1.5}
+function big1(){
+var height1=images1.height
+var width1=images1.width
+images1.height=height1*1.5
+images1.width=width1*1.5}
+    </script>
+{% endblock %}
+
