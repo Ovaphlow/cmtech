@@ -42,16 +42,20 @@ class ChaKan(MethodView):
         data = cursor.fetchall()
         cursor.execute(sql_t, param_t)
         result = cursor.fetchall()
-        if int(result[0][0]) < int(pic_id):
-            previous_id = result[0][0]
-            if len(result) == 2:
-                previous_id = result[0][0]
-                next_id = result[1][0]
-            else:
-                next_id = None
-        else:
+        if cursor.rowcount == 0:
             previous_id = None
-            next_id = result[0][0]
+            next_id = None
+        else:
+            if int(result[0][0]) < int(pic_id):
+                previous_id = result[0][0]
+                if len(result) == 2:
+                    previous_id = result[0][0]
+                    next_id = result[1][0]
+                else:
+                    next_id = None
+            else:
+                previous_id = None
+                next_id = result[0][0]
         globalvars.close_db(cursor, cnx)
         row = data[0]
         return render_template(
