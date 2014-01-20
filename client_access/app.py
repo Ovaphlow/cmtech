@@ -18,6 +18,14 @@ app.add_url_rule(
     '/archieve',
     view_func = archieve.Archieve.as_view('archieve')
 )
+app.add_url_rule(
+    '/view',
+    view_func = archieve.View.as_view('view')
+)
+app.add_url_rule(
+    '/view_cat/<cat>',
+    view_func = archieve.ViewCat.as_view('view_cat')
+)
 
 
 if __name__ == '__main__':
