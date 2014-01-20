@@ -25,7 +25,6 @@ class DangAn(MethodView):
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
-        print data
         dob = data[0][5].split('-')
         dor = data[0][6].split('-')
         if cat == '0':
