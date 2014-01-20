@@ -15,17 +15,17 @@ class DangAn(MethodView):
             SELECT d.*,c.code
             FROM dangan d LEFT JOIN access_code c
             ON d.shenfenzheng=c.archieve_id
-            WHERE d.id=%(archieve_id)s and c.date=%(date)s
+            WHERE d.id=%(archieve_id)s
             ORDER BY c.id DESC LIMIT 1
         '''
         param = {
             'archieve_id': rec_id,
-            'date': datetime.datetime.now().strftime('%Y-%m-%d'),
         }
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
+        print data
         dob = data[0][5].split('-')
         dor = data[0][6].split('-')
         if cat == '0':
