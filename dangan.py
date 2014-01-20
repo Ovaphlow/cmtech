@@ -100,6 +100,7 @@ class DeleteArchieve(MethodView):
     def get(self, archieve_id):
         from flask import redirect
         from globalvars import connect_db, close_db
+
         sql = '''
             UPDATE dangan
             SET
