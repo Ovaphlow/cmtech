@@ -27,11 +27,9 @@ class DaoRu(MethodView):
 def import_xls(file_path):
     import xlrd
     import globalvars
-#     import mysql.connector
 
     xls = xlrd.open_workbook(file_path, 'rb')
     sh = xls.sheets()[0]
-#     cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
     cnx = globalvars.connect_db()
     cursor = cnx.cursor()
     for row in range(1, sh.nrows):
@@ -78,8 +76,5 @@ def import_xls(file_path):
                 sh.cell(row, 6).value, dob, dor, data[0][0]
             )
             cursor.execute(sql, param)
-            #globalvars.caozuo_jilu(escape(session['id']), u'导入数据', 'excel')
     cnx.commit()
-#     cursor.close()
-#     cnx.close()
     globalvars.close_db(cursor, cnx)
