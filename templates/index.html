@@ -4,13 +4,11 @@
 {% block content %}
     <div class="row-fluid">
       <div class="span8 offset2">
-        <form class="form-horizontal" role="form" action="/" method="post">
-          <div class="input-append">
-            <input class="input-block-level" type="text" name="id">
-            <span class="input-group-btn">
-              <button class="btn btn-danger" type="submit">检索</button>
-            </span>
-          </div>
+        <form class="form-inline" role="form" action="/" method="post">
+          <p class="text-center">
+            <input class="span6" type="text" name="id">
+            <button class="btn btn-danger" type="submit">检索</button>
+          </p>
         </form>
       </div>
     </div>
@@ -18,13 +16,15 @@
       <div class="span8 offset2">
         <h3>
           <strong>
-            共计
-            {{ data_count[0][0] }}
-            份档案，其中
-            {{ data_count[1][0] }}
-            份档案共含有
-            {{ data_count[2][0] }}
-            个图片文件
+            <p class="text-center">
+              共计
+              {{ data_count[0][0] }}
+              份档案，其中
+              {{ data_count[1][0] }}
+              份档案共含有
+              {{ data_count[2][0] }}
+              个图片文件
+            </p>
           </strong>
         </h3>
       </div>
