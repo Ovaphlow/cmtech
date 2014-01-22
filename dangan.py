@@ -12,14 +12,30 @@ class DangAn(MethodView):
             return redirect('/login')
         cat = request.args.get('cat', '0')
         sql = '''
-            SELECT d.*,c.code
-            FROM dangan d LEFT JOIN access_code c
-            ON d.shenfenzheng=c.archieve_id
-            WHERE d.id=%(archieve_id)s
-            ORDER BY c.id DESC LIMIT 1
+            select
+                d.*,
+                (
+                    select
+                        a.code
+                    from
+                        cm_archieve.access_code a
+                    where
+                        a.date=%(now_date)s
+                        and
+                        a.archieve_id=d.ShenFenZheng
+                    order by
+                        a.id
+                        desc
+                    limit 1
+                ) as code
+            FROM
+                cm_archieve.dangan d
+            WHERE
+                d.id=%(archieve_id)s
         '''
         param = {
             'archieve_id': rec_id,
+            'now_date': datetime.datetime.now().strftime('%Y-%m-%d')
         }
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()

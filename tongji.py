@@ -13,10 +13,13 @@ class TongJi(MethodView):
     def get(self):
         from flask import render_template, session
         from globalvars import connect_db, close_db
+        import datetime
 
         if not 'user_id' in session:
             return redirect('/login')
-        sql = '''
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        sql_1 = '''
             select
                 u.id,u.mingcheng,count(c.id)
             from
@@ -28,11 +31,30 @@ class TongJi(MethodView):
             group by
                 u.id
         '''
-        cnx = connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(sql)
-        result = cursor.fetchall()
+        cursor.execute(sql_1)
+        result_1 = cursor.fetchall()
+        sql_2 = '''
+            select
+                u.MingCheng,(
+                    select
+                        count(*)
+                    from
+                        cm_archieve.caozuo_jilu c
+                    where
+                        c.yh_id=u.id
+                        and
+                        c.RiQi like "%(now_month)s"
+                ) as cur_mongth
+            from
+                cm_archieve.user u
+        '''
+        param = {
+            'now_month': datetime.datetime.now().strftime('%Y-%m') + '%'
+        }
+        cursor.execute(sql_2)
+        result_2 = cursor.fetchall()
         return render_template('tongji.html',
             User = session['user_name'],
-            counter_1 = result,
+            counter_1 = result_1,
+            counter_2 = result_2,
         )

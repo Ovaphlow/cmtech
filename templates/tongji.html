@@ -4,10 +4,8 @@
 {% block content %}
 <div class="row-fluid">
   <div class="span8 offset2">
-    {% for row in counter_1 %}
-    {{ row[0] }} // {{ row[1] }} // {{ row[2] }}<br />
-    {% endfor %}
     <div id="container" style="min-width:600px;height:400px"></div>
+    <div id="container_2" style="min-width:600px;height:400px"></div>
   </div>
 </div>
 {% endblock %}
@@ -20,13 +18,17 @@ $(function () {
             type: 'column'
         },
         title: {
-            text: '个人统计数据'
+            text: '操作总量统计数据'
         },
         subtitle: {
-            text: '数据内容'
+            text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
         },
         xAxis: {
-            categories: ['添加档案信息', '修改档案信息', '扫描档案文件', '批量上传']
+            categories: [
+                {% for row in counter_1 %}
+                '{{ row[1] }}',
+                {% endfor %}
+            ]
         },
         yAxis: {
             title: {
@@ -42,12 +44,52 @@ $(function () {
             }
         },
         series: [{
-            name: '{{ User }}',
+            name: '总量数据',
             data: [
-                12,
-                5,
-                8,
-                34,
+                {% for row in counter_1 %}
+                {{ row[2] }},
+                {% endfor %}
+            ]
+        },]
+    });
+});
+$(function () {
+    $('#container_2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '当月操作统计数据'
+        },
+        subtitle: {
+            text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
+        },
+        xAxis: {
+            categories: [
+                {% for row in counter_2 %}
+                '{{ row[0] }}',
+                {% endfor %}
+            ]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '当月数据',
+            data: [
+                {% for row in counter_2 %}
+                {{ row[1] }},
+                {% endfor %}
             ]
         },]
     });
