@@ -53,7 +53,8 @@ class TongJi(MethodView):
         }
         cursor.execute(sql_2)
         result_2 = cursor.fetchall()
-        return render_template('tongji.html',
+        return render_template(
+            'tongji.html',
             User = session['user_name'],
             counter_1 = result_1,
             counter_2 = result_2,
