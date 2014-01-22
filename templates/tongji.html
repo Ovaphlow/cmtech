@@ -4,6 +4,9 @@
 {% block content %}
 <div class="row-fluid">
   <div class="span8 offset2">
+    {% for row in counter_1 %}
+    {{ row[0] }} // {{ row[1] }} // {{ row[2] }}<br />
+    {% endfor %}
     <div id="container" style="min-width:600px;height:400px"></div>
   </div>
 </div>
