@@ -12,6 +12,7 @@ import controls
 import chakan
 import chaxun
 import yonghu
+import tongji
 
 
 app = Flask(__name__)
@@ -50,6 +51,10 @@ app.add_url_rule(
 app.add_url_rule(
     '/gen_code/<archieve_id>',
     view_func = controls.GenCode.as_view('gen_code')
+)
+app.add_url_rule(
+    '/tongji',
+    view_func = tongji.TongJi.as_view('tong_ji')
 )
 
 if __name__ == '__main__':

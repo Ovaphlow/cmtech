@@ -27,6 +27,50 @@
             </p>
           </strong>
         </h3>
+        <div id="container" style="min-width:700px;height:400px"></div>
       </div>
     </div>
+{% endblock %}
+{% block jslib %}
+  <script src="/static/js/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '个人统计数据'
+        },
+        subtitle: {
+            text: '数据内容'
+        },
+        xAxis: {
+            categories: ['添加档案信息', '修改档案信息', '扫描档案文件', '批量上传']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '{{ User }}',
+            data: [
+                {{ opr_count1 }},
+                {{ opr_count2 }},
+                {{ opr_count3 }},
+                {{ opr_count4 }},
+            ]
+        },]
+    });
+});
+</script>
 {% endblock %}

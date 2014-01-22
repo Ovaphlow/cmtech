@@ -10,14 +10,6 @@ class Index(MethodView):
 
         if not 'user_id' in session:
             return redirect('/login')
-        sql = (
-            'SELECT * FROM update_log '
-            'ORDER BY id DESC'
-        )
-        cnx = globalvars.connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(sql)
-        data = cursor.fetchall()
         sql = '''
             SELECT COUNT(*) FROM dangan
             UNION
@@ -31,26 +23,54 @@ class Index(MethodView):
             UNION
             SELECT COUNT(*) FROM wenjian
         '''
+        cnx = globalvars.connect_db()
+        cursor = cnx.cursor()
         cursor.execute(sql)
         data_count = cursor.fetchall()
-#         cursor.close()
-#         cnx.close()
+        sql = '''
+            select
+                caozuo, count(*)
+            from
+                caozuo_jilu
+            where
+                yh_id=%(user_id)s
+            group by
+                caozuo
+        '''
+        param = {'user_id': session['user_id']}
+        cursor.execute(sql, param)
+        result = cursor.fetchall()
         globalvars.close_db(cursor, cnx)
+        opr_count1 = 0
+        opr_count2 = 0
+        opr_count3 = 0
+        opr_count4 = 0
+        for row in result:
+            if row[0] == u'添加档案信息':
+                opr_count1 = row[1]
+            elif row[0] == u'修改档案信息':
+                opr_count2 = row[1]
+            elif row[0] == u'上传图片':
+                opr_count3 = row[1]
+            elif row[0] == u'批量上传':
+                opr_count4 = row[1]
+        print opr_count1, opr_count2, opr_count3, opr_count4
         return render_template(
             'index.html',
-            data = data,
             User = session['user_name'],
-            data_count = data_count
+            data_count = data_count,
+            opr_count1 = opr_count1,
+            opr_count2 = opr_count2,
+            opr_count3 = opr_count3,
+            opr_count4 = opr_count4,
         )
 
     def post(self):
-#         import mysql.connector
         from flask import request, redirect
         import globalvars
 
         sql = 'SELECT id FROM dangan WHERE DangAnHao=%s OR ShenFenZheng=%s'
         param = (request.form['id'], request.form['id'])
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -69,12 +89,10 @@ class Login(MethodView):
 
     def post(self):
         from flask import request, redirect, session
-#         import mysql.connector
         import globalvars
 
         zhang_hao = request.form['zhanghao']
         mi_ma = request.form['mima']
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         sql = 'SELECT COUNT(*),id,MingCheng FROM user WHERE ZhangHao=%s AND MiMa=%s'

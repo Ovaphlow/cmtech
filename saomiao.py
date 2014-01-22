@@ -6,7 +6,6 @@ class SaoMiao(MethodView):
     def get(self, uid):
         from flask import session, redirect, request, render_template
         import globalvars
-#         import mysql.connector
 
         if not 'user_id' in session:
             return redirect('/login')
@@ -18,7 +17,6 @@ class SaoMiao(MethodView):
         param = (
             uid,
         )
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -27,8 +25,6 @@ class SaoMiao(MethodView):
             row = data[0]
         else:
             row = None
-#         cursor.close()
-#         cnx.close()
         globalvars.close_db(cursor, cnx)
         fp = globalvars.get_file_path(uid)
         return render_template(
