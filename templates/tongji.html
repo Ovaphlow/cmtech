@@ -4,6 +4,50 @@
 {% block content %}
 <div class="row-fluid">
   <div class="span8 offset2">
+    <div id="container" style="min-width:700px;height:400px"></div>
   </div>
 </div>
+{% endblock %}
+{% block jslib %}
+<script src="/static/js/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '个人统计数据'
+        },
+        subtitle: {
+            text: '数据内容'
+        },
+        xAxis: {
+            categories: ['添加档案信息', '修改档案信息', '扫描档案文件', '批量上传']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '{{ User }}',
+            data: [
+                12,
+                5,
+                8,
+                34,
+            ]
+        },]
+    });
+});
+</script>
 {% endblock %}
