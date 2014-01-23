@@ -21,11 +21,9 @@ class Index(MethodView):
         cursor.execute(sql, param)
         result = cursor.fetchall()
         if result[0][0] == 1:
-            #print('success:', result[0][0])
             session['idcard'] = request.form['idcard']
             return redirect('/code')
         else:
-            #print('err:', result[0][0])
             return redirect('/')
 
 

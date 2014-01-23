@@ -192,5 +192,4 @@ class ViewCat(MethodView):
             next_id = next_id,
             row = result[0],
             fs_root = G_FILE_SERVER_ROOT,
-
         )
