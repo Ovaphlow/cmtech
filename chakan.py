@@ -101,7 +101,7 @@ class ChaKan(MethodView):
                 WHERE w.id=%s
             '''
             param = (pic_id,)
-            cnx = globalvars.connect_db
+            cnx = globalvars.connect_db()
             cursor = cnx.cursor()
             cursor.execute(sql, param)
             data = cursor.fetchall()
