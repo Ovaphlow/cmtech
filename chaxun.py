@@ -23,11 +23,19 @@ class ChaXun(MethodView):
         gender = request.form['XingBie']
         check = request.form.getlist('check')
         sql = '''
-            SELECT d.*,COUNT(w.id)
-            FROM dangan d
-            LEFT JOIN wenjian w
-            ON d.id=w.aid
-            WHERE isNull(ZhuanChu)
+            select
+                d.*,(
+                    select
+                        count(*)
+                    from
+                        cm_archieve.wenjian w
+                    where
+                        w.aid=d.id
+                )
+            from
+                cm_archieve.dangan d
+            where
+                isNULL(d.ZhuanChu)
         '''
         if aid != '':
             sql = '%s AND DangAnHao LIKE "%s%s%s"' % (sql, '%', aid, '%')
@@ -45,7 +53,7 @@ class ChaXun(MethodView):
             sql = '%s AND NvGuanLiGangWei=1' % (sql,)
         if 'stow' in check:
             sql = '%s AND TeShuGongZhong=1' % (sql,)
-        sql = '%s GROUP BY d.id LIMIT 100' % (sql,)
+        sql = '%s LIMIT 100' % (sql,)
         #print(sql)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
