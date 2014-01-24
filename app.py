@@ -13,6 +13,7 @@ import chakan
 import chaxun
 import yonghu
 import tongji
+import test
 
 
 app = Flask(__name__)
@@ -24,6 +25,7 @@ app.add_url_rule(
     '/',
     view_func = index.Index.as_view('index')
 )
+app.add_url_rule('/test',view_func=test.Test.as_view('test'))
 app.add_url_rule('/login', view_func = index.Login.as_view('login'))
 app.add_url_rule('/logout', view_func = index.Logout.as_view('logout'))
 app.add_url_rule('/chaxun', view_func = chaxun.ChaXun.as_view('chaxun'))
