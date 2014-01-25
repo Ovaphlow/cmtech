@@ -35,6 +35,8 @@ class ChaXun(MethodView):
             from
                 cm_archieve.dangan d
             where
+                d.ZhuanChu=""
+                or
                 isNULL(d.ZhuanChu)
         '''
         if aid != '':
