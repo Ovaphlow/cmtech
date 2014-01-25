@@ -7,8 +7,39 @@
     <a href="{{ link1 }}" class="btn btn-primary">扫描该档案</a>
     <a href="/shangchuan/{{ id }}" class="btn btn-success">上传该档案</a>
     <a href="/gen_code/{{ id }}" class="btn btn-inverse">查询密码({{ row[13] }})</a>
-    <a href="/delete_archieve/{{ id }}" class="btn btn-danger">档案转出</a>
   </p>
+    <form class="form-inline" action="/delete_archieve/{{ id }}" method="post">
+      <p class="text-center">
+        <select name="reason">
+          {% if row[12] == "非转出状态" %}
+          <option value="" selected>非转出状态</option>
+          {% else %}
+          <option value="">非转出状态</option>
+          {% endif %}
+          {% if row[12] == "调转" %}
+          <option value="调转" selected="">转出原因：调转</option>
+          {% else %}
+          <option value="调转">转出原因：调转</option>
+          {% endif %}
+          {% if row[12] == "退休" %}
+          <option value="退休">转出原因：退休</option>
+          {% else %}
+          <option value="退休">转出原因：退休</option>
+          {% endif %}
+          {% if row[12] == "失业保险" %}
+          <option value="失业保险" selected="">转出原因：失业保险</option>
+          {% else %}
+          <option value="失业保险">转出原因：失业保险</option>
+          {% endif %}
+          {% if row[12] == "死亡" %}
+          <option value="死亡" selected="">转出原因：死亡</option>
+          {% else %}
+          <option value="死亡">转出原因：死亡</option>
+          {% endif %}
+        </select>
+        <button class="btn btn-danger" type="submit">确认</button>
+      </p>
+    </form>
 </div>
 <div class="row-fluid">
   <div class="span3" style="background-color:#E0E0F8">

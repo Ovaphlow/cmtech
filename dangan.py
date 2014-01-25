@@ -113,17 +113,22 @@ class DangAn(MethodView):
 
 
 class DeleteArchieve(MethodView):
-    def get(self, archieve_id):
-        from flask import redirect
+    def post(self, archieve_id):
+        from flask import redirect, request
         from globalvars import connect_db, close_db
 
-        sql = '''
-            UPDATE dangan
-            SET
-            ZhuanChu=%s
-            WHERE id=%s
-        '''
-        param = ('1', archieve_id)
+        sql = (
+            'update '
+            'dangan '
+            'set '
+            'ZhuanChu=%(zhuanchu)s '
+            'where '
+            'id=%(archieve_id)s '
+        )
+        param = {
+            'zhuanchu': request.form['reason'],
+            'archieve_id': archieve_id
+        }
         cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
