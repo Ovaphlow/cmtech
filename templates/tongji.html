@@ -25,9 +25,13 @@ $(function () {
         },
         xAxis: {
             categories: [
-                {% for row in counter_1 %}
+            {% for row in counter_1 %}
+                {% if row == counter_1[sum_1 - 1] %}
+                '{{ row[1] }}'
+                {% else %}
                 '{{ row[1] }}',
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             ]
         },
         yAxis: {
@@ -46,9 +50,13 @@ $(function () {
         series: [{
             name: '总量数据',
             data: [
-                {% for row in counter_1 %}
+            {% for row in counter_1 %}
+                {% if row == counter_1[sum_1 - 1] %}
+                {{ row[2] }}
+                {% else %}
                 {{ row[2] }},
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             ]
         },]
     });
@@ -66,9 +74,13 @@ $(function () {
         },
         xAxis: {
             categories: [
-                {% for row in counter_2 %}
+            {% for row in counter_2 %}
+                {% if row == counter_2[sum_2 - 1] %}
+                '{{ row[0] }}'
+                {% else %}
                 '{{ row[0] }}',
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             ]
         },
         yAxis: {
@@ -87,9 +99,13 @@ $(function () {
         series: [{
             name: '当月数据',
             data: [
-                {% for row in counter_2 %}
+            {% for row in counter_2 %}
+                {% if row == counter_2[sum_2 - 1] %}
+                {{ row[1] }}
+                {% else %}
                 {{ row[1] }},
-                {% endfor %}
+                {% endif %}
+            {% endfor %}
             ]
         },]
     });

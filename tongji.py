@@ -57,5 +57,7 @@ class TongJi(MethodView):
             'tongji.html',
             User = session['user_name'],
             counter_1 = result_1,
+            sum_1 = len(result_1),
             counter_2 = result_2,
+            sum_2 = len(result_2)
         )
