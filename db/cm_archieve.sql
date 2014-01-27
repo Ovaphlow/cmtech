@@ -30,7 +30,7 @@ CREATE TABLE `access_code` (
   `code` varchar(10) DEFAULT NULL,
   `date` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,7 +48,7 @@ CREATE TABLE `caozuo_jilu` (
   `RiQi` varchar(100) DEFAULT NULL COMMENT '日期',
   `ShiJian` varchar(100) DEFAULT NULL COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,7 @@ CREATE TABLE `dangan` (
   `CunDangZhuangTai` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `NvGuanLiGangWei` int(11) DEFAULT NULL,
   `TeShuGongZhong` int(11) DEFAULT NULL,
-  `ZhuanChu` int(11) DEFAULT NULL,
+  `ZhuanChu` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -134,4 +134,4 @@ CREATE TABLE `wenjian` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-23 10:29:30
+-- Dump completed on 2014-01-27 22:16:37
