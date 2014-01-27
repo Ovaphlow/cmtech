@@ -102,14 +102,14 @@ class DangAn(MethodView):
             XingBie=%s
             WHERE id=%s
         '''
-        param = (dob, dor, s, t, name, idcard, gender, aid)
+        param = (dob, dor, s, t, name, idcard, gender, rec_id)
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         cnx.commit()
         globalvars.close_db(cursor, cnx)
-        globalvars.caozuo_jilu(session['user_id'], u'修改档案信息', aid)
-        return redirect('/dangan/%s' % (aid))
+        globalvars.caozuo_jilu(session['user_id'], u'修改档案信息', rec_id)
+        return redirect('/dangan/%s' % (rec_id))
 
 
 class DeleteArchieve(MethodView):
