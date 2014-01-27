@@ -26,7 +26,10 @@ app.add_url_rule(
     '/view_cat/<cat>',
     view_func = archieve.ViewCat.as_view('view_cat')
 )
-
+app.add_url_rule(
+    '/logout',
+    view_func=index.Logout.as_view('logout')
+)
 
 if __name__ == '__main__':
     app.run(port = 5001)
