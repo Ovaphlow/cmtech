@@ -26,28 +26,23 @@
       </p>
     </form>
     <p class="text-center">
-    <input type="button" value="缩小" onclick="small1()" />
-    <input type="button" value="放大" onclick="big1()" />
-    <br />
-    <img alt="" border="0" id="images1" name="images1" src="{{ fs_root }}/{{ aid }}/{{ row[2] }}" onclick="javascript:window.open(this.src);"
-        style="cursor: pointer;" onload="return imgzoom(this,600);" />
+      <input type="button" value="缩小" onclick="zoomOut()" />
+      <input type="button" value="放大" onclick="zoomIn()" />
+      <br />
+      <img alt="" border="0" id="img" name="img" src="{{ fs_root }}/{{ aid }}/{{ row[2] }}" />
     </p>
   </div>
 </div>
 {% endblock %}
 {% block jslib %}
 <script language="javascript" type="text/javascript">
-function small1(){
-  var height1=images1.height
-  var width1=images1.width
-  images1.height=height1/1.5
-  images1.width=width1/1.5
+function zoomOut() {
+  img.height = img.height / 1.2;
+  img.width = img.width / 1.2;
 }
-function big1(){
-  var height1=images1.height
-  var width1=images1.width
-  images1.height=height1*1.5
-  images1.width=width1*1.5
+function zoomIn() {
+  img.height = img.height * 1.2;
+  img.width = img.width * 1.2;
 }
 </script>
 {% endblock %}
