@@ -16,6 +16,7 @@
           <option value="delete">删除图片</option>
         </select>
         <button type="submit" class="btn btn-danger">确认</button>
+        <a href="/dayin/{{ archieve_id }}?pic_id={{ pic_id }}" class="btn btn-success" target="_blank">打印</a>
         <a href="/dangan/{{ archieve_id }}" class="btn btn-primary">返回</a>
         {% if previous_id %}
         <a href="/chakan/{{ archieve_id }}?pic_id={{ previous_id }}" class="btn">上一页</a>

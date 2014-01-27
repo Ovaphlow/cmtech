@@ -58,6 +58,10 @@ app.add_url_rule(
     '/tongji',
     view_func = tongji.TongJi.as_view('tong_ji')
 )
+app.add_url_rule(
+    '/dayin/<archieve_id>',
+    view_func = chakan.DaYin.as_view('da_yin')
+)
 
 if __name__ == '__main__':
     app.run()

@@ -67,6 +67,7 @@ class ChaKan(MethodView):
             archieve_id = rec_id,
             previous_id = previous_id,
             next_id = next_id,
+            pic_id = pic_id
         )
 
     def post(self, rec_id):
@@ -149,3 +150,47 @@ class ChaKan(MethodView):
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
         else:
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+
+
+class DaYin(MethodView):
+    def get(self, archieve_id):
+        from globalvars import render_text, connect_db, close_db, G_UPLOAD_PATH
+        from flask import request, redirect
+
+        pic_id = request.args.get('pic_id')
+        if pic_id == '':
+            redirect('/')
+        sql = ('select '
+            'd.DangAnHao, ( '
+            'select '
+            'w.WenJianMing '
+            'from '
+            'cm_archieve.wenjian w '
+            'where '
+            'w.id=%(pic_id)s '
+            'and '
+            'w.aid=d.id '
+            ') as pic_name '
+            'from '
+            'cm_archieve.dangan d '
+            'where '
+            'd.id=%(archieve_id)s')
+        param = {
+            'pic_id': request.args.get('pic_id'),
+            'archieve_id': archieve_id
+        }
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(sql, param)
+        result = cursor.fetchall()
+        close_db(cursor, cnx)
+        file_name = '%s\%s\%s' % (G_UPLOAD_PATH, result[0][0], result[0][1])
+        render_text(
+            file_name=file_name,
+            font_size=45,
+            text=u'与原件相符',
+            output_name='%s/%s/for_print.png' % (G_UPLOAD_PATH, result[0][0]),
+            output_type='png'
+        )
+        return '<img src="/static/upload/%s/for_print.png" />' % \
+            (result[0][0])

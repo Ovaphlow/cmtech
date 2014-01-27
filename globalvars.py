@@ -142,3 +142,14 @@ def idcard_convert(idcard_15):
         i += 1
     idcard_18 = '%s%s' % (idcard_18, ai[sum_a % 11])
     return idcard_18
+
+
+def render_text(file_name, font_size, text, output_name, output_type):
+    from PIL import Image, ImageDraw, ImageFont
+
+    img = Image.open(file_name)
+    draw = ImageDraw.Draw(img)
+    font = ImageFont.truetype('c:\\windows\\fonts\\simhei.ttf', font_size)
+    draw.text((10, 20), text, font=font, fill=(255,0,0,255))
+    img.save(output_name, output_type)
+    #img.show()

@@ -54,7 +54,6 @@ class Index(MethodView):
                 opr_count3 = row[1]
             elif row[0] == u'批量上传':
                 opr_count4 = row[1]
-        print opr_count1, opr_count2, opr_count3, opr_count4
         return render_template(
             'index.html',
             User = session['user_name'],
