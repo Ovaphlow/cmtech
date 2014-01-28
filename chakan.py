@@ -95,6 +95,24 @@ class ChaKan(MethodView):
             )
             globalvars.close_db(cursor, cnx)
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'rotate':
+            sql = '''
+                SELECT w.id,w.aid,w.wenjianming,d.danganhao
+                FROM wenjian w INNER JOIN dangan d ON w.aid=d.id
+                WHERE w.id=%s
+            '''
+            param = (pic_id,)
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            data = cursor.fetchall()
+            row = data[0]
+            globalvars.rotate_image(
+                '%s\%s\%s' % \
+                (globalvars.G_UPLOAD_PATH, row[3], row[2])
+            )
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
         elif opr == 'delete':
             sql = '''
                 SELECT w.id,w.aid,w.wenjianming,d.danganhao
@@ -187,7 +205,7 @@ class DaYin(MethodView):
         file_name = '%s\%s\%s' % (G_UPLOAD_PATH, result[0][0], result[0][1])
         render_text(
             file_name=file_name,
-            font_size=45,
+            font_size=32,
             text=u'与原件相符',
             output_name='%s/%s/for_print.png' % (G_UPLOAD_PATH, result[0][0]),
             output_type='png'

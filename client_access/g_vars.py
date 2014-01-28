@@ -1,13 +1,13 @@
 # -*- coding=UTF-8 -*-
 
 cnx_param = {
-    'user': 'cmtech',
-    'password': 'cmtech.1123',
-    'host': '125.211.221.215',
+    'user': 'root',
+    'password': 'dsdfjk',
+    'host': '127.0.0.1',
     'database': 'cm_archieve',
 }
 
-G_FILE_SERVER_ROOT = 'http://localhost:5000/static/upload'
+G_FILE_SERVER_ROOT = 'http://172.17.203.100:5000/static/upload'
 
 cat_name = [
     u'就业类',

@@ -50,6 +50,21 @@ class View(MethodView):
         from flask import session, render_template, request
         from g_vars import connect_db, close_db
 
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        sql_t = '''
+            select
+                id
+            from
+                dangan
+            where
+                shenfenzheng=%(idcard)s
+            limit 1
+        '''
+        param_t = {'idcard': session['idcard']}
+        cursor.execute(sql_t, param_t)
+        result = cursor.fetchall()
+        archieve_id = result[0][0]
         sql = '''
             SELECT
                 LeiBie,COUNT(*)
@@ -57,14 +72,14 @@ class View(MethodView):
                 wenjian
             WHERE
                 aid=%(archieve_id)s
+                and
+                client_access=1
             GROUP BY
                 LeiBie
         '''
         param = {
-            'archieve_id': 39
+            'archieve_id': archieve_id
         }
-        cnx = connect_db()
-        cursor = cnx.cursor()
         cursor.execute(sql, param)
         result = cursor.fetchall()
         close_db(cursor, cnx)
@@ -142,6 +157,8 @@ class ViewCat(MethodView):
                         aid=%(archieve_id)s
                         AND
                         leibie=%(cat)s
+                        and
+                        client_access=1
                 ) OR
                 id = (
                     SELECT
@@ -154,6 +171,8 @@ class ViewCat(MethodView):
                         aid=%(archieve_id)s
                         AND
                         leibie=%(cat)s
+                        and
+                        client_access=1
                 )
         '''
         if request.args.get('pic_id') == None:
