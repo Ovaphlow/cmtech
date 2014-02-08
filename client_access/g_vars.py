@@ -6,8 +6,31 @@ cnx_param = {
     'host': '127.0.0.1',
     'database': 'cm_archieve',
 }
+"""
+生产环境
+cnx_param = {
+    'user': 'root',
+    'password': 'dsdfjk',
+    'host': '127.0.0.1',
+    'database': 'cm_archieve',
+}
+开发环境
+cnx_param = {
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
+    'database': 'cm_archieve',
+}
+"""
 
+G_FILE_SERVER_ROOT = 'http://127.0.0.1:5000/static/upload'
+
+"""
+生产环境
 G_FILE_SERVER_ROOT = 'http://172.17.203.100:5000/static/upload'
+开发环境
+G_FILE_SERVER_ROOT = 'http://127.0.0.1:5000/static/upload'
+"""
 
 cat_name = [
     u'就业类',

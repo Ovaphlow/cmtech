@@ -8,11 +8,27 @@ jinja_env = jinja2.Environment(
 '''
 
 cnx_cfg = {
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
+    'database': 'cm_archieve',
+}
+"""
+生产环境
+cnx_cfg = {
     'user': 'root',
     'password': 'dsdfjk',
     'host': '127.0.0.1',
     'database': 'cm_archieve',
 }
+开发环境
+cnx_cfg = {
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
+    'database': 'cm_archieve',
+}
+"""
 
 G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
