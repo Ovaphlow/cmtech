@@ -1,153 +1,225 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
+
 <head>
-  <title>档案管理</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link rel="shortcut icon" href="/static/img/favicon.ico">
-   <link rel="stylesheet" href="/static/123/css/lightbox.css" type="text/css" media="screen" />
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>新中新二代证阅读器控件测试程序JavaScript</title>
 
-    <script src="/static/123/js/prototype.js" type="text/javascript"></script>
-
-    <script src="/static/123/js/scriptaculous.js?load=effects" type="text/javascript"></script>
-
-    <script src="/static/123/js/lightbox.js" type="text/javascript"></script>
-
-</head>
-<body style="background-color:dimgrey" >
-  <div class="navbar">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#"><strong>哈尔滨市人力资源市场</strong></a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li><a href="/">首页</a></li>
-            <li><a href="/daoru">导入基础数据</a></li>
-            <li><a href="/luru">录入档案信息</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                查询统计
-                <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><a href="/chaxun">基础数据查询</a></li>
-                <li><a href="/chaxun/dytx">指定月份退休人员</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header"></li>
-                <li><a href="/tongji">统计</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav pull-right">
-            <li><a href="/xgmm">测试</a></li>
-            <li><a href="/logout">退出</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid" style="background-color:Ivory">
-    <div class="row-fluid">
-      <div class="span10 offset1">
-        <div class="page-header">
-          <h2><p class="text-center">个人档案<br /><small></small></p></h2>
-        </div>
-      </div>
-    </div>
-  </div>
-<a href="#myModal" role="button" class="btn" data-toggle="modal">查看演示案例</a>
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-<h3 id="myModalLabel">Modal header</h3>
-</div>
-<div class="modal-body">
-<p>One fine body…</p>
-</div>
-<div class="modal-footer">
-<button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-<button class="btn btn-primary">Save changes</button>
-</div>
-</div>
-  <div class="container-fluid" style="background-color:Ivory">
-
-<div class="row-fluid">
-  <div class="span10 offset1">
-    <form action="" method="POST" class="form-inline">
-      <p class="text-center">
-        <select name="operate">
-
-          <option value="cancel_access">取消导出到用户查询</option>
-
-          <option value="turn">上下翻转</option>
-          <option value="delete">删除图片</option>
-        </select>
-        <button type="submit" class="btn btn-danger">确认</button>
-        <a href="/dangan/39" class="btn btn-primary">返回</a>
-
-
-        <a href="/chakan/39?pic_id=40" class="btn">下一页</a>
-
-      </p>
-
-<p class="text-center">
-<a href="/static/123/123.png" rel="lightbox">
-        <img src="/static/123/123.png" alt="" style="width:100px; height:100px;" /></a>
-</p>
-    </form>
-
-  </div>
-</div>
-
-  </div>
-
-  <div class="navbar navbar-bottom navbar-inverse">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#"><strong>档案管理系统</strong></a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li><a href=#>[技术支持]电话：18686853420；QQ：2340538</a></li>
-            <li></li>
-          </ul>
-          <ul class="nav pull-right">
-            <li><a href=#><strong>&copy; 成铭科技 2013</strong></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-<script src="/static/js/jquery-1.10.2.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
-
-<script language="javascript" type="text/javascript">
-function small1(){
-  var height1=images1.height
-  var width1=images1.width
-  images1.height=height1/1.5
-  images1.width=width1/1.5
-}
-function big1(){
-  var height1=images1.height
-  var width1=images1.width
-  images1.height=height1*1.5
-  images1.width=width1*1.5
+<script language="javascript" for="SynCardOcx1" event="CardIn( State );">
+{ 
+  if(State == 1)
+  {
+	  document.all['S1'].value=document.all['S1'].value+"读卡成功\r\n";	
+	  document.all['S1'].value=document.all['S1'].value+"姓名:"+SynCardOcx1.NameA +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"性别:"+SynCardOcx1.Sex +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"民族:"+SynCardOcx1.Nation +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"出生日期:"+SynCardOcx1.Born +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"地址:"+SynCardOcx1.Address +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"身份证号:"+SynCardOcx1.CardNo +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"有效期开始:"+SynCardOcx1.UserLifeB +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"有效期结束:"+SynCardOcx1.UserLifeE +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"发证机关:"+SynCardOcx1.Police +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"照片文件名:"+SynCardOcx1.PhotoName +"\r\n";
+          var aaa=SynCardOcx1.CardNo;
+          document.getElementById("SFZH").value=aaa;
+  }
 }
 </script>
 
+
+<script language="JavaScript1.2">
+  function FindReader_onclick()
+  {
+  	var str;
+  	str = SynCardOcx1.FindReader();
+  	if (str > 0)
+  	{
+  		if(str>1000)
+  		{
+  			str =document.all['S1'].value+ "读卡器连接在USB " + str+"\r\n" ;
+  		}
+  		else
+  		{
+  			str =document.all['S1'].value+ "读卡器连接在COM " + str+"\r\n" ;
+  		}
+  	}
+  	else
+  	{
+  		str =document.all['S1'].value+ "没有找到读卡器\r\n";
+  	}
+  	document.all['S1'].value=str;
+ 	
+  }
+  function ReadSAMID_onclick()
+  {
+  	var str=SynCardOcx1.GetSAMID();
+  	document.all['S1'].value=document.all['S1'].value+"读卡器SAMID为:"+str+"\r\n";
+  }
+  function Clear_onclick()
+  {
+  	document.all['S1'].value="";
+  }
+  function ReadCard_onclick()
+  {
+	var nRet;
+  	SynCardOcx1.SetReadType(0);
+  	nRet = SynCardOcx1.ReadCardMsg();
+  	if(nRet==0)
+  	{
+  		document.all['S1'].value=document.all['S1'].value+"读卡成功\r\n";	
+  		document.all['S1'].value=document.all['S1'].value+"姓名:"+SynCardOcx1.NameA +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"性别:"+SynCardOcx1.Sex +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"民族:"+SynCardOcx1.Nation +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"出生日期:"+SynCardOcx1.Born +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"地址:"+SynCardOcx1.Address +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"身份证号:"+SynCardOcx1.CardNo +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"有效期开始:"+SynCardOcx1.UserLifeB +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"有效期结束:"+SynCardOcx1.UserLifeE +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"发证机关:"+SynCardOcx1.Police +"\r\n";
+  		document.all['S1'].value=document.all['S1'].value+"照片文件名:"+SynCardOcx1.PhotoName +"\r\n";
+                var aaa=SynCardOcx1.CardNo;
+                document.getElementById("SFZH").value=aaa;
+  	}
+  }
+  function ReadCardAuto_onclick()
+  {
+  	SynCardOcx1.SetloopTime(1000);
+  	SynCardOcx1.SetReadType(1);
+  }
+
+  function PhotoPath_onclick()
+  {
+  	var str="";
+  	SynCardOcx1.SetPhotoPath(0,str);
+  	document.all['S1'].value=document.all['S1'].value+"照片保存路径设置为C盘根目录\r\n";
+  }
+  function PhotoPath2_onclick()
+  {
+  	var str="";
+  	SynCardOcx1.SetPhotoPath(1,str);
+  	document.all['S1'].value=document.all['S1'].value+"照片保存路径设置为当前目录\r\n";
+  }
+  function PhotoPath3_onclick()
+  {
+  	var str="D:\\Photo";
+  	var nRet;
+  	nRet= SynCardOcx1.SetPhotoPath(2,str);
+  	if(nRet == 0)
+  	{
+  		document.all['S1'].value=document.all['S1'].value+"照片保存路径设置为"+str+"\r\n";
+  	}
+  	else
+  	{
+  		document.all['S1'].value=document.all['S1'].value+"照片保存路径设置失败\r\n";  	
+  	}
+  }
+  function PhotoType_onclick()
+  {
+  	var nRet;
+	nRet=SynCardOcx1.SetPhotoType(0);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存格式设置为Bmp\r\n";
+	}
+  }
+  function PhotoType2_onclick()
+  {
+  	var nRet;
+	nRet=SynCardOcx1.SetPhotoType(1);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存格式设置为Jpeg\r\n";
+	}
+  }
+  function PhotoType3_onclick()
+  {
+  	var nRet;
+	nRet=SynCardOcx1.SetPhotoType(2);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存格式设置为Base64\r\n";
+	}
+  }
+  function PhotoName_onclick()
+  {
+   	var nRet;
+	nRet=SynCardOcx1.SetPhotoName(0);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存文件名设置为tmp\r\n";
+	}
+  }
+  function PhotoName2_onclick()
+  {
+   	var nRet;
+	nRet=SynCardOcx1.SetPhotoName(1);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存文件名设置为 姓名\r\n";
+	}
+  }
+  function PhotoName3_onclick()
+  {
+   	var nRet;
+	nRet=SynCardOcx1.SetPhotoName(2);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存文件名设置为 身份证号\r\n";
+	}
+  }
+  function PhotoName4_onclick()
+  {
+   	var nRet;
+	nRet=SynCardOcx1.SetPhotoName(3);
+	if(nRet==0)
+	{
+		document.all['S1'].value=document.all['S1'].value+"照片保存文件名设置为 姓名_身份证号\r\n";
+	}
+  }
+  function PhotoName5_onclick()
+  {
+  	var str= SynCardOcx1.Base64Photo;
+	document.all['S1'].value=document.all['S1'].value+str+"  \r\n";
+  }
+
+</script>
+
+</head>
+
+<p>
+<object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codeBase="SynCardOcx.CAB#version=1,0,0,1" width="102" height="126" >
+</object>
+</p>
+<form method="POST" action="--WEBBOT-SELF--" name="form1">
+<p>
+  身份证号码：<input type="text" name="SFZH" id="SFZH">
+</P>
+  <p>
+  <textarea rows="17" name="S1" cols="82"></textarea></p>
+	<p>
+  <input type="button" value="自动寻找读卡器" name="FindReadBtn" onclick="FindReader_onclick()">
+  <input type="button" value="获得SAMID" name="GetSAMIDBtn" onclick="ReadSAMID_onclick()">
+  <input type="button" value="手动读卡" name="ReadCardBtn" onclick="ReadCard_onclick()">
+  <input type="button" value="自动读卡" name="ReadCardAutoBtn" onclick="ReadCardAuto_onclick()">
+  <input type="button" value="清除所有信息" name="ClearBtn" onclick="Clear_onclick()"></p>
+	<p>
+  照片保存路径:&nbsp;&nbsp;
+  <input type="button" value="C盘根目录" name="PathBtn" onclick="PhotoPath_onclick()">
+  <input type="button" value="当前目录" name="Path2Btn" onclick="PhotoPath2_onclick()">
+  <input type="button" value="指定路径" name="Path3Btn" onclick="PhotoPath3_onclick()"></p>
+	<p>
+  照片保存格式:&nbsp;&nbsp;
+  <input type="button" value="bmp" name="PhotoTypeBtn" onclick="PhotoType_onclick()">
+  <input type="button" value="Jpeg" name="PhotoType2Btn" onclick="PhotoType2_onclick()">
+  <input type="button" value="Base64" name="PhotoType3Btn" onclick="PhotoType3_onclick()"></p>
+	<p>
+  照片文件名格式:
+  <input type="button" value="tmp" name="PhotoNameBtn" onclick="PhotoName_onclick()">
+  <input type="button" value="姓名" name="PhotoName2Btn" onclick="PhotoName2_onclick()">
+  <input type="button" value="身份证号" name="PhotoName3Btn" onclick="PhotoName3_onclick()">
+  <input type="button" value="姓名_身份证号" name="PhotoName4Btn" onclick="PhotoName4_onclick()">
+  <input type="button" value="Base64照片" name="PhotoName4Btn0" onclick="PhotoName5_onclick()"></p>
+</form>
+
 </body>
+
 </html>
