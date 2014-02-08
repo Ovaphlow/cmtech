@@ -24,7 +24,6 @@ cnx_param = {
 """
 
 G_FILE_SERVER_ROOT = 'http://127.0.0.1:5000/static/upload'
-
 """
 生产环境
 G_FILE_SERVER_ROOT = 'http://172.17.203.100:5000/static/upload'
