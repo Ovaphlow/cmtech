@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>多文件上传</title>
+	<script type="text/javascript" src="swfobject.js"></script>
+</head>
+<body onload="showFlash();">
+
+	<div id="divFlash">
+		加载中...
+	</div>
+	<script type="text/javascript">
+		function showFlash() {
+			var params = {
+				serverUrl: "saveImage.aspx?aaa=love&id=123",
+				jsFunction: "flashReturn",
+				imageWidth:100
+			}
+			swfobject.embedSWF("mFileUpload.swf", "divFlash", "300", "30", "10.0.0", "expressInstall.swf", params);
+		}
+
+		function flashReturn(type, str) {
+			var divReturn = document.getElementById('divReturn');
+			var span = document.createElement('span');
+			span.innerHTML = '<b style="color:blue;">' + type + "</b>-" + str + "<br>";
+			divReturn.appendChild(span);
+		}
+		
+		function setPara()
+		{
+			var swf = document.getElementById('divFlash');
+			if(!swf.isBusy())
+			{
+				swf.setPara('labelFormat','{%}');
+			}
+		}
+	</script>
+	<div>
+	<input type="button" value="设 置" onclick="setPara();" />
+	</div>
+	<div id="divReturn">
+	
+	</div>
+</body>
+</html>

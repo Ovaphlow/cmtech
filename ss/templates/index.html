@@ -1,0 +1,76 @@
+﻿{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}档案管理系统<br /><small> 首页</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <form class="form-inline" role="form" action="/" method="post">
+          <p class="text-center">
+            <input class="span6" type="text" name="id">
+            <button class="btn btn-danger" type="submit">检索</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <h3>
+          <strong>
+            <p class="text-center">
+              共计
+              {{ data_count[0][0] }}
+              份档案，其中
+              {{ data_count[1][0] }}
+              份档案共含有
+              {{ data_count[2][0] }}
+              个图片文件
+            </p>
+          </strong>
+        </h3>
+        <div id="container" style="min-width:700px;height:400px"></div>
+      </div>
+    </div>
+{% endblock %}
+{% block jslib %}
+<script src="/static/js/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '个人统计数据'
+        },
+        subtitle: {
+            text: '数据内容'
+        },
+        xAxis: {
+            categories: ['添加档案信息', '修改档案信息', '扫描档案文件', '批量上传']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '{{ User }}',
+            data: [
+                {{ opr_count1 }},
+                {{ opr_count2 }},
+                {{ opr_count3 }},
+                {{ opr_count4 }}
+            ]
+        }]
+    });
+});
+</script>
+{% endblock %}
