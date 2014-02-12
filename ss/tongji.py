@@ -17,9 +17,6 @@ class TongJi(MethodView):
         value = request.args.get('value')
         name = name.split(',')
         value = value.split(',')
-        print len(name), name, len(value), value
-        for i in range(0, len(name)):
-            print name[i]
         return render_template(
             'tongji.html',
             type = request.args.get('type', 'column'),
