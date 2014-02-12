@@ -9,7 +9,7 @@ from flask.views import MethodView
 ：按月份各用户添加档案总数曲线
 """
 
-class TongJi(MethodView):
+class Chart(MethodView):
     def get(self):
         from flask import render_template, session, request
 
@@ -18,7 +18,7 @@ class TongJi(MethodView):
         name = name.split(',')
         value = value.split(',')
         return render_template(
-            'tongji.html',
+            'chart.html',
             type = request.args.get('type', 'column'),
             height = request.args.get('height', '300'),
             title = request.args.get('title'),
