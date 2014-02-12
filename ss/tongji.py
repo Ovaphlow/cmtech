@@ -1,6 +1,6 @@
 # -*- coding=UTF-8 -*-
 from flask.views import MethodView
-
+#http://localhost:5000/tongji?type=123&height=200&title=中&subtitle=中文&name=a,b,c&value=11,41,27
 """
 统计
 ：各用户操作总数对比
@@ -11,53 +11,23 @@ from flask.views import MethodView
 
 class TongJi(MethodView):
     def get(self):
-        from flask import render_template, session
-        from globalvars import connect_db, close_db
-        import datetime
+        from flask import render_template, session, request
 
-        if not 'user_id' in session:
-            return redirect('/login')
-        cnx = connect_db()
-        cursor = cnx.cursor()
-        sql_1 = '''
-            select
-                u.id,u.mingcheng,count(c.id)
-            from
-                `cm_archieve`.user u
-                left join
-                `cm_archieve`.caozuo_jilu c
-                on
-                u.id=c.yh_id
-            group by
-                u.id
-        '''
-        cursor.execute(sql_1)
-        result_1 = cursor.fetchall()
-        sql_2 = '''
-            select
-                u.MingCheng,(
-                    select
-                        count(*)
-                    from
-                        cm_archieve.caozuo_jilu c
-                    where
-                        c.yh_id=u.id
-                        and
-                        c.RiQi like "%(now_month)s"
-                ) as cur_mongth
-            from
-                cm_archieve.user u
-        '''
-        param = {
-            'now_month': datetime.datetime.now().strftime('%Y-%m') + '%'
-        }
-        cursor.execute(sql_2)
-        result_2 = cursor.fetchall()
+        name = request.args.get('name')
+        value = request.args.get('value')
+        name = name.split(',')
+        value = value.split(',')
+        print len(name), name, len(value), value
+        for i in range(0, len(name)):
+            print name[i]
         return render_template(
             'tongji.html',
-            User = session['user_name'],
-            counter_1 = result_1,
-            sum_1 = len(result_1),
-            counter_2 = result_2,
-            sum_2 = len(result_2)
+            type = request.args.get('type', 'column'),
+            height = request.args.get('height', '300'),
+            title = request.args.get('title'),
+            subtitle = request.args.get('subtitle'),
+            name = name,
+            count_name = len(name),
+            value = value,
+            count_value = len(value)
         )
