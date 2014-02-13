@@ -1,4 +1,4 @@
-# -*- coding=UTF-8 -*-
+﻿# -*- coding=UTF-8 -*-
 from flask.views import MethodView
 #http://localhost:5000/chart?type=column&height=200&title=中&subtitle=中文&name=a,b,c&value=11,41,27"""
 """
@@ -20,6 +20,7 @@ class Chart(MethodView):
         value = request.args.get('value')
         name = name.split(',')
         value = value.split(',')
+        print request.args.get('title')
         return render_template(
             'chart.html',
             type = request.args.get('type', 'column'),
