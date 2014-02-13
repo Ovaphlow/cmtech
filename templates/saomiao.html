@@ -116,8 +116,6 @@
   {
     var ss= nFileCount+".jpg";
     SZ[SZS] =ss
-    //alert(ss);
-    //alert(SZ);
     strFile = "{{ filepath }}" + nFileCount;
     strFile += ".jpg";
     document.getElementById('b').value = strFile
@@ -169,6 +167,9 @@
   function DeleteFile()
   {
     CmCaptureOcx.DeleteFile(strFile);
+    var hh=0;
+    hh=SZS-1;
+    SZ.splice(hh,1);   
   }
   //消除噪点
   function SetDenoise()
