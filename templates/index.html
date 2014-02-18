@@ -5,12 +5,13 @@
 {% block content %}
     <div class="row-fluid">
       <div class="span8 offset2">
-        <form class="form-inline" role="form" action="/" method="post">
-          <p style="display:none;">
-            <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1"
-            width="102" height="126">
+        <p>
+          <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1"
+           width="0" height="0">
           </object>
-          </p>
+          <textarea rows="17" name="S1" cols="82" style="display: none;"></textarea>
+        </p>
+        <form class="form-inline" role="form" action="/" method="post">
           <p class="text-center">
             <input class="span6" type="text" name="id" id="id">
             <button class="btn btn-danger" type="submit">检索</button>
