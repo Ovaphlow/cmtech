@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}档案查阅<br /><small>档案概要</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <p class="text-center">
+          <a href="/view" class="btn btn-primary">查看档案文件</a>
+        </p>
+        <table class="table">
+          <tr>
+            <td><h2>身份证</h2></td>
+            <td><h2>{{ row[0] }}</h2></td>
+          </tr>
+          <tr>
+            <td><h2>姓名</h2></td>
+            <td><h2>{{ row[1] }}</h2></td>
+          </tr>
+          <tr>
+            <td><h2>预退休日期</h2></td>
+            <td><h2>{{ row[2] }}</h2></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}录入档案信息<br /><small>基础信息</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        {% if error %}
+        <div class="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>警告</strong> {{ error }}
+        </div>
+        {% endif %}
+        <form class="form-horizontal" role="form" action="/luru" method="post">
+          <fieldset>
+            <legend>档案基础信息</legend>
+            <div class="control-group">
+              <label class="control-label" for="aid">档案号</label>
+              <div class="controls">
+                <input class="input-small" type="text" id="aid" name="aid">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="idcard">身份证</label>
+              <div class="controls">
+                <input class="input-large" type="text" id="idcard" name="idcard">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="name">姓名</label>
+              <div class="controls">
+                <input class="input-small" type="text" id="name" name="name">
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="controls">
+                <label class="checkbox inline">
+                  <input type="checkbox" name="check" value="female"> 女管理岗位
+                </label>
+                <label class="checkbox inline">
+                  <input type="checkbox" name="check" value="stow"> 特殊工种
+                </label>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-danger">确认提交</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+{% endblock %}

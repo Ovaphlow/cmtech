@@ -1,0 +1,62 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="row-fluid">
+  <div class="span8 offset2">
+    <div id="container" style="min-width:600px;height:{{ height }}px"></div>
+  </div>
+</div>
+{% endblock %}
+{% block jslib %}
+<script src="/static/js/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: '{{ type }}'
+        },
+        title: {
+            text: '{{ title }}'
+        },
+        subtitle: {
+            text: '{{ subtitle }}'
+        },
+        xAxis: {
+            categories: [
+            {% for i in range(0, count_name) %}
+                {% if i == count_name - 1 %}
+                '{{ name[i] }}'
+                {% else %}
+                '{{ name[i] }}',
+                {% endif %}
+            {% endfor %}
+            ]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '{{ title }}',
+            data: [
+            {% for i in range(0, count_value) %}
+                {% if i == count_value - 1 %}
+                {{ value[i] }}
+                {% else %}
+                {{ value[i] }},
+                {% endif %}
+            {% endfor %}
+            ]
+        }]
+    });
+});
+</script>
+{% endblock %}

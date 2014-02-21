@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}统计<br /><small></small>{% endblock %}
+{% block content %}
+<div class="row-fluid">
+  <div class="span8 offset2">
+    <div id="container" style="min-width:600px;height:400px"></div>
+    <div id="container_2" style="min-width:600px;height:400px"></div>
+  </div>
+</div>
+{% endblock %}
+{% block jslib %}
+<script src="/static/js/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '操作总量统计数据'
+        },
+        subtitle: {
+            text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
+        },
+        xAxis: {
+            categories: [
+            {% for row in counter_1 %}
+                {% if row == counter_1[sum_1 - 1] %}
+                '{{ row[1] }}'
+                {% else %}
+                '{{ row[1] }}',
+                {% endif %}
+            {% endfor %}
+            ]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '总量数据',
+            data: [
+            {% for row in counter_1 %}
+                {% if row == counter_1[sum_1 - 1] %}
+                {{ row[2] }}
+                {% else %}
+                {{ row[2] }},
+                {% endif %}
+            {% endfor %}
+            ]
+        }]
+    });
+});
+$(function () {
+    $('#container_2').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '当月操作统计数据'
+        },
+        subtitle: {
+            text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
+        },
+        xAxis: {
+            categories: [
+            {% for row in counter_2 %}
+                {% if row == counter_2[sum_2 - 1] %}
+                '{{ row[0] }}'
+                {% else %}
+                '{{ row[0] }}',
+                {% endif %}
+            {% endfor %}
+            ]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '当月数据',
+            data: [
+            {% for row in counter_2 %}
+                {% if row == counter_2[sum_2 - 1] %}
+                {{ row[1] }}
+                {% else %}
+                {{ row[1] }},
+                {% endif %}
+            {% endfor %}
+            ]
+        }]
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}档案查阅<br /><small>{{ cat_name }}</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <p class="text-center">
+          <a href="/view" class="btn btn-primary">
+            返回档案文件
+          </a>
+          {% if previous_id %}
+          <a href="/view_cat/{{ cat }}?pic_id={{ previous_id }}" class="btn">
+            上一页
+          </a>
+          {% endif %}
+          {% if next_id %}
+          <a href="/view_cat/{{ cat }}?pic_id={{ next_id }}" class="btn">
+            下一页
+          </a>
+          {% endif %}
+          <br /><br />
+          <img src="{{ fs_root }}/{{ row[1] }}/{{ row[3] }}""
+        </p>
+      </div>
+    </div>
+{% endblock %}
+
+

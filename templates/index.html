@@ -1,0 +1,132 @@
+﻿{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}档案管理系统<br /><small> 首页</small>{% endblock %}
+{% block bodylib %}onload="FindReader_onclick();ReadCardAuto_onclick();"{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <form class="form-inline" role="form" action="/" method="post">
+          <p style="display:none;">
+            <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1"
+            width="102" height="126">
+          </object>
+          </p>
+          <p class="text-center">
+            <input class="span6" type="text" name="id" id="id">
+            <button class="btn btn-danger" type="submit">检索</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <h3>
+          <strong>
+            <p class="text-center">
+              共计
+              {{ data_count[0][0] }}
+              份档案，其中
+              {{ data_count[1][0] }}
+              份档案共含有
+              {{ data_count[2][0] }}
+              个图片文件
+            </p>
+          </strong>
+        </h3>
+        <div id="container" style="min-width:700px;height:400px"></div>
+      </div>
+    </div>
+{% endblock %}
+{% block jslib %}
+<script src="/static/js/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '个人统计数据'
+        },
+        subtitle: {
+            text: '数据内容'
+        },
+        xAxis: {
+            categories: ['添加档案信息', '修改档案信息', '扫描档案文件', '批量上传']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '{{ User }}',
+            data: [
+                {{ opr_count1 }},
+                {{ opr_count2 }},
+                {{ opr_count3 }},
+                {{ opr_count4 }}
+            ]
+        }]
+    });
+});
+</script>
+    <script language="javascript" for="SynCardOcx1" event="CardIn( State );">
+{ 
+  if(State == 1)
+  {
+	  document.all['S1'].value=document.all['S1'].value+"读卡成功\r\n";	
+	  document.all['S1'].value=document.all['S1'].value+"姓名:"+SynCardOcx1.NameA +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"性别:"+SynCardOcx1.Sex +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"民族:"+SynCardOcx1.Nation +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"出生日期:"+SynCardOcx1.Born +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"地址:"+SynCardOcx1.Address +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"身份证号:"+SynCardOcx1.CardNo +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"有效期开始:"+SynCardOcx1.UserLifeB +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"有效期结束:"+SynCardOcx1.UserLifeE +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"发证机关:"+SynCardOcx1.Police +"\r\n";
+	  document.all['S1'].value=document.all['S1'].value+"照片文件名:"+SynCardOcx1.PhotoName +"\r\n";
+          var aaa=SynCardOcx1.CardNo;
+          document.getElementById("id").value=aaa;
+  }
+}
+    </script>
+
+    <script language="JavaScript1.2">
+  function FindReader_onclick()
+  {
+  	var str;
+  	str = SynCardOcx1.FindReader();
+  	if (str > 0)
+  	{
+  		if(str>1000)
+  		{
+  			str =document.all['S1'].value+ "读卡器连接在USB " + str+"\r\n" ;
+  		}
+  		else
+  		{
+  			str =document.all['S1'].value+ "读卡器连接在COM " + str+"\r\n" ;
+  		}
+  	}
+  	else
+  	{
+  		str =document.all['S1'].value+ "没有找到读卡器\r\n";
+  	}
+  	document.all['S1'].value=str;
+ 	
+  }
+  function ReadCardAuto_onclick()
+  {
+  	SynCardOcx1.SetloopTime(1000);
+  	SynCardOcx1.SetReadType(1);
+  }
+    </script>
+{% endblock %}

@@ -1,0 +1,110 @@
+﻿{% extends "base.html" %}
+{% block title %}档案查阅<br /><small></small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <form class="form-inline" role="form" action="" method="post">
+          <h3>
+            <p class="text-center">
+            请输入查询密码
+            </p>
+          </h3>
+          <p class="text-center">
+            <input id="code" class="span8" type="text" name="code" style="font-size:40px;line-height:45px;height:50px">
+          </p>
+          <p class="text-center">
+            <button class="btn btn-primary" type="submit">完成</button>
+          </p>
+        </form>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 offset2"><p class="text-center">
+        <input id="a1" type="button" value="1" onclick="a()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="a2" type="button" value="2" onclick="b()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="a3" type="button" value="3" onclick="c()" style="width:22%; height:50px; font-size:25px;"/>
+        <br />
+        <br />
+        <input id="a4" type="button" value="4" onclick="d()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="a5" type="button" value="5" onclick="e()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="a6" type="button" value="6" onclick="f()" style="width:22%; height:50px; font-size:25px;"/>
+        <br />
+        <br />
+        <input id="a7" type="button" value="7" onclick="g()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="a8" type="button" value="8" onclick="h()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="a9" type="button" value="9" onclick="i()" style="width:22%; height:50px; font-size:25px;"/>
+        <br />
+        <br />
+        <input id="a0" type="button" value="0" onclick="j()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="ax" type="button" value="X" onclick="k()" style="width:22%; height:50px; font-size:25px;"/>
+        <input id="ac" type="button" value="删除" onclick="l()" style="width:22%; height:50px; font-size:25px;"/>
+        <br />
+        </p>
+      </div>
+    </div>
+{% endblock %}
+{% block jslib %}
+  <script language="javascript" type="text/javascript">
+    function a()
+    {
+    var a=document.getElementById("a1").value;
+    document.getElementById("code").value+=a;
+    }
+    function b()
+    {
+    var b=document.getElementById("a2").value;
+    document.getElementById("code").value+=b;
+    }
+    function c()
+    {
+    var c=document.getElementById("a3").value;
+    document.getElementById("code").value+=c;
+    }
+    function d()
+    {
+    var d=document.getElementById("a4").value;
+    document.getElementById("code").value+=d;
+    }
+    function e()
+    {
+    var e=document.getElementById("a5").value;
+    document.getElementById("code").value+=e;
+    }
+    function f()
+    {
+    var f=document.getElementById("a6").value;
+    document.getElementById("code").value+=f;
+    }
+    function g()
+    {
+    var g=document.getElementById("a7").value;
+    document.getElementById("code").value+=g;
+    }
+    function h()
+    {
+    var h=document.getElementById("a8").value;
+    document.getElementById("code").value+=h;
+    }
+    function i()
+    {
+    var i=document.getElementById("a9").value;
+    document.getElementById("code").value+=i;
+    }
+    function j()
+    {
+    var j=document.getElementById("a0").value;
+    document.getElementById("code").value+=j;
+    }
+    function k()
+    {
+    var k=document.getElementById("ax").value;
+    document.getElementById("code").value+=k;
+    }
+    function l()
+    {
+    var l=document.getElementById("code").value
+     var ll=l.substring(0,l.length-1);
+     document.getElementById("code").value=ll;
+    }
+    </script>
+{% endblock %}

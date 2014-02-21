@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}档案查阅<br /><small>档案文件</small>{% endblock %}
+{% block content %}
+    <div class="row-fluid">
+      <div class="span8 offset2">
+        <p class="text-center">
+          <a href="/archieve" class="btn btn-primary">
+            返回档案概要
+          </a>
+          <br /><br />
+          {% for row in result %}
+            {% if row[0] == 1: %}
+            <a href="/view_cat/1" class="btn" style="width:60%">
+              就业类: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 2 %}
+            <a href="/view_cat/2" class="btn" style="width:60%">
+              职工历年调整工资审批表: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 3 %}
+            <a href="/view_cat/3" class="btn" style="width:60%">
+              职工登记表: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 4 %}
+            <a href="/view_cat/4" class="btn" style="width:60%">
+              历次调转介绍信: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 5 %}
+            <a href="/view_cat/5" class="btn" style="width:60%">
+              养老保险转移单与解除关系备案登记表: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 6 %}
+            <a href="/view_cat/6" class="btn" style="width:60%">
+              职称材料: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 7 %}
+            <a href="/view_cat/7" class="btn" style="width:60%">
+              学历材料: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 8 %}
+            <a href="/view_cat/8" class="btn" style="width:60%">
+              入党、团及职务变动: {{ row[1] }} 个文件
+            </a>
+            {% elif row[0] == 9 %}
+            <a href="/view_cat/9" class="btn" style="width:60%">
+              其它: {{ row[1] }} 个文件
+            </a>
+            {% endif %}
+            <br />
+          {% endfor %}
+        </p>
+      </div>
+    </div>
+{% endblock %}
+
+

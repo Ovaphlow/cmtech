@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}指定月份退休人员<br /><small></small>{% endblock %}
+{% block content %}
+
+<div class=row-fluid>
+  <div class="span8 offset2">
+    <form method="post" class="form-inline">
+      <input type="text" name="year" placeholder="年份" class="span2">
+      <select name="month" class="span2">
+        <option value="01">一月</option>
+        <option value="02">二月</option>
+        <option value="03">三月</option>
+        <option value="04">四月</option>
+        <option value="05">五月</option>
+        <option value="06">六月</option>
+        <option value="07">七月</option>
+        <option value="08">八月</option>
+        <option value="09">九月</option>
+        <option value="10">十月</option>
+        <option value="11">十一月</option>
+        <option value="12">十二月</option>
+      </select>
+      <button type="submit">确认</button>
+    </form>
+    <table class="table tabel-hover">
+      <thead>
+        <tr>
+          <th>档案号</th>
+          <th>身份证</th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>预退休日期</th>
+          <th>女管理岗位</th>
+          <th>特殊工种</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <td>{{ row[6] }}</td>
+          {% if row[11] == 1 %}
+          <td>是</td>
+          {% else %}
+          <td>否</td>
+          {% endif %}
+          {% if row[12] == 1 %}
+          <td>是</td>
+          {% else %}
+          <td>否</td>
+          {% endif %}
+          <td>
+            <a href=/dangan/{{ row[0] }}>查看档案</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
+{% block jslib %}
+{% endblock %}
