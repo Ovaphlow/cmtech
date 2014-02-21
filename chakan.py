@@ -166,6 +166,118 @@ class ChaKan(MethodView):
             cnx.commit()
             globalvars.close_db(cursor, cnx)
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat1':
+            sql = ('update '
+                'wenjian '
+                'set '
+                'leibie=1 '
+                'where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat2':
+            sql = ('update wenjian set leibie=2 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat3':
+            sql = ('update wenjian set leibie=3 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat4':
+            sql = ('update wenjian set leibie=4 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat5':
+            sql = ('update wenjian set leibie=5 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat6':
+            sql = ('update wenjian set leibie=6 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat7':
+            sql = ('update wenjian set leibie=7 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat8':
+            sql = ('update wenjian set leibie=8 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
+        elif opr == 'movetocat9':
+            sql = ('update wenjian set leibie=9 where '
+                'id=%(pic_id)s')
+            param = {
+                'pic_id': pic_id
+            }
+            cnx = globalvars.connect_db()
+            cursor = cnx.cursor()
+            cursor.execute(sql, param)
+            cnx.commit()
+            globalvars.close_db(cursor, cnx)
+            return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
         else:
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
 
