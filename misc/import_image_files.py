@@ -1,9 +1,8 @@
-#! /usr/bin/env python
 # -*- coding=UTF-8 -*-
 
-source_path = '/home/ovaphlow/srcode/test1'
-target_path = '/home/ovaphlow/srcode/test2'
-path_divider = '/'
+source_path = 'd:\\test1'
+target_path = 'd:\\test2'
+path_divider = '\\'
 
 db_param = {
     'user': 'cmtech',
@@ -56,7 +55,8 @@ def copy_files(path):
             if os.path.exists(t):
                 print 'Exists directory:', t
                 continue
-            os.mkdir (t)
+            os.mkdir(t)
+            print 'Working in directory:', p
             copy_files(p)
         else:
             dir_name = os.path.split(p)[0].split(path_divider)
