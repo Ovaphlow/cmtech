@@ -1,13 +1,14 @@
 # -*- coding=UTF-8 -*-
 
-source_path = 'd:\\test1'
-target_path = 'd:\\test2'
+source_path = 'd:\\other_scanner'
+target_path = 'd:\\cmtech-archieve\\static\\upload'
+backup_path = 'd:\\backup_path'
 path_divider = '\\'
 
 db_param = {
-    'user': 'cmtech',
-    'password': 'cmtech.1123',
-    'host': '125.211.221.215',
+    'user': 'root',
+    'password': 'dsdfjk',
+    'host': '127.0.0.1',
     'database': 'cm_archieve',
 }
 
@@ -72,8 +73,12 @@ def copy_files(path):
             cursor = cnx.cursor()
             cursor.execute(sql, param)
             result = cursor.fetchall()
-            if result == None:
+            if len(result) == 0:
                 print 'No archieve #', dir_name, 'exists'
+                b = os.path.join(backup_path, dir_name)
+                if not os.path.exists(b):
+                    os.mkdir(b)
+                shutil.copyfile(p, os.path.join(backup_path, dir_name, item))
                 continue
             sql = ('insert into wenjian '
                 '(aid, Leibie, WenJianMing, client_access) '
