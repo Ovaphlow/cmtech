@@ -1,7 +1,7 @@
 ﻿{% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
 {% block title %}档案管理系统<br /><small> 首页</small>{% endblock %}
-{% block bodylib %}onload="FindReader_onclick();ReadCardAuto_onclick();"{% endblock %}
+{% block bodylib %}onload="FindReader_onclick();"{% endblock %}
 {% block content %}
     <div class="row-fluid">
       <div class="span8 offset2">
@@ -14,6 +14,7 @@
         <form class="form-inline" role="form" action="/" method="post">
           <p class="text-center">
             <input class="span6" type="text" name="id" id="id">
+            <input class="btn btn-danger" type="button" value="手动读卡" name="ReadCardBtn" onclick="ReadCard_onclick()">
             <button class="btn btn-danger" type="submit">检索</button>
           </p>
         </form>
@@ -84,17 +85,6 @@ $(function () {
 { 
   if(State == 1)
   {
-	  document.all['S1'].value=document.all['S1'].value+"读卡成功\r\n";	
-	  document.all['S1'].value=document.all['S1'].value+"姓名:"+SynCardOcx1.NameA +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"性别:"+SynCardOcx1.Sex +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"民族:"+SynCardOcx1.Nation +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"出生日期:"+SynCardOcx1.Born +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"地址:"+SynCardOcx1.Address +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"身份证号:"+SynCardOcx1.CardNo +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"有效期开始:"+SynCardOcx1.UserLifeB +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"有效期结束:"+SynCardOcx1.UserLifeE +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"发证机关:"+SynCardOcx1.Police +"\r\n";
-	  document.all['S1'].value=document.all['S1'].value+"照片文件名:"+SynCardOcx1.PhotoName +"\r\n";
           var aaa=SynCardOcx1.CardNo;
           document.getElementById("id").value=aaa;
   }
@@ -124,10 +114,16 @@ $(function () {
   	document.all['S1'].value=str;
  	
   }
-  function ReadCardAuto_onclick()
+   function ReadCard_onclick()
   {
-  	SynCardOcx1.SetloopTime(1000);
-  	SynCardOcx1.SetReadType(1);
+	var nRet;
+  	SynCardOcx1.SetReadType(0);
+  	nRet = SynCardOcx1.ReadCardMsg();
+  	if(nRet==0)
+  	{
+          var aaa=SynCardOcx1.CardNo;
+          document.getElementById("id").value=aaa;
+  	}
   }
     </script>
 {% endblock %}
