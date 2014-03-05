@@ -1,3 +1,4 @@
+static/upload/*
 nodejs/hp/node_module/*
 *.pyc
 
