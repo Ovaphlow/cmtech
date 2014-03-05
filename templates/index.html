@@ -1,4 +1,4 @@
-﻿{% extends "base.html" %}
+{% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
 {% block title %}档案管理系统<br /><small> 首页</small>{% endblock %}
 {% block bodylib %}onload="FindReader_onclick();ReadCardAuto_onclick();"{% endblock %}
@@ -81,10 +81,10 @@ $(function () {
 });
 </script>
     <script language="javascript" for="SynCardOcx1" event="CardIn( State );">
-{ 
+{
   if(State == 1)
   {
-	  document.all['S1'].value=document.all['S1'].value+"读卡成功\r\n";	
+	  document.all['S1'].value=document.all['S1'].value+"读卡成功\r\n";
 	  document.all['S1'].value=document.all['S1'].value+"姓名:"+SynCardOcx1.NameA +"\r\n";
 	  document.all['S1'].value=document.all['S1'].value+"性别:"+SynCardOcx1.Sex +"\r\n";
 	  document.all['S1'].value=document.all['S1'].value+"民族:"+SynCardOcx1.Nation +"\r\n";
@@ -122,7 +122,7 @@ $(function () {
   		str =document.all['S1'].value+ "没有找到读卡器\r\n";
   	}
   	document.all['S1'].value=str;
- 	
+
   }
   function ReadCardAuto_onclick()
   {
