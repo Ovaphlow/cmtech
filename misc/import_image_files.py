@@ -1,14 +1,14 @@
 # -*- coding=UTF-8 -*-
 
-source_path = 'd:\\other_scanner'
-target_path = 'd:\\cmtech-archieve\\static\\upload'
-backup_path = 'd:\\backup_path'
+source_path = 'd:\\srcode\\cmtech-archieve\\misc\\1123'
+target_path = 'd:\\srcode\\cmtech-archieve\\misc\\1234'
+backup_path = 'd:\\srcode\\cmtech-archieve\\misc\\backup_path'
 path_divider = '\\'
 
 db_param = {
-    'user': 'root',
-    'password': 'dsdfjk',
-    'host': '127.0.0.1',
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
     'database': 'cm_archieve',
 }
 
@@ -48,6 +48,7 @@ def rename_dir():
 def copy_files(path):
     import os
     import shutil
+    import datetime
 
     for item in os.listdir(path):
         p = os.path.join(path, item)
@@ -62,7 +63,9 @@ def copy_files(path):
         else:
             dir_name = os.path.split(p)[0].split(path_divider)
             dir_name = dir_name[len(dir_name) - 1]
-            t = os.path.join(target_path, dir_name, item)
+            time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+            file_name = '%s.%s' % (time, item.split('.')[-1])
+            t = os.path.join(target_path, dir_name, file_name)
             if os.path.isfile(t):
                 print 'Exists file:', t
                 continue
@@ -78,7 +81,7 @@ def copy_files(path):
                 b = os.path.join(backup_path, dir_name)
                 if not os.path.exists(b):
                     os.mkdir(b)
-                shutil.copyfile(p, os.path.join(backup_path, dir_name, item))
+                shutil.copyfile(p, os.path.join(backup_path, dir_name, t))
                 continue
             sql = ('insert into wenjian '
                 '(aid, Leibie, WenJianMing, client_access) '
@@ -90,7 +93,7 @@ def copy_files(path):
             param = {
                 'archieve_id': result[0][0],
                 'cat': 9,
-                'file_name': item,
+                'file_name': file_name,
                 'client_access': 0
             }
             cursor.execute(sql, param)
