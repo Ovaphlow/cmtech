@@ -54,10 +54,8 @@ def copy_files(path):
         p = os.path.join(path, item)
         if os.path.isdir(p):
             t = os.path.join(target_path, item)
-            if os.path.exists(t):
-                print 'Exists directory:', t
-                continue
-            os.mkdir(t)
+            if not os.path.exists(t):
+                os.mkdir(t)
             print 'Working in directory:', p
             copy_files(p)
         else:
