@@ -202,7 +202,8 @@
   {
      for (var i=0;i<SZ.length;i++)
    {
-   CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"","{{ filepath }}"+SZ[i]+"",1);
+   //CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"","{{ filepath }}"+SZ[i]+"",1);
+    CmCaptureOcx.UpdataFile("{{ url_root }}_upload_image_file?id={{ id }}&cat="+LBvalue+"",SZ[i]+"",1);
    //alert(LBvalue+"/"+SZ[i]);
    }
    SZ.length = 0
