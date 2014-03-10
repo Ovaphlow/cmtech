@@ -3,59 +3,59 @@
 {% block title %}录入档案信息<br /><small>基础信息</small>{% endblock %}
 {% block bodylib %}onload="FindReader_onclick();"{% endblock %}
 {% block content %}
-    <div class="row-fluid">
-      <div class="span8 offset2">
+<div class="row-fluid">
+    <div class="span8 offset2">
         <p>
-          <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1"
-           width="0" height="0">
-          </object>
-          <textarea rows="17" name="S1" cols="82" style="display: none;"></textarea>
+            <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1"
+                    width="0" height="0">
+            </object>
+            <textarea rows="17" name="S1" cols="82" style="display: none;"></textarea>
         </p>
         {% if error %}
         <div class="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>警告</strong> {{ error }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>警告</strong> {{ error }}
         </div>
         {% endif %}
         <form class="form-horizontal" role="form" action="/luru" method="post">
-          <fieldset>
-            <legend>档案基础信息</legend>
-            <div class="control-group">
-              <label class="control-label" for="aid">档案号</label>
-              <div class="controls">
-                <input class="input-small" type="text" id="aid" name="aid">
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="idcard">身份证</label>
-              <div class="controls">
-                <input class="input-large" type="text" id="idcard" name="idcard">
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="name">姓名</label>
-              <div class="controls">
-                <input class="input-small" type="text" id="name" name="name">
-              </div>
-            </div>
-            <div class="control-group">
-              <div class="controls">
-                <label class="checkbox inline">
-                  <input type="checkbox" name="check" value="female"> 女管理岗位
-                </label>
-                <label class="checkbox inline">
-                  <input type="checkbox" name="check" value="stow"> 特殊工种
-                </label>
-              </div>
-            </div>
-            <div class="form-actions">
-              <input type="button" class="btn" value="手动读卡" name="ReadCardBtn" onclick="ReadCard_onclick()">
-              <button type="submit" class="btn btn-danger">确认提交</button>
-            </div>
-          </fieldset>
+            <fieldset>
+                <legend>档案基础信息</legend>
+                <div class="control-group">
+                    <label class="control-label" for="aid">档案号</label>
+                    <div class="controls">
+                        <input class="input-small" type="text" id="aid" name="aid">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="idcard">身份证</label>
+                    <div class="controls">
+                        <input class="input-large" type="text" id="idcard" name="idcard">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="name">姓名</label>
+                    <div class="controls">
+                        <input class="input-small" type="text" id="name" name="name">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="check" value="female"> 女管理岗位
+                        </label>
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="check" value="stow"> 特殊工种
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="button" class="btn" value="读卡" name="ReadCardBtn" onclick="ReadCard_onclick()">
+                    <button type="submit" class="btn btn-danger">确认提交</button>
+                </div>
+            </fieldset>
         </form>
-      </div>
     </div>
+</div>
 {% endblock %}
 {% block jslib %}
 <script language="javascript" for="SynCardOcx1" event="CardIn( State );">
@@ -91,18 +91,18 @@
         }
         document.all['S1'].value=str;
     }
- function ReadCard_onclick()
-  {
-	var nRet;
-  	SynCardOcx1.SetReadType(0);
-  	nRet = SynCardOcx1.ReadCardMsg();
-  	if(nRet==0)
-  	{
-                var idcard=SynCardOcx1.CardNo;
-                document.getElementById("idcard").value=idcard;
-                var name=SynCardOcx1.NameA;
-                document.getElementById("name").value=name;
-  	}
-  }
+    function ReadCard_onclick()
+    {
+        var nRet;
+        SynCardOcx1.SetReadType(0);
+        nRet = SynCardOcx1.ReadCardMsg();
+        if(nRet==0)
+        {
+            var idcard=SynCardOcx1.CardNo;
+            document.getElementById("idcard").value=idcard;
+            var name=SynCardOcx1.NameA;
+            document.getElementById("name").value=name;
+        }
+    }
 </script>
 {% endblock %}
