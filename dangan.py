@@ -54,8 +54,7 @@ class DangAn(MethodView):
         globalvars.close_db(cursor, cnx)
         lp1 = '/saomiao/%s' % (rec_id,)
         lp2 = '/luru/%s' % (rec_id,)
-        return render_template(
-            'dangan.html',
+        return render_template('dangan.html',
             id = rec_id,
             row = data[0],
             link1 = lp1,
@@ -66,8 +65,8 @@ class DangAn(MethodView):
             dob = dob,
             dor = dor,
             cat = cat,
-            User = session['user_name']
-        )
+            User = session['user_name'],
+            pic_count=len(data1))
 
     def post(self, rec_id):
         from flask import request, redirect, session
@@ -135,3 +134,38 @@ class DeleteArchieve(MethodView):
         cnx.commit()
         close_db(cursor, cnx)
         return redirect('/')
+
+
+class DownloadZip(MethodView):
+    def get(self, archieve_id):
+        from flask import render_template
+        import zipfile
+        import os
+        from globalvars import G_UPLOAD_PATH, connect_db, close_db
+
+        sql = ('select danganhao '
+            'from dangan '
+            'where id=%(archieve_id)s')
+        param = {'archieve_id': archieve_id}
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(sql, param)
+        result = cursor.fetchall()
+        archieve_path = os.path.join(G_UPLOAD_PATH, result[0][0])
+        sql = ('select wenjianming '
+            'from wenjian '
+            'where aid=%(archieve_id)s '
+            'and client_access=1')
+        param = {'archieve_id': archieve_id}
+        cursor.execute(sql, param)
+        file_list = cursor.fetchall()
+        zip_file = zipfile.ZipFile(os.path.join(archieve_path, 'file.zip'),
+            'w', zipfile.ZIP_DEFLATED)
+        for f in file_list:
+            zip_file.write(os.path.join(archieve_path, f[0]), f[0])
+        zip_file.close()
+        close_db(cursor, cnx)
+        p = os.path.join(archieve_path, 'file.zip')
+        return render_template('dl_zip.html',
+            archieve_id=archieve_id,
+            archieve=result[0][0])
