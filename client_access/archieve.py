@@ -5,44 +5,32 @@ from flask.views import MethodView
 class Archieve(MethodView):
     def get(self):
         from flask import render_template, session
-        import g_vars
+        from g_vars import connect_db, close_db
 
-        sql = '''
-            SELECT ShenFenZheng,XingMing,YuTuiXiuRiQi
-            FROM dangan
-            WHERE ShenFenZheng=%(idcard)s
-        '''
-        param = {
-            'idcard': session['idcard']
-        }
-        cnx = g_vars.connect_db()
+        sql = ('select ShenFenZheng,XingMing,YuTuiXiuRiQi,id '
+            'from dangan '
+            'where ShenFenZheng=%(idcard)s '
+            'limit 1')
+        param = {'idcard': session['idcard']}
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
-        result = cursor.fetchall()
-        g_vars.close_db(cursor, cnx)
+        archieve = cursor.fetchall()
+        sql = ('select LeiBie,count(*) '
+            'from wenjian '
+            'where aid=%(archieve_id)s '
+            'and client_access=1 '
+            'group by LeiBie ')
+        param = {
+            'archieve_id': archieve[0][3]
+        }
+        cursor.execute(sql, param)
+        cat_list = cursor.fetchall()
+        close_db(cursor, cnx)
         return render_template(
             'archieve.html',
-            row = result[0],
-        )
-
-    def post(self):
-        from flask import redirect, request, session
-        import g_vars
-
-        sql = '''
-            SELECT COUNT(*) FROM access_code
-            WHERE archieve_id=%s AND date=%s
-        '''
-        param = (request.form['idcard'], '2014-01-06')
-        cnx = g_vars.connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(sql, param)
-        result = cursor.fetchall()
-        if result[0][0] == 1:
-            session['idcard'] = request.form['idcard']
-            return redirect('/code')
-        else:
-            return redirect('/')
+            archieve=archieve[0],
+            cat_list=cat_list)
 
 
 class View(MethodView):
@@ -83,10 +71,8 @@ class View(MethodView):
         cursor.execute(sql, param)
         result = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template(
-            'view.html',
-            result = result,
-        )
+        return render_template('view.html',
+            result=result)
 
 
 class ViewCat(MethodView):

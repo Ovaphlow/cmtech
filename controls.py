@@ -70,3 +70,41 @@ class GenCode(MethodView):
         cnx.commit()
         close_db(cursor, cnx)
         return redirect('/dangan/%s' % archieve_id)
+
+
+class Exp2Client(MethodView):
+    def post(self, rec_id):
+        from flask import request, redirect
+        from globalvars import connect_db, close_db
+
+        pic_id = request.form.getlist('pic_id')
+        sql = ('select * '
+            'from wenjian '
+            'where aid=%(archieve_id)s')
+        param = {'archieve_id': rec_id}
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(sql, param)
+        result = cursor.fetchall()
+        for row in result:
+            if str(row[0]) in pic_id:
+                sql = ('UPDATE wenjian '
+                    'SET client_access=%(client_access)s '
+                    'WHERE id=%(pic_id)s')
+                param = {
+                    'client_access': 1,
+                    'pic_id': row[0],
+                }
+                cursor.execute(sql, param)
+            else:
+                sql = ('UPDATE wenjian '
+                    'SET client_access=%(client_access)s '
+                    'WHERE id=%(pic_id)s')
+                param = {
+                    'client_access': 0,
+                    'pic_id': row[0],
+                }
+                cursor.execute(sql, param)
+        cnx.commit()
+        close_db(cursor, cnx)
+        return redirect('/dangan/%s' % (rec_id,))

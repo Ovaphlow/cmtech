@@ -8,7 +8,7 @@
             返回档案概要
           </a>
           <br /><br />
-          {% for row in result %}
+          {% for row in cat_list %}
             {% if row[0] == 1: %}
             <a href="/view_cat/1" class="btn" style="width:60%">
               就业类: {{ row[1] }} 个文件
