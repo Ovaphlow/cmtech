@@ -2,7 +2,7 @@
 {% block title %}档案查阅<br /><small></small>{% endblock %}
 {% block content %}
 <div class="row-fluid">
-    <div class="span8 offset1">
+    <div class="span9 offset1">
         <h2>档案概要</h2>
         <table class="table">
             <tr>
@@ -19,7 +19,7 @@
             </tr>
         </table>
     </div>
-    <div class="span2 offset1">
+    <div class="span2">
         <br />
         <p><a href="/logout" class="btn btn-danger span12">结束查询</a></p>
         <br />
@@ -27,39 +27,39 @@
         {% for row in cat_list %}
         {% if row[0] == 1: %}
         <p><a href="/view_cat/1" class="btn span12">
-          就业类:<br />{{ row[1] }} 个文件
+          就业类：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 2 %}
         <p><a href="/view_cat/2" class="btn span12">
-          职工历年调整工资审批表:<br />{{ row[1] }} 个文件
+          职工历年调整工资审批表：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 3 %}
         <p><a href="/view_cat/3" class="btn span12">
-          职工登记表:<br />{{ row[1] }} 个文件
+          职工登记表：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 4 %}
         <p><a href="/view_cat/4" class="btn span12">
-          历次调转介绍信:<br />{{ row[1] }} 个文件
+          历次调转介绍信：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 5 %}
         <p><a href="/view_cat/5" class="btn span12">
-          养老保险转移单与解除关系备案登记表:<br />{{ row[1] }} 个文件
+          养老保险转移单与解除关系备案登记表：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 6 %}
         <p><a href="/view_cat/6" class="btn span12">
-          职称材料:<br />{{ row[1] }} 个文件
+          职称材料：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 7 %}
         <p><a href="/view_cat/7" class="btn span12">
-          学历材料:<br />{{ row[1] }} 个文件
+          学历材料：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 8 %}
         <p><a href="/view_cat/8" class="btn span12">
-          入党、团及职务变动:<br />{{ row[1] }} 个文件
+          入党、团及职务变动：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% elif row[0] == 9 %}
         <p><a href="/view_cat/9" class="btn span12">
-          其它:<br />{{ row[1] }} 个文件
+          其它：<br />{{ row[1] }} 个文件
         </a></p><br />
         {% endif %}
         <br />

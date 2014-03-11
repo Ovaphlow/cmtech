@@ -1,27 +1,76 @@
 {% extends "base.html" %}
+{% block bodylib %} onload="initDiv();"{% endblock %}
 {% block title %}档案查阅<br /><small>{{ cat_name }}</small>{% endblock %}
-{% block content %}
-    <div class="row-fluid">
-      <div class="span8 offset2">
-        <p class="text-center">
-          <a href="/view" class="btn btn-primary">
-            返回档案文件
-          </a>
-          {% if previous_id %}
-          <a href="/view_cat/{{ cat }}?pic_id={{ previous_id }}" class="btn">
-            上一页
-          </a>
-          {% endif %}
-          {% if next_id %}
-          <a href="/view_cat/{{ cat }}?pic_id={{ next_id }}" class="btn">
-            下一页
-          </a>
-          {% endif %}
-          <br /><br />
-          <img src="{{ fs_root }}/{{ row[1] }}/{{ row[3] }}""
-        </p>
-      </div>
-    </div>
+{% block top_content %}
+<div id = "left" style="position:absolute;z-index:999;border:1px black;height:100px;top:400px;left:40px">
+    <p><a href="#" class="btn btn-success">向上</a></p>
+    <p><a href="#" class="btn btn-success">向下</a></p>
+</div>
 {% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span9 offset1">
+        <h2>档案详情</h2>
+        <p class="text-center">
+            <img src="{{ fs_root }}/{{ row[1] }}/{{ row[3] }}">
+        </p>
+    </div>
+    <div class="span2">
+        <br />
+        <p><a href="/logout" class="btn btn-danger span12">结束查询</a></p>
+        <br />
+        <br />
+        <p>
+            <a href="/archieve" class="btn btn-primary span12">
+            返回档案
+            </a>
+        </p>
+        {% if previous_id %}
+        <p>
+            <a href="/view_cat/{{ cat }}?pic_id={{ previous_id }}" class="btn span12">
+                上一页
+            </a>
+        </p>
+        {% endif %}
+        {% if next_id %}
+        <p>
+            <a href="/view_cat/{{ cat }}?pic_id={{ next_id }}" class="btn span12">
+                下一页
+            </a>
+        </p>
+        {% endif %}
+        <br /><br />
+    </div>
+</div>
+{% endblock %}
+{% block jslib %}
+<script type="text/javascript">
+function initDiv() {
+    moveLeftDiv();
+}
+//获得滚动条滚动的像素
+function getBodyScrollHeight(){
+    if(window.innerHeight){
+        return window.pageYOffset;
+    }
+    else if(document.documentElement&&document.documentElement.scrollTop){
+        return document.documentElement.scrollTop;
+    }
+    else if(document.body){
+        return document.body.scrollTop;
+    }
+}
 
-
+//移动左栏
+function moveLeftDiv(){
+    var el = document.getElementById("left");
+    //得到滚动条滚动的距离
+    var pos= getBodyScrollHeight();
+    var y = 100;
+    //将左栏向下移动pos个像素
+    el.style.top=(y+pos)+"px";
+    //10ms后移动
+    setTimeout("moveLeftDiv();",10);
+}
+</script>
+{% endblock %}
