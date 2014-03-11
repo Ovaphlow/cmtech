@@ -4,8 +4,12 @@ from flask.views import MethodView
 
 class Index(MethodView):
     def get(self):
-        from flask import render_template, session
+        from flask import render_template, session, request
 
+        err = request.args.get('err', 0)
+        if err == '1':
+            return render_template('index.html',
+                error_message=u'身份证输入错误')
         return render_template('index.html')
 
     def post(self):
@@ -30,13 +34,20 @@ class Index(MethodView):
             session['idcard'] = request.form['idcard']
             return redirect('/code')
         else:
-            return redirect('/')
+            return redirect('/?err=1')
 
 
 class Code(MethodView):
     def get(self):
-        from flask import session, render_template
+        from flask import render_template, session, request
 
+        err = request.args.get('err', 0)
+        if err == '1':
+            return render_template('code.html',
+                error_message=u'密码输入错误')
+        elif err == '2':
+            return render_template('code.html',
+                error_message=u'无可用密码，请到柜台查询。')
         return render_template('code.html')
 
     def post(self):
@@ -68,9 +79,9 @@ class Code(MethodView):
         cursor.execute(sql, param)
         result = cursor.fetchall()
         if result == None:
-            return redirect('/code')
+            return redirect('/code?err=2')
         if result[0][2] != request.form['code']:
-            return redirect('/code')
+            return redirect('/code?err=1')
         session['code'] = request.form['code']
         return redirect('/archieve')
 
