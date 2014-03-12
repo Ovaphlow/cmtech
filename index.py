@@ -10,23 +10,23 @@ class Index(MethodView):
 
         if not 'user_id' in session:
             return redirect('/login')
-        sql = '''
-            SELECT COUNT(*) FROM dangan
-            UNION
-            SELECT COUNT(*) FROM (
-                SELECT d.id
-                FROM dangan d
-                INNER JOIN wenjian w
-                ON d.id=w.aid
-                GROUP BY d.id
-            ) AS a
-            UNION
-            SELECT COUNT(*) FROM wenjian
-        '''
+        sql = 'select count(*) from dangan'
         cnx = globalvars.connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
-        data_count = cursor.fetchall()
+        data_count1 = cursor.fetchall()
+        sql = ('select count(*) '
+            'from ('
+            'select d.id '
+            'from dangan d '
+            'inner join wenjian w '
+            'on d.id=w.aid '
+            'group by d.id) as a')
+        cursor.execute(sql)
+        data_count2 = cursor.fetchall()
+        sql = 'select count(*) from wenjian'
+        cursor.execute(sql)
+        data_count3 = cursor.fetchall()
         sql = '''
             select
                 caozuo, count(*)
@@ -57,7 +57,9 @@ class Index(MethodView):
         return render_template(
             'index.html',
             User = session['user_name'],
-            data_count = data_count,
+            data_count1 = data_count1,
+            data_count2 = data_count2,
+            data_count3 = data_count3,
             opr_count1 = opr_count1,
             opr_count2 = opr_count2,
             opr_count3 = opr_count3,
