@@ -1,4 +1,4 @@
-# -*- coding=UTF-8 -*-
+﻿# -*- coding=UTF-8 -*-
 import os
 
 
@@ -9,7 +9,7 @@ jinja_env = jinja2.Environment(
 
 cnx_cfg = {
     'user': 'root',
-    'password': '',
+    'password': 'root',
     'host': 'localhost',
     'database': 'cm_archieve',
 }
