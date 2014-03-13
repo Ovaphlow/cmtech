@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+﻿{% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
 {% block title %}个人档案<br /><small>基本信息</small>{% endblock %}
 {% block content %}
@@ -117,7 +117,7 @@
                     {% endfor %}
                 </ul>
                 <p class="text-right">
-                    <input id="checkAll" type="checkbox" onClick="" /> 全选
+                    <input id="checkAll" type="checkbox" onclick="selectAll(this);" /> 全选
                     <button type="submit" class="btn btn-primary">调整终端可见状态</button>
                 </p>
             </form>
@@ -197,4 +197,15 @@
         }
     }
 </script>
+ <script type="text/javascript" src="/static/js/jquery-1.4.4.min.js"></script>
+
+    <script type="text/javascript">  
+ 
+             function selectAll(checkbox) {  
+ 
+                 $('input[type=checkbox]').attr('checked', $(checkbox).attr('checked'));  
+ 
+             }  
+ 
+    </script>
 {% endblock %}
