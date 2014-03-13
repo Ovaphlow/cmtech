@@ -2,8 +2,8 @@
 
 cnx_param = {
     'user': 'root',
-    'password': 'root',
-    'host': '127.0.0.1',
+    'password': '',
+    'host': 'localhost',
     'database': 'cm_archieve',
 }
 """
