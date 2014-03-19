@@ -3,8 +3,8 @@
 {% block title %}档案查阅<br /><small>{{ cat_name }}</small>{% endblock %}
 {% block top_content %}
 <div id = "left" style="position:absolute;z-index:999;border:1px black;height:100px;top:400px;left:40px">
-    <p><a id="downText" class="btn btn-success">向下 </a></p>
     <p><a id="upText" class="btn btn-success">向上 </a></p>
+    <p><a id="downText" class="btn btn-success">向下 </a></p>
 </div>
 {% endblock %}
 {% block content %}
@@ -73,21 +73,21 @@ function moveLeftDiv(){
     setTimeout("moveLeftDiv();",10);
 }
 </script>
-<script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>
+<!--<script type="text/javascript" src="/static/js/jquery-1.4.2.js"></script>-->
 <script>
-			$(function(){
-				$("#downButton").click(function(){
-					window.scrollBy(0,200);//使用javascript控制，没有使用jquery控制
-				});
-				$("#upButton").click(function(){
-					window.scrollBy(0,-200);
-				});
-				$("#downText").click(function(){
-					window.scrollBy(0,200);
-				});
-				$("#upText").click(function(){
-					window.scrollBy(0,-200);
-				});
-			});	
-    </script>
+$(function(){
+	$("#downButton").click(function(){
+		window.scrollBy(0,200);//使用javascript控制，没有使用jquery控制
+	});
+	$("#upButton").click(function(){
+		window.scrollBy(0,-200);
+	});
+	$("#downText").click(function(){
+		window.scrollBy(0,200);
+	});
+	$("#upText").click(function(){
+		window.scrollBy(0,-200);
+	});
+});
+</script>
 {% endblock %}

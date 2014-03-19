@@ -1,9 +1,9 @@
 ﻿# -*- coding=UTF-8 -*-
 
 cnx_param = {
-    'user': 'root',
-    'password': '',
-    'host': 'localhost',
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
     'database': 'cm_archieve',
 }
 """
