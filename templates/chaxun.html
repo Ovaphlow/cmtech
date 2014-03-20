@@ -3,69 +3,69 @@
 {% block title %}综合查询<br /><small>由于记录数量较大，所以查询结果限制在100个。如有需要请根据情况精确查询条件。</small>{% endblock %}
 {% block content %}
 <div class="row-fluid">
-    <div class="span8 offset2">
-        <form action="" method="post">
-            <input name="DangAnHao" class="span4" type="text" placeholder="档案号">
-            <br />
-            <input name="ShenFenZheng" class="span4" type="text" placeholder="身份证">
-            <input name="XingMing" class="span3" type="text" placeholder="姓名">
-            <select name="XingBie" class="span2" type="text" id="gender">
-                <option value="0">不限</option>
-                <option value="male">男</option>
-                <option value="female">女</option>
-            </select>
-            <br />
-            <label class="checkbox">
-                <input type="checkbox" name="check" value="ngl">
-                女管理岗位
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" name="check" value="stow">
-                特殊工种
-            </label>
-            <br />
-            <button type="reset" class="btn">重置</button>
-            <button type="submit" class="btn btn-danger">提交</button>
-        </form>
-        <table class="table tabel-hover">
-            <caption></caption>
-            <thead>
-                <tr>
-                    <th>档案号</th>
-                    <th>身份证</th>
-                    <th>姓名</th>
-                    <th>性别</th>
-                    <th>预退休日期</th>
-                    <th>特殊工种</th>
-                    <th>扫描档案</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in data %}
-                <tr>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
-                    <td>{{ row[6] }}</td>
-                    {% if row[11] == 1 %}
-                    <td>是</td>
-                    {% else %}
-                    <td>否</td>
-                    {% endif %}
-                    {% if row[13] >0 %}
-                    <td>是 ({{ row[13] }})</td>
-                    {% else %}
-                    <td><p class="text-error">否</p></td>
-                    {% endif %}
-                    <td>
-                        <a href=/dangan/{{ row[0] }}>查看档案</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+  <div class="span8 offset2">
+    <form action="" method="post">
+      <input name="DangAnHao" class="span4" type="text" placeholder="档案号">
+      <br />
+      <input name="ShenFenZheng" class="span4" type="text" placeholder="身份证">
+      <input name="XingMing" class="span3" type="text" placeholder="姓名">
+      <select name="XingBie" class="span2" type="text" id="gender">
+        <option value="0">不限</option>
+        <option value="male">男</option>
+        <option value="female">女</option>
+      </select>
+      <br />
+      <label class="checkbox">
+        <input type="checkbox" name="check" value="ngl">
+        女管理岗位
+      </label>
+      <label class="checkbox">
+        <input type="checkbox" name="check" value="stow">
+        特殊工种
+      </label>
+      <br />
+      <button type="reset" class="btn">重置</button>
+      <button type="submit" class="btn btn-danger">提交</button>
+    </form>
+    <table class="table tabel-hover">
+      <caption></caption>
+      <thead>
+        <tr>
+          <th>档案号</th>
+          <th>身份证</th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>预退休日期</th>
+          <th>特殊工种</th>
+          <th>扫描档案</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <td>{{ row[6] }}</td>
+          {% if row[11] == 1 %}
+          <td>是</td>
+          {% else %}
+          <td>否</td>
+          {% endif %}
+          {% if row[13] >0 %}
+          <td>是 ({{ row[13] }})</td>
+          {% else %}
+          <td><p class="text-error">否</p></td>
+          {% endif %}
+          <td>
+            <a href=/dangan/{{ row[0] }}>查看档案</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
