@@ -50,7 +50,7 @@ class TongJi(MethodView):
         param = {
             'now_month': datetime.datetime.now().strftime('%Y-%m') + '%'
         }
-        cursor.execute(sql_2)
+        cursor.execute(sql_2, param)
         result_2 = cursor.fetchall()
         close_db(cursor, cnx)
         return render_template(
