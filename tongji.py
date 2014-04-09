@@ -61,3 +61,43 @@ class TongJi(MethodView):
             counter_2 = result_2,
             sum_2 = len(result_2)
         )
+
+
+class TongjiMonth(MethodView):
+    def get(self):
+        from flask import render_template, session, request
+        from globalvars import connect_db, close_db
+        import datetime
+
+        if not 'user_id' in session:
+            return redirect('/login')
+        year = request.args.get('year')
+        month = request.args.get('month')
+        sql = 'select u.MingCheng, (' + \
+            'select count(*) ' + \
+            'from cm_archieve.caozuo_jilu c ' + \
+            'where c.yh_id=u.id and c.RiQi like "' + \
+            year + '-' + month + '%"' + \
+            ') as cur_mongth ' + \
+            'from cm_archieve.user u'
+        param = {
+            'month': '%s-%s' % (year, month) + '%'
+        }
+        print sql
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(sql)
+        res = cursor.fetchall()
+        print res
+        close_db(cursor, cnx)
+        return render_template('tongji_month.html',
+            counter_1 = res,
+            sum_1 = len(res))
+
+    def post(self):
+        from flask import request, redirect
+
+        year = request.form['year']
+        month = request.form['month']
+
+        return redirect('/tongji_month/?year=%s&month=%s' % (year, month))

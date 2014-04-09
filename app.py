@@ -53,6 +53,9 @@ app.add_url_rule('/exp2client/<rec_id>',
     view_func=controls.Exp2Client.as_view('exp2client'))
 app.add_url_rule('/dl_zip/<archieve_id>',
     view_func=dangan.DownloadZip.as_view('dl_zip'))
+app.add_url_rule('/tongji_month',
+    view_func=tongji.TongjiMonth.as_view('tongji_month'))
+
 
 if __name__ == '__main__':
     app.run()
