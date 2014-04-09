@@ -2,24 +2,24 @@
 {% block user %}{{ User }}{% endblock %}
 {% block title %}统计<br /><small></small>{% endblock %}
 {% block content %}
-<form>
+<form class="form-inline">
   <p class="text-center">
-  <input type="text" name="year" class="span2">年
-  <select name="month" class="span2">
-    <option value="01">一月</option>
-    <option value="02">二月</option>
-    <option value="03">三月</option>
-    <option value="04">四月</option>
-    <option value="05">五月</option>
-    <option value="06">六月</option>
-    <option value="07">七月</option>
-    <option value="08">八月</option>
-    <option value="09">九月</option>
-    <option value="10">十月</option>
-    <option value="11">十一月</option>
-    <option value="12">十二月</option>
-  </select>
-  <button class="btn btn-primary" value="submit">确认</button>
+    <input type="text" name="year" class="span2">年
+    <select name="month" class="span2">
+      <option value="01">一月</option>
+      <option value="02">二月</option>
+      <option value="03">三月</option>
+      <option value="04">四月</option>
+      <option value="05">五月</option>
+      <option value="06">六月</option>
+      <option value="07">七月</option>
+      <option value="08">八月</option>
+      <option value="09">九月</option>
+      <option value="10">十月</option>
+      <option value="11">十一月</option>
+      <option value="12">十二月</option>
+    </select>
+    <button class="btn btn-primary" value="submit">确认</button>
   </p>
 </form>
 <div class="row-fluid">
@@ -37,7 +37,7 @@ $(function () {
             type: 'bar'
         },
         title: {
-            text: '月份操作统计'
+            text: '月份操作统计（{{ date }}）'
         },
         subtitle: {
             text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
@@ -67,7 +67,7 @@ $(function () {
             }
         },
         series: [{
-            name: '月份操作统计',
+            name: '月份操作统计（{{ date }}）',
             data: [
             {% for row in counter_1 %}
                 {% if row == counter_1[sum_1 - 1] %}

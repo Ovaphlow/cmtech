@@ -22,106 +22,107 @@
   </form>
 </div>
 <div class="row-fluid">
-    <div class="span3" style="background-color:#E0E0F8">
-      <h4>基础信息</h4>
+  <div class="span3" style="background-color:#E0E0F8">
+    <h4>基础信息</h4>
+    <hr />
+    <dl class="dl">
+      <dt>档案号</dt>
+      <dd>{{ row[1] }}</dd>
+    </dl>
+    <form class="form-horizontal" role="form" action="/dangan/{{ id }}" method="post">
+      <input type="hidden" name="hidden1" id="hidden1" value="{{ row[4] }}" />
+      <input type="hidden" name="hidden2" id="hidden2" value="{{ dob[0] }}" />
+      <dl class="dl">
+        <dt>身份证</dt>
+        <dd><input type="text" name="shenfenzheng" value="{{ row[2] }}" class="span10" /></dd>
+      </dl>
+      <dl class="dl">
+        <dt>姓名</dt>
+        <dd><input class="span10" type="text" name="xingming" value="{{ row[3] }}" /></dd>
+      </dl>
+      <dl class="dl">
+        <dt>性别</dt>
+        <dd>{{ row[4] }}</dd>
+      </dl>
+      <h4>附加信息</h4>
       <hr />
       <dl class="dl">
-        <dt>档案号</dt>
-        <dd>{{ row[1] }}</dd>
+        <dt>出生日期</dt>
+        <dd>
+          <input id="dob-year" onblur="check_year()" class="span3" type="text" name="dob-year" placeholder="年" value="{{ dob[0] }}">
+          <input id="dob-month" onblur="check_month()" class="span3" type="text" name="dob-month" placeholder="月" value="{{ dob[1] }}">
+          <input id="dob-date" onblur="check_date()" class="span3" type="text" name="dob-date" placeholder="日" value="{{ dob[2] }}">
+        </dd>
       </dl>
-      <form class="form-horizontal" role="form" action="/dangan/{{ id }}" method="post">
-        <input type="hidden" name="hidden1" id="hidden1" value="{{ row[4] }}" />
-        <input type="hidden" name="hidden2" id="hidden2" value="{{ dob[0] }}" />
-        <dl class="dl">
-          <dt>身份证</dt>
-          <dd><input type=text name=shenfenzheng value="{{ row[2] }}" /></dd>
-        </dl>
-        <dl class="dl">
-          <dt>姓名</dt>
-          <dd><input class=input-mini type=text name=xingming value={{ row[3] }} /></dd>
-        </dl>
-        <dl class="dl">
-          <dt>性别</dt>
-          <dd>{{ row[4] }}</dd>
-        </dl>
-        <h4>附加信息</h4>
-        <hr />
-        <dl class="dl">
-          <dt>出生日期</dt>
-          <dd>
-            <input id="dob-year" onblur="check_year()" class="input-mini" type="text" name="dob-year" placeholder="年" value="{{ dob[0] }}">
-            <input id="dob-month" onblur="check_month()" class="input-mini" type="text" name="dob-month" placeholder="月" value="{{ dob[1] }}">
-            <input id="dob-date" onblur="check_date()" class="input-mini" type="text" name="dob-date" placeholder="日" value="{{ dob[2] }}">
-          </dd>
-        </dl>
-        <dl class="dl">
-          <dt>预退休日期</dt>
-          <dd>
-            <input class="input-mini" type="text" name="dor-year" placeholder="年" value="{{ dor[0] }}" id="dor-year">
-            <input class="input-mini" type="text" name="dor-month" placeholder="月" value="{{ dor[1] }}" id="dor-month">
-            <input class="input-mini" type="text" name="dor-date" placeholder="日" value="{{ dor[2] }}" id="dor-date">
-          </dd>
-        </dl>
-        {% if row[4] == '女' %}
-        <dl class="dl">
-          <dt>是否为女管理岗位</dt>
-          <dd>
-            <input id="female" type="checkbox" name="check" value="female" onClick="check_female()"{% if row[10] == 1 %} checked{% endif %}>
-          </dd>
-        </dl>
-        {% endif %}
-        <dl class="dl">
-          <dt>是否为特殊工种</dt>
-          <dd>
-            <input id="stow" type="checkbox" name="check" value="stow" onClick="check_stow()"{% if row[11] == 1 %} checked{% endif %}>
-          </dd>
-        </dl>
-        <dl class="dl">
-          <dt></dt>
-          <dd>
-            <button type="submit" class="btn btn-danger">确认提交</button>
-          </dd>
-        </dl>
-      </form>
-    </div>
+      <dl class="dl">
+        <dt>预退休日期</dt>
+        <dd>
+          <input class="span3" type="text" name="dor-year" placeholder="年" value="{{ dor[0] }}" id="dor-year">
+          <input class="span3" type="text" name="dor-month" placeholder="月" value="{{ dor[1] }}" id="dor-month">
+          <input class="span3" type="text" name="dor-date" placeholder="日" value="{{ dor[2] }}" id="dor-date">
+        </dd>
+      </dl>
+      {% if row[4] == '女' %}
+      <dl class="dl">
+        <dt>是否为女管理岗位</dt>
+        <dd>
+          <input id="female" type="checkbox" name="check" value="female" onClick="check_female()"{% if row[10] == 1 %} checked{% endif %}>
+        </dd>
+      </dl>
+      {% endif %}
+      <dl class="dl">
+        <dt>是否为特殊工种</dt>
+        <dd>
+          <input id="stow" type="checkbox" name="check" value="stow" onClick="check_stow()"{% if row[11] == 1 %} checked{% endif %}>
+        </dd>
+      </dl>
+      <dl class="dl">
+        <dt></dt>
+        <dd>
+          <button type="submit" class="btn btn-danger">确认提交</button>
+        </dd>
+      </dl>
+    </form>
+  </div>
   <div class="span9" style="background-color:#FBEFF2">
     <form action="/dangan/{{ id }}" method="get" class="form-horizontal">
       <p class=text-center>
         <select name="cat" value="1" id="selCat" onChange="selOnChange()">
           <option value="0"{% if cat == '0' %} selected{% endif %}>所有</option>
-          <option value=1{% if cat == '1' %} selected{% endif %}>就业类</option>
-          <option value=2{% if cat == '2' %} selected{% endif %}>职工历年调整工资审批表</option>
-          <option value=3{% if cat == '3' %} selected{% endif %}>职工登记表</option>
-          <option value=4{% if cat == '4' %} selected{% endif %}>历次调转介绍信</option>
-          <option value=5{% if cat == '5' %} selected{% endif %}>养老保险转移单与解除关系备案登记表</option>
-          <option value=6{% if cat == '6' %} selected{% endif %}>职称材料</option>
-          <option value=7{% if cat == '7' %} selected{% endif %}>学历材料</option>
-          <option value=8{% if cat == '8' %} selected{% endif %}>入党、团及职务变动</option>
-          <option value=9{% if cat == '9' %} selected{% endif %}>其它</option>
+          <option value="1"{% if cat == '1' %} selected{% endif %}>就业类</option>
+          <option value="2"{% if cat == '2' %} selected{% endif %}>职工历年调整工资审批表</option>
+          <option value="3"{% if cat == '3' %} selected{% endif %}>职工登记表</option>
+          <option value="4"{% if cat == '4' %} selected{% endif %}>历次调转介绍信</option>
+          <option value="5"{% if cat == '5' %} selected{% endif %}>养老保险转移单与解除关系备案登记表</option>
+          <option value="6"{% if cat == '6' %} selected{% endif %}>职称材料</option>
+          <option value="7"{% if cat == '7' %} selected{% endif %}>学历材料</option>
+          <option value="8"{% if cat == '8' %} selected{% endif %}>入党、团及职务变动</option>
+          <option value="9"{% if cat == '9' %} selected{% endif %}>其它</option>
         </select>
         <button type="submit" class="btn">确认</button>
       </p>
     </form>
-    <div class="row-fluid">
-      <p class="text-left">共有{{ pic_count }}个图片。下载[ <a href="/dl_zip/{{ id }}">导出文件压缩包</a> ]</p>
+      <p>共有{{ pic_count }}个图片。下载[ <a href="/dl_zip/{{ id }}">导出文件压缩包</a> ]</p>
       <form action="/exp2client/{{ id }}" method="post">
-        <ul class="thumbnails">
-          <br />
-          {% for row1 in data1: %}
+      <div class="row-fluid">
+        {% for row1 in data1: %}
+        {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
           <li class="span3">
-            <a href="/chakan/{{ id }}?pic_id={{ row1[0] }}" class="thumbnail">
-              <img data-src="holder.js/260x120" alt="" src={{ fs_root }}/{{ aid }}/{{ row1[3] }}>
-            </a>
-            <label><input name="pic_id" type="checkbox" value="{{ row1[0] }}"{% if row1[4] == 1 %} checked{% endif %} /> 终端可见</label>
+            <div class="thumbnail">
+              <a href="/chakan/{{ id }}?pic_id={{ row1[0] }}">
+                <img alt="" src="{{ fs_root }}/{{ aid }}/{{ row1[3] }}">
+              </a>
+              <label><input name="pic_id" type="checkbox" value="{{ row1[0] }}"{% if row1[4] == 1 %} checked{% endif %} /> 终端可见</label>
+            </div>
           </li>
-          {% endfor %}
-        </ul>
+        {% if loop.index % 4 == 0 %}</ul>{% endif %}
+        {% endfor %}
+      </div>
         <p class="text-right">
           <input id="checkAll" type="checkbox" onclick="selectAll(this);" /> 全选
           <button type="submit" class="btn btn-primary">调整终端可见状态</button>
         </p>
       </form>
-    </div>
   </div>
 </div>
 {% endblock %}

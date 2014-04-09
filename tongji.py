@@ -32,34 +32,12 @@ class TongJi(MethodView):
         '''
         cursor.execute(sql_1)
         result_1 = cursor.fetchall()
-        sql_2 = '''
-            select
-                u.MingCheng,(
-                    select
-                        count(*)
-                    from
-                        cm_archieve.caozuo_jilu c
-                    where
-                        c.yh_id=u.id
-                        and
-                        c.RiQi like "%(now_month)s"
-                ) as cur_mongth
-            from
-                cm_archieve.user u
-        '''
-        param = {
-            'now_month': datetime.datetime.now().strftime('%Y-%m') + '%'
-        }
-        cursor.execute(sql_2, param)
-        result_2 = cursor.fetchall()
         close_db(cursor, cnx)
         return render_template(
             'tongji.html',
             User = session['user_name'],
             counter_1 = result_1,
-            sum_1 = len(result_1),
-            counter_2 = result_2,
-            sum_2 = len(result_2)
+            sum_1 = len(result_1)
         )
 
 
@@ -71,8 +49,8 @@ class TongjiMonth(MethodView):
 
         if not 'user_id' in session:
             return redirect('/login')
-        year = request.args.get('year')
-        month = request.args.get('month')
+        year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
+        month = request.args.get('month', datetime.datetime.now().strftime('%m'))
         sql = 'select u.MingCheng, (' + \
             'select count(*) ' + \
             'from cm_archieve.caozuo_jilu c ' + \
@@ -83,16 +61,15 @@ class TongjiMonth(MethodView):
         param = {
             'month': '%s-%s' % (year, month) + '%'
         }
-        print sql
         cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         res = cursor.fetchall()
-        print res
         close_db(cursor, cnx)
         return render_template('tongji_month.html',
             counter_1 = res,
-            sum_1 = len(res))
+            sum_1 = len(res),
+            date = '%s-%s' % (year, month))
 
     def post(self):
         from flask import request, redirect
