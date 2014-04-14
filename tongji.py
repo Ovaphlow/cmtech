@@ -37,7 +37,6 @@ class TongJi(MethodView):
             'tongji.html',
             User = session['user_name'],
             counter_1 = result_1,
-            sum_1 = len(result_1)
         )
 
 
@@ -68,7 +67,6 @@ class TongjiMonth(MethodView):
         close_db(cursor, cnx)
         return render_template('tongji_month.html',
             counter_1 = res,
-            sum_1 = len(res),
             date = '%s-%s' % (year, month))
 
     def post(self):

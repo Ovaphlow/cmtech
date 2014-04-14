@@ -27,13 +27,13 @@ $(function () {
         },
         xAxis: {
             categories: [
-            {% for row in counter_1 %}
-                {% if row == counter_1[sum_1 - 1] %}
+            {%- for row in counter_1 -%}
+                {%- if loop.last -%}
                 '{{ row[1] }}'
-                {% else %}
+                {% else -%}
                 '{{ row[1] }}',
-                {% endif %}
-            {% endfor %}
+                {% endif -%}
+            {%- endfor -%}
             ]
         },
         yAxis: {
@@ -52,13 +52,13 @@ $(function () {
         series: [{
             name: '总量数据',
             data: [
-            {% for row in counter_1 %}
-                {% if row == counter_1[sum_1 - 1] %}
+            {%- for row in counter_1 -%}
+                {%- if loop.last -%}
                 {{ row[2] }}
-                {% else %}
+                {%- else -%}
                 {{ row[2] }},
-                {% endif %}
-            {% endfor %}
+                {%- endif -%}
+            {%- endfor -%}
             ]
         }]
     });

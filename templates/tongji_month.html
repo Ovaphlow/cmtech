@@ -44,13 +44,13 @@ $(function () {
         },
         xAxis: {
             categories: [
-            {% for row in counter_1 %}
-                {% if row == counter_1[sum_1 - 1] %}
+            {%- for row in counter_1 -%}
+                {%- if loop.last -%}
                 '{{ row[0] }}'
-                {% else %}
+                {%- else -%}
                 '{{ row[0] }}',
-                {% endif %}
-            {% endfor %}
+                {%- endif -%}
+            {%- endfor -%}
             ]
         },
         yAxis: {
@@ -69,13 +69,13 @@ $(function () {
         series: [{
             name: '月份操作统计（{{ date }}）',
             data: [
-            {% for row in counter_1 %}
-                {% if row == counter_1[sum_1 - 1] %}
+            {%- for row in counter_1 -%}
+                {%- if loop.last -%}
                 {{ row[1] }}
-                {% else %}
+                {%- else -%}
                 {{ row[1] }},
-                {% endif %}
-            {% endfor %}
+                {%- endif -%}
+            {%- endfor -%}
             ]
         }]
     });
