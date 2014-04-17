@@ -48,26 +48,39 @@ class TongjiMonth(MethodView):
 
         if not 'user_id' in session:
             return redirect('/login')
-        year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
-        month = request.args.get('month', datetime.datetime.now().strftime('%m'))
-        sql = 'select u.MingCheng, (' + \
-            'select count(*) ' + \
-            'from cm_archieve.caozuo_jilu c ' + \
-            'where c.yh_id=u.id and c.RiQi like "' + \
-            year + '-' + month + '%"' + \
-            ') as cur_mongth ' + \
-            'from cm_archieve.user u'
+        _year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
+        _month = request.args.get('month', datetime.datetime.now().strftime('%m'))
+        _date = '%s-%s' % (_year, _month)
+        # sql = 'select u.MingCheng, (' + \
+        #     'select count(*) ' + \
+        #     'from cm_archieve.caozuo_jilu c ' + \
+        #     'where c.yh_id=u.id and c.RiQi like "' + \
+        #     year + '-' + month + '%"' + \
+        #     ') as cur_mongth ' + \
+        #     'from cm_archieve.user u'
+        sql = ('select u.MingCheng,('
+            'select count(*) as yh_count '
+            'from ('
+            'select yh_id,count(*) '
+            'from cm_archieve.caozuo_jilu c '
+            'where c.caozuo="上传图片" '
+            'and locate(%(date)s,c.riqi) > 0 '
+            'group by yh_id,neirong '
+            ') as yh '
+            'where yh.yh_id=u.id '
+            ') as yh_count '
+            'from cm_archieve.user as u')
         param = {
-            'month': '%s-%s' % (year, month) + '%'
+            'date': _date
         }
         cnx = connect_db()
         cursor = cnx.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, param)
         res = cursor.fetchall()
         close_db(cursor, cnx)
         return render_template('tongji_month.html',
-            counter_1 = res,
-            date = '%s-%s' % (year, month))
+            counter_1=res,
+            date=_date)
 
     def post(self):
         from flask import request, redirect
