@@ -115,13 +115,18 @@ def caozuo_jilu(user_id, caozuo, neirong):
 
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     time = datetime.datetime.now().strftime('%HH%MM%SS')
-    sql = '''
-        INSERT INTO caozuo_jilu
-        (yh_id, CaoZuo, NeiRong, RiQi, ShiJian)
-        VALUES(%s,%s,%s,%s,%s)
-    '''
+    sql = ('insert into caozuo_jilu '
+        '(yh_id,CaoZuo,NeiRong,RiQi,ShiJian) '
+        'values (%(yh_id)s,%(caozuo)s,%(neirong)s,'
+        '%(riqi)s),%(shijian)s)')
     uid = int(user_id)
-    param = (uid, caozuo, neirong, date, time)
+    param = {
+        'yh_id': uid,
+        'caozuo': caozuo,
+        'neirong': neirong,
+        'riqi': date,
+        'shijian': time
+    }
     cnx = connect_db()
     cursor = cnx.cursor()
     cursor.execute(sql, param)

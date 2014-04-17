@@ -31,7 +31,7 @@ class UploadImageFile(MethodView):
         cnx.commit()
         globalvars.close_db(cursor, cnx)
         globalvars.rotate_image(fp)
-        globalvars.caozuo_jilu(session['user_id'], u'上传图片', fp)
+        globalvars.caozuo_jilu(session['user_id'], u'上传图片', rec_id)
         return '完成'
 
 

@@ -64,7 +64,7 @@ class ShangChuan(MethodView):
                 '''
                 param = (rec_id, cat, fn)
                 cursor.execute(sql, param)
-                globalvars.caozuo_jilu(session['user_id'], u'批量上传', fn)
+                globalvars.caozuo_jilu(session['user_id'], u'批量上传', rec_id)
         cnx.commit()
         globalvars.close_db(cursor, cnx)
         return '[%s]上传完成' % (fn)

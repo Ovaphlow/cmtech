@@ -23,12 +23,10 @@ class LuRu(MethodView):
             s = 1
         if 'stow' in request.form.getlist('check'):
             t = 1
-        print request.form['idcard']
         if len(request.form['idcard']) == 15:
             idcard_18 = globalvars.idcard_convert(request.form['idcard'])
         else:
             idcard_18 = request.form['idcard']
-        print idcard_18
         dob = idcard_18[6:14]
         if int(idcard_18[16:17]) % 2 == 1:
             gender = u'男'
