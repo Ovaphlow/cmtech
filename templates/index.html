@@ -35,7 +35,7 @@
                 </p>
             </strong>
         </h3>
-        <div id="container" style="min-width:700px;height:400px"></div>
+        <div id="container"></div>
     </div>
 </div>
 {% endblock %}
@@ -45,7 +45,7 @@
     $(function () {
         $('#container').highcharts({
             chart: {
-                type: 'column'
+                type: 'bar'
             },
             title: {
                 text: '个人统计数据'

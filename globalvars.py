@@ -118,7 +118,7 @@ def caozuo_jilu(user_id, caozuo, neirong):
     sql = ('insert into caozuo_jilu '
         '(yh_id,CaoZuo,NeiRong,RiQi,ShiJian) '
         'values (%(yh_id)s,%(caozuo)s,%(neirong)s,'
-        '%(riqi)s),%(shijian)s)')
+        '%(riqi)s,%(shijian)s)')
     uid = int(user_id)
     param = {
         'yh_id': uid,
