@@ -51,13 +51,6 @@ class TongjiMonth(MethodView):
         _year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
         _month = request.args.get('month', datetime.datetime.now().strftime('%m'))
         _date = '%s-%s' % (_year, _month)
-        # sql = 'select u.MingCheng, (' + \
-        #     'select count(*) ' + \
-        #     'from cm_archieve.caozuo_jilu c ' + \
-        #     'where c.yh_id=u.id and c.RiQi like "' + \
-        #     year + '-' + month + '%"' + \
-        #     ') as cur_mongth ' + \
-        #     'from cm_archieve.user u'
         sql = ('select u.MingCheng,('
             'select count(*) as yh_count '
             'from ('
