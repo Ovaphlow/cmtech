@@ -3,14 +3,12 @@
 {% block title %}个人档案<br /><small>基本信息</small>{% endblock %}
 {% block content %}
 <div class="row-fluid">
-  <p class="text-center">
-    <a href="{{ link1 }}" class="btn btn-primary">扫描该档案</a>
-    <a href="/shangchuan/{{ id }}" class="btn btn-success">上传该档案</a>
-    <a href="/gen_code/{{ id }}" class="btn btn-inverse">查询密码({{ row[13] }})</a>
-  </p>
   <form class="form-inline" action="/delete_archieve/{{ id }}" method="post">
     <p class="text-center">
-      <select name="reason">
+      <a href="{{ link1 }}" class="btn btn-primary">扫描该档案</a>
+      <a href="/shangchuan/{{ id }}" class="btn btn-success">上传该档案</a>
+      <a href="/gen_code/{{ id }}" class="btn btn-inverse">查询密码({{ row[13] }})</a>
+      <select name="reason" class="span2">
         <option value=""{% if row[12] == "非转出状态" %} selected{% endif %}>非转出状态</option>
         <option value="调转"{% if row[12] == "调转" %} selected{% endif %}>转出原因：调转</option>
         <option value="退休"{% if row[12] == "退休" %} selected{% endif %}>转出原因：退休</option>
