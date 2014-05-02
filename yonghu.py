@@ -1,20 +1,21 @@
 # -*- coding=UTF-8 -*-
+
+# import mysql.connector
+
+import globalvars
+
+from flask import render_template, session, redirect, request
 from flask.views import MethodView
 
 
 class XiuGaiMiMa(MethodView):
     def get(self):
-        from flask import render_template, session, redirect
         if not 'user_id' in session:
             return redirect('/login')
 
         return render_template('xgmm.html', User=session['user_name'])
 
     def post(self):
-        from flask import redirect, request, session
-#         import mysql.connector
-        import globalvars
-
         jiumima = request.form['jiumima']
         xinmima = request.form['xinmima']
         xinmima2 = request.form['xinmima2']

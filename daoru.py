@@ -1,36 +1,35 @@
 # -*- coding=UTF-8 -*-
+
+import os
+
+import xlrd
+
+from flask import render_template, session, redirect, request
 from flask.views import MethodView
+from werkzeug import secure_filename
+
+from globalvars import G_UPLOAD_PATH, connect_db, close_db
 
 
 class DaoRu(MethodView):
     def get(self):
-        from flask import render_template, session, redirect
-
         if not 'user_id' in session:
             return redirect('/login')
         return render_template('daoru.html', User=session['user_name'])
 
     def post(self):
-        import os
-        from werkzeug import secure_filename
-        from flask import request, redirect
-        import globalvars
-
         f = request.files['file']
         filename = secure_filename(f.filename)
-        file_path = os.path.join(globalvars.G_UPLOAD_PATH, filename)
+        file_path = os.path.join(G_UPLOAD_PATH, filename)
         f.save(file_path)
         import_xls(file_path)
         return redirect('/daoru')
 
 
 def import_xls(file_path):
-    import xlrd
-    import globalvars
-
     xls = xlrd.open_workbook(file_path, 'rb')
     sh = xls.sheets()[0]
-    cnx = globalvars.connect_db()
+    cnx = connect_db()
     cursor = cnx.cursor()
     for row in range(1, sh.nrows):
         if sh.cell(row, 6).value != u'已调入':
@@ -77,4 +76,4 @@ def import_xls(file_path):
             )
             cursor.execute(sql, param)
     cnx.commit()
-    globalvars.close_db(cursor, cnx)
+    close_db(cursor, cnx)

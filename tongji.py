@@ -1,5 +1,4 @@
 # -*- coding=UTF-8 -*-
-from flask.views import MethodView
 
 #统计
 #：各用户操作总数对比
@@ -7,13 +6,16 @@ from flask.views import MethodView
 #：按月份各用户扫描总数曲线
 #：按月份各用户添加档案总数曲线
 
+import datetime
+
+from flask import render_template, session, request, redirect
+from flask.views import MethodView
+
+from globalvars import connect_db, close_db
+
 
 class TongJi(MethodView):
     def get(self):
-        from flask import render_template, session
-        from globalvars import connect_db, close_db
-        import datetime
-
         if not 'user_id' in session:
             return redirect('/login')
         cnx = connect_db()
@@ -42,14 +44,11 @@ class TongJi(MethodView):
 
 class TongjiMonth(MethodView):
     def get(self):
-        from flask import render_template, session, request
-        from globalvars import connect_db, close_db
-        import datetime
-
         if not 'user_id' in session:
             return redirect('/login')
         _year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
-        _month = request.args.get('month', datetime.datetime.now().strftime('%m'))
+        _month = request.args.get('month', 
+            datetime.datetime.now().strftime('%m'))
         _date = '%s-%s' % (_year, _month)
         sql = ('select u.MingCheng,('
             'select count(*) as yh_count '
@@ -76,8 +75,6 @@ class TongjiMonth(MethodView):
             date=_date)
 
     def post(self):
-        from flask import request, redirect
-
         year = request.form['year']
         month = request.form['month']
 
