@@ -102,12 +102,12 @@ class ShangChuan(MethodView):
         fp = get_file_path(rec_id)
         lp = '/saomiao/%s' % (rec_id,)
         return render_template('shangchuan.html',
-            row = row,
-            id = rec_id,
-            filepath = fp,
-            link = lp,
-            cat = cat,
-            User = session['user_name'])
+            row=row,
+            id=rec_id,
+            filepath=fp,
+            link=lp,
+            cat=cat,
+            User=session['user_name'])
 
     def post(self, rec_id):
         # print 'upload path:', G_UPLOAD_PATH
@@ -161,11 +161,11 @@ class SaoMiao(MethodView):
         close_db(cursor, cnx)
         fp = get_file_path(uid)
         return render_template('saomiao.html',
-            filepath = fp,
-            row = row,
-            id = uid,
-            url_root = url_root,
-            User = session['user_name'])
+            filepath=fp,
+            row=row,
+            id=uid,
+            url_root=url_root,
+            User=session['user_name'])
 
 #     def post(self, uid):
 #         pass

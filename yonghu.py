@@ -1,18 +1,14 @@
 # -*- coding=UTF-8 -*-
 
-# import mysql.connector
-
-import globalvars
-
 from flask import render_template, session, redirect, request
 from flask.views import MethodView
 
+from globalvars import connect_db, close_db
 
 class XiuGaiMiMa(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-
         return render_template('xgmm.html', User=session['user_name'])
 
     def post(self):
@@ -23,8 +19,7 @@ class XiuGaiMiMa(MethodView):
             return redirect('/xgmm')
         sql = 'SELECT * FROM user WHERE id=%s'
         param = (session['user_id'],)
-#         cnx = mysql.connector.Connect(**globalvars.cnx_cfg)
-        cnx = globalvars.connect_db()
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         data = cursor.fetchall()
@@ -40,5 +35,5 @@ class XiuGaiMiMa(MethodView):
         cnx.commit()
 #         cursor.close()
 #         cnx.close()
-        globalvars.close_db(cursor, cnx)
+        close_db(cursor, cnx)
         return redirect('/')

@@ -1,5 +1,12 @@
 ﻿# -*- coding=UTF-8 -*-
+
+import datetime
+import time
 import os
+
+import mysql.connector
+
+from PIL import Image, ImageDraw, ImageFont
 
 
 '''
@@ -34,11 +41,9 @@ G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'
-
+G_ADMIN_USER = ['admin']
 
 def connect_db():
-    import mysql.connector
-
     return mysql.connector.Connect(**cnx_cfg)
 
 
@@ -48,8 +53,6 @@ def close_db(cursor, cnx):
 
 
 def get_time():
-    import time
-
     return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))
 
 
@@ -60,7 +63,7 @@ def check_ext(file_name):
 
 def join_file_name(sep, flist):
     # s = ''
-    s = '{seperator}'.format(seperator = sep).join(flist)
+    s = '{seperator}'.format(seperator=sep).join(flist)
     return s
 
 
@@ -94,16 +97,12 @@ def check_path(path):
 
 
 def rotate_image(file_path):
-    from PIL import Image
-
     img = Image.open(file_path)
     img_t = img.transpose(Image.ROTATE_270)
     img_t.save(file_path)
 
 
 def turn_image(file_path):
-    from PIL import Image
-
     img = Image.open(file_path)
     img_t = img.transpose(Image.ROTATE_180)
     img_t.save(file_path)
@@ -111,14 +110,14 @@ def turn_image(file_path):
 
 
 def caozuo_jilu(user_id, caozuo, neirong):
-    import datetime
-
     date = datetime.datetime.now().strftime('%Y-%m-%d')
     time = datetime.datetime.now().strftime('%HH%MM%SS')
-    sql = ('insert into caozuo_jilu '
-        '(yh_id,CaoZuo,NeiRong,RiQi,ShiJian) '
-        'values (%(yh_id)s,%(caozuo)s,%(neirong)s,'
-        '%(riqi)s,%(shijian)s)')
+    sql = '''
+        insert into caozuo_jilu
+            (yh_id,CaoZuo,NeiRong,RiQi,ShiJian)
+        values
+            (%(yh_id)s,%(caozuo)s,%(neirong)s,%(riqi)s,%(shijian)s)
+    '''
     uid = int(user_id)
     param = {
         'yh_id': uid,
@@ -166,11 +165,9 @@ def idcard_convert(idcard_15):
 
 
 def render_text(file_name, font_size, text, output_name, output_type):
-    from PIL import Image, ImageDraw, ImageFont
-
     img = Image.open(file_name)
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype('c:\\windows\\fonts\\simhei.ttf', font_size)
-    draw.text((10, 20), text, font=font, fill=(255,0,0,255))
+    draw.text((10, 20), text, font=font, fill=(255, 0, 0, 255))
     img.save(output_name, output_type)
-    #img.show()
+    # img.show()

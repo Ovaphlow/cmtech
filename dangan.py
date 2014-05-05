@@ -22,26 +22,16 @@ class DangAn(MethodView):
             return redirect('/login')
         cat = request.args.get('cat', '0')
         sql = '''
-            select
-                d.*,
-                (
-                    select
-                        a.code
-                    from
-                        cm_archieve.access_code a
-                    where
-                        a.date=%(now_date)s
-                        and
-                        a.archieve_id=d.ShenFenZheng
-                    order by
-                        a.id
-                        desc
-                    limit 1
-                ) as code
-            FROM
-                cm_archieve.dangan d
-            WHERE
-                d.id=%(archieve_id)s
+            select d.*,(
+                select a.code
+                from cm_archieve.access_code a
+                where a.date=%(now_date)s
+                and a.archieve_id=d.ShenFenZheng
+                order by a.id desc
+                limit 1
+            ) as code
+            from cm_archieve.dangan d
+            where d.id=%(archieve_id)s
         '''
         param = {
             'archieve_id': rec_id,
@@ -65,17 +55,17 @@ class DangAn(MethodView):
         lp1 = '/saomiao/%s' % (rec_id,)
         lp2 = '/luru/%s' % (rec_id,)
         return render_template('dangan.html',
-            id = rec_id,
-            row = data[0],
-            link1 = lp1,
-            link2 = lp2,
-            fs_root = G_FILE_SERVER_ROOT,
-            aid = get_aid(rec_id),
-            data1 = data1,
-            dob = dob,
-            dor = dor,
-            cat = cat,
-            User = session['user_name'],
+            id=rec_id,
+            row=data[0],
+            link1=lp1,
+            link2=lp2,
+            fs_root=G_FILE_SERVER_ROOT,
+            aid=get_aid(rec_id),
+            data1=data1,
+            dob=dob,
+            dor=dor,
+            cat=cat,
+            User=session['user_name'],
             pic_count=len(data1))
 
     def post(self, rec_id):
@@ -120,14 +110,11 @@ class DangAn(MethodView):
 
 class DeleteArchieve(MethodView):
     def post(self, archieve_id):
-        sql = (
-            'update '
-            'dangan '
-            'set '
-            'ZhuanChu=%(zhuanchu)s '
-            'where '
-            'id=%(archieve_id)s '
-        )
+        sql = '''
+            update dangan
+            set ZhuanChu=%(zhuanchu)s
+            where id=%(archieve_id)s
+        '''
         param = {
             'zhuanchu': request.form['reason'],
             'archieve_id': archieve_id
@@ -142,19 +129,23 @@ class DeleteArchieve(MethodView):
 
 class DownloadZip(MethodView):
     def get(self, archieve_id):
-        sql = ('select danganhao '
-            'from dangan '
-            'where id=%(archieve_id)s')
+        sql = '''
+            select danganhao
+            from dangan
+            where id=%(archieve_id)s
+        '''
         param = {'archieve_id': archieve_id}
         cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         result = cursor.fetchall()
         archieve_path = os.path.join(G_UPLOAD_PATH, result[0][0])
-        sql = ('select wenjianming '
-            'from wenjian '
-            'where aid=%(archieve_id)s '
-            'and client_access=1')
+        sql = '''
+            select wenjianming
+            from wenjian
+            where aid=%(archieve_id)s
+            and client_access=1
+        '''
         param = {'archieve_id': archieve_id}
         cursor.execute(sql, param)
         file_list = cursor.fetchall()
@@ -175,21 +166,16 @@ class DaYin(MethodView):
         pic_id = request.args.get('pic_id')
         if pic_id == '':
             redirect('/')
-        sql = ('select '
-            'd.DangAnHao, ( '
-            'select '
-            'w.WenJianMing '
-            'from '
-            'cm_archieve.wenjian w '
-            'where '
-            'w.id=%(pic_id)s '
-            'and '
-            'w.aid=d.id '
-            ') as pic_name '
-            'from '
-            'cm_archieve.dangan d '
-            'where '
-            'd.id=%(archieve_id)s')
+        sql = '''
+            select d.DangAnHao,(
+                select w.WenJianMing
+                from cm_archieve.wenjian w
+                where w.id=%(pic_id)s
+                and w.aid=d.id
+            ) as pic_name
+            from cm_archieve.dangan d
+            where d.id=%(archieve_id)s
+        '''
         param = {
             'pic_id': request.args.get('pic_id'),
             'archieve_id': archieve_id
@@ -200,13 +186,11 @@ class DaYin(MethodView):
         result = cursor.fetchall()
         close_db(cursor, cnx)
         file_name = '%s\%s\%s' % (G_UPLOAD_PATH, result[0][0], result[0][1])
-        render_text(
-            file_name=file_name,
+        render_text(file_name=file_name,
             font_size=32,
             text=u'与原件相符',
             output_name='%s/%s/for_print.png' % (G_UPLOAD_PATH, result[0][0]),
-            output_type='png'
-        )
+            output_type='png')
         return '<img src="/static/upload/%s/for_print.png" />' % \
             (result[0][0])
 
@@ -217,12 +201,13 @@ class ChaKan(MethodView):
             return redirect('/login')
         pic_id = request.args.get('pic_id', '0')
         sql = '''
-            SELECT wenjian.id,wenjian.aid,wenjian.wenjianming,
-                dangan.danganhao,wenjian.client_access
-            FROM wenjian INNER JOIN dangan ON wenjian.aid=dangan.id
-            WHERE wenjian.id=%s
+            SELECT w.id,w.aid,w.wenjianming,d.danganhao,w.client_access
+            FROM wenjian as w
+            INNER JOIN dangan as d
+            ON w.aid=d.id
+            WHERE w.id=%(pic_id)s
         '''
-        param = (pic_id,)
+        param = {'pic_id': pic_id}
         sql_t = '''
             select id
             from `cm_archieve`.wenjian
@@ -264,17 +249,16 @@ class ChaKan(MethodView):
                 next_id = result[0][0]
         close_db(cursor, cnx)
         row = data[0]
-        return render_template(
-            'chakan.html',
-            fs_root = G_FILE_SERVER_ROOT,
-            aid = row[3],
-            row = row,
-            User = session['user_name'],
-            archieve_id = rec_id,
-            previous_id = previous_id,
-            next_id = next_id,
-            pic_id = pic_id
-        )
+        return render_template('chakan.html',
+            fs_root=G_FILE_SERVER_ROOT,
+            aid=row[3],
+            row=row,
+            User=session['user_name'],
+            archieve_id=rec_id,
+            previous_id=previous_id,
+            next_id=next_id,
+            pic_id=pic_id)
+
 
     def post(self, rec_id):
         opr = request.form['operate']
@@ -309,10 +293,8 @@ class ChaKan(MethodView):
             cursor.execute(sql, param)
             data = cursor.fetchall()
             row = data[0]
-            rotate_image(
-                '%s\%s\%s' % \
-                (G_UPLOAD_PATH, row[3], row[2])
-            )
+            rotate_image('%s\%s\%s' % \
+                (G_UPLOAD_PATH, row[3], row[2]))
             close_db(cursor, cnx)
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
         elif opr == 'delete':
@@ -375,9 +357,7 @@ class ChaKan(MethodView):
                 'leibie=1 '
                 'where '
                 'id=%(pic_id)s')
-            param = {
-                'pic_id': pic_id
-            }
+            param = {'pic_id': pic_id}
             cnx = connect_db()
             cursor = cnx.cursor()
             cursor.execute(sql, param)
@@ -509,7 +489,7 @@ class UploadImageFile(MethodView):
         lose_db(cursor, cnx)
         rotate_image(fp)
         caozuo_jilu(session['user_id'], u'上传图片', rec_id)
-        return '完成'
+        return u'完成'
 
 
 class GenCode(MethodView):
@@ -520,7 +500,7 @@ class GenCode(MethodView):
             SELECT shenfenzheng FROM dangan
             WHERE id=%(archieve_id)s
         '''
-        param = {'archieve_id': archieve_id,}
+        param = {'archieve_id': archieve_id, }
         cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)

@@ -14,8 +14,7 @@ class ChaXun(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-
-        return render_template('chaxun.html', User = session['user_name'])
+        return render_template('chaxun.html', User=session['user_name'])
 
     def post(self):
         reload(sys)
@@ -26,21 +25,14 @@ class ChaXun(MethodView):
         gender = request.form['XingBie']
         check = request.form.getlist('check')
         sql = '''
-            select
-                d.*,(
-                    select
-                        count(*)
-                    from
-                        cm_archieve.wenjian w
-                    where
-                        w.aid=d.id
-                )
-            from
-                cm_archieve.dangan d
-            where
-                d.ZhuanChu=""
-                or
-                isNULL(d.ZhuanChu)
+            select d.*,(
+                select count(*)
+                from cm_archieve.wenjian w
+                where w.aid=d.id
+            ) as page_count
+            from cm_archieve.dangan d
+            where d.ZhuanChu=""
+            or isNULL(d.ZhuanChu)
         '''
         if aid != '':
             sql = '%s AND DangAnHao LIKE "%s%s%s"' % (sql, '%', aid, '%')
@@ -50,7 +42,7 @@ class ChaXun(MethodView):
             sql = '%s AND XingMing LIKE "%s%s%s"' % (sql, '%', name, '%')
         if gender == 'male':
             sql = '%s AND XingBie="%s"' % (sql, u'男')
-        elif gender =='female':
+        elif gender == 'female':
             sql = '%s AND XingBie="%s"' % (sql, u'女')
         else:
             pass
@@ -59,15 +51,15 @@ class ChaXun(MethodView):
         if 'stow' in check:
             sql = '%s AND TeShuGongZhong=1' % (sql,)
         sql = '%s LIMIT 100' % (sql,)
-        #print(sql)
-        cnx = onnect_db()
+        # print(sql)
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        ose_db(cursor, cnx)
+        close_db(cursor, cnx)
         return render_template('chaxun.html',
-            data = data,
-            User = session['user_name'])
+            data=data,
+            User=session['user_name'])
 
 
 class DangYueTuiXiu(MethodView):
@@ -84,11 +76,9 @@ class DangYueTuiXiu(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template(
-            'dytx.html',
-            data = data,
-            User = session['user_name']
-        )
+        return render_template('dytx.html',
+            data=data,
+            User=session['user_name'])
 
     def post(self):
         if not 'user_id' in session:
@@ -100,11 +90,9 @@ class DangYueTuiXiu(MethodView):
         cursor.execute(sql)
         result = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template(
-            'dytx.html',
-            data = result,
-            user = session['user_name']
-        )
+        return render_template('dytx.html',
+            data=result,
+            user=session['user_name'])
 
 
 class TeShuGongZhong(MethodView):
@@ -117,11 +105,9 @@ class TeShuGongZhong(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template(
-            'tsgz.html',
-            data = data,
-            User = session['user_name']
-        )
+        return render_template('tsgz.html',
+            data=data,
+            User=session['user_name'])
 
 
 class NvGuanLiGangWei(MethodView):
@@ -134,18 +120,16 @@ class NvGuanLiGangWei(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template(
-            'nglgw.html',
-            data = data,
-            User = session['user_name']
-        )
+        return render_template('nglgw.html',
+            data=data,
+            User=session['user_name'])
 
 
-#统计
-#：各用户操作总数对比
-#：按月份各用户操作总数曲线
-#：按月份各用户扫描总数曲线
-#：按月份各用户添加档案总数曲线
+# 统计
+# ：各用户操作总数对比
+# ：按月份各用户操作总数曲线
+# ：按月份各用户扫描总数曲线
+# ：按月份各用户添加档案总数曲线
 
 class TongJi(MethodView):
     def get(self):
@@ -168,11 +152,9 @@ class TongJi(MethodView):
         cursor.execute(sql_1)
         result_1 = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template(
-            'tongji.html',
-            User = session['user_name'],
-            counter_1 = result_1,
-        )
+        return render_template('tongji.html',
+            User=session['user_name'],
+            counter_1=result_1)
 
 
 class TongjiMonth(MethodView):
@@ -180,24 +162,24 @@ class TongjiMonth(MethodView):
         if not 'user_id' in session:
             return redirect('/login')
         _year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
-        _month = request.args.get('month', 
+        _month = request.args.get('month',
             datetime.datetime.now().strftime('%m'))
         _date = '%s-%s' % (_year, _month)
-        sql = ('select u.MingCheng,('
-            'select count(*) as yh_count '
-            'from ('
-            'select yh_id,count(*) '
-            'from cm_archieve.caozuo_jilu c '
-            'where c.caozuo="上传图片" '
-            'and locate(%(date)s,c.riqi) > 0 '
-            'group by yh_id,neirong '
-            ') as yh '
-            'where yh.yh_id=u.id '
-            ') as yh_count '
-            'from cm_archieve.user as u')
-        param = {
-            'date': _date
-        }
+        sql = '''
+            select u.MingCheng,(
+                select count(*) as yh_count
+                from (
+                    select yh_id,count(*)
+                    from cm_archieve.caozuo_jilu c
+                    where c.caozuo="上传图片"
+                    and locate(%(date)s,c.riqi) > 0
+                    group by yh_id,neirong
+                ) as yh
+                where yh.yh_id=u.id
+            ) as yh_count
+            from cm_archieve.user as u
+        '''
+        param = {'date': _date}
         cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql, param)
@@ -212,4 +194,3 @@ class TongjiMonth(MethodView):
         month = request.form['month']
 
         return redirect('/tongji_month/?year=%s&month=%s' % (year, month))
-
