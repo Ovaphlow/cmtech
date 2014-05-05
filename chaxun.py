@@ -1,20 +1,23 @@
 # -*- coding=UTF-8 -*-
+
+import datetime
+import sys
+import time
+
+from flask import render_template, session, redirect, request
 from flask.views import MethodView
+
+from globalvars import connect_db, close_db
 
 
 class ChaXun(MethodView):
     def get(self):
-        from flask import render_template, session, redirect
         if not 'user_id' in session:
             return redirect('/login')
 
         return render_template('chaxun.html', User = session['user_name'])
 
     def post(self):
-        from flask import request, render_template, session
-        import globalvars
-        import sys
-
         reload(sys)
         sys.setdefaultencoding('utf-8')
         aid = request.form['DangAnHao']
@@ -57,24 +60,18 @@ class ChaXun(MethodView):
             sql = '%s AND TeShuGongZhong=1' % (sql,)
         sql = '%s LIMIT 100' % (sql,)
         #print(sql)
-        cnx = globalvars.connect_db()
+        cnx = onnect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        globalvars.close_db(cursor, cnx)
-        return render_template(
-            'chaxun.html',
+        ose_db(cursor, cnx)
+        return render_template('chaxun.html',
             data = data,
-            User = session['user_name']
-        )
+            User = session['user_name'])
 
 
 class DangYueTuiXiu(MethodView):
     def get(self):
-        import time
-        import globalvars
-        from flask import render_template, redirect, session
-
         if not 'user_id' in session:
             return redirect('/login')
 
@@ -82,11 +79,11 @@ class DangYueTuiXiu(MethodView):
         time_str = time.strftime('%Y-%m', t)
         sql = 'SELECT * FROM dangan WHERE YuTuiXiuRiQi LIKE "' + \
             time_str + '%"'
-        cnx = globalvars.connect_db()
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        globalvars.close_db(cursor, cnx)
+        close_db(cursor, cnx)
         return render_template(
             'dytx.html',
             data = data,
@@ -94,18 +91,15 @@ class DangYueTuiXiu(MethodView):
         )
 
     def post(self):
-        import globalvars
-        from flask import render_template, redirect, session, request
-
         if not 'user_id' in session:
             return redirect('/login')
         d = '%s-%s' % (request.form['year'], request.form['month'])
         sql = 'SELECT * FROM dangan WHERE YuTuiXiuRiQi LIKE "' + d + '%"'
-        cnx = globalvars.connect_db()
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         result = cursor.fetchall()
-        globalvars.close_db(cursor, cnx)
+        close_db(cursor, cnx)
         return render_template(
             'dytx.html',
             data = result,
@@ -115,17 +109,14 @@ class DangYueTuiXiu(MethodView):
 
 class TeShuGongZhong(MethodView):
     def get(self):
-        from flask import render_template, redirect, session
-        import globalvars
-
         if not 'user_id' in session:
             return redirect('/login')
         sql = 'SELECT * FROM dangan WHERE TeShuGongZhong=1'
-        cnx = globalvars.connect_db()
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        globalvars.close_db(cursor, cnx)
+        close_db(cursor, cnx)
         return render_template(
             'tsgz.html',
             data = data,
@@ -135,19 +126,90 @@ class TeShuGongZhong(MethodView):
 
 class NvGuanLiGangWei(MethodView):
     def get(self):
-        import globalvars
-        from flask import render_template, redirect, session
-
         if not 'user_id' in session:
             return redirect('/login')
         sql = 'SELECT * FROM dangan WHERE NvGuanLiGangWei=1'
-        cnx = globalvars.connect_db()
+        cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        globalvars.close_db(cursor, cnx)
+        close_db(cursor, cnx)
         return render_template(
             'nglgw.html',
             data = data,
             User = session['user_name']
         )
+
+
+#统计
+#：各用户操作总数对比
+#：按月份各用户操作总数曲线
+#：按月份各用户扫描总数曲线
+#：按月份各用户添加档案总数曲线
+
+class TongJi(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('/login')
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        sql_1 = '''
+            select
+                u.id,u.mingcheng,count(c.id)
+            from
+                `cm_archieve`.user u
+                left join
+                `cm_archieve`.caozuo_jilu c
+                on
+                u.id=c.yh_id
+            group by
+                u.id
+        '''
+        cursor.execute(sql_1)
+        result_1 = cursor.fetchall()
+        close_db(cursor, cnx)
+        return render_template(
+            'tongji.html',
+            User = session['user_name'],
+            counter_1 = result_1,
+        )
+
+
+class TongjiMonth(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('/login')
+        _year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
+        _month = request.args.get('month', 
+            datetime.datetime.now().strftime('%m'))
+        _date = '%s-%s' % (_year, _month)
+        sql = ('select u.MingCheng,('
+            'select count(*) as yh_count '
+            'from ('
+            'select yh_id,count(*) '
+            'from cm_archieve.caozuo_jilu c '
+            'where c.caozuo="上传图片" '
+            'and locate(%(date)s,c.riqi) > 0 '
+            'group by yh_id,neirong '
+            ') as yh '
+            'where yh.yh_id=u.id '
+            ') as yh_count '
+            'from cm_archieve.user as u')
+        param = {
+            'date': _date
+        }
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(sql, param)
+        res = cursor.fetchall()
+        close_db(cursor, cnx)
+        return render_template('tongji_month.html',
+            counter_1=res,
+            date=_date)
+
+    def post(self):
+        year = request.form['year']
+        month = request.form['month']
+
+        return redirect('/tongji_month/?year=%s&month=%s' % (year, month))
+
