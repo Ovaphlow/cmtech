@@ -10,4 +10,5 @@ class Home(MethodView):
     def get(self):
         if not session['user_account'] in G_ADMIN_USER:
             return redirect('/logout')
-        return render_template('admin_home.html')
+        return render_template('admin_home.html',
+            user_name=session['user_name'])
