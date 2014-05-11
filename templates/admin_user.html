@@ -1,0 +1,32 @@
+{% extends "layout_admin.html" %}
+{% block content_center %}
+<h3>用户管理</h3>
+<hr />
+<form class="form-horizontal" action="" method="post">
+  <div class="control-group">
+    <label class="control-label" for="name">姓名</label>
+    <div class="controls">
+      <input class="span4" type="text" id="name" name="name" value="{{ row[3] }}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="account">账号</label>
+    <div class="controls">
+      <input class="span4" type="text" id="account" name="account" value="{{ row[1] }}">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="password">密码</label>
+    <div class="controls">
+      <input class="span4" type="text" id="password" name="password" value="{{ row[2] }}">
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-danger">确认</button>
+      <a href="/admin/delete_user?user_id={{ row[0] }}" class="btn btn-inverse">删除用户</a>
+    </div>
+  </div>
+
+</form>
+{% endblock %}
