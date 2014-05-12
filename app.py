@@ -60,7 +60,8 @@ app.add_url_rule('/admin', view_func=admin.Home.as_view('admin'))
 app.add_url_rule('/admin/user_list',
     view_func=admin.UserList.as_view('admin user list'))
 app.add_url_rule('/admin/user', view_func=admin.User.as_view('admin user'))
-
+app.add_url_rule('/admin/add_user',
+    view_func=admin.AddUser.as_view('admin add user'))
 
 if __name__ == '__main__':
     app.run()

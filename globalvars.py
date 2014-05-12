@@ -7,6 +7,7 @@ import os
 import mysql.connector
 
 from PIL import Image, ImageDraw, ImageFont
+from sqlalchemy import create_engine
 
 
 '''
@@ -37,11 +38,18 @@ cnx_cfg = {
 }
 """
 
+db_engine = create_engine('mysql+mysqlconnector://%s:%s@%s/%s' % \
+    (cnx_cfg['user'],cnx_cfg['password'], \
+    cnx_cfg['host'],cnx_cfg['database']),
+    pool_recycle=900,
+    pool_size=20)
+
 G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'
 G_ADMIN_USER = ['admin']
+
 
 def connect_db():
     return mysql.connector.Connect(**cnx_cfg)

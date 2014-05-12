@@ -74,3 +74,49 @@ class User(MethodView):
         cnx.commit()
         close_db(cursor, cnx)
         return redirect('/admin/user?user_id=%s' % (user_id))
+
+
+class AddUser(MethodView):
+    def get(self):
+        if not session['user_account'] in G_ADMIN_USER:
+            return redirect('/logout')
+        _err = request.args.get('err', '0')
+        if _err == '1':
+            _err_message = u'姓名不能为空'
+        elif _err == '2':
+            _err_message = u'账号不能为空'
+        elif _err == '3':
+            _err_message = u'密码不能为空'
+        else:
+            _err_message = None
+        return render_template('admin_add_user.html',
+            user_name=session['user_name'],
+            error=_err_message)
+
+    def post(self):
+        _name = request.form['name']
+        _account = request.form['account']
+        _password = request.form['password']
+        if not _name:
+            return redirect('/admin/add_user?err=1')
+        if not _account:
+            return redirect('/admin/add_user?err=2')
+        if not _password:
+            return redirect('/admin/add_user?err=3')
+        sql = '''
+            insert into user
+                (ZhangHao,Mima,MingCheng)
+            values
+                (%(account)s,%(password)s,%(name)s)
+        '''
+        param = {
+            'account': _account,
+            'password': _password,
+            'name': _name
+        }
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(' '.join(sql.split()), param)
+        cnx.commit()
+        close_db(cursor, cnx)
+        return redirect('/admin/user_list')
