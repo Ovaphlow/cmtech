@@ -62,6 +62,11 @@ app.add_url_rule('/admin/user_list',
 app.add_url_rule('/admin/user', view_func=admin.User.as_view('admin user'))
 app.add_url_rule('/admin/add_user',
     view_func=admin.AddUser.as_view('admin add user'))
+app.add_url_rule('/admin/archieve',
+    view_func=admin.Archieve.as_view('admin archieve'))
+app.add_url_rule('/admin/delete_archieve',
+    view_func=admin.DeleteArchieve.as_view('admin delete archieve'))
+
 
 if __name__ == '__main__':
     app.run()

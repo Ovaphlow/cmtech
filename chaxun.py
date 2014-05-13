@@ -35,21 +35,21 @@ class ChaXun(MethodView):
             or isNULL(d.ZhuanChu)
         '''
         if aid != '':
-            sql = '%s AND DangAnHao LIKE "%s%s%s"' % (sql, '%', aid, '%')
+            sql = '%s AND d.DangAnHao LIKE "%s%s%s"' % (sql, '%', aid, '%')
         if idcard != '':
-            sql = '%s AND ShenFenZheng LIKE "%s%s%s"' % (sql, '%', idcard, '%')
+            sql = '%s AND d.ShenFenZheng LIKE "%s%s%s"' % (sql, '%', idcard, '%')
         if name != '':
-            sql = '%s AND XingMing LIKE "%s%s%s"' % (sql, '%', name, '%')
+            sql = '%s AND d.XingMing LIKE "%s%s%s"' % (sql, '%', name, '%')
         if gender == 'male':
-            sql = '%s AND XingBie="%s"' % (sql, u'男')
+            sql = '%s AND d.XingBie="%s"' % (sql, u'男')
         elif gender == 'female':
-            sql = '%s AND XingBie="%s"' % (sql, u'女')
+            sql = '%s AND d.XingBie="%s"' % (sql, u'女')
         else:
             pass
         if 'ngl' in check:
-            sql = '%s AND NvGuanLiGangWei=1' % (sql,)
+            sql = '%s AND d.NvGuanLiGangWei=1' % (sql,)
         if 'stow' in check:
-            sql = '%s AND TeShuGongZhong=1' % (sql,)
+            sql = '%s AND d.TeShuGongZhong=1' % (sql,)
         sql = '%s LIMIT 100' % (sql,)
         # print(sql)
         cnx = connect_db()

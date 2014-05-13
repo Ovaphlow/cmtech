@@ -1,4 +1,26 @@
 {% extends "layout_admin.html" %}
 {% block content_center %}
-<h3><p>管理员首页</p></h3>
+<h3><p>系统管理页面</p></h3>
+<table class="table tabel-hover">
+  <thead>
+    <tr>
+      <td>日期</td>
+      <td>时间</td>
+      <td>姓名</td>
+      <td>操作</td>
+      <td>档案号</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in data %}
+    <tr>
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[2] }}</td>
+      <td>{{ row[3] }}</td>
+      <td>{{ row[4] }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

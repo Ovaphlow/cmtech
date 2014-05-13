@@ -10,8 +10,24 @@ class Home(MethodView):
     def get(self):
         if not session['user_account'] in G_ADMIN_USER:
             return redirect('/logout')
+        sql = '''
+            select l.riqi,l.shijian,u.mingcheng,l.caozuo,a.danganhao
+            from caozuo_jilu as l,
+                user as u,
+                dangan as a
+            where l.yh_id=u.id
+            and l.neirong=a.id
+            order by l.id desc
+            limit 100
+        '''
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(' '.join(sql.split()))
+        res = cursor.fetchall()
+        close_db(cursor, cnx)
         return render_template('admin_home.html',
-            user_name=session['user_name'])
+            user_name=session['user_name'],
+            data=res)
 
 
 class UserList(MethodView):
@@ -26,6 +42,7 @@ class UserList(MethodView):
         cursor = cnx.cursor()
         cursor.execute(' '.join(sql.split()))
         res = cursor.fetchall()
+        close_db(cursor, cnx)
         return render_template('admin_user_list.html',
             user_name=session['user_name'],
             data=res)
@@ -120,3 +137,73 @@ class AddUser(MethodView):
         cnx.commit()
         close_db(cursor, cnx)
         return redirect('/admin/user_list')
+
+
+class Archieve(MethodView):
+    def get(self):
+        if not session['user_account'] in G_ADMIN_USER:
+            return redirect('/logout')
+        archieve_id = request.args.get('archieve_id')
+        id_card = request.args.get('id_card')
+        name = request.args.get('name')
+        sql = '''
+            select *
+            from dangan
+            where zhuanchu is null
+            or zhuanchu=""
+        '''
+        if archieve_id:
+            sql += '''
+                and locate(%(archieve_id)s,danganhao) > 0
+            '''
+        if id_card:
+            sql += '''
+                and locate(%(id_card)s, shenfenzheng) > 0
+            '''
+        if name:
+            sql += '''
+                and locate(%(name)s, xingming) > 0
+            '''
+        sql += '''
+            limit 20
+        '''
+        param = {
+            'archieve_id': archieve_id,
+            'id_card': id_card,
+            'name': name
+        }
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(' '.join(sql.split()), param)
+        res = cursor.fetchall()
+        close_db(cursor, cnx)
+        return render_template('admin_archieve.html',
+            user_name=session['user_name'],
+            data=res)
+
+    def post(self):
+        archieve_id = request.form['archieve_id']
+        id_card = request.form['id_card']
+        name = request.form['name']
+        url = '/admin/archieve?archieve_id=%s&id_card=%s&name=%s' % \
+            (archieve_id, id_card, name)
+        return redirect(url)
+
+
+class DeleteArchieve(MethodView):
+    def get(self):
+        archieve_id = request.args.get('archieve_id')
+        if not archieve_id:
+            return redirect('/admin')
+        sql = '''
+            delete
+            from dangan
+            where id=%(archieve_id)s
+        '''
+        param = {'archieve_id': archieve_id}
+        cnx = connect_db()
+        cursor = cnx.cursor()
+        cursor.execute(' '.join(sql.split()), param)
+        cnx.commit()
+        close_db(cursor, cnx)
+        return redirect('/admin/archieve')
