@@ -7,6 +7,7 @@ import globalvars
 import index
 import shangchuan
 import test
+import view
 import yonghu
 
 from flask import Flask
@@ -56,6 +57,7 @@ app.add_url_rule('/dl_zip/<archieve_id>',
 app.add_url_rule('/tongji_month',
     view_func=chaxun.TongjiMonth.as_view('tongji_month'))
 
+# 管理员账号部分
 app.add_url_rule('/admin', view_func=admin.Home.as_view('admin'))
 app.add_url_rule('/admin/user_list',
     view_func=admin.UserList.as_view('admin user list'))
@@ -66,6 +68,9 @@ app.add_url_rule('/admin/archieve',
     view_func=admin.Archieve.as_view('admin archieve'))
 app.add_url_rule('/admin/delete_archieve',
     view_func=admin.DeleteArchieve.as_view('admin delete archieve'))
+
+# 浏览账号部分
+app.add_url_rule('/view', view_func=view.Home.as_view('view_home'))
 
 
 if __name__ == '__main__':

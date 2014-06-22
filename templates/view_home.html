@@ -1,0 +1,33 @@
+{% extends "layout_view.html" %}
+{% block content_center %}
+<h1>哈尔滨市人力资源市场</h1>
+<ul class="thumbnails">
+  <li class="span4">
+    <div class="thumbnail">
+      <p class="text-center">
+        <a href="list_1"><img data-src="holder.js/300x300" src="/static/img/home_1.png" alt=""></a>
+      </p>
+      <h2><p class="text-center"><a href="/list_1">查看用户</a></p></h2>
+      <h4><p class="text-center">目前用户总数：<span class="label label-important">{% if project_count_1 %}{{ project_count_1 }}{% else %}0{% endif %}</span></p></h4>
+    </div>
+  </li>
+  <li class="span4">
+    <div class="thumbnail">
+      <p class="text-center">
+        <a href="list_1"><img data-src="holder.js/300x300" src="/static/img/home_2.png" alt=""></a>
+      </p>
+      <h2><p class="text-center"><a href="/list_1">查询档案</a></p></h2>
+      <h4><p class="text-center">系统共计档案：<span class="label label-important">{% if project_count_1 %}{{ project_count_1 }}{% else %}0{% endif %}</span></p></h4>
+    </div>
+  </li>
+  <li class="span4">
+    <div class="thumbnail">
+      <p class="text-center">
+        <a href="list_1"><img data-src="holder.js/300x300" src="/static/img/home_3.png" alt=""></a>
+      </p>
+      <h2><p class="text-center"><a href="/list_1">统计</a></p></h2>
+      <h4><p class="text-center">包含图片档案：<span class="label label-important">{% if project_count_1 %}{{ project_count_1 }}{% else %}0{% endif %}</span></p></h4>
+    </div>
+  </li>
+</ul>
+{% endblock %}

@@ -3,7 +3,7 @@
 from flask import redirect, render_template, session, request
 from flask.views import MethodView
 
-from globalvars import connect_db, close_db, G_ADMIN_USER
+from globalvars import connect_db, close_db, G_ADMIN_USER, G_VIEW_USER
 
 
 class Index(MethodView):
@@ -112,6 +112,8 @@ class Login(MethodView):
             session['user_name'] = data[0][3]
             if data[0][2] in G_ADMIN_USER:
                 return redirect('/admin')
+            elif data[0][2] in G_VIEW_USER:
+                return redirect('/view')
             else:
                 return redirect('/')
         else:

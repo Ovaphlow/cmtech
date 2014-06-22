@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>哈尔滨市人力资源市场</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/static/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  {% block html_head %}{% endblock %}
+</head>
+<body style="background-color:dimgrey;">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#"><strong>哈尔滨市人力资源市场</strong></a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="/admin"><i class="icon-home"></i>首页</a></li>
+            <li><a href="/admin/user_list"><i class="icon-list"></i>查看用户</a></li>
+            <li><a href="/admin/archieve"><i class="icon-trash"></i>查询档案</a></li>
+            <li><a href="/admin/archieve"><i class="icon-trash"></i>统计</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="#"><i class="icon-user"></i>{{ user_name }}</a></li>
+            <li><a href="/logout"><i class="icon-off"></i>退出</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="background-color:Ivory;background-image:url(static/img/bg.jpg);background-position:topleft;background-repeat:yes">
+    <div class="row-fluid">
+      <div class="span2">
+      {% block content_left %}{% endblock %}
+      </div>
+      <div class="span8">
+      {% block content_center %}{% endblock %}
+      </div>
+      <div class="span2">
+      {% block content_right %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar navbar-bottom navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/"><strong>系统浏览页面</strong></a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="#">[技术支持]电话：18686853420；QQ：2340538</a></li>
+            <li></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="#"><strong>&copy; 成铭科技 2014</strong></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/static/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/static/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  {% block javascriot_lib %}{% endblock %}
+</body>
+</html>

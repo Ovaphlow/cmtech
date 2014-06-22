@@ -16,9 +16,9 @@ jinja_env = jinja2.Environment(
 '''
 
 cnx_cfg = {
-    'user': 'root',
-    'password': '',
-    'host': '127.0.0.1',
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
     'database': 'cm_archieve',
 }
 """
@@ -49,6 +49,7 @@ ALLOWED_EXT = set(['jpg', 'png', 'bmp'])
 G_LOCAL_PATH = 'd:\\\\archieve'
 G_FILE_SERVER_ROOT = '/static/upload'
 G_ADMIN_USER = ['admin']
+G_VIEW_USER = ['test1123']
 
 
 def connect_db():

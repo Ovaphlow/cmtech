@@ -7,28 +7,34 @@
   <link href="/static/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
   <link rel="shortcut icon" href="/static/img/favicon.ico">
 </head>
-<body style="background-image:url(static/img/login.jpg);background-position:top;background-repeat:no-repeat">
+<body style="background-color:black;background-image:url(static/img/wallpaper-1993717.jpg);background-position:top;background-repeat:no-repeat;background-size:cover">
+  <br /><br /><br /><br /><br />
+  <p class="text-center" style="font-size:50px;font-weight:bold;">哈尔滨市人力资源市场档案管理系统</p>
+  <br /><br /><br />
   <div class="container-fluid">
     <div class="row-fluid">
-      <h1>
-        <br />
-        <br />
-        <p class="text-center">哈尔滨市人力资源市场档案管理系统</p>
-      </h1>
+      <form class="form-inline" action="" method="post">
+        <p class="text-center">
+          <label for="account">账号：</label>
+          <input id="account" type="text" name="zhanghao" class="span2">
+          <label for="password">密码：</label>
+          <input id="password" type="password" name="mima" class="span2">
+          <button type="submit" class="btn btn-danger">确认</button>
+        </p>
+      </form>
     </div>
     <div class="row-fluid">
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <div class="span4 offset4" style="background-color:PowderBlue">
+<!--
+      <br /><br /><br /><br /><br />
+      <div class="span3 offset8" style="background-color:coral">
         <form class="form-inline" action="" method="post">
-          <legend><p class=text-center>系统登录</p></legend>
-          <p class="text-center">账号 <input type="text" name="zhanghao" class="span8"></p>
-          <p class="text-center">密码 <input type="password" name="mima" class="span8"></p>
-          <p class="text-center"><button type="submit" class="btn btn-danger">确认</button></p>
+          <legend><p class="text-center" style="font-weight:bold">系统登录</p></legend>
+          <p class="text-center"><label for="account">账号：</label><input id="account" type="text" name="zhanghao" class="span8"></p>
+          <p class="text-center"><label for="password">密码：</label><input id="password" type="password" name="mima" class="span8"></p>
+          <p class="text-center"><button type="submit" class="btn btn-primary">确认</button></p>
         </form>
       </div>
+ -->
     </div>
   </div>
   <script src="/static/jquery/1.10.2/jquery-1.10.2.min.js"></script>
