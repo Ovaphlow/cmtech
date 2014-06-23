@@ -71,7 +71,11 @@ app.add_url_rule('/admin/delete_archieve',
 
 # 浏览账号部分
 app.add_url_rule('/view', view_func=view.Home.as_view('view_home'))
-
+app.add_url_rule('/view/user', view_func=view.User.as_view('view_user'))
+app.add_url_rule('/view/archieve',
+    view_func=view.Archieve.as_view('view_archieve'))
+app.add_url_rule('/view/statistics',
+    view_func=view.Statistics.as_view('view_statistics'))
 
 if __name__ == '__main__':
     app.run()

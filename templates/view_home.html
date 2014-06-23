@@ -5,28 +5,28 @@
   <li class="span4">
     <div class="thumbnail">
       <p class="text-center">
-        <a href="list_1"><img data-src="holder.js/300x300" src="/static/img/home_1.png" alt=""></a>
+        <a href="/view/user"><img data-src="holder.js/300x300" src="/static/img/home_1.png" alt=""></a>
       </p>
-      <h2><p class="text-center"><a href="/list_1">查看用户</a></p></h2>
-      <h4><p class="text-center">目前用户总数：<span class="label label-important">{% if project_count_1 %}{{ project_count_1 }}{% else %}0{% endif %}</span></p></h4>
+      <h2><p class="text-center"><a href="/view/user">查看用户</a></p></h2>
+      <p class="text-center" style="font-weight:bold;">目前用户总数：<span class="label label-important">{{ count_1 }}</span></p>
     </div>
   </li>
   <li class="span4">
     <div class="thumbnail">
       <p class="text-center">
-        <a href="list_1"><img data-src="holder.js/300x300" src="/static/img/home_2.png" alt=""></a>
+        <a href="/view/archieve"><img data-src="holder.js/300x300" src="/static/img/home_2.png" alt=""></a>
       </p>
-      <h2><p class="text-center"><a href="/list_1">查询档案</a></p></h2>
-      <h4><p class="text-center">系统共计档案：<span class="label label-important">{% if project_count_1 %}{{ project_count_1 }}{% else %}0{% endif %}</span></p></h4>
+      <h2><p class="text-center"><a href="/view/archieve">查询档案</a></p></h2>
+      <p class="text-center" style="font-weight:bold;">系统共计档案：<span class="label label-important">{{ count_2 }}</span></p>
     </div>
   </li>
   <li class="span4">
     <div class="thumbnail">
       <p class="text-center">
-        <a href="list_1"><img data-src="holder.js/300x300" src="/static/img/home_3.png" alt=""></a>
+        <a href="/view/statistics"><img data-src="holder.js/300x300" src="/static/img/home_3.png" alt=""></a>
       </p>
-      <h2><p class="text-center"><a href="/list_1">统计</a></p></h2>
-      <h4><p class="text-center">包含图片档案：<span class="label label-important">{% if project_count_1 %}{{ project_count_1 }}{% else %}0{% endif %}</span></p></h4>
+      <h2><p class="text-center"><a href="/view/statistics">统计</a></p></h2>
+      <p class="text-center" style="font-weight:bold;">已扫描档案：<span class="label label-important">{{ count_3 }}</span></p>
     </div>
   </li>
 </ul>
