@@ -1,6 +1,7 @@
 # -*- coding=UTF-8 -*-
 
 import sys
+import datetime
 
 from flask import redirect, render_template, session, request
 from flask.views import MethodView
@@ -108,7 +109,6 @@ class Archieve(MethodView):
             'name': name,
             'gender': gender,
         }
-        print(sql)
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
@@ -129,63 +129,68 @@ class Archieve(MethodView):
         p = 'archieve_id=%s&id_card=%s&name=%s&gender=%s&ngl=%s&stow=%s' % \
             (archieve_id, id_card, name, gender, check_1, check_2)
         return redirect('/view/archieve?%s' % (p))
-#         sql = '''
-#             select d.*,(
-#                 select count(*)
-#                 from cm_archieve.wenjian w
-#                 where w.aid=d.id
-#             ) as page_count
-#             from cm_archieve.dangan d
-#             where d.ZhuanChu=""
-#             or d.ZhuanChu is null
-#         '''
-#         if aid != '':
-#             sql = '%s and d.DangAnHao like "%s%s%s"' % (sql, '%', archieve_id, '%')
-#         if idcard != '':
-#             sql = '%s AND d.ShenFenZheng LIKE "%s%s%s"' % (sql, '%', idcard, '%')
-#         if name != '':
-#             sql = '%s AND d.XingMing LIKE "%s%s%s"' % (sql, '%', name, '%')
-#         if gender == 'male':
-#             sql = '%s AND d.XingBie="%s"' % (sql, u'男')
-#         elif gender == 'female':
-#             sql = '%s AND d.XingBie="%s"' % (sql, u'女')
-#         else:
-#             pass
-#         if 'ngl' in check:
-#             sql = '%s AND d.NvGuanLiGangWei=1' % (sql,)
-#         if 'stow' in check:
-#             sql = '%s AND d.TeShuGongZhong=1' % (sql,)
-#         sql = '%s LIMIT 20' % (sql)
-        # print(sql)
-#         sql = '''
-#             select d.*,(
-#                 select count(*)
-#                 from cm_archieve.wenjian w
-#                 where w.aid=d.id
-#             ) as page_count
-#             from cm_archieve.dangan d
-#             where d.ZhuanChu=""
-#             or d.ZhuanChu is null
-#         '''
-#         if archieve_id:
-#             sql += 'and locate(:archieve_id,d.DangAnHao)>0'
-#         if id_card:
-#             sql += 'and locate(:id_card,d.ShenFenZheng)>0'
-#         if name:
-#             sql += 'and locate(:name,d.XingMing)>0'
-#         if gender:
-#             sql += 'and d.XingBie=:gender'
-#         if 'ngl' in check:
-#             sql += 'and d.NvGuanLiGangWei=1'
-#         if 'stow' in check:
-#             sql += 'and d.TeShuGongZhong=1'
-#         sql += 'limit 20'
-#         print(sql)
-#         res = db_engine.execute(text(' '.join(sql.split())), param)
-#         rows = res.fetchall()
+
+
+class ArchieveDetail(MethodView):
+    def get(self):
+        if not session['user_account'] in G_VIEW_USER:
+            return redirect('/logout')
+        archieve_id = request.args.get('archieve_id')
+        sql = '''
+            select *
+            from dangan
+            where id=:archieve_id
+        '''
+        param = {'archieve_id': archieve_id}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        row = res.fetchone()
+        res.close()
+        sql = '''
+            select *
+            from wenjian
+            where aid=:archieve_id
+        '''
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('view_archieve_detail.html',
+            user_name=session['user_name'],
+            row=row, rows=rows)
 
 
 class Statistics(MethodView):
     def get(self):
         if not session['user_account'] in G_VIEW_USER:
             return redirect('/logout')
+        sql = '''
+            select u.id,u.mingcheng,count(c.id) as counter
+            from `cm_archieve`.user u
+            left join `cm_archieve`.caozuo_jilu c
+            on u.id=c.yh_id
+            group by u.id
+        '''
+        res = db_engine.execute(text(' '.join(sql.split())))
+        rows_1 = res.fetchall()
+        res.close()
+        sql = '''
+            select u.MingCheng,(
+                select count(*) as yh_count
+                from (
+                    select yh_id,count(*)
+                    from cm_archieve.caozuo_jilu c
+                    where c.caozuo="上传图片"
+                    and locate(:month,c.riqi) > 0
+                    group by yh_id,neirong
+                ) as yh
+                where yh.yh_id=u.id
+            ) as yh_count
+            from cm_archieve.user as u
+        '''
+#         param = {'month': datetime.datetime.now().strftime('%Y-%m')}
+        param = {'month': '2014-04'}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_month = res.fetchall()
+        res.close()
+        return render_template('statistics.html',
+            user_name=session['user_name'],
+            rows_1=rows_1, rows_month=rows_month)

@@ -1,0 +1,44 @@
+{% extends "layout_view.html" %}
+{% block content_center %}
+<h1>查看档案</h1>
+<div class="row-fluid">
+  <div class="span2">
+    <h4>档案号：{{ row.DangAnHao }}</h4>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+    <h4>身份证号：{{ row.ShenFenZheng }}</h4>
+  </div>
+  <div class="span4">
+    <h4>姓名：{{ row.XingMing }}</h4>
+  </div>
+  <div class="span4">
+    <h4>性别：{{ row.XingBie }}</h4>
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span4">
+    <h4>出生日期：{{ row.ChuShengRiQi }}</h4>
+  </div>
+  <div class="span4">
+    <h4>预退休日期：{{ row.YuTuiXiuRiQi }}</h4>
+  </div>
+  <div class="span4">
+    <h4>{% if row.NvGuanLiGangWei %}女管理岗位{% endif %}{% if row.TeShuGongZhong %}特殊工种{% endif %}</h4>
+  </div>
+</div>
+<div class="row-fluid">
+  {% for row_pic in rows %}
+  {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
+  <li class="span3">
+    <div class="thumbnail">
+      <a href="#">
+        <img alt="" src="/static/upload/{{ row.DangAnHao }}/{{ row_pic.WenJianMing }}" />
+      </a>
+    </div>
+  </li>
+  {% if loop.index % 4 == 0 or loop.last %}</ul>{% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

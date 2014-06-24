@@ -102,20 +102,20 @@
     </form>
       <p>共有{{ pic_count }}个图片。下载[ <a href="/dl_zip/{{ id }}">导出文件压缩包</a> ]</p>
       <form action="/exp2client/{{ id }}" method="post">
-      <div class="row-fluid">
-        {% for row1 in data1: %}
-        {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
-          <li class="span3">
-            <div class="thumbnail">
-              <a href="/chakan/{{ id }}?pic_id={{ row1[0] }}">
-                <img alt="" src="{{ fs_root }}/{{ aid }}/{{ row1[3] }}">
-              </a>
-              <label><input name="pic_id" type="checkbox" value="{{ row1[0] }}"{% if row1[4] == 1 %} checked{% endif %} /> 终端可见</label>
-            </div>
-          </li>
-        {% if loop.index % 4 == 0 %}</ul>{% endif %}
-        {% endfor %}
-      </div>
+        <div class="row-fluid">
+          {% for row1 in data1: %}
+          {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
+            <li class="span3">
+              <div class="thumbnail">
+                <a href="/chakan/{{ id }}?pic_id={{ row1[0] }}">
+                  <img alt="" src="{{ fs_root }}/{{ aid }}/{{ row1[3] }}">
+                </a>
+                <label><input name="pic_id" type="checkbox" value="{{ row1[0] }}"{% if row1[4] == 1 %} checked{% endif %} /> 终端可见</label>
+              </div>
+            </li>
+          {% if loop.index % 4 == 0 %}</ul>{% endif %}
+          {% endfor %}
+        </div>
         <p class="text-right">
           <input id="checkAll" type="checkbox" onclick="selectAll(this);" /> 全选
           <button type="submit" class="btn btn-primary">调整终端可见状态</button>

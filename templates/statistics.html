@@ -1,0 +1,87 @@
+{% extends "layout_view.html" %}
+{% block content_center %}
+<h1>统计</h1>
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active"><a href="#stat" data-toggle="tab" style="font-weight:bold">总计</a></li>
+  <li><a href="#month" data-toggle="tab" style="font-weight:bold">当月</a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="stat">
+    <div id="container" style="height:400px"></div>
+  </div>
+  <div class="tab-pane" id="month">
+    <div id="container_month" style="height:400px"></div>
+  </div>
+</div>
+{% endblock %}
+{% block javascript_lib %}
+<script src="/static/highcharts/4.0.1/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '操作总量统计数据'
+        },
+        subtitle: {
+            text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
+        },
+        xAxis: {
+            categories: [{% for row in rows_1 %}{% if loop.last %}'{{ row.mingcheng }}'{% else %}'{{ row.mingcheng }}',{% endif %}{% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '总量数据',
+            data: [{% for row in rows_1 %}{% if loop.last %}{{ row.counter }}{% else %}{{ row.counter }},{% endif %}{% endfor %}]
+        }]
+    });
+});
+$(function () {
+    $('#container_month').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '当月总量统计数据'
+        },
+        subtitle: {
+            text: '数据内容为扫描并上传档案份数'
+        },
+        xAxis: {
+            categories: [{% for row in rows_month %}{% if loop.last %}'{{ row.MingCheng }}'{% else %}'{{ row.MingCheng }}',{% endif %}{% endfor %}]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '当月数据',
+            data: [{% for row in rows_month %}{% if loop.last %}{{ row.yh_count }}{% else %}{{ row.yh_count }},{% endif %}{% endfor %}]
+        }]
+    });
+});
+</script>
+{% endblock %}

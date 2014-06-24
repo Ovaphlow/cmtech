@@ -35,13 +35,13 @@
 
   <div class="container-fluid" style="background-color:Ivory;background-image:url(/static/img/bg.gif);background-position:topleft;background-repeat:yes">
     <div class="row-fluid">
-      <div class="span2">
+      <div class="span1">
       {% block content_left %}{% endblock %}
       </div>
-      <div class="span8">
+      <div class="span10">
       {% block content_center %}{% endblock %}
       </div>
-      <div class="span2">
+      <div class="span1">
       {% block content_right %}{% endblock %}
       </div>
     </div>
@@ -68,8 +68,8 @@
       </div>
     </div>
   </div>
-  <script src="/static/jquery/1.10.2/jquery.min.js"></script>
+  <script src="/static/jquery/1.10.2/jquery-1.10.2.min.js"></script>
   <script src="/static/bootstrap/2.3.2/js/bootstrap.min.js"></script>
-  {% block javascriot_lib %}{% endblock %}
+  {% block javascript_lib %}{% endblock %}
 </body>
 </html>

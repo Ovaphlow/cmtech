@@ -74,6 +74,8 @@ app.add_url_rule('/view', view_func=view.Home.as_view('view_home'))
 app.add_url_rule('/view/user', view_func=view.User.as_view('view_user'))
 app.add_url_rule('/view/archieve',
     view_func=view.Archieve.as_view('view_archieve'))
+app.add_url_rule('/view/archieve_detail',
+    view_func=view.ArchieveDetail.as_view('view_archieve_detail'))
 app.add_url_rule('/view/statistics',
     view_func=view.Statistics.as_view('view_statistics'))
 
