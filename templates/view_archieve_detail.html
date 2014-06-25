@@ -28,19 +28,19 @@
     <h4>{% if row.NvGuanLiGangWei %}女管理岗位{% endif %}{% if row.TeShuGongZhong %}特殊工种{% endif %}</h4>
   </div>
 </div>
-<div id="myCarousel" class="carousel slide">
+<hr />
+<div id="myCarousel" class="carousel slide" data-interval="false">
 <!--   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
   </ol> -->
   <!-- Carousel items -->
-  <div class="carousel-inner" data-interval=false>
+  <div class="carousel-inner">
   {% for row_pic in rows %}
     <div class="{% if loop.first %}active {% endif %}item"><p class="text-center"><img alt="" src="/static/upload/{{ row.DangAnHao }}/{{ row_pic.WenJianMing }}" /></p></div>
   {% endfor %}
   </div>
-  <!-- Carousel nav -->
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
   <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 </div>
