@@ -186,8 +186,7 @@ class Statistics(MethodView):
             ) as yh_count
             from cm_archieve.user as u
         '''
-#         param = {'month': datetime.datetime.now().strftime('%Y-%m')}
-        param = {'month': '2014-04'}
+        param = {'month': datetime.datetime.now().strftime('%Y-%m')}
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows_month = res.fetchall()
         res.close()
