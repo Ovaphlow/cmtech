@@ -33,7 +33,5 @@ class XiuGaiMiMa(MethodView):
         param = (xinmima, session['user_id'])
         cursor.execute(sql, param)
         cnx.commit()
-#         cursor.close()
-#         cnx.close()
         close_db(cursor, cnx)
         return redirect('/')
