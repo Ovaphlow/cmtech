@@ -2,36 +2,52 @@
 {% block content_center %}
 <h1>查询档案</h1>
 <form action="" method="post" class="form-inline">
-  <p>
-    <label class="control-label" for="archieve_id">档案号</label>
-    <input name="DangAnHao" class="span2" type="text" id="archieve_id">
-    |
-    <label class="control-label" for="id_card">身份证</label>
-    <input name="ShenFenZheng" class="span3" type="text" id="id_card">
-    |
-    <label class="control-label" for="name">姓名</label>
-    <input name="XingMing" class="span2" type="text" id="name">
-  </p>
-  <p>
-    <label class="control-label" for="gender">性别</label>
-    <select name="XingBie" class="span1" type="text" id="gender">
-      <option value="">不限</option>
-      <option value="男">男</option>
-      <option value="女">女</option>
-    </select>
-    <label class="checkbox">
-      <input type="checkbox" name="check" value="ngl">
-      女管理岗位
-    </label>
-    <label class="checkbox">
-      <input type="checkbox" name="check" value="stow">
-      特殊工种
-    </label>
-  </p>
-  <p>
-  </p>
-  <button type="submit" class="btn btn-danger">提交</button>
-  <button type="reset" class="btn">重置</button>
+  <div class="row-fluid">
+    <div class="span3">
+      <label class="control-label" for="archieve_id" style="font-size:32px;">档案号</label>
+      <br />
+      <input name="DangAnHao" class="span12" type="text" id="archieve_id" style="font-size:40px;height:50px">
+    </div>
+    <div class="span6">
+      <label class="control-label" for="id_card" style="font-size:32px;">身份证</label>
+      <br />
+      <input name="ShenFenZheng" class="span12" type="text" id="id_card" style="font-size:40px;height:50px">
+    </div>
+    <div class="span3">
+      <label class="control-label" for="name" style="font-size:32px;">姓名</label>
+      <br />
+      <input name="XingMing" class="span12" type="text" id="name" style="font-size:40px;40px;height:50px">
+    </div>
+  </div>
+  <br />
+  <div class="row-fluid">
+    <div class="span3">
+      <label class="control-label" for="gender" style="font-size:32px;">性别</label>
+      <br />
+      <select name="XingBie" class="span12" type="text" id="gender" style="font-size:32px;height:50px">
+        <option value="">不限</option>
+        <option value="男">男</option>
+        <option value="女">女</option>
+      </select>
+    </div>
+    <div class="span6">
+      <label class="checkbox" style="font-size:32px;">
+        <input type="checkbox" name="check" value="ngl">
+        女管理岗位
+      </label>
+      <br /><br />
+      <label class="checkbox" style="font-size:32px;">
+        <input type="checkbox" name="check" value="stow">
+        特殊工种
+      </label>
+    </div>
+    <div class="span3">
+      <br />
+      <button type="submit" class="btn btn-danger span12">提交</button>
+      <br />
+      <button type="reset" class="btn span12">重置</button>
+    </div>
+  </div>
 </form>
 <table class="table table-bordered table-hover table-striped table-condensed">
   <caption></caption>
