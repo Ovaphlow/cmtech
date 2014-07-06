@@ -6,8 +6,9 @@ import time
 
 from flask import render_template, session, redirect, request
 from flask.views import MethodView
+from sqlalchemy import text
 
-from globalvars import connect_db, close_db
+from globalvars import *
 
 
 class ChaXun(MethodView):
@@ -137,7 +138,7 @@ class NvGuanLiGangWei(MethodView):
 # 2.分月份统计，统计结果单击操作员可出现该操作员已扫描档案列表
 # 3.分时间段统计，选择起始日期和终止日期，统计该事件段内所有操作员扫描情况，单击操作员可出现
 #   已扫描档案列表
-# 4.按档案号吗输入可查询到该档案由哪个操作员什么时间扫描
+# 4.按档案号码输入可查询到该档案由哪个操作员什么时间扫描
 # 二、档案利用操作统计
 # 按月及时间段统计档案材料打印、自助查询密码设置数量（册、页），及单击可列表具体的档案号码。
 # 输入档案号码可查该档案材料是否被利用过，利用时间，操作员。
@@ -157,6 +158,7 @@ class TongJi(MethodView):
                 `cm_archieve`.caozuo_jilu c
                 on
                 u.id=c.yh_id
+            where c.caozuo="上传图片"
             group by
                 u.id
         '''
@@ -172,9 +174,8 @@ class TongjiMonth(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-        _year = request.args.get('year', datetime.datetime.now().strftime('%Y'))
-        _month = request.args.get('month',
-            datetime.datetime.now().strftime('%m'))
+        _year = datetime.datetime.now().strftime('%Y')
+        _month = datetime.datetime.now().strftime('%m')
         _date = '%s-%s' % (_year, _month)
         sql = '''
             select u.MingCheng,(
@@ -197,11 +198,70 @@ class TongjiMonth(MethodView):
         res = cursor.fetchall()
         close_db(cursor, cnx)
         return render_template('tongji_month.html',
+            User=session['user_name'],
             counter_1=res,
             date=_date)
 
-    def post(self):
-        year = request.form['year']
-        month = request.form['month']
 
-        return redirect('/tongji_month/?year=%s&month=%s' % (year, month))
+class TongjiTimeSlot(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('login')
+        if request.args.get('year_begin'):
+            year_begin = request.args.get('year_begin')
+        else:
+            year_begin = datetime.datetime.now().strftime('%Y')
+        if request.args.get('month_begin'):
+            month_begin = request.args.get('month_begin')
+        else:
+            month_begin = datetime.datetime.now().strftime('%m')
+        if request.args.get('day_begin'):
+            day_begin = request.args.get('day_begin')
+        else:
+            day_begin = '01'
+        if request.args.get('year_end'):
+            year_end = request.args.get('year_end')
+        else:
+            year_end = year_begin
+        if request.args.get('month_end'):
+            month_end = request.args.get('month_end')
+        else:
+            month_end = month_begin
+        if request.args.get('day_end'):
+            day_end = request.args.get('day_end')
+        else:
+            day_end = '31'
+        # print(year_begin, month_begin, day_begin)
+        # print(year_end, month_end, day_end)
+        date_begin = '%s-%s-%s' % (year_begin, month_begin, day_begin)
+        date_end = '%s-%s-%s' % (year_end, month_end, day_end)
+        sql = '''
+            select u.id,u.mingcheng,count(c.id) as counter
+            from `cm_archieve`.user u
+            left join `cm_archieve`.caozuo_jilu c
+            on u.id=c.yh_id
+            where c.caozuo="上传图片"
+            and c.riqi>:date_begin
+            and c.riqi<:date_end
+            group by u.id
+        '''
+        param = {
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('tongji_time_slot.html',
+            User=session['user_name'], rows=rows,
+            date_begin=date_begin, date_end=date_end)
+
+    def post(self):
+        uri = '/tongji_time_slot?'
+        uri += 'year_begin=%s' % (request.form['year_begin'])
+        uri += '&month_begin=%s' % (request.form['month_begin'])
+        uri += '&day_begin=%s' % (request.form['day_begin'])
+        uri += '&year_end=%s' % (request.form['year_end'])
+        uri += '&month_end=%s' % (request.form['month_end'])
+        uri += '&day_end=%s' % (request.form['day_end'])
+        return redirect(uri)

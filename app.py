@@ -56,6 +56,8 @@ app.add_url_rule('/dl_zip/<archieve_id>',
     view_func=dangan.DownloadZip.as_view('dl_zip'))
 app.add_url_rule('/tongji_month',
     view_func=chaxun.TongjiMonth.as_view('tongji_month'))
+app.add_url_rule('/tongji_time_slot',
+    view_func=chaxun.TongjiTimeSlot.as_view('tongji_time_slot'))
 
 # 管理员账号部分
 app.add_url_rule('/admin', view_func=admin.Home.as_view('admin'))
