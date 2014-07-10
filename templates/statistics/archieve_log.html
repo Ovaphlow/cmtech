@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}档案扫描记录<br /><small></small>{% endblock %}
+{% block content %}
+<div class="row-fluid">
+  <div class="span8 offset2">
+    <form class="form-inline" action="" method="post">
+      <p class="text-center">
+        <label for="archieve_id">档案号<input type="text" id="archieve_id" name="archieve_id" /></label>
+        <button class="btn btn-danger" type="submit">提交</button>
+      </p>
+    </form>
+    <p class="text-info"><strong>档案号：{{ rows[0].danganhao }}</strong></p>
+    <table class="table table-bordered table-hover table-striped table-condensed">
+      <thead>
+        <tr>
+          <th>操作人</th>
+          <th>日期</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td>{{ row.mingcheng}}</td>
+          <td>{{ row.riqi }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

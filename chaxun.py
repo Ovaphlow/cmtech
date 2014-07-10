@@ -265,3 +265,33 @@ class TongjiTimeSlot(MethodView):
         uri += '&month_end=%s' % (request.form['month_end'])
         uri += '&day_end=%s' % (request.form['day_end'])
         return redirect(uri)
+
+
+class ArchieveLog(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('login')
+        archieve_id = request.args.get('archieve_id', 0)
+        sql = '''
+            select d.id,d.danganhao, c.yh_id,c.riqi,u.mingcheng
+            from dangan as d
+            left join caozuo_jilu as c
+            on c.NeiRong=d.id
+            left join user as u
+            on c.yh_id=u.id
+            where c.CaoZuo=:operation
+            and d.danganhao=:archieve_id
+        '''
+        param = {
+            'operation': u'上传图片',
+            'archieve_id': archieve_id
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('statistics/archieve_log.html',
+            User=session['user_name'], rows=rows)
+
+    def post(self):
+        archieve_id = request.form['archieve_id']
+        return redirect('/tongji_archieve_log?archieve_id=%s' % (archieve_id))
