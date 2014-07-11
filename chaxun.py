@@ -336,3 +336,45 @@ class InvokeMonth(MethodView):
         return render_template('statistics/invoke_month.html',
             User=session['user_name'], rows_print=rows_print, date=date,
             rows_code=rows_code, rows_export=rows_export)
+
+
+class InvokeTimeSlot(MethodView):
+    def get(self):
+        pass
+
+    def post(self):
+        pass
+
+
+class InvokeLog(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('login')
+        archieve_id = request.args.get('archieve_id', 0)
+        sql = '''
+            select d.id,d.danganhao, c.yh_id,c.caozuo,c.riqi,u.mingcheng
+            from dangan as d
+            left join caozuo_jilu as c
+            on c.NeiRong=d.id
+            left join user as u
+            on c.yh_id=u.id
+            where (c.CaoZuo=:operation_1
+                or c.caozuo=:operation_2
+                or c.caozuo=:operation_3)
+            and d.danganhao=:archieve_id
+        '''
+        param = {
+            'operation_1': u'打印',
+            'operation_2': u'生成查询密码',
+            'operation_3': u'导出到终端',
+            'archieve_id': archieve_id
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('statistics/invoke_log.html',
+            User=session['user_name'], rows=rows)
+
+    def post(self):
+        archieve_id = request.form['archieve_id']
+        return redirect('/invoke_log?archieve_id=%s' % (archieve_id))

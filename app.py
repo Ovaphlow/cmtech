@@ -64,6 +64,10 @@ app.add_url_rule('/tongji_archieve_log',
     view_func=chaxun.ArchieveLog.as_view('tongji_archieve_log'))
 app.add_url_rule('/invoke_month',
     view_func=chaxun.InvokeMonth.as_view('invoke_month'))
+app.add_url_rule('/invoke_time_slot',
+    view_func=chaxun.InvokeTimeSlot.as_view('invoke_time_slot'))
+app.add_url_rule('/invoke_log',
+    view_func=chaxun.InvokeLog.as_view('invoke_log'))
 
 # 管理员账号部分
 app.add_url_rule('/admin', view_func=admin.Home.as_view('admin'))
