@@ -295,3 +295,10 @@ class ArchieveLog(MethodView):
     def post(self):
         archieve_id = request.form['archieve_id']
         return redirect('/tongji_archieve_log?archieve_id=%s' % (archieve_id))
+
+
+class PrintTimeSlot(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('login')
+        

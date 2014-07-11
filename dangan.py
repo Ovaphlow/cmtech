@@ -177,7 +177,7 @@ class DaYin(MethodView):
             where d.id=%(archieve_id)s
         '''
         param = {
-            'pic_id': request.args.get('pic_id'),
+            'pic_id': pic_id,
             'archieve_id': archieve_id
         }
         cnx = connect_db()
@@ -191,6 +191,7 @@ class DaYin(MethodView):
             text=u'与原件相符',
             output_name='%s/%s/for_print.png' % (G_UPLOAD_PATH, result[0][0]),
             output_type='png')
+        caozuo_jilu(session['user_id'], u'打印', archieve_id)
         return '<img src="/static/upload/%s/for_print.png" />' % \
             (result[0][0])
 
@@ -521,6 +522,7 @@ class GenCode(MethodView):
         cursor.execute(sql, param)
         cnx.commit()
         close_db(cursor, cnx)
+        caozuo_jilu(session['user_id'], u'生成查询密码', archieve_id)
         return redirect('/dangan/%s' % archieve_id)
 
 
@@ -556,4 +558,5 @@ class Exp2Client(MethodView):
                 cursor.execute(sql, param)
         cnx.commit()
         close_db(cursor, cnx)
+        caozuo_jilu(session['user_id'], u'导出到终端', rec_id)
         return redirect('/dangan/%s' % (rec_id,))

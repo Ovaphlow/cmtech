@@ -120,7 +120,7 @@ def turn_image(file_path):
 
 def caozuo_jilu(user_id, caozuo, neirong):
     date = datetime.datetime.now().strftime('%Y-%m-%d')
-    time = datetime.datetime.now().strftime('%HH%MM%SS')
+    time = datetime.datetime.now().strftime('%H:%M:%S')
     sql = '''
         insert into caozuo_jilu
             (yh_id,CaoZuo,NeiRong,RiQi,ShiJian)
