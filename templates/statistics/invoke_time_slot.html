@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
-{% block title %}时段统计<br /><small></small>{% endblock %}
+{% block title %}档案利用时段统计<br /><small></small>{% endblock %}
 {% block content %}
 <form class="form-inline" action="" method="post">
   <p class="text-center">
@@ -80,14 +80,14 @@ $(function () {
             type: 'bar'
         },
         title: {
-            text: '时段操作统计 {{ date_begin }}至{{ date_end }}'
+            text: '档案利用 - 时段操作统计 {{ date_begin }}至{{ date_end }}'
         },
         subtitle: {
-            text: '数据内容为扫描并上传档案的份数'
+            text: '数据内容为档案利用的次数'
         },
         xAxis: {
             categories: [
-            {%- for row in rows -%}
+            {%- for row in rows_print -%}
                 {%- if loop.last -%}
                 '{{ row.mingcheng }}'
                 {%- else -%}
@@ -110,9 +110,31 @@ $(function () {
             }
         },
         series: [{
-            name: '时段操作统计 {{ date_begin }}至{{ date_end }}',
+            name: '打印',
             data: [
-            {%- for row in rows -%}
+            {%- for row in rows_print -%}
+                {%- if loop.last -%}
+                {{ row.counter }}
+                {%- else -%}
+                {{ row.counter }},
+                {%- endif -%}
+            {%- endfor -%}
+            ],
+            }, {
+            name: '生成查询密码',
+            data: [
+            {%- for row in rows_code -%}
+                {%- if loop.last -%}
+                {{ row.counter }}
+                {%- else -%}
+                {{ row.counter }},
+                {%- endif -%}
+            {%- endfor -%}
+            ],
+            }, {
+            name: '导出到终端',
+            data: [
+            {%- for row in rows_export -%}
                 {%- if loop.last -%}
                 {{ row.counter }}
                 {%- else -%}

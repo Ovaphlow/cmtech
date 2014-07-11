@@ -17,10 +17,10 @@ $(function () {
             type: 'bar'
         },
         title: {
-            text: '打印 - 月份操作统计（{{ date }}）'
+            text: '档案利用 - 月份操作统计（{{ date }}）'
         },
         subtitle: {
-            text: '数据内容为打印档案的次数'
+            text: '数据内容为档案利用的次数'
         },
         xAxis: {
             categories: [
@@ -47,7 +47,7 @@ $(function () {
             }
         },
         series: [{
-            name: '月份操作统计（{{ date }}）',
+            name: '打印',
             data: [
             {%- for row in rows_print -%}
                 {%- if loop.last -%}
@@ -58,7 +58,7 @@ $(function () {
             {%- endfor -%}
             ],
         }, {
-            name: '月份操作统计（{{ date }}）',
+            name: '生成查询密码',
             data: [
             {%- for row in rows_code -%}
                 {%- if loop.last -%}
@@ -69,7 +69,7 @@ $(function () {
             {%- endfor -%}
             ],
         }, {
-            name: '月份操作统计（{{ date }}）',
+            name: '导出到终端',
             data: [
             {%- for row in rows_export -%}
                 {%- if loop.last -%}

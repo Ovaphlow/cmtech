@@ -340,10 +340,61 @@ class InvokeMonth(MethodView):
 
 class InvokeTimeSlot(MethodView):
     def get(self):
-        pass
+        if not 'user_id' in session:
+            return redirect('login')
+        date_begin = request.args.get('date_begin', '')
+        date_end = request.args.get('date_end', '')
+        sql = '''
+            select u.id,u.mingcheng,(
+              select count(*)
+              from cm_archieve.caozuo_jilu as c
+              where yh_id=u.id
+              and c.caozuo=:operation
+              and c.riqi>=:date_begin
+              and c.riqi<=:date_end
+            ) as counter
+            from cm_archieve.user as u
+        '''
+        param = {
+            'operation': u'打印',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_print = res.fetchall()
+        res.close()
+        param = {
+            'operation': u'生成查询密码',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_code = res.fetchall()
+        res.close()
+        param = {
+            'operation': u'导出到终端',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_export = res.fetchall()
+        res.close()
+        return render_template('statistics/invoke_time_slot.html',
+            User=session['user_name'], date_begin=date_begin,
+            date_end=date_end, rows_print=rows_print,
+            rows_code=rows_code, rows_export=rows_export)
 
     def post(self):
-        pass
+        year_begin = request.form['year_begin']
+        month_begin = request.form['month_begin']
+        day_begin = request.form['day_begin']
+        year_end = request.form['year_end']
+        month_end = request.form['month_end']
+        day_end = request.form['day_end']
+        date_begin = '%s-%s-%s' % (year_begin, month_begin, day_begin)
+        date_end = '%s-%s-%s' % (year_end, month_end, day_end)
+        return redirect('/invoke_time_slot?date_begin=%s&date_end=%s' % \
+            (date_begin, date_end))
 
 
 class InvokeLog(MethodView):
