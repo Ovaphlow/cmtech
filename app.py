@@ -36,30 +36,34 @@ app.add_url_rule('/shangchuan/<rec_id>',
 app.add_url_rule('/dangan/<rec_id>', view_func=dangan.DangAn.as_view('dangan'))
 app.add_url_rule('/_upload_image_file',
     view_func=dangan.UploadImageFile.as_view('ulpic'))
-app.add_url_rule('/chaxun/tsgz',
-    view_func=chaxun.TeShuGongZhong.as_view('tsgz'))
-app.add_url_rule('/chaxun/nglgw',
-    view_func=chaxun.NvGuanLiGangWei.as_view('nglgw'))
-app.add_url_rule('/chaxun/dytx', view_func=chaxun.DangYueTuiXiu.as_view('dytx'))
 app.add_url_rule('/xgmm', view_func=yonghu.XiuGaiMiMa.as_view('xgmm'))
 app.add_url_rule('/delete_archieve/<archieve_id>',
     view_func=dangan.DeleteArchieve.as_view('delete_archieve'))
 app.add_url_rule('/gen_code/<archieve_id>',
     view_func=dangan.GenCode.as_view('gen_code'))
-app.add_url_rule('/tongji',
-    view_func=chaxun.TongJi.as_view('tong_ji'))
 app.add_url_rule('/dayin/<archieve_id>',
     view_func=dangan.DaYin.as_view('da_yin'))
 app.add_url_rule('/exp2client/<rec_id>',
     view_func=dangan.Exp2Client.as_view('exp2client'))
 app.add_url_rule('/dl_zip/<archieve_id>',
     view_func=dangan.DownloadZip.as_view('dl_zip'))
+
+# 查询统计
+app.add_url_rule('/chaxun/tsgz',
+    view_func=chaxun.TeShuGongZhong.as_view('tsgz'))
+app.add_url_rule('/chaxun/nglgw',
+    view_func=chaxun.NvGuanLiGangWei.as_view('nglgw'))
+app.add_url_rule('/chaxun/dytx', view_func=chaxun.DangYueTuiXiu.as_view('dytx'))
+app.add_url_rule('/tongji',
+    view_func=chaxun.TongJi.as_view('tong_ji'))
 app.add_url_rule('/tongji_month',
     view_func=chaxun.TongjiMonth.as_view('tongji_month'))
 app.add_url_rule('/tongji_time_slot',
     view_func=chaxun.TongjiTimeSlot.as_view('tongji_time_slot'))
 app.add_url_rule('/tongji_archieve_log',
     view_func=chaxun.ArchieveLog.as_view('tongji_archieve_log'))
+app.add_url_rule('/invoke_month',
+    view_func=chaxun.InvokeMonth.as_view('invoke_month'))
 
 # 管理员账号部分
 app.add_url_rule('/admin', view_func=admin.Home.as_view('admin'))

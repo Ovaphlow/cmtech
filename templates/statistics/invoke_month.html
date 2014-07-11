@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}档案利用统计<br /><small></small>{% endblock %}
+{% block content %}
+<div class="row-fluid">
+  <div class="span8 offset2">
+    <div id="container"></div>
+  </div>
+</div>
+{% endblock %}
+{% block jslib %}
+<script src="/static/highcharts/3.0.9/highcharts.js"></script>
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '打印 - 月份操作统计（{{ date }}）'
+        },
+        subtitle: {
+            text: '数据内容为打印档案的次数'
+        },
+        xAxis: {
+            categories: [
+            {%- for row in rows_print -%}
+                {%- if loop.last -%}
+                '{{ row.mingcheng }}'
+                {%- else -%}
+                '{{ row.mingcheng }}',
+                {%- endif -%}
+            {%- endfor -%}
+            ]
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '月份操作统计（{{ date }}）',
+            data: [
+            {%- for row in rows_print -%}
+                {%- if loop.last -%}
+                {{ row.counter }}
+                {%- else -%}
+                {{ row.counter }},
+                {%- endif -%}
+            {%- endfor -%}
+            ],
+        }, {
+            name: '月份操作统计（{{ date }}）',
+            data: [
+            {%- for row in rows_code -%}
+                {%- if loop.last -%}
+                {{ row.counter }}
+                {%- else -%}
+                {{ row.counter }},
+                {%- endif -%}
+            {%- endfor -%}
+            ],
+        }, {
+            name: '月份操作统计（{{ date }}）',
+            data: [
+            {%- for row in rows_export -%}
+                {%- if loop.last -%}
+                {{ row.counter }}
+                {%- else -%}
+                {{ row.counter }},
+                {%- endif -%}
+            {%- endfor -%}
+            ]
+        }]
+    });
+});
+</script>
+{% endblock %}

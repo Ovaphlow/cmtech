@@ -297,8 +297,42 @@ class ArchieveLog(MethodView):
         return redirect('/tongji_archieve_log?archieve_id=%s' % (archieve_id))
 
 
-class PrintTimeSlot(MethodView):
+class InvokeMonth(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('login')
-        
+        date = datetime.datetime.now().strftime('%Y-%m')
+        sql = '''
+            select u.id,u.mingcheng,(
+              select count(*)
+              from cm_archieve.caozuo_jilu as c
+              where yh_id=u.id
+              and c.caozuo=:operation
+              and locate(:date,c.riqi)>0
+            ) as counter
+            from cm_archieve.user as u
+        '''
+        param = {
+            'operation': u'打印',
+            'date': date
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_print = res.fetchall()
+        res.close()
+        param = {
+            'operation': u'生成查询密码',
+            'date': date
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_code = res.fetchall()
+        res.close()
+        param = {
+            'operation': u'导出到终端',
+            'date': date
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_export = res.fetchall()
+        res.close()
+        return render_template('statistics/invoke_month.html',
+            User=session['user_name'], rows_print=rows_print, date=date,
+            rows_code=rows_code, rows_export=rows_export)
