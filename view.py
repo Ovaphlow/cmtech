@@ -45,9 +45,76 @@ class Home(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())))
         row_archieve_scaned = res.fetchone()
         res.close()
-        return render_template('view_home.html', user_name=session['user_name'],
+        return render_template('view/home.html', user_name=session['user_name'],
             count_1=row_user.count, count_2=row_archieve.count,
             count_3=row_archieve_scaned.count)
+
+
+class InputArchieveId(MethodView):
+    def get(self):
+        if not session['user_account'] in G_VIEW_USER:
+            return redirect('/logout')
+        err = None
+        return render_template('view/input_archieve_id.html',
+            user_name=session['user_name'], error_message=err)
+
+    def post(self):
+        archieve_id = request.form['archieve_id']
+        return redirect('/view/archieve_list?archieve_id=%s' % \
+            (archieve_id))
+
+
+class InputIdentityCard(MethodView):
+    def get(self):
+        if not session['user_account'] in G_VIEW_USER:
+            return redirect('/logout')
+        err = None
+        return render_template('view/input_identity_card.html',
+            user_name=session['user_name'], error_message=err)
+
+    def post(self):
+        identity_card = request.form['identity_card']
+        return redirect('/view/archieve_list?identity_card=%s' % \
+            (identity_card))
+
+
+class ArchieveList(MethodView):
+    def get(self):
+        if not session['user_account'] in G_VIEW_USER:
+            return redirect('/logout')
+        archieve_id = request.args.get('archieve_id', None)
+        identity_card = request.args.get('identity_card', None)
+        if archieve_id:
+            sql = '''
+                select d.*,(
+                    select count(*)
+                    from cm_archieve.wenjian w
+                    where w.aid=d.id
+                ) as page_count
+                from cm_archieve.dangan d
+                where (d.ZhuanChu=""
+                or d.ZhuanChu is null)
+                and locate(:archieve_id,danganhao)>0
+            '''
+            param = {'archieve_id': archieve_id}
+        if identity_card:
+            sql = '''
+                select d.*,(
+                    select count(*)
+                    from cm_archieve.wenjian w
+                    where w.aid=d.id
+                ) as page_count
+                from cm_archieve.dangan d
+                where (d.ZhuanChu=""
+                or d.ZhuanChu is null)
+                and locate(:identity_card,shenfenzheng)>0
+            '''
+            param = {'identity_card': identity_card}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('view/archieve_list.html',
+            user_name=session['user_name'], rows=rows)
 
 
 class User(MethodView):
@@ -61,7 +128,7 @@ class User(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())))
         rows = res.fetchall()
         res.close()
-        return render_template('view_user.html',
+        return render_template('view/user.html',
             user_name=session['user_name'],
             rows=rows)
 
@@ -112,7 +179,7 @@ class Archieve(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
-        return render_template('view_archieve.html',
+        return render_template('view/archieve.html',
             user_name=session['user_name'], rows=rows)
 
     def post(self):
@@ -153,7 +220,7 @@ class ArchieveDetail(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
-        return render_template('view_archieve_detail.html',
+        return render_template('view/archieve_detail.html',
             user_name=session['user_name'],
             row=row, rows=rows)
 
@@ -190,6 +257,6 @@ class Statistics(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows_month = res.fetchall()
         res.close()
-        return render_template('statistics.html',
+        return render_template('view/statistics.html',
             user_name=session['user_name'],
             rows_1=rows_1, rows_month=rows_month)

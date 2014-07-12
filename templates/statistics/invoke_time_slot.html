@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
-{% block title %}档案利用时段统计<br /><small></small>{% endblock %}
+{% block title %}档案利用 - 时段统计<br /><small></small>{% endblock %}
 {% block content %}
 <form class="form-inline" action="" method="post">
   <p class="text-center">
@@ -72,7 +72,7 @@
 </div>
 {% endblock %}
 {% block jslib %}
-<script src="/static/highcharts/3.0.9/highcharts.js"></script>
+<script src="/static/highcharts/4.0.1/highcharts.js"></script>
 <script>
 $(function () {
     $('#container').highcharts({

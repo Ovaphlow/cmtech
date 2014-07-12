@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block user %}{{ User }}{% endblock %}
-{% block title %}档案利用统计<br /><small></small>{% endblock %}
+{% block title %}档案利用 - 当月统计<br /><small></small>{% endblock %}
 {% block content %}
 <div class="row-fluid">
   <div class="span8 offset2">
@@ -9,7 +9,7 @@
 </div>
 {% endblock %}
 {% block jslib %}
-<script src="/static/highcharts/3.0.9/highcharts.js"></script>
+<script src="/static/highcharts/4.0.1/highcharts.js"></script>
 <script>
 $(function () {
     $('#container').highcharts({
