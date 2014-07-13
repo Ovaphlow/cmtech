@@ -109,7 +109,6 @@ class ScanLog(MethodView):
             User=session['user_name'], users=rows_user, rows=rows)
 
     def post(self):
-        # archieve_id = request.form['archieve_id']
         user_id = request.form['user_id']
         year_begin = request.form['year_begin']
         month_begin = request.form['month_begin']
@@ -118,6 +117,69 @@ class ScanLog(MethodView):
         month_end = request.form['month_end']
         day_end = request.form['day_end']
         uri = '/chaxun/scan_log?'
+        uri += 'user_id=%s' % (user_id)
+        uri += '&date_begin=%s-%s-%s' % (year_begin, month_begin, day_begin)
+        uri += '&date_end=%s-%s-%s' % (year_end, month_end, day_end)
+        return redirect(uri)
+
+
+class InvokeLogUser(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('/login')
+        user_id = request.args.get('user_id')
+        date_begin = request.args.get('date_begin',
+            datetime.datetime.now().strftime('%Y-%m-01'))
+        date_end = request.args.get('date_end',
+            datetime.datetime.now().strftime('%Y-%m-31'))
+        sql = '''
+            select *
+            from user
+        '''
+        res = db_engine.execute(text(' '.join(sql.split())))
+        rows_user = res.fetchall()
+        res.close()
+        sql = '''
+            select d.*,c.CaoZuo,c.RiQi,(
+                select count(*)
+                from cm_archieve.wenjian w
+                where w.aid=c.yh_id
+            ) as page_count
+            from caozuo_jilu as c
+            left join dangan as d
+            on c.NeiRong=d.id
+            where (d.ZhuanChu=""
+                or d.ZhuanChu is null)
+            and (c.caozuo=:operation_1
+                or c.caozuo=:operation_2
+                or c.caozuo=:operation_3)
+            and c.yh_id=:user_id
+            and c.riqi>=:date_begin
+            and c.riqi<=:date_end
+        '''
+        param = {
+            'operation_1': u'打印',
+            'operation_2': u'生成查询密码',
+            'operation_3': u'导出到终端',
+            'user_id': user_id,
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('statistics/invoke_log_user.html',
+            User=session['user_name'], users=rows_user, rows=rows)
+
+    def post(self):
+        user_id = request.form['user_id']
+        year_begin = request.form['year_begin']
+        month_begin = request.form['month_begin']
+        day_begin = request.form['day_begin']
+        year_end = request.form['year_end']
+        month_end = request.form['month_end']
+        day_end = request.form['day_end']
+        uri = '/chaxun/invoke_log_user?'
         uri += 'user_id=%s' % (user_id)
         uri += '&date_begin=%s-%s-%s' % (year_begin, month_begin, day_begin)
         uri += '&date_end=%s-%s-%s' % (year_end, month_end, day_end)
@@ -447,7 +509,7 @@ class InvokeLog(MethodView):
             return redirect('login')
         archieve_id = request.args.get('archieve_id', 0)
         sql = '''
-            select d.id,d.danganhao, c.yh_id,c.caozuo,c.riqi,u.mingcheng
+            select d.id,d.danganhao,c.yh_id,c.caozuo,c.riqi,u.mingcheng
             from dangan as d
             left join caozuo_jilu as c
             on c.NeiRong=d.id

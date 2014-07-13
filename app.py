@@ -70,6 +70,8 @@ app.add_url_rule('/invoke_log',
     view_func=chaxun.InvokeLog.as_view('invoke_log'))
 app.add_url_rule('/chaxun/scan_log',
     view_func=chaxun.ScanLog.as_view('chaxun.scan_log'))
+app.add_url_rule('/chaxun/invoke_log_user',
+    view_func=chaxun.InvokeLogUser.as_view('chaxun.invoke_log_user'))
 
 # 管理员账号部分
 app.add_url_rule('/admin', view_func=admin.Home.as_view('admin'))

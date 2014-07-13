@@ -69,6 +69,14 @@
   <div class="span8 offset2">
     <div id="container"></div>
   </div>
+  <div class="span2">
+    <h4>查看详细</h4>
+    <ul>
+      {% for row in rows_print %}
+      <li><a href="/chaxun/invoke_log_user?user_id={{ row.id }}&date_begin={{ date_begin }}&date_end={{ date_end }}">{{ row.mingcheng }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}
 {% block jslib %}
@@ -120,7 +128,7 @@ $(function () {
                 {%- endif -%}
             {%- endfor -%}
             ],
-            }, {
+        }, {
             name: '生成查询密码',
             data: [
             {%- for row in rows_code -%}
@@ -131,7 +139,7 @@ $(function () {
                 {%- endif -%}
             {%- endfor -%}
             ],
-            }, {
+        }, {
             name: '导出到终端',
             data: [
             {%- for row in rows_export -%}

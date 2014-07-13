@@ -31,37 +31,19 @@ class Index(MethodView):
         cursor.execute(sql)
         data_count3 = cursor.fetchall()
         sql = '''
-            select caozuo, count(*)
+            select caozuo,count(*) as counter
             from caozuo_jilu
             where yh_id=%(user_id)s
             group by caozuo
         '''
         param = {'user_id': session['user_id']}
         cursor.execute(sql, param)
-        result = cursor.fetchall()
+        res_count = cursor.fetchall()
         close_db(cursor, cnx)
-        opr_count1 = 0
-        opr_count2 = 0
-        opr_count3 = 0
-        opr_count4 = 0
-        for row in result:
-            if row[0] == u'添加档案信息':
-                opr_count1 = row[1]
-            elif row[0] == u'修改档案信息':
-                opr_count2 = row[1]
-            elif row[0] == u'上传图片':
-                opr_count3 = row[1]
-            elif row[0] == u'批量上传':
-                opr_count4 = row[1]
         return render_template('index.html',
-            User=session['user_name'],
-            data_count1=data_count1,
-            data_count2=data_count2,
-            data_count3=data_count3,
-            opr_count1=opr_count1,
-            opr_count2=opr_count2,
-            opr_count3=opr_count3,
-            opr_count4=opr_count4)
+            User=session['user_name'], data_count1=data_count1,
+            data_count2=data_count2, data_count3=data_count3,
+            cat_count=res_count)
 
     def post(self):
         sql = '''
