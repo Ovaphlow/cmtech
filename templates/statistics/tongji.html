@@ -23,15 +23,15 @@ $(function () {
             text: '操作总量统计数据'
         },
         subtitle: {
-            text: '数据内容包括添加及修改档案信息，扫描或上传档案文件等'
+            text: '数据内容为扫描并上传档案的份数'
         },
         xAxis: {
             categories: [
             {%- for row in counter_1 -%}
                 {%- if loop.last -%}
-                '{{ row[1] }}'
+                '{{ row.MingCheng }}'
                 {% else -%}
-                '{{ row[1] }}',
+                '{{ row.MingCheng }}',
                 {% endif -%}
             {%- endfor -%}
             ]
@@ -54,9 +54,9 @@ $(function () {
             data: [
             {%- for row in counter_1 -%}
                 {%- if loop.last -%}
-                {{ row[2] }}
+                {{ row.counter }}
                 {%- else -%}
-                {{ row[2] }},
+                {{ row.counter }},
                 {%- endif -%}
             {%- endfor -%}
             ]

@@ -69,6 +69,14 @@
   <div class="span8 offset2">
     <div id="container"></div>
   </div>
+  <div class="span2">
+    <h4>查看详细</h4>
+    <ul>
+      {% for row in rows %}
+      <li><a href="/chaxun/scan_log?user_id={{ row.id }}&date_begin={{ date_begin }}&date_end={{ date_end }}">{{ row.MingCheng }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 {% endblock %}
 {% block jslib %}
@@ -89,9 +97,9 @@ $(function () {
             categories: [
             {%- for row in rows -%}
                 {%- if loop.last -%}
-                '{{ row.mingcheng }}'
+                '{{ row.MingCheng }}'
                 {%- else -%}
-                '{{ row.mingcheng }}',
+                '{{ row.MingCheng }}',
                 {%- endif -%}
             {%- endfor -%}
             ]

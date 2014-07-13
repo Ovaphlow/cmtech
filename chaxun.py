@@ -63,6 +63,67 @@ class ChaXun(MethodView):
             User=session['user_name'])
 
 
+class ScanLog(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('/login')
+        user_id = request.args.get('user_id')
+        date_begin = request.args.get('date_begin',
+            datetime.datetime.now().strftime('%Y-%m-01'))
+        date_end = request.args.get('date_end',
+            datetime.datetime.now().strftime('%Y-%m-31'))
+        sql = '''
+            select *
+            from user
+        '''
+        res = db_engine.execute(text(' '.join(sql.split())))
+        rows_user = res.fetchall()
+        res.close()
+        sql = '''
+            select d.*,(
+                select count(*)
+                from cm_archieve.wenjian w
+                where w.aid=d.id
+            ) as page_count
+            from cm_archieve.dangan as d
+            left join caozuo_jilu as c
+            on d.id=c.neirong
+            where (d.ZhuanChu=""
+                or d.ZhuanChu is null)
+            and c.caozuo=:operation
+            and c.yh_id=:user_id
+            and c.riqi>=:date_begin
+            and c.riqi<=:date_end
+            group by c.neirong
+        '''
+        param = {
+            'operation': u'上传图片',
+            'user_id': user_id,
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
+        return render_template('statistics/scan_log.html',
+            User=session['user_name'], users=rows_user, rows=rows)
+
+    def post(self):
+        # archieve_id = request.form['archieve_id']
+        user_id = request.form['user_id']
+        year_begin = request.form['year_begin']
+        month_begin = request.form['month_begin']
+        day_begin = request.form['day_begin']
+        year_end = request.form['year_end']
+        month_end = request.form['month_end']
+        day_end = request.form['day_end']
+        uri = '/chaxun/scan_log?'
+        uri += 'user_id=%s' % (user_id)
+        uri += '&date_begin=%s-%s-%s' % (year_begin, month_begin, day_begin)
+        uri += '&date_end=%s-%s-%s' % (year_end, month_end, day_end)
+        return redirect(uri)
+
+
 class DangYueTuiXiu(MethodView):
     def get(self):
         if not 'user_id' in session:
@@ -149,103 +210,84 @@ class TongJi(MethodView):
             return redirect('/login')
         cnx = connect_db()
         cursor = cnx.cursor()
-        sql_1 = '''
-            select
-                u.id,u.mingcheng,count(c.id)
-            from
-                `cm_archieve`.user u
-                left join
-                `cm_archieve`.caozuo_jilu c
-                on
-                u.id=c.yh_id
-            where c.caozuo="上传图片"
-            group by
-                u.id
+        sql = '''
+            select u.MingCheng,u.id,(
+                select count(*) as yh_count
+                from (
+                    select yh_id,count(*)
+                    from cm_archieve.caozuo_jilu c
+                    where c.caozuo=:operation
+                    group by yh_id,neirong
+                ) as yh
+                where yh.yh_id=u.id
+            ) as counter
+            from cm_archieve.user as u
         '''
-        cursor.execute(sql_1)
-        result_1 = cursor.fetchall()
-        close_db(cursor, cnx)
+        param = {'operation': u'上传图片'}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
         return render_template('statistics/tongji.html',
-            User=session['user_name'],
-            counter_1=result_1)
+            User=session['user_name'], counter_1=rows)
 
 
 class TongjiMonth(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-        _year = datetime.datetime.now().strftime('%Y')
-        _month = datetime.datetime.now().strftime('%m')
-        _date = '%s-%s' % (_year, _month)
+        _date = datetime.datetime.now().strftime('%Y-%m')
         sql = '''
-            select u.MingCheng,(
+            select u.MingCheng,u.id,(
                 select count(*) as yh_count
                 from (
                     select yh_id,count(*)
                     from cm_archieve.caozuo_jilu c
-                    where c.caozuo="上传图片"
-                    and locate(%(date)s,c.riqi) > 0
+                    where c.caozuo=:operation
+                    and locate(:date,c.riqi)>0
                     group by yh_id,neirong
                 ) as yh
                 where yh.yh_id=u.id
             ) as yh_count
             from cm_archieve.user as u
         '''
-        param = {'date': _date}
-        cnx = connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(sql, param)
-        res = cursor.fetchall()
-        close_db(cursor, cnx)
+        param = {
+            'date': _date,
+            'operation': u'上传图片'
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
+        res.close()
         return render_template('statistics/tongji_month.html',
-            User=session['user_name'],
-            counter_1=res,
-            date=_date)
+            User=session['user_name'], counter_1=rows, date=_date)
 
 
 class TongjiTimeSlot(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('login')
-        if request.args.get('year_begin'):
-            year_begin = request.args.get('year_begin')
-        else:
-            year_begin = datetime.datetime.now().strftime('%Y')
-        if request.args.get('month_begin'):
-            month_begin = request.args.get('month_begin')
-        else:
-            month_begin = datetime.datetime.now().strftime('%m')
-        if request.args.get('day_begin'):
-            day_begin = request.args.get('day_begin')
-        else:
-            day_begin = '01'
-        if request.args.get('year_end'):
-            year_end = request.args.get('year_end')
-        else:
-            year_end = year_begin
-        if request.args.get('month_end'):
-            month_end = request.args.get('month_end')
-        else:
-            month_end = month_begin
-        if request.args.get('day_end'):
-            day_end = request.args.get('day_end')
-        else:
-            day_end = '31'
-        # print(year_begin, month_begin, day_begin)
-        # print(year_end, month_end, day_end)
-        date_begin = '%s-%s-%s' % (year_begin, month_begin, day_begin)
-        date_end = '%s-%s-%s' % (year_end, month_end, day_end)
+        date_begin = request.args.get('date_begin',
+            datetime.datetime.now().strftime('%Y-%m-01'))
+        date_end = request.args.get('date_end',
+            datetime.datetime.now().strftime('%Y-%m-31'))
+        print(date_begin)
+        print(date_end)
         sql = '''
-            select u.id,u.mingcheng,count(c.id) as counter
-            from `cm_archieve`.user u
-            left join `cm_archieve`.caozuo_jilu c
-            on u.id=c.yh_id
-            where c.caozuo="上传图片"
-            and c.riqi>:date_begin
-            and c.riqi<:date_end
-            group by u.id
+            select u.MingCheng,u.id,(
+                select count(*) as yh_count
+                from (
+                    select yh_id,count(*)
+                    from cm_archieve.caozuo_jilu c
+                    where c.caozuo=:operation
+                    and c.riqi>=:date_begin
+                    and c.riqi<=:date_end
+                    group by yh_id,neirong
+                ) as yh
+                where yh.yh_id=u.id
+            ) as counter
+            from cm_archieve.user as u
         '''
         param = {
+            'operation': u'上传图片',
             'date_begin': date_begin,
             'date_end': date_end
         }
@@ -257,13 +299,15 @@ class TongjiTimeSlot(MethodView):
             date_begin=date_begin, date_end=date_end)
 
     def post(self):
+        year_begin = request.form['year_begin']
+        month_begin = request.form['month_begin']
+        day_begin = request.form['day_begin']
+        year_end = request.form['year_end']
+        month_end = request.form['month_end']
+        day_end = request.form['day_end']
         uri = '/tongji_time_slot?'
-        uri += 'year_begin=%s' % (request.form['year_begin'])
-        uri += '&month_begin=%s' % (request.form['month_begin'])
-        uri += '&day_begin=%s' % (request.form['day_begin'])
-        uri += '&year_end=%s' % (request.form['year_end'])
-        uri += '&month_end=%s' % (request.form['month_end'])
-        uri += '&day_end=%s' % (request.form['day_end'])
+        uri += 'date_begin=%s-%s-%s' % (year_begin, month_begin, day_begin)
+        uri += '&date_end=%s-%s-%s' % (year_end, month_end, day_end)
         return redirect(uri)
 
 
@@ -304,11 +348,11 @@ class InvokeMonth(MethodView):
         date = datetime.datetime.now().strftime('%Y-%m')
         sql = '''
             select u.id,u.mingcheng,(
-              select count(*)
-              from cm_archieve.caozuo_jilu as c
-              where yh_id=u.id
-              and c.caozuo=:operation
-              and locate(:date,c.riqi)>0
+                select count(*)
+                from cm_archieve.caozuo_jilu as c
+                where yh_id=u.id
+                and c.caozuo=:operation
+                and locate(:date,c.riqi)>0
             ) as counter
             from cm_archieve.user as u
         '''

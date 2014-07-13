@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block user %}{{ User }}{% endblock %}
+{% block title %}档案扫描记录查询<br /><small></small>{% endblock %}
+{% block content %}
+<div class="row-fluid">
+  <div class="span8 offset2">
+    <form action="" method="post" class="form-inline">
+      <!-- <label for="archieve_id">档案号</label>
+      <input name="archieve_id" class="span2" type="text" id="archieve_id">
+      | -->
+      <label for="user_id">操作员</label>
+      <!-- <input name="name" class="span3" type="text" id="name"> -->
+      <select id="user_id" name="user_id">
+        {% for u in users %}
+        <option value="{{ u.id }}">{{ u.MingCheng }}</option>
+        {% endfor %}
+      </select>
+      <br /><br />
+      <input name="year_begin" class="span1" type="text" id="year_begin>
+      <label for="year_begin">年</label>
+      <select name="month_begin" class="span2">
+        <option value="01" selected>一月</option>
+        <option value="02">二月</option>
+        <option value="03">三月</option>
+        <option value="04">四月</option>
+        <option value="05">五月</option>
+        <option value="06">六月</option>
+        <option value="07">七月</option>
+        <option value="08">八月</option>
+        <option value="09">九月</option>
+        <option value="10">十月</option>
+        <option value="11">十一月</option>
+        <option value="12">十二月</option>
+      </select>
+      <label for="month_begin">月</label>
+      <select name='day_begin' class="span1">
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        {% for i in range(10, 32) %}
+        <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+      </select>
+      <label for="day_begin">日</label>
+      <span class="label label-info">至</span>
+      <input name="year_end" class="span1" type="text" id="year_end">
+      <label for="year_end">年</label>
+      <select name="month_end" class="span2">
+        <option value="01" selected>一月</option>
+        <option value="02">二月</option>
+        <option value="03">三月</option>
+        <option value="04">四月</option>
+        <option value="05">五月</option>
+        <option value="06">六月</option>
+        <option value="07">七月</option>
+        <option value="08">八月</option>
+        <option value="09">九月</option>
+        <option value="10">十月</option>
+        <option value="11">十一月</option>
+        <option value="12">十二月</option>
+      </select>
+      <label for="month_end">月</label>
+      <select name='day_end' class="span1">
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        {% for i in range(10, 32) %}
+        <option value="{{ i }}"{% if loop.last %}selected{% endif %}>{{ i }}</option>
+        {% endfor %}
+      </select>
+      <label for="day_end">日</label>
+      <br /><br />
+      <button type="submit" class="btn btn-danger">检索</button>
+      <button type="reset" class="btn">重置</button>
+    </form>
+    <table class="table table-bordered table-hover table-striped table-condensed">
+      <caption></caption>
+      <thead>
+        <tr>
+          <th>档案号</th>
+          <th>身份证</th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>预退休日期</th>
+          <th>特殊工种</th>
+          <th>扫描档案</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in rows %}
+        <tr>
+          <td>{{ row.DangAnHao }}</td>
+          <td>{{ row.ShenFenZheng }}</td>
+          <td>{{ row.XingMing }}</td>
+          <td>{{ row.XingBie }}</td>
+          <td>{{ row.YuTuiXiuRiQi }}</td>
+          {% if row.TeShuGongZhong == 1 %}
+          <td>是</td>
+          {% else %}
+          <td>否</td>
+          {% endif %}
+          {% if row.page_count >0 %}
+          <td>是 ({{ row.page_count }})</td>
+          {% else %}
+          <td><p class="text-error">否</p></td>
+          {% endif %}
+          <td>
+            <a href=/dangan/{{ row.id }}>查看档案</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

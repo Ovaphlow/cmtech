@@ -102,11 +102,7 @@ class ShangChuan(MethodView):
         fp = get_file_path(rec_id)
         lp = '/saomiao/%s' % (rec_id,)
         return render_template('shangchuan.html',
-            row=row,
-            id=rec_id,
-            filepath=fp,
-            link=lp,
-            cat=cat,
+            row=row, id=rec_id, filepath=fp, link=lp, cat=cat,
             User=session['user_name'])
 
     def post(self, rec_id):
