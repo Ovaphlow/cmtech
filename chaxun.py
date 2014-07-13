@@ -15,7 +15,7 @@ class ChaXun(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-        return render_template('chaxun.html', User=session['user_name'])
+        return render_template('statistics/chaxun.html', User=session['user_name'])
 
     def post(self):
         reload(sys)
@@ -58,7 +58,7 @@ class ChaXun(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('chaxun.html',
+        return render_template('statistics/chaxun.html',
             data=data,
             User=session['user_name'])
 
@@ -77,7 +77,7 @@ class DangYueTuiXiu(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('dytx.html',
+        return render_template('statistics/dytx.html',
             data=data,
             User=session['user_name'])
 
@@ -106,7 +106,7 @@ class TeShuGongZhong(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('tsgz.html',
+        return render_template('statistics/tsgz.html',
             data=data,
             User=session['user_name'])
 
@@ -121,7 +121,7 @@ class NvGuanLiGangWei(MethodView):
         cursor.execute(sql)
         data = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('nglgw.html',
+        return render_template('statistics/nglgw.html',
             data=data,
             User=session['user_name'])
 
@@ -165,7 +165,7 @@ class TongJi(MethodView):
         cursor.execute(sql_1)
         result_1 = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('tongji.html',
+        return render_template('statistics/tongji.html',
             User=session['user_name'],
             counter_1=result_1)
 
@@ -197,7 +197,7 @@ class TongjiMonth(MethodView):
         cursor.execute(sql, param)
         res = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('tongji_month.html',
+        return render_template('statistics/tongji_month.html',
             User=session['user_name'],
             counter_1=res,
             date=_date)
@@ -252,7 +252,7 @@ class TongjiTimeSlot(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
-        return render_template('tongji_time_slot.html',
+        return render_template('statistics/tongji_time_slot.html',
             User=session['user_name'], rows=rows,
             date_begin=date_begin, date_end=date_end)
 
