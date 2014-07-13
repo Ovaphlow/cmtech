@@ -25,7 +25,7 @@ class Home(MethodView):
         cursor.execute(' '.join(sql.split()))
         res = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('admin_home.html',
+        return render_template('admin/home.html',
             user_name=session['user_name'],
             data=res)
 
@@ -43,7 +43,7 @@ class UserList(MethodView):
         cursor.execute(' '.join(sql.split()))
         res = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('admin_user_list.html',
+        return render_template('admin/user_list.html',
             user_name=session['user_name'],
             data=res)
 
@@ -66,7 +66,7 @@ class User(MethodView):
         close_db(cursor, cnx)
         if not res:
             return redirect('/admin')
-        return render_template('admin_user.html',
+        return render_template('admin/user.html',
             row=res[0],
             user_name=session['user_name'])
 
@@ -106,7 +106,7 @@ class AddUser(MethodView):
             _err_message = u'密码不能为空'
         else:
             _err_message = None
-        return render_template('admin_add_user.html',
+        return render_template('admin/add_user.html',
             user_name=session['user_name'],
             error=_err_message)
 
@@ -177,7 +177,7 @@ class Archieve(MethodView):
         cursor.execute(' '.join(sql.split()), param)
         res = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('admin_archieve.html',
+        return render_template('admin/archieve.html',
             user_name=session['user_name'],
             data=res)
 
