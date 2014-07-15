@@ -41,8 +41,8 @@ cnx_cfg = {
 db_engine = create_engine('mysql+mysqlconnector://%s:%s@%s/%s' % \
     (cnx_cfg['user'],cnx_cfg['password'], \
     cnx_cfg['host'],cnx_cfg['database']),
-    pool_recycle=60,
-    pool_size=20)
+    pool_recycle=900,
+    pool_size=5)
 
 G_UPLOAD_PATH = os.path.join(os.getcwd(), 'static\upload')
 ALLOWED_EXT = set(['jpg', 'png', 'bmp'])

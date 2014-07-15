@@ -331,8 +331,6 @@ class TongjiTimeSlot(MethodView):
             datetime.datetime.now().strftime('%Y-%m-01'))
         date_end = request.args.get('date_end',
             datetime.datetime.now().strftime('%Y-%m-31'))
-        print(date_begin)
-        print(date_end)
         sql = '''
             select u.MingCheng,u.id,(
                 select count(*) as yh_count
