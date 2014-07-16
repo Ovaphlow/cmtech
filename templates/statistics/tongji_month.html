@@ -6,14 +6,14 @@
   <div class="span8 offset2">
     <div id="container" style="height:2000px"></div>
   </div>
-  <div class="span2">
+  <!-- <div class="span2">
     <h4>查看详细</h4>
     <ul>
       {% for row in counter_1 %}
       <li><a href="/chaxun/scan_log?user_id={{ row.id }}&date_begin={{ date }}-01&date_end={{ date }}-31">{{ row.MingCheng }}</a></li>
       {% endfor %}
     </ul>
-  </div>
+  </div> -->
 </div>
 {% endblock %}
 {% block jslib %}
@@ -32,11 +32,11 @@ $(function () {
         },
         xAxis: {
             categories: [
-            {%- for row in counter_1 -%}
+            {%- for name in counter_1.keys() -%}
                 {%- if loop.last -%}
-                '{{ row[0] }}'
+                '{{ name }}'
                 {%- else -%}
-                '{{ row[0] }}',
+                '{{ name }}',
                 {%- endif -%}
             {%- endfor -%}
             ]
@@ -57,11 +57,11 @@ $(function () {
         series: [{
             name: '月份操作统计（{{ date }}）',
             data: [
-            {%- for row in counter_1 -%}
+            {%- for name in counter_1.keys() -%}
                 {%- if loop.last -%}
-                {{ row[2] }}
+                {{ counter_1[name] }}
                 {%- else -%}
-                {{ row[2] }},
+                {{ counter_1[name] }},
                 {%- endif -%}
             {%- endfor -%}
             ]

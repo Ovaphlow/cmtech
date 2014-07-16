@@ -6,14 +6,14 @@
   <div class="span8 offset2">
     <div id="container" style="height:2000px"></div>
   </div>
-  <div class="span2">
+  <!-- <div class="span2">
     <h4>查看详细</h4>
     <ul>
       {% for row in rows_print %}
       <li><a href="/chaxun/invoke_log_user?user_id={{ row.id }}&date_begin={{ date }}-01&date_end={{ date }}-31">{{ row.mingcheng }}</a></li>
       {% endfor %}
     </ul>
-  </div>
+  </div> -->
 </div>
 {% endblock %}
 {% block jslib %}
@@ -32,11 +32,11 @@ $(function () {
         },
         xAxis: {
             categories: [
-            {%- for row in rows_print -%}
+            {%- for name in rows_print.keys() -%}
                 {%- if loop.last -%}
-                '{{ row.mingcheng }}'
+                '{{ name }}'
                 {%- else -%}
-                '{{ row.mingcheng }}',
+                '{{ name }}',
                 {%- endif -%}
             {%- endfor -%}
             ]
@@ -57,33 +57,33 @@ $(function () {
         series: [{
             name: '打印',
             data: [
-            {%- for row in rows_print -%}
+            {%- for name in rows_print.keys() -%}
                 {%- if loop.last -%}
-                {{ row.counter }}
+                {{ rows_print[name] }}
                 {%- else -%}
-                {{ row.counter }},
+                {{ rows_print[name] }},
                 {%- endif -%}
             {%- endfor -%}
             ],
         }, {
             name: '生成查询密码',
             data: [
-            {%- for row in rows_code -%}
+            {%- for name in rows_code.keys() -%}
                 {%- if loop.last -%}
-                {{ row.counter }}
+                {{ rows_code[name] }}
                 {%- else -%}
-                {{ row.counter }},
+                {{ rows_code[name] }},
                 {%- endif -%}
             {%- endfor -%}
             ],
         }, {
             name: '导出到终端',
             data: [
-            {%- for row in rows_export -%}
+            {%- for name in rows_export.keys() -%}
                 {%- if loop.last -%}
-                {{ row.counter }}
+                {{ rows_export[name] }}
                 {%- else -%}
-                {{ row.counter }},
+                {{ rows_export[name] }},
                 {%- endif -%}
             {%- endfor -%}
             ]
