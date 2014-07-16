@@ -93,9 +93,8 @@
           <th>身份证</th>
           <th>姓名</th>
           <th>性别</th>
+          <th>出生日期</th>
           <th>预退休日期</th>
-          <th>特殊工种</th>
-          <th>扫描档案</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -106,17 +105,8 @@
           <td>{{ row.ShenFenZheng }}</td>
           <td>{{ row.XingMing }}</td>
           <td>{{ row.XingBie }}</td>
+          <td>{{ row.ChuShengRiQi }}</td>
           <td>{{ row.YuTuiXiuRiQi }}</td>
-          {% if row.TeShuGongZhong == 1 %}
-          <td>是</td>
-          {% else %}
-          <td>否</td>
-          {% endif %}
-          {% if row.page_count >0 %}
-          <td>是 ({{ row.page_count }})</td>
-          {% else %}
-          <td><p class="text-error">否</p></td>
-          {% endif %}
           <td>
             <a href=/dangan/{{ row.id }}>查看档案</a>
           </td>

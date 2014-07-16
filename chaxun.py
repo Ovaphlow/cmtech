@@ -80,11 +80,8 @@ class ScanLog(MethodView):
         rows_user = res.fetchall()
         res.close()
         sql = '''
-            select d.*,(
-                select count(*)
-                from cm_archieve.wenjian w
-                where w.aid=d.id
-            ) as page_count
+            select d.id,d.DangAnHao,d.ShenFenZheng,d.XingMing,d.XingBie,
+                d.ChuShengRiQi,d.YuTuiXiuRiQi
             from cm_archieve.dangan as d
             left join caozuo_jilu as c
             on d.id=c.neirong
@@ -94,7 +91,7 @@ class ScanLog(MethodView):
             and c.yh_id=:user_id
             and c.riqi>=:date_begin
             and c.riqi<=:date_end
-            group by c.neirong
+            group by d.id
         '''
         param = {
             'operation': u'上传图片',
@@ -127,24 +124,21 @@ class InvokeLogUser(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-        user_id = request.args.get('user_id')
+        user_id = request.args.get('user_id', 0)
         date_begin = request.args.get('date_begin',
-            datetime.datetime.now().strftime('%Y-%m-01'))
+            datetime.datetime.now().strftime('%Y-%m-%d'))
         date_end = request.args.get('date_end',
-            datetime.datetime.now().strftime('%Y-%m-31'))
+            datetime.datetime.now().strftime('%Y-%m-%d'))
         sql = '''
-            select *
+            select id,MingCheng
             from user
         '''
         res = db_engine.execute(text(' '.join(sql.split())))
         rows_user = res.fetchall()
         res.close()
         sql = '''
-            select d.*,c.CaoZuo,c.RiQi,(
-                select count(*)
-                from cm_archieve.wenjian w
-                where w.aid=c.yh_id
-            ) as page_count
+            select d.id,d.DangAnHao,d.ShenFenZheng,d.XingMing,d.XingBie,
+                c.CaoZuo,c.RiQi
             from caozuo_jilu as c
             left join dangan as d
             on c.NeiRong=d.id
@@ -169,7 +163,8 @@ class InvokeLogUser(MethodView):
         rows = res.fetchall()
         res.close()
         return render_template('statistics/invoke_log_user.html',
-            User=session['user_name'], users=rows_user, rows=rows)
+            User=session['user_name'], users=rows_user, rows=rows,
+            user_id_sel=int(user_id), date_begin=date_begin, date_end=date_end)
 
     def post(self):
         user_id = request.form['user_id']
