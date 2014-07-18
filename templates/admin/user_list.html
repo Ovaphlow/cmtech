@@ -8,6 +8,7 @@
       <td>姓名</td>
       <td>账号</td>
       <td>密码</td>
+      <td>操作</td>
     </tr>
   </thead>
   <tbody>
@@ -16,6 +17,13 @@
       <td><a href="/admin/user?user_id={{ row[0] }}">{{ row[3] }}</a></td>
       <td>{{ row[1] }}</td>
       <td>{{ row[2] }}</td>
+      <td><a href="/admin/auth_del_archieve?user_id={{ row.id }}">
+      {% if not row.auth_del_archieve %}
+        添加删除档案权限
+      {% else %}
+        取消删除档案权限
+      {% endif %}
+      </a></td>
     </tr>
     {% endfor %}
   </tbody>

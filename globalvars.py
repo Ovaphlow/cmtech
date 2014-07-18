@@ -125,21 +125,15 @@ def caozuo_jilu(user_id, caozuo, neirong):
         insert into caozuo_jilu
             (yh_id,CaoZuo,NeiRong,RiQi,ShiJian)
         values
-            (%(yh_id)s,%(caozuo)s,%(neirong)s,%(riqi)s,%(shijian)s)
+            (:yh_id,:caozuo,:neirong,:riqi,:shijian)
     '''
     uid = int(user_id)
-    param = {
-        'yh_id': uid,
+    param = {'yh_id': uid,
         'caozuo': caozuo,
         'neirong': neirong,
         'riqi': date,
-        'shijian': time
-    }
-    cnx = connect_db()
-    cursor = cnx.cursor()
-    cursor.execute(sql, param)
-    cnx.commit()
-    close_db(cursor, cnx)
+        'shijian': time}
+    db_engine.execute(text(' '.join(sql.split())), param)
 
 
 def get_years(gender, te, nv):

@@ -10,10 +10,9 @@ from random import randint
 
 from flask import session, redirect, request, render_template
 from flask.views import MethodView
+from sqlalchemy import text
 
-from globalvars import connect_db, close_db, G_UPLOAD_PATH, \
-    render_text, G_FILE_SERVER_ROOT, get_aid, caozuo_jilu, \
-    turn_image, rotate_image, check_path
+from globalvars import *
 
 
 class DangAn(MethodView):
@@ -25,48 +24,57 @@ class DangAn(MethodView):
             select d.*,(
                 select a.code
                 from cm_archieve.access_code a
-                where a.date=%(now_date)s
+                where a.date=:now_date
                 and a.archieve_id=d.ShenFenZheng
                 order by a.id desc
                 limit 1
             ) as code
             from cm_archieve.dangan d
-            where d.id=%(archieve_id)s
+            where d.id=:archieve_id
         '''
         param = {
             'archieve_id': rec_id,
             'now_date': datetime.datetime.now().strftime('%Y-%m-%d')
         }
-        cnx = connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(sql, param)
-        data = cursor.fetchall()
-        dob = data[0][5].split('-')
-        dor = data[0][6].split('-')
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        row = res.fetchone()
+        res.close()
+        dob = row[5].split('-')
+        dor = row[6].split('-')
         if cat == '0':
-            sql = 'SELECT * FROM wenjian WHERE aid=%s'
-            param = (rec_id,)
+            sql = 'SELECT * FROM wenjian WHERE aid=:archieve_id'
+            param = {'archieve_id': rec_id}
         else:
-            sql = 'SELECT * FROM wenjian WHERE aid=%s AND LeiBie=%s'
-            param = (rec_id, cat)
-        cursor.execute(sql, param)
-        data1 = cursor.fetchall()
-        close_db(cursor, cnx)
+            sql = '''
+                SELECT *
+                FROM wenjian
+                WHERE aid=:archieve_id
+                AND LeiBie=%:cat
+            '''
+            param = {'archieve_id': rec_id,
+                'cat': cat}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_pic = res.fetchall()
+        res.close()
+        sql = '''
+            select auth_del_archieve
+            from user
+            where id=:id
+        '''
+        param = {'id': session['user_id']}
+        print(session['user_id'])
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        row_auth = res.fetchone()
+        res.close()
+        print(row_auth)
         lp1 = '/saomiao/%s' % (rec_id,)
         lp2 = '/luru/%s' % (rec_id,)
         return render_template('dangan.html',
-            id=rec_id,
-            row=data[0],
-            link1=lp1,
-            link2=lp2,
-            fs_root=G_FILE_SERVER_ROOT,
-            aid=get_aid(rec_id),
-            data1=data1,
-            dob=dob,
-            dor=dor,
-            cat=cat,
-            User=session['user_name'],
-            pic_count=len(data1))
+            id=rec_id, row=row, link1=lp1, link2=lp2,
+            fs_root=G_FILE_SERVER_ROOT, aid=get_aid(rec_id),
+            data1=rows_pic, dob=dob, dor=dor, cat=cat, auth=row_auth,
+            User=session['user_name'])
+
 
     def post(self, rec_id):
         idcard = request.form['shenfenzheng']
@@ -109,21 +117,30 @@ class DangAn(MethodView):
 
 
 class DeleteArchieve(MethodView):
+    def get(self):
+        if not 'user_id' in session:
+            return redirect('/login')
+        archieve_id = request.args.get('archieve_id')
+        sql = '''
+            delete from dangan
+            where id=:id
+        '''
+        param = {'id': archieve_id}
+        db_engine.execute(text(' '.join(sql.split())), param)
+        caozuo_jilu(session['user_id'], u'删除档案', archieve_id)
+        return redirect('/')
+
+
+class MakeVoid(MethodView):
     def post(self, archieve_id):
         sql = '''
             update dangan
-            set ZhuanChu=%(zhuanchu)s
-            where id=%(archieve_id)s
+            set ZhuanChu=:zhuanchu
+            where id=:archieve_id
         '''
-        param = {
-            'zhuanchu': request.form['reason'],
-            'archieve_id': archieve_id
-        }
-        cnx = connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(sql, param)
-        cnx.commit()
-        close_db(cursor, cnx)
+        param = {'zhuanchu': request.form['reason'],
+            'archieve_id': archieve_id}
+        db_engine.execute(text(' '.join(sql.split())), param)
         return redirect('/')
 
 

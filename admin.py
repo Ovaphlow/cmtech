@@ -2,8 +2,9 @@
 
 from flask import redirect, render_template, session, request
 from flask.views import MethodView
+from sqlalchemy import text
 
-from globalvars import connect_db, close_db, G_ADMIN_USER
+from globalvars import *
 
 
 class Home(MethodView):
@@ -38,14 +39,41 @@ class UserList(MethodView):
             select *
             from user
         '''
-        cnx = connect_db()
-        cursor = cnx.cursor()
-        cursor.execute(' '.join(sql.split()))
-        res = cursor.fetchall()
-        close_db(cursor, cnx)
+        res = db_engine.execute(text(' '.join(sql.split())))
+        rows = res.fetchall()
+        res.close()
         return render_template('admin/user_list.html',
             user_name=session['user_name'],
-            data=res)
+            data=rows)
+
+
+class AuthDelArchieve(MethodView):
+    def get(self):
+        if not session['user_account'] in G_ADMIN_USER:
+            return redirect('/logout')
+        user_id = request.args.get('user_id')
+        sql = '''
+            select *
+            from user
+            where id=:id
+        '''
+        param = {'id': user_id}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        row = res.fetchone()
+        res.close()
+        sql = '''
+            update user
+            set auth_del_archieve=:auth
+            where id=:user_id
+        '''
+        if row.auth_del_archieve:
+            param = {'auth': 0,
+                'user_id': user_id}
+        else:
+            param = {'auth': 1,
+                'user_id': user_id}
+        db_engine.execute(text(' '.join(sql.split())), param)
+        return redirect('/admin/user_list')
 
 
 class User(MethodView):

@@ -37,8 +37,10 @@ app.add_url_rule('/dangan/<rec_id>', view_func=dangan.DangAn.as_view('dangan'))
 app.add_url_rule('/_upload_image_file',
     view_func=dangan.UploadImageFile.as_view('ulpic'))
 app.add_url_rule('/xgmm', view_func=yonghu.XiuGaiMiMa.as_view('xgmm'))
-app.add_url_rule('/delete_archieve/<archieve_id>',
-    view_func=dangan.DeleteArchieve.as_view('delete_archieve'))
+app.add_url_rule('/delete_archieve',
+    view_func=dangan.DeleteArchieve.as_view('del_archieve'))
+app.add_url_rule('/make_void/<archieve_id>',
+    view_func=dangan.MakeVoid.as_view('delete_archieve'))
 app.add_url_rule('/gen_code/<archieve_id>',
     view_func=dangan.GenCode.as_view('gen_code'))
 app.add_url_rule('/dayin/<archieve_id>',
@@ -84,6 +86,8 @@ app.add_url_rule('/admin/archieve',
     view_func=admin.Archieve.as_view('admin archieve'))
 app.add_url_rule('/admin/delete_archieve',
     view_func=admin.DeleteArchieve.as_view('admin delete archieve'))
+app.add_url_rule('/admin/auth_del_archieve',
+    view_func=admin.AuthDelArchieve.as_view('admin.auth_del_archieve'))
 
 # 浏览账号部分
 app.add_url_rule('/view', view_func=view.Home.as_view('view_home'))
