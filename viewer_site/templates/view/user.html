@@ -1,0 +1,20 @@
+{% extends "view/layout_view.html" %}
+{% block content_center %}
+<h1>查看用户</h1>
+<table class="table table-bordered table-hover table-striped table-condensed">
+  <thead>
+    <tr>
+      <th><h3>用户名</h3></th>
+      <th><h3>账号</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in rows %}
+    <tr>
+      <td><h4>{{ row.MingCheng }}</h4></td>
+      <td><h4>{{ row.ZhangHao }}</h4></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

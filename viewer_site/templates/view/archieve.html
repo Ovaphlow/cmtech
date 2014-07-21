@@ -1,0 +1,89 @@
+{% extends "view/layout_view.html" %}
+{% block content_center %}
+<h1>查询档案</h1>
+<form action="" method="post" class="form-inline">
+  <div class="row-fluid">
+    <div class="span3">
+      <label class="control-label" for="archieve_id" style="font-size:20px;">档案号</label>
+      <br />
+      <input name="DangAnHao" class="span12" type="text" id="archieve_id" style="font-size:20px;height:40px">
+    </div>
+    <div class="span6">
+      <label class="control-label" for="id_card" style="font-size:20px;">身份证</label>
+      <br />
+      <input name="ShenFenZheng" class="span12" type="text" id="id_card" style="font-size:20px;height:40px">
+    </div>
+    <div class="span3">
+      <label class="control-label" for="name" style="font-size:20px;">姓名</label>
+      <br />
+      <input name="XingMing" class="span12" type="text" id="name" style="font-size:20px;height:40px">
+    </div>
+  </div>
+  <br />
+  <div class="row-fluid">
+    <div class="span3">
+      <label class="control-label" for="gender" style="font-size:20px;">性别</label>
+      <br />
+      <select name="XingBie" class="span12" type="text" id="gender" style="font-size:20px;height:40px">
+        <option value="">不限</option>
+        <option value="男">男</option>
+        <option value="女">女</option>
+      </select>
+    </div>
+    <div class="span6">
+      <label class="checkbox" style="font-size:20px;">
+        <input type="checkbox" name="check" value="ngl">
+        女管理岗位
+      </label>
+      <br /><br />
+      <label class="checkbox" style="font-size:20px;">
+        <input type="checkbox" name="check" value="stow">
+        特殊工种
+      </label>
+    </div>
+    <div class="span3">
+      <br />
+      <button type="submit" class="btn btn-danger span12">提交</button>
+      <br />
+      <button type="reset" class="btn span12">重置</button>
+    </div>
+  </div>
+</form>
+<table class="table table-bordered table-hover table-striped table-condensed">
+  <caption></caption>
+  <thead>
+    <tr>
+      <th><h4>档案号</h4></th>
+      <th><h4>身份证</h4></th>
+      <th><h4>姓名</h4></th>
+      <th><h4>性别</h4></th>
+      <th><h4>预退休日期</h4></th>
+      <th><h4>特殊工种</h4></th>
+      <th><h4>扫描档案</h4></th>
+      <th><h4>操作</h4></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      <td><h4>{{ row.DangAnHao }}</h4></td>
+      <td><h4>{{ row.ShenFenZheng }}</h4></td>
+      <td><h4>{{ row.XingMing }}</h4></td>
+      <td><h4>{{ row.XingBie }}</h4></td>
+      <td><h4>{{ row.YuTuiXiuRiQi }}</h4></td>
+      {% if row.TeShuGongZhong == 1 %}
+      <td><h4>是</h4></td>
+      {% else %}
+      <td><h4>否</h4></td>
+      {% endif %}
+      {% if row.page_count >0 %}
+      <td><h4>是 ({{ row.page_count }})</h4></td>
+      {% else %}
+      <td><h4><p class="text-error">否</p></h4></td>
+      {% endif %}
+      <td><h4><a href=/view/archieve_detail?archieve_id={{ row.id }}>查看档案</a></h4></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

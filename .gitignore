@@ -1,5 +1,4 @@
-static/upload/*
-nodejs/hp/node_module/*
+archieve/static/upload/*
 *.pyc
 
 # C extensions
