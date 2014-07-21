@@ -7,7 +7,6 @@ import globalvars
 import index
 import shangchuan
 import test
-import view
 import yonghu
 
 from flask import Flask
