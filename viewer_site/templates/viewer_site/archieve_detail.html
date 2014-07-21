@@ -1,4 +1,4 @@
-{% extends "view/layout_view.html" %}
+{% extends "viewer_site/layout_view.html" %}
 {% block content_center %}
 <h1>查看档案</h1>
 <div class="row-fluid">
@@ -38,7 +38,7 @@
   <!-- Carousel items -->
   <div class="carousel-inner">
   {% for row_pic in rows %}
-    <div class="{% if loop.first %}active {% endif %}item"><p class="text-center"><img alt="" src="/static/upload/{{ row.DangAnHao }}/{{ row_pic.WenJianMing }}" /></p></div>
+    <div class="{% if loop.first %}active {% endif %}item"><p class="text-center"><img alt="" src="{{ file_uri }}/{{ row.DangAnHao }}/{{ row_pic.WenJianMing }}" /></p></div>
   {% endfor %}
   </div>
   <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>

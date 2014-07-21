@@ -43,7 +43,7 @@ class Home(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())))
         row_archieve_scaned = res.fetchone()
         res.close()
-        return render_template('view/home.html', user_name=session['user_name'],
+        return render_template('viewer_site/home.html', user_name=session['user_name'],
             count_1=row_user.count, count_2=row_archieve.count,
             count_3=row_archieve_scaned.count)
 
@@ -51,7 +51,7 @@ class Home(MethodView):
 class InputArchieveId(MethodView):
     def get(self):
         err = None
-        return render_template('view/input_archieve_id.html',
+        return render_template('viewer_site/input_archieve_id.html',
             user_name=session['user_name'], error_message=err)
 
     def post(self):
@@ -63,7 +63,7 @@ class InputArchieveId(MethodView):
 class InputIdentityCard(MethodView):
     def get(self):
         err = None
-        return render_template('view/input_identity_card.html',
+        return render_template('viewer_site/input_identity_card.html',
             user_name=session['user_name'], error_message=err)
 
     def post(self):
@@ -105,7 +105,7 @@ class ArchieveList(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
-        return render_template('view/archieve_list.html',
+        return render_template('viewer_site/archieve_list.html',
             user_name=session['user_name'], rows=rows)
 
 
@@ -118,7 +118,7 @@ class ArchieveList(MethodView):
 #         res = db_engine.execute(text(' '.join(sql.split())))
 #         rows = res.fetchall()
 #         res.close()
-#         return render_template('view/user.html',
+#         return render_template('viewer_site/user.html',
 #             user_name=session['user_name'],
 #             rows=rows)
 
@@ -167,7 +167,7 @@ class ArchieveList(MethodView):
 #         res = db_engine.execute(text(' '.join(sql.split())), param)
 #         rows = res.fetchall()
 #         res.close()
-#         return render_template('view/archieve.html',
+#         return render_template('viewer_site/archieve.html',
 #             user_name=session['user_name'], rows=rows)
 #
 #     def post(self):
@@ -206,9 +206,9 @@ class ArchieveDetail(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
-        return render_template('view/archieve_detail.html',
-            user_name=session['user_name'],
-            row=row, rows=rows)
+        return render_template('viewer_site/archieve_detail.html',
+            user_name=session['user_name'], row=row, rows=rows,
+            file_uri=ARCHIEVE_FILE_URI)
 
 
 # class Statistics(MethodView):
@@ -241,6 +241,6 @@ class ArchieveDetail(MethodView):
 #         res = db_engine.execute(text(' '.join(sql.split())), param)
 #         rows_month = res.fetchall()
 #         res.close()
-#         return render_template('view/statistics.html',
+#         return render_template('viewer_site/statistics.html',
 #             user_name=session['user_name'],
 #             rows_1=rows_1, rows_month=rows_month)

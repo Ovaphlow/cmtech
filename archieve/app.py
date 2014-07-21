@@ -88,21 +88,6 @@ app.add_url_rule('/admin/delete_archieve',
 app.add_url_rule('/admin/auth_del_archieve',
     view_func=admin.AuthDelArchieve.as_view('admin.auth_del_archieve'))
 
-# 浏览账号部分
-app.add_url_rule('/view', view_func=view.Home.as_view('view_home'))
-app.add_url_rule('/view/user', view_func=view.User.as_view('view_user'))
-app.add_url_rule('/view/archieve',
-    view_func=view.Archieve.as_view('view_archieve'))
-app.add_url_rule('/view/archieve_detail',
-    view_func=view.ArchieveDetail.as_view('view_archieve_detail'))
-app.add_url_rule('/view/statistics',
-    view_func=view.Statistics.as_view('view_statistics'))
-app.add_url_rule('/view/input_archieve_id',
-    view_func=view.InputArchieveId.as_view('view.input_archieve_id'))
-app.add_url_rule('/view/input_identity_card',
-    view_func=view.InputIdentityCard.as_view('view.input_identity_card'))
-app.add_url_rule('/view/archieve_list',
-    view_func=view.ArchieveList.as_view('view.archieve_list'))
 
 if __name__ == '__main__':
     app.run()
