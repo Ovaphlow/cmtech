@@ -194,8 +194,7 @@ class DangYueTuiXiu(MethodView):
         data = cursor.fetchall()
         close_db(cursor, cnx)
         return render_template('statistics/dytx.html',
-            data=data,
-            User=session['user_name'])
+            data=data, User=session['user_name'])
 
     def post(self):
         if not 'user_id' in session:
@@ -207,7 +206,7 @@ class DangYueTuiXiu(MethodView):
         cursor.execute(sql)
         result = cursor.fetchall()
         close_db(cursor, cnx)
-        return render_template('dytx.html',
+        return render_template('statistics/dytx.html',
             data=result,
             user=session['user_name'])
 
