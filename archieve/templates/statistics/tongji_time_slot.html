@@ -87,7 +87,7 @@
 </div>
 {% endblock %}
 {% block jslib %}
-<script src="/static/highcharts/3.0.9/highcharts.js"></script>
+<script src="/static/highcharts/4.0.1/highcharts.js"></script>
 <script>
 $(function () {
     $('#container').highcharts({
@@ -102,11 +102,11 @@ $(function () {
         },
         xAxis: {
             categories: [
-            {%- for name in rows.keys() -%}
+            {%- for row in rows -%}
                 {%- if loop.last -%}
-                '{{ name }}'
+                '{{ row.MingCheng }}'
                 {%- else -%}
-                '{{ name }}',
+                '{{ row.MingCheng }}',
                 {%- endif -%}
             {%- endfor -%}
             ]
@@ -127,11 +127,11 @@ $(function () {
         series: [{
             name: '时段操作统计 {{ date_begin }}至{{ date_end }}',
             data: [
-            {%- for name in rows.keys() -%}
+            {%- for row in rows -%}
                 {%- if loop.last -%}
-                {{ rows[name] }}
+                {{ row.counter }}
                 {%- else -%}
-                {{ rows[name] }},
+                {{ row.counter }},
                 {%- endif -%}
             {%- endfor -%}
             ]

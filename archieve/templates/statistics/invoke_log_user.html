@@ -85,6 +85,7 @@
       <caption></caption>
       <thead>
         <tr>
+          <th>序号</th>
           <th>档案号</th>
           <th>身份证</th>
           <th>姓名</th>
@@ -96,6 +97,7 @@
       <tbody>
         {% for row in rows %}
         <tr>
+          <td>{{ loop.index }}</td>
           <td>{{ row.DangAnHao }}</td>
           <td>{{ row.ShenFenZheng }}</td>
           <td>{{ row.XingMing }}</td>

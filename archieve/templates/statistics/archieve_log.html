@@ -10,7 +10,7 @@
         <button class="btn btn-danger" type="submit">提交</button>
       </p>
     </form>
-    <p class="text-info"><strong>档案号：{% if rows %}{{ rows[0].danganhao }}{% endif %}</strong></p>
+    <strong>档案号：<a href="/dangan/{{ rows[0].id }}">{{ rows[0].danganhao }}</a></strong>
     <table class="table table-hover table-striped">
       <thead>
         <tr>

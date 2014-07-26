@@ -102,11 +102,11 @@ $(function () {
         },
         xAxis: {
             categories: [
-            {%- for name in rows_print.keys() -%}
+            {%- for row in rows_print -%}
                 {%- if loop.last -%}
-                '{{ name }}'
+                '{{ row.MingCheng }}'
                 {%- else -%}
-                '{{ name }}',
+                '{{ row.MingCheng }}',
                 {%- endif -%}
             {%- endfor -%}
             ]
@@ -127,33 +127,33 @@ $(function () {
         series: [{
             name: '打印',
             data: [
-            {%- for name in rows_print.keys() -%}
+            {%- for row in rows_print -%}
                 {%- if loop.last -%}
-                {{ rows_print[name] }}
+                {{ row.counter }}
                 {%- else -%}
-                {{ rows_print[name] }},
+                {{ row.counter }},
                 {%- endif -%}
             {%- endfor -%}
             ],
         }, {
             name: '生成查询密码',
             data: [
-            {%- for name in rows_code.keys() -%}
+            {%- for row in rows_code -%}
                 {%- if loop.last -%}
-                {{ rows_code[name] }}
+                {{ row.counter }}
                 {%- else -%}
-                {{ rows_code[name] }},
+                {{ row.counter }},
                 {%- endif -%}
             {%- endfor -%}
             ],
         }, {
             name: '导出到终端',
             data: [
-            {%- for name in rows_export.keys() -%}
+            {%- for row in rows_export -%}
                 {%- if loop.last -%}
-                {{ rows_export[name] }}
+                {{ row.counter }}
                 {%- else -%}
-                {{ rows_export[name] }},
+                {{ row.counter }},
                 {%- endif -%}
             {%- endfor -%}
             ]

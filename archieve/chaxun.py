@@ -23,41 +23,53 @@ class ChaXun(MethodView):
         aid = request.form['DangAnHao']
         idcard = request.form['ShenFenZheng']
         name = request.form['XingMing']
-        gender = request.form['XingBie']
         check = request.form.getlist('check')
         sql = '''
             select d.*,(
-                select count(*)
-                from cm_archieve.wenjian w
+                select id
+                from wenjian w
                 where w.aid=d.id
-            ) as page_count
-            from cm_archieve.dangan d
-            where d.ZhuanChu=""
-            or isNULL(d.ZhuanChu)
+                limit 1
+            ) as scanned
+            from dangan d
+            where (d.ZhuanChu=""
+            or d.ZhuanChu is null)
         '''
-        if aid != '':
-            sql = '%s AND d.DangAnHao LIKE "%s%s%s"' % (sql, '%', aid, '%')
-        if idcard != '':
-            sql = '%s AND d.ShenFenZheng LIKE "%s%s%s"' % (sql, '%', idcard, '%')
-        if name != '':
-            sql = '%s AND d.XingMing LIKE "%s%s%s"' % (sql, '%', name, '%')
-        if gender == 'male':
-            sql = '%s AND d.XingBie="%s"' % (sql, u'男')
-        elif gender == 'female':
-            sql = '%s AND d.XingBie="%s"' % (sql, u'女')
-        else:
-            pass
+        if aid:
+            sql += '''
+                and locate(:archieve_id,d.danganhao)>0
+            '''
+        if idcard:
+            sql += '''
+                and locate(:id_card,d.shenfenzheng)>0
+            '''
+        if name:
+            sql += '''
+                and locate(:name,d.XingMing)>0
+            '''
         if 'ngl' in check:
-            sql = '%s AND d.NvGuanLiGangWei=1' % (sql,)
+            sql += '''
+                and d.nvguanligangwei=1
+            '''
         if 'stow' in check:
-            sql = '%s AND d.TeShuGongZhong=1' % (sql,)
-        sql = '%s LIMIT 100' % (sql,)
+            sql += '''
+                and d.teshugongzhong=1
+            '''
+        sql += '''
+            order by d.danganhao
+            limit 100
+        '''
+        param = {
+            'archieve_id': aid,
+            'id_card': idcard,
+            'name': name,
+        }
         # print(sql)
-        res = db_engine.execute(text(' '.join(sql.split())))
+        res = db_engine.execute(text(' '.join(sql.split())), param)
         rows = res.fetchall()
         res.close()
         return render_template('statistics/chaxun.html',
-            User=session['user_name'], data=rows)
+            User=session['user_name'], archieve=rows)
 
 
 class ScanLog(MethodView):
@@ -65,10 +77,9 @@ class ScanLog(MethodView):
         if not 'user_id' in session:
             return redirect('/login')
         user_id = request.args.get('user_id', 0)
-        date_begin = request.args.get('date_begin',
-            datetime.datetime.now().strftime('%Y-%m-01'))
-        date_end = request.args.get('date_end',
-            datetime.datetime.now().strftime('%Y-%m-31'))
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        date_begin = request.args.get('date_begin', today)
+        date_end = request.args.get('date_end', today)
         sql = '''
             select *
             from user
@@ -123,10 +134,9 @@ class InvokeLogUser(MethodView):
         if not 'user_id' in session:
             return redirect('/login')
         user_id = request.args.get('user_id', 0)
-        date_begin = request.args.get('date_begin',
-            datetime.datetime.now().strftime('%Y-%m-%d'))
-        date_end = request.args.get('date_end',
-            datetime.datetime.now().strftime('%Y-%m-%d'))
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        date_begin = request.args.get('date_begin', today)
+        date_end = request.args.get('date_end', today)
         sql = '''
             select id,MingCheng
             from user
@@ -241,68 +251,29 @@ class NvGuanLiGangWei(MethodView):
             User=session['user_name'])
 
 
-# 统计
-# ：各用户操作总数对比
-# ：按月份各用户操作总数曲线
-# ：按月份各用户扫描总数曲线
-# ：按月份各用户添加档案总数曲线
-
-# 2014-07-04
-# 一、档案扫描录入统计
-# 1.档案扫描总量统计
-# 2.分月份统计，统计结果单击操作员可出现该操作员已扫描档案列表
-# 3.分时间段统计，选择起始日期和终止日期，统计该事件段内所有操作员扫描情况，单击操作员可出现
-#   已扫描档案列表
-# 4.按档案号码输入可查询到该档案由哪个操作员什么时间扫描
-# 二、档案利用操作统计
-# 按月及时间段统计档案材料打印、自助查询密码设置数量（册、页），及单击可列表具体的档案号码。
-# 输入档案号码可查该档案材料是否被利用过，利用时间，操作员。
-
 class TongJi(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('/login')
-        # sql = '''
-        #     select u.MingCheng,u.id,(
-        #         select count(*) as yh_count
-        #         from (
-        #             select yh_id,count(*)
-        #             from cm_archieve.caozuo_jilu c
-        #             where c.caozuo=:operation
-        #             group by yh_id,neirong
-        #         ) as yh
-        #         where yh.yh_id=u.id
-        #     ) as counter
-        #     from cm_archieve.user as u
-        # '''
-        # param = {'operation': u'上传图片'}
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows = res.fetchall()
-        # res.close()
         sql = '''
-            select id,MingCheng
-            from user
+            select u.MingCheng,u.id,(
+              	select count(*) as yh_count
+              	from (
+                		select yh_id,count(*)
+                		from caozuo_jilu c
+                		where c.caozuo=:operation
+                		group by yh_id,neirong
+              	) as yh
+              	where yh.yh_id=u.id
+            ) as counter
+            from user as u
         '''
-        res = db_engine.execute(text(' '.join(sql.split())))
-        rows_user = res.fetchall()
+        param = {'operation': u'上传图片'}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
         res.close()
-        dict_counter = dict()
-        for row in rows_user:
-            sql = '''
-                select neirong
-                from caozuo_jilu
-                where yh_id=:user_id
-                and caozuo=:operation
-                group by neirong
-            '''
-            param = {'user_id': row.id,
-                'operation': u'上传图片'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            row_counter = res.rowcount
-            res.close()
-            dict_counter[row.MingCheng] = row_counter
         return render_template('statistics/tongji.html',
-            User=session['user_name'], counter_1=dict_counter)
+            User=session['user_name'], counter_1=rows)
 
 
 class TongjiMonth(MethodView):
@@ -310,113 +281,63 @@ class TongjiMonth(MethodView):
         if not 'user_id' in session:
             return redirect('/login')
         _date = datetime.datetime.now().strftime('%Y-%m')
-        # sql = '''
-        #     select u.MingCheng,u.id,(
-        #         select count(*) as yh_count
-        #         from (
-        #             select yh_id,count(*)
-        #             from cm_archieve.caozuo_jilu c
-        #             where c.caozuo=:operation
-        #             and locate(:date,c.riqi)>0
-        #             group by yh_id,neirong
-        #         ) as yh
-        #         where yh.yh_id=u.id
-        #     ) as yh_count
-        #     from cm_archieve.user as u
-        # '''
-        # param = {
-        #     'date': _date,
-        #     'operation': u'上传图片'
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows = res.fetchall()
-        # res.close()
         sql = '''
-            select id,MingCheng
-            from user
+            select u.MingCheng,u.id,(
+                select count(*) as yh_count
+                from (
+                    select yh_id,count(*)
+                    from cm_archieve.caozuo_jilu c
+                    where c.caozuo=:operation
+                    and locate(:date,c.riqi)>0
+                    group by yh_id,neirong
+                ) as yh
+                where yh.yh_id=u.id
+            ) as yh_count
+            from cm_archieve.user as u
         '''
-        res = db_engine.execute(text(' '.join(sql.split())))
-        rows_user = res.fetchall()
+        param = {
+            'date': _date,
+            'operation': u'上传图片'
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
         res.close()
-        dict_counter = dict()
-        for row in rows_user:
-            sql = '''
-                select neirong
-                from caozuo_jilu
-                where yh_id=:user_id
-                and locate(:date, RiQi)>0
-                and caozuo=:operation
-                group by neirong
-            '''
-            param = {'user_id': row.id,
-                'date': _date,
-                'operation': u'上传图片'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            row_counter = res.rowcount
-            res.close()
-            dict_counter[row.MingCheng] = row_counter
         return render_template('statistics/tongji_month.html',
-            User=session['user_name'], counter_1=dict_counter, date=_date)
+            User=session['user_name'], counter_1=rows, date=_date)
 
 
 class TongjiTimeSlot(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('login')
-        date_begin = request.args.get('date_begin',
-            datetime.datetime.now().strftime('%Y-%m-01'))
-        date_end = request.args.get('date_end',
-            datetime.datetime.now().strftime('%Y-%m-31'))
-        # sql = '''
-        #     select u.MingCheng,u.id,(
-        #         select count(*) as yh_count
-        #         from (
-        #             select yh_id,count(*)
-        #             from cm_archieve.caozuo_jilu c
-        #             where c.caozuo=:operation
-        #             and c.riqi>=:date_begin
-        #             and c.riqi<=:date_end
-        #             group by yh_id,neirong
-        #         ) as yh
-        #         where yh.yh_id=u.id
-        #     ) as counter
-        #     from cm_archieve.user as u
-        # '''
-        # param = {
-        #     'operation': u'上传图片',
-        #     'date_begin': date_begin,
-        #     'date_end': date_end
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows = res.fetchall()
-        # res.close()
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        date_begin = request.args.get('date_begin', today)
+        date_end = request.args.get('date_end', today)
         sql = '''
-            select id,MingCheng
-            from user
+            select u.MingCheng,u.id,(
+                select count(*) as yh_count
+                from (
+                    select yh_id,count(*)
+                    from caozuo_jilu c
+                    where c.caozuo=:operation
+                    and c.riqi>=:date_begin
+                    and c.riqi<=:date_end
+                    group by yh_id,neirong
+                ) as yh
+                where yh.yh_id=u.id
+            ) as counter
+            from user as u
         '''
-        res = db_engine.execute(text(' '.join(sql.split())))
-        rows_user = res.fetchall()
+        param = {
+            'operation': u'上传图片',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows = res.fetchall()
         res.close()
-        dict_counter = dict()
-        for row in rows_user:
-            sql = '''
-                select neirong
-                from caozuo_jilu
-                where yh_id=:user_id
-                and caozuo=:operation
-                and RiQi between :date_begin and :date_end
-                group by neirong
-            '''
-            param = {'user_id': row.id,
-                'date_begin': date_begin,
-                'date_end': date_end,
-                'operation': u'上传图片'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            row_counter = res.rowcount
-            res.close()
-            dict_counter[row.MingCheng] = row_counter
         return render_template('statistics/tongji_time_slot.html',
-            User=session['user_name'], rows=dict_counter,
+            User=session['user_name'], rows=rows,
             date_begin=date_begin, date_end=date_end)
 
     def post(self):
@@ -467,168 +388,86 @@ class InvokeMonth(MethodView):
         if not 'user_id' in session:
             return redirect('login')
         date = datetime.datetime.now().strftime('%Y-%m')
-        # sql = '''
-        #     select u.id,u.mingcheng,(
-        #         select count(*)
-        #         from cm_archieve.caozuo_jilu as c
-        #         where yh_id=u.id
-        #         and c.caozuo=:operation
-        #         and locate(:date,c.riqi)>0
-        #     ) as counter
-        #     from cm_archieve.user as u
-        # '''
-        # param = {
-        #     'operation': u'打印',
-        #     'date': date
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows_print = res.fetchall()
-        # res.close()
-        # param = {
-        #     'operation': u'生成查询密码',
-        #     'date': date
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows_code = res.fetchall()
-        # res.close()
-        # param = {
-        #     'operation': u'导出到终端',
-        #     'date': date
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows_export = res.fetchall()
-        # res.close()
         sql = '''
-            select id,MingCheng
-            from user
+            select u.id,u.MingCheng,count(*)
+            from user as u
+            left join caozuo_jilu as c
+            on c.yh_id=u.id
+            where c.caozuo=:operation
+            and locate(:date, c.riqi)>0
+            group by u.id
         '''
-        res = db_engine.execute(text(' '.join(sql.split())))
-        rows_user = res.fetchall()
+        param = {
+            'operation': u'打印',
+            'date': date
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_print = res.fetchall()
         res.close()
-        counter_print = counter_code = counter_export = dict()
-        for row in rows_user:
-            sql = '''
-                select neirong
-                from caozuo_jilu
-                where yh_id=:user_id
-                and caozuo=:operation
-                and locate(:date,RiQi)>0
-                group by neirong
-            '''
-            param = {'user_id': row.id,
-                'date': date,
-                'operation': u'打印'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            counter = res.rowcount
-            res.close()
-            counter_print[row.MingCheng] = counter
-            param = {'user_id': row.id,
-                'date': date,
-                'operation': u'生成查询密码'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            counter = res.rowcount
-            res.close()
-            counter_code[row.MingCheng] = counter
-            param = {'user_id': row.id,
-                'date': date,
-                'operation': u'导出到终端'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            counter = res.rowcount
-            res.close()
-            counter_export[row.MingCheng] = counter
+        param = {
+            'operation': u'生成查询密码',
+            'date': date
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_code = res.fetchall()
+        res.close()
+        param = {
+            'operation': u'导出到终端',
+            'date': date
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_export = res.fetchall()
+        res.close()
         return render_template('statistics/invoke_month.html',
-            User=session['user_name'], rows_print=counter_print, date=date,
-            rows_code=counter_code, rows_export=counter_export)
+            User=session['user_name'], rows_print=rows_print, date=date,
+            rows_code=rows_code, rows_export=rows_export)
 
 
 class InvokeTimeSlot(MethodView):
     def get(self):
         if not 'user_id' in session:
             return redirect('login')
-        date_begin = request.args.get('date_begin',
-            datetime.datetime.now().strftime('%Y-%m-01'))
-        date_end = request.args.get('date_end',
-            datetime.datetime.now().strftime('%Y-%m-31'))
-        # sql = '''
-        #     select u.id,u.mingcheng,(
-        #       select count(*)
-        #       from cm_archieve.caozuo_jilu as c
-        #       where yh_id=u.id
-        #       and c.caozuo=:operation
-        #       and c.riqi>=:date_begin
-        #       and c.riqi<=:date_end
-        #     ) as counter
-        #     from cm_archieve.user as u
-        # '''
-        # param = {
-        #     'operation': u'打印',
-        #     'date_begin': date_begin,
-        #     'date_end': date_end
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows_print = res.fetchall()
-        # res.close()
-        # param = {
-        #     'operation': u'生成查询密码',
-        #     'date_begin': date_begin,
-        #     'date_end': date_end
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows_code = res.fetchall()
-        # res.close()
-        # param = {
-        #     'operation': u'导出到终端',
-        #     'date_begin': date_begin,
-        #     'date_end': date_end
-        # }
-        # res = db_engine.execute(text(' '.join(sql.split())), param)
-        # rows_export = res.fetchall()
-        # res.close()
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        date_begin = request.args.get('date_begin', today)
+        date_end = request.args.get('date_end', today)
         sql = '''
-            select id,MingCheng
-            from user
+            select u.id,u.MingCheng,count(*)
+            from user as u
+            left join caozuo_jilu as c
+            on c.yh_id=u.id
+            where c.caozuo=:operation
+            and c.riqi>=:date_begin
+            and c.riqi<=:date_end
+            group by u.id
         '''
-        res = db_engine.execute(text(' '.join(sql.split())))
-        rows_user = res.fetchall()
+        param = {
+            'operation': u'打印',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_print = res.fetchall()
         res.close()
-        counter_print = counter_code = counter_export = dict()
-        for row in rows_user:
-            sql = '''
-                select neirong
-                from caozuo_jilu
-                where yh_id=:user_id
-                and caozuo=:operation
-                and RiQi between :date_begin and :date_end
-                group by neirong
-            '''
-            param = {'user_id': row.id,
-                'date_begin': date_begin,
-                'date_end': date_end,
-                'operation': u'打印'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            counter = res.rowcount
-            res.close()
-            counter_print[row.MingCheng] = counter
-            param = {'user_id': row.id,
-                'date_begin': date_begin,
-                'date_end': date_end,
-                'operation': u'生成查询密码'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            counter = res.rowcount
-            res.close()
-            counter_code[row.MingCheng] = counter
-            param = {'user_id': row.id,
-                'date_begin': date_begin,
-                'date_end': date_end,
-                'operation': u'导出到终端'}
-            res = db_engine.execute(text(' '.join(sql.split())), param)
-            counter = res.rowcount
-            res.close()
-            counter_export[row.MingCheng] = counter
+        param = {
+            'operation': u'生成查询密码',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_code = res.fetchall()
+        res.close()
+        param = {
+            'operation': u'导出到终端',
+            'date_begin': date_begin,
+            'date_end': date_end
+        }
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rows_export = res.fetchall()
+        res.close()
         return render_template('statistics/invoke_time_slot.html',
             User=session['user_name'], date_begin=date_begin,
-            date_end=date_end, rows_print=counter_print,
-            rows_code=counter_code, rows_export=counter_export)
+            date_end=date_end, rows_print=rows_print,
+            rows_code=rows_code, rows_export=rows_export)
 
     def post(self):
         year_begin = request.form['year_begin']
