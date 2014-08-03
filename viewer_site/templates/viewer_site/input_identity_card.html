@@ -43,6 +43,9 @@
 {% endblock %}
 {% block javascript_lib %}
 <script language="javascript" type="text/javascript">
+$(function (){
+    document.getElementById('input_identity_card').focus();
+});
 
 function appendChar(ch) {
     document.getElementById("input_identity_card").value += ch;
