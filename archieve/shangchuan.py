@@ -6,17 +6,15 @@ import xlrd
 
 from flask import session, request, render_template, redirect
 from flask.views import MethodView
+from sqlalchemy import text
 from werkzeug import secure_filename
 
-from globalvars import connect_db, close_db, get_file_path, G_UPLOAD_PATH, \
-    get_aid, check_path, check_ext, caozuo_jilu, idcard_convert, get_years
+from globalvars import *
 
 
 def import_xls(file_path):
     xls = xlrd.open_workbook(file_path, 'rb')
     sh = xls.sheets()[0]
-    cnx = connect_db()
-    cursor = cnx.cursor()
     for row in range(1, sh.nrows):
         if sh.cell(row, 6).value != u'已调入':
             continue
@@ -28,41 +26,55 @@ def import_xls(file_path):
             dor = '%s-%s-%s' % (int(dor_y) + 60, dob[5:7], dob[8:10])
         else:
             dor = '%s-%s-%s' % (int(dor_y) + 50, dob[5:7], dob[8:10])
-        sql = 'SELECT id FROM dangan WHERE DangAnHao=%s'
-        param = (sh.cell(row, 3).value,)
-        cursor.execute(sql, param)
-        data = cursor.fetchall()
-        if cursor.rowcount == 0:
+        sql = '''
+            SELECT id FROM dangan WHERE DangAnHao=:archieve_id
+        '''
+        param = {'archieve_id': sh.cell(row, 3).value}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        data = res.fetchall()
+        if len(data) == 0:
             sql = '''
-                INSERT INTO dangan
-                VALUES(
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                INSERT INTO cm_archieve.dangan
+                (DangAnHao, ShenFenZheng, XingMing, XingBie, ChuShengRiQi,
+                    YuTuiXiuRiQi, RenYuanLeiBie, CunDangRiQi, CunDangZhuangTai)
+                VALUES (:archieve_id, :identity, :name, :gender, :dob, :dor,
+                    :cat, :arch_date, :arch_status)
             '''
-            param = (
-                0, sh.cell(row, 3).value, sh.cell(row, 0).value,
-                sh.cell(row, 1).value, sh.cell(row, 2).value, dob,
-                dor, sh.cell(row, 4).value, sh.cell(row, 5).value,
-                sh.cell(row, 6).value, 0, 0
-            )
-            cursor.execute(sql, param)
+            param = {'archieve_id': sh.cell(row, 3).value,
+                'identity': sh.cell(row, 0).value,
+                'name': sh.cell(row, 1).value,
+                'gender': sh.cell(row, 2).value,
+                'dob': dob,
+                'dor': dor,
+                'cat': sh.cell(row, 4).value,
+                'arch_date': sh.cell(row, 5).value,
+                'arch_status': sh.cell(row, 6).value}
+            # param = (
+            #     0, sh.cell(row, 3).value, sh.cell(row, 0).value,
+            #     sh.cell(row, 1).value, sh.cell(row, 2).value, dob,
+            #     dor, sh.cell(row, 4).value, sh.cell(row, 5).value,
+            #     sh.cell(row, 6).value, 0, 0
+            # )
         else:
             sql = '''
-                UPDATE dangan
-                SET
-                DangAnHao=%s, ShenFenZheng=%s, XingMing=%s,
-                XingBie=%s, RenYuanLeiBie=%s, CunDangRiQi=%s,
-                CunDangZhuangTai=%s, ChuShengRiQi=%s, YuTuiXiuRiQi=%s
-                WHERE id=%s
+                update dangan
+                set DangAnHao=:archieve_id, ShenFenZheng=:identity,
+                    XingMing=:name, XingBie=:gender, ChuShengRiQi=:dob,
+                    YuTuiXiuRiQi=:dor, RenYuanLeiBie=:cat,
+                    CunDangRiQi=:arch_date, CunDangZhuangTai=:arch_status
+                where id=:id
             '''
-            param = (
-                sh.cell(row, 3).value, sh.cell(row, 0).value,
-                sh.cell(row, 1).value, sh.cell(row, 2).value,
-                sh.cell(row, 4).value, sh.cell(row, 5).value,
-                sh.cell(row, 6).value, dob, dor, data[0][0]
-            )
-            cursor.execute(sql, param)
-    cnx.commit()
-    close_db(cursor, cnx)
+            param = {'archieve_id': sh.cell(row, 3).value,
+                'identity': sh.cell(row, 0).value,
+                'name': sh.cell(row, 1).value,
+                'gender': sh.cell(row, 2).value,
+                'dob': dob,
+                'dor': dor,
+                'cat': sh.cell(row, 4).value,
+                'arch_date': sh.cell(row, 5).value,
+                'arch_status': sh.cell(row, 6).value,
+                'id': data[0].id}
+        db_engine.execute(text(' '.join(sql.split())), param)
 
 
 class DaoRu(MethodView):
