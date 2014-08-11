@@ -1,18 +1,25 @@
 # -*- coding=UTF-8 -*-
 
 import os
-import sys
 
 import xlrd
 
-from sqlalchemy import text
+from sqlalchemy import text, create_engine
 
-sys.path.append('..')
-from archieve.globalvars import *
+cnx_cfg = {
+    'user': 'root',
+    'password': 'dsdfjk',
+    'host': '127.0.0.1',
+    'database': 'cm_archieve',
+}
+
+db_engine = create_engine('mysql+mysqlconnector://%s:%s@%s/%s' % \
+    (cnx_cfg['user'], cnx_cfg['password'], cnx_cfg['host'],
+    cnx_cfg['database']), pool_recycle=900, pool_size=1)
 
 
-if __name__ == '__main__':
-    xls = xlrd.open_workbook('3.xls', 'rb')
+def xls2mysql(file_name):
+    xls = xlrd.open_workbook(file_name, 'rb')
     sh = xls.sheets()[0]
     for row in range(1, sh.nrows):
         if sh.cell(row, 6).value != u'已调入':
@@ -69,3 +76,10 @@ if __name__ == '__main__':
                 'arch_status': sh.cell(row, 6).value,
                 'id': data[0].id}
         db_engine.execute(text(' '.join(sql.split())), param)
+
+
+if __name__ == '__main__':
+    xls2mysql('4.xls')
+    xls2mysql('3.xls')
+    xls2mysql('2.xls')
+    xls2mysql('1.xls')
