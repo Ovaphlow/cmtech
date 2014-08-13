@@ -1,33 +1,33 @@
 # -*- coding=UTF-8 -*-
 
-source_path = 'd:\\srcode\\cmtech-archieve\\misc\\1123'
-target_path = 'd:\\srcode\\cmtech-archieve\\misc\\1234'
-backup_path = 'd:\\srcode\\cmtech-archieve\\misc\\backup_path'
+import datetime
+import os
+import shutil
+import sys
+
+from sqlalchemy import text, create_engine
+
+cnx = {'user': 'root',
+    'password': 'dsdfjk',
+    'host': '127.0.0.1',
+    'database': 'cm_archieve'}
+
+db_engine = create_engine('mysql+mysqlconnector://%s:%s@%s/%s' % \
+    (cnx['user'], cnx['password'], cnx['host'], cnx['database']),
+    pool_recycle=900, pool_size=1)
+
+# source_path = 'd:\\srcode\\cmtech-archieve\\misc\\source'
+source_path = os.path.join(os.getcwd(), 'source')
+# target_path = 'd:\\srcode\\cmtech-archieve\\misc\\target'
+target_path = 'e:\\cmtech-archieve\\static\\upload'
 path_divider = '\\'
-
-db_param = {
-    'user': 'cmtech',
-    'password': 'cmtech.1123',
-    'host': '125.211.221.215',
-    'database': 'cm_archieve',
-}
-
-def open_db():
-    import mysql.connector
-
-    return mysql.connector.Connect(**db_param)
-
-
-def close_db(cursor, cnx):
-    cursor.close()
-    cnx.close()
 
 
 def insert_rec(archieve_id):
-    sql = 'select id from dangan where danganhao=%(archieve_id)s'
-    param = {
-        archieve_id: archieve_id
-    }
+    sql = '''
+        select id from dangan where danganhao=:archieve_id
+    '''
+    param = {archieve_id: archieve_id}
     cnx = conenct_db()
     cursor = cnx.cursor()
     cursor.execute(sql, param)
@@ -36,8 +36,6 @@ def insert_rec(archieve_id):
 
 
 def rename_dir():
-    import os
-
     for item in os.listdir(source_path):
         p = os.path.join(source_path, item)
         if os.path.isdir(p):
@@ -46,17 +44,13 @@ def rename_dir():
 
 
 def copy_files(path):
-    import os
-    import shutil
-    import datetime
-
     for item in os.listdir(path):
         p = os.path.join(path, item)
         if os.path.isdir(p):
             t = os.path.join(target_path, item)
             if not os.path.exists(t):
                 os.mkdir(t)
-            print 'Working in directory:', p
+            # print 'Working in directory:', p
             copy_files(p)
         else:
             dir_name = os.path.split(p)[0].split(path_divider)
@@ -68,36 +62,37 @@ def copy_files(path):
                 print 'Exists file:', t
                 continue
             shutil.copyfile(p, t)
-            sql = ('select id from dangan where danganhao=%(archieve_id)s')
+            sql = '''
+                select id from dangan where danganhao=:archieve_id
+            '''
             param = {'archieve_id': dir_name}
-            cnx = open_db()
-            cursor = cnx.cursor()
-            cursor.execute(sql, param)
-            result = cursor.fetchall()
-            if len(result) == 0:
-                print 'No archieve #', dir_name, 'exists'
-                b = os.path.join(backup_path, dir_name)
-                if not os.path.exists(b):
-                    os.mkdir(b)
-                shutil.copyfile(p, os.path.join(backup_path, dir_name, t))
-                continue
-            sql = ('insert into wenjian '
-                '(aid, Leibie, WenJianMing, client_access) '
-                'values '
-                '(%(archieve_id)s,'
-                '%(cat)s,'
-                '%(file_name)s,'
-                '%(client_access)s)')
-            param = {
-                'archieve_id': result[0][0],
-                'cat': 9,
-                'file_name': file_name,
-                'client_access': 0
-            }
-            cursor.execute(sql, param)
-            cnx.commit()
-            close_db(cursor, cnx)
+            res = db_engine.execute(text(' '.join(sql.split())), param)
+            data = res.fetchall()
+            if len(data) == 0:
+                sql = '''
+                    insert into dangan
+                        (danganhao)
+                    values
+                        (:archieve_id)
+                '''
+                param = {'archieve_id': dir_name}
+                db_engine.execute(text(' '.join(sql.split())), param)
+            else:
+                sql = '''
+                    insert into wenjian
+                      (aid, Leibie, WenJianMing, client_access)
+                    values
+                      (:archieve_id, :cat, :file_name, :client_access)
+                '''
+                param = {'archieve_id': data[0].id,
+                    'cat': 9,
+                    'file_name': file_name,
+                    'client_access': 0}
+                db_engine.execute(text(' '.join(sql.split())), param)
+            res.close()
+
 
 if __name__ == '__main__':
-    rename_dir()
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     copy_files(source_path)
