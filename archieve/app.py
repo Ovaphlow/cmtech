@@ -33,6 +33,8 @@ app.add_url_rule('/saomiao/<uid>',
 app.add_url_rule('/shangchuan/<rec_id>',
     view_func=shangchuan.ShangChuan.as_view('shangchuan'))
 app.add_url_rule('/dangan/<rec_id>', view_func=dangan.DangAn.as_view('dangan'))
+app.add_url_rule('/amend_archieve_id',
+    view_func=dangan.AmendArchieveId.as_view('dangan.amend_archieve_id'))
 app.add_url_rule('/_upload_image_file',
     view_func=dangan.UploadImageFile.as_view('ulpic'))
 app.add_url_rule('/xgmm', view_func=yonghu.XiuGaiMiMa.as_view('xgmm'))

@@ -19,6 +19,7 @@ class DangAn(MethodView):
     def get(self, rec_id):
         if not 'user_id' in session:
             return redirect('/login')
+        # print(session['auth']['del_archieve'])
         cat = request.args.get('cat', '0')
         sql = '''
             select d.*,(
@@ -32,10 +33,8 @@ class DangAn(MethodView):
             from cm_archieve.dangan d
             where d.id=:archieve_id
         '''
-        param = {
-            'archieve_id': rec_id,
-            'now_date': datetime.datetime.now().strftime('%Y-%m-%d')
-        }
+        param = {'archieve_id': rec_id,
+            'now_date': datetime.datetime.now().strftime('%Y-%m-%d')}
         res = db_engine.execute(text(' '.join(sql.split())), param)
         row = res.fetchone()
         res.close()
@@ -62,11 +61,11 @@ class DangAn(MethodView):
             where id=:id
         '''
         param = {'id': session['user_id']}
-        print(session['user_id'])
+        # print(session['user_id'])
         res = db_engine.execute(text(' '.join(sql.split())), param)
         row_auth = res.fetchone()
         res.close()
-        print(row_auth)
+        # print(row_auth)
         lp1 = '/saomiao/%s' % (rec_id,)
         lp2 = '/luru/%s' % (rec_id,)
         return render_template('dangan.html',
@@ -74,7 +73,6 @@ class DangAn(MethodView):
             fs_root=G_FILE_SERVER_ROOT, aid=get_aid(rec_id),
             data1=rows_pic, dob=dob, dor=dor, cat=cat, auth=row_auth,
             User=session['user_name'])
-
 
     def post(self, rec_id):
         idcard = request.form['shenfenzheng']
@@ -481,6 +479,7 @@ class ChaKan(MethodView):
         else:
             return redirect('/chakan/%s?pic_id=%s' % (rec_id, pic_id))
 
+
 class UploadImageFile(MethodView):
     def post(self):
         rec_id = request.args.get('id', '')
@@ -577,3 +576,39 @@ class Exp2Client(MethodView):
         close_db(cursor, cnx)
         caozuo_jilu(session['user_id'], u'导出到终端', rec_id)
         return redirect('/dangan/%s' % (rec_id,))
+
+
+class AmendArchieveId(MethodView):
+    def post(self):
+        aid = request.args.get('archieve_id')
+        d1 = request.form['d1']
+        d2 = request.form['d2']
+        path1 = os.path.join(G_UPLOAD_PATH, d1)
+        path2 = os.path.join(G_UPLOAD_PATH, d2)
+        if os.path.exists(path2):
+            return redirect('/dangan/%s' % aid)
+        sql = '''
+            select count(*) as counter, danganhao
+            from dangan
+            where danganhao=:danganhao
+        '''
+        param = {'danganhao': d2}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        c = res.fetchone()
+        if c.counter >= 1:
+            return redirect('/dangan/%s' % aid)
+        try:
+            os.rename(path1, path2)
+        except:
+            print('Rename directory has a error!')
+            return redirect('/dangan/%s' % aid)
+        else:
+            sql = '''
+                update dangan
+                set DangAnHao=:danganhao
+                where id=:archieve_id
+            '''
+            param = {'danganhao': d2,
+                'archieve_id': aid}
+            db_engine.execute(text(' '.join(sql.split())), param)
+        return redirect('/dangan/%s' % aid)

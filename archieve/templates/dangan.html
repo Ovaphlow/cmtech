@@ -28,8 +28,21 @@
     <hr />
     <dl class="dl">
       <dt>档案号</dt>
-      <dd>{{ row[1] }}</dd>
+      <dd>{{ row[1] }}{% if auth.auth_del_archieve %}<a href="#myModal" data-toggle="modal">[修改]</a>{% endif %}</dd>
     </dl>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">修改档案号</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-inline" action="/amend_archieve_id?archieve_id={{ row[0] }}" method="post">
+          <p><label for="d1">现档案号：</label><input type="text" name="d1" id="d1" value="{{ row[1] }}" readonly /></p>
+          <p><label for="d2">新档案号：</label><input type="text" name="d2" id="d2" value="{{ row[1] }}" /></p>
+          <p><button type="submit" class="btn btn-primary">确认</button></p>
+        </form>
+      </div>
+    </div>
     <form class="form-horizontal" role="form" action="/dangan/{{ id }}" method="post">
       <input type="hidden" name="hidden1" id="hidden1" value="{{ row[4] }}" />
       <input type="hidden" name="hidden2" id="hidden2" value="{{ dob[0] }}" />

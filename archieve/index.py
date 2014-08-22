@@ -2,8 +2,9 @@
 
 from flask import redirect, render_template, session, request
 from flask.views import MethodView
+from sqlalchemy import text
 
-from globalvars import connect_db, close_db, G_ADMIN_USER, G_VIEW_USER
+from globalvars import *
 
 
 class Index(MethodView):
@@ -73,28 +74,25 @@ class Login(MethodView):
     def post(self):
         _acc = request.form['zhanghao']
         _pwd = request.form['mima']
-        cnx = connect_db()
-        cursor = cnx.cursor()
         sql = '''
-            select count(*),id,zhanghao,MingCheng
+            select *
             from user
-            where ZhangHao=%(account)s
-            and MiMa=%(password)s
+            where ZhangHao=:account
+            and MiMa=:password
         '''
-        param = {
-            'account': _acc,
-            'password': _pwd
-        }
-        cursor.execute(sql, param)
-        data = cursor.fetchall()
-        close_db(cursor, cnx)
-        if data[0][0] == 1:
-            session['user_id'] = data[0][1]
-            session['user_account'] = data[0][2]
+        param = {'account': _acc,
+            'password': _pwd}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        data = res.fetchall()
+        res.close
+        if len(data) == 1:
+            session['user_id'] = data[0][0]
+            session['user_account'] = data[0][1]
             session['user_name'] = data[0][3]
-            if data[0][2] in G_ADMIN_USER:
+            session['auth'] = {'del_archieve': data[0][4]}
+            if data[0][3] in G_ADMIN_USER:
                 return redirect('/admin')
-            elif data[0][2] in G_VIEW_USER:
+            elif data[0][3] in G_VIEW_USER:
                 return redirect('/view')
             else:
                 return redirect('/')
