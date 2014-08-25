@@ -1,10 +1,14 @@
 # -*- coding=UTF-8 -*-
 
+import datetime
+
 import gl
+import settings
 
 from flask import redirect, render_template, session, request
 from flask.views import MethodView
 from sqlalchemy import text
+from werkzeug import secure_filename
 
 
 class Archive(MethodView):
@@ -44,3 +48,16 @@ class Archive(MethodView):
             'transfer': request.form['transfer_out']}
         gl.db_engine.execute(text(' '.join(sql.split())), param)
         return redirect('/archive?id=%s' % id)
+
+
+class Upload(MethodView):
+    def post(self):
+        print('begin')
+        category = request.args.get('category')
+        archive_id = request.args.get('archive_id')
+        # path = os.path.join(settings.nginx_path, settings.FILE_DIR, archive_id)
+        # file_name =
+        # print(path)
+        # f = request.files['Filedata']
+        # f.save(path)
+        return '1'

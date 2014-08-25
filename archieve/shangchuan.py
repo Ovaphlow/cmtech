@@ -233,39 +233,37 @@ class LuRu(MethodView):
         dor = '%s-%s-%s' % (int(dor_y) + years, dob[5:7], dob[8:10])
         cnx = connect_db()
         cursor = cnx.cursor()
-        sql = ('select count(*) '
-            'from dangan '
-            'where danganhao=%(archieve_id)s '
-            'or shenfenzheng=%(idcard)s')
-        param = {
-            'archieve_id': _danganhao,
-            'idcard': idcard_18
-        }
-        cursor.execute(sql, param)
-        res = cursor.fetchall()
-        if res[0][0] > 0:
+        sql = '''
+            select id
+            from dangan
+            where danganhao=:aid
+            or shenfenzheng=:id_card
+        '''
+        param = {'aid': _danganhao,
+            'id_card': idcard_18}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        data = res.fetchall()
+        print(len(data))
+        if len(data) > 0:
             return redirect('/luru?err=4')
         sql = '''
             INSERT INTO dangan
-            (DangAnHao,ShenFenZheng,XingMing,XingBie,ChuShengRiQi,
-            YuTuiXiuRiQi,NvGuanLiGangWei,TeShuGongZhong)
+                (DangAnHao,ShenFenZheng,XingMing,XingBie,ChuShengRiQi,
+                YuTuiXiuRiQi,NvGuanLiGangWei,TeShuGongZhong)
             VALUES
-            (%(archieve_id)s,%(idcard)s,%(name)s,%(gender)s, %(dob)s,
-            %(dor)s, %(ngl)s, %(stow)s)
+                (:archieve_id,:idcard,:name,:gender, :dob,
+                :dor, :ngl, :stow)
         '''
-        param = {
-            'archieve_id': _danganhao,
+        param = {'archieve_id': _danganhao,
             'idcard': idcard_18,
             'name': _name,
             'gender': gender,
             'dob': dob,
             'dor': dor,
             'ngl': s,
-            'stow': t
-        }
-        cursor.execute(sql, param)
-        cnx.commit()
-        rec_id = cursor.lastrowid
-        close_db(cursor, cnx)
+            'stow': t}
+        res = db_engine.execute(text(' '.join(sql.split())), param)
+        rec_id = res.lastrowid
+        res.close()
         caozuo_jilu(session['user_id'], u'添加档案信息', rec_id)
         return redirect('/saomiao/%s' % (rec_id))

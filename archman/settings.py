@@ -6,6 +6,7 @@ SECRET_KEY = '8124uckmbUYIj3wr7*)(935okk)'
 port = 8000
 
 NGINX_URL = '//localhost:8080/'
+nginx_path = 'd:\\srcode\\web_public'
 
 FILE_DIR = 'archman'
 

@@ -15,6 +15,8 @@ app.add_url_rule('/login', view_func=home.Login.as_view('login'))
 app.add_url_rule('/logout', view_func=home.Login.as_view('logout'))
 
 app.add_url_rule('/archive', view_func=archive.Archive.as_view('archive'))
+app.add_url_rule('/archive/upload',
+    view_func=archive.Upload.as_view('archive.upload'))
 
 
 if __name__ == '__main__':

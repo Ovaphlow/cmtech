@@ -81,8 +81,9 @@
         </div>
       </div>
       <div class="control-group">
-        <dic class="controls">
+        <div class="controls">
           <button type="submit" class="btn btn-primary">确认</button>
+        </div>
       </div>
     </form>
   </div>
@@ -90,19 +91,34 @@
     <p></p>
   </div>
   <div id="tabs-3">
-    <p class="text-center">
-      <a href="#" class="btn">上传档案图片</a>
-      <a href="#" class="btn">生成查询密码</a>
-      <a href="#" class="btn">删除档案</a>
-    </p>
+    <div class="row-fluid">
+      <div class="span9">
+        <input type="file" name="file_upload" id="file_upload_1" />
+      </div>
+      <div class="span3">
+        <p><a href="#" class="btn">查询密码</a></p>
+        <p><a href="#" class="btn">删除档案</a></p>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
 
 {% block js_lib %}
-<script>
+<script src="{{ config.NGINX_URL }}static/uploadify/3.2.1/jquery.uploadify.min.js"></script>
+<script type="text/javascript">
 $(function() {
+    $("#file_upload_1").uploadify({
+        'buttonText': '[上传档案图片]',
+        'fileTypeDesc': '图片文件',
+        'fileTypeExts': '*.jpg; *.bmp; *.png; *.gif; *.jpeg',
+        'fileSizeLimit': '5MB',
+        'swf': '{{ config.NGINX_URL }}static/uploadify/3.2.1/uploadify.swf',
+        'uploader': '/archive/upload?category=9&archive_id={{ archive.id }}'
+    });
+
     $("#tabs").tabs();
+
     $("#birthday").datepicker({
        changeMonth: true,
        changeYear: true
@@ -111,6 +127,7 @@ $(function() {
     {% if not archive.birthday %}
     $("#birthday").datepicker("setDate", new Date());
     {% endif %}
+
     $("#retire_date").datepicker({
        changeMonth: true,
        changeYear: true

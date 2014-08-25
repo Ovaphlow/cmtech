@@ -7,7 +7,7 @@ import os
 import mysql.connector
 
 from PIL import Image, ImageDraw, ImageFont
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 
 '''
