@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
+
 {% block body_lib %}onload="FindReader_onclick();"{% endblock %}
+
 {% block content %}
 <h3><p>哈尔滨市人力资源市场档案管理系统</p></h3><hr />
 <p>
@@ -8,9 +10,9 @@
 </p>
 <form class="form-inline" action="" method="post">
   <p class="text-center">
-    <label for="identity">档案号</label>
+    <label for="identity">档案号/身份证</label>
     <input class="span3" type="text" name="identity" id="identity">
-    <input class="btn" type="button" value="读卡" name="ReadCardBtn" onclick="ReadCard_onclick()">
+    <!-- <input class="btn" type="button" value="读卡" name="ReadCardBtn" onclick="ReadCard_onclick()"> -->
     <button class="btn btn-primary" type="submit">检索</button>
   </p>
 </form>
@@ -18,11 +20,11 @@
   <p class="text-center"><strong>共计 0 份档案</strong></p>
   <p class="text-center"><strong>其中 0 份档案共含有 0 个图片文件</strong></p>
 </h4>
-<div id="container"></div>
+<!-- <div id="container"></div> -->
 {% endblock %}
 
 {% block js_lib %}
-<script src="{{ config.NGINX_URL }}static/highcharts/4.0.1/highcharts.js"></script>
+<script src="{{ config.NGINX_URL }}/static/highcharts/4.0.1/highcharts.js"></script>
 <script>
     $(function () {
         $('#container').highcharts({

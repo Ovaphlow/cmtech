@@ -88,7 +88,20 @@
     </form>
   </div>
   <div id="tabs-2">
-    <p></p>
+    <div class="row-fluid">
+      {% for f in file: %}
+      {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
+        <li class="span3">
+          <div class="thumbnail">
+            <a href="/chakan/{{ archive.id }}?pic_id={{ f.id }}">
+              <img alt="" src="{{ config.NGINX_URL}}archman/{{ archive.id }}/{{ f.file_name }}">
+            </a>
+            <label><input name="pic_id" type="checkbox" value="{{ f.id }}"{% if f.access == 1 %} checked{% endif %} /> 终端可见</label>
+          </div>
+        </li>
+      {% if loop.index % 4 == 0 %}</ul>{% endif %}
+      {% endfor %}
+    </div>
   </div>
   <div id="tabs-3">
     <div class="row-fluid">
@@ -111,10 +124,10 @@ $(function() {
     $("#file_upload_1").uploadify({
         'buttonText': '[上传档案图片]',
         'fileTypeDesc': '图片文件',
-        'fileTypeExts': '*.jpg; *.bmp; *.png; *.gif; *.jpeg',
+        'fileTypeExts': '*.jpg;',
         'fileSizeLimit': '5MB',
         'swf': '{{ config.NGINX_URL }}static/uploadify/3.2.1/uploadify.swf',
-        'uploader': '/archive/upload?category=9&archive_id={{ archive.id }}'
+        'uploader': '{{ url_root }}archive/upload?category=9&archive_id={{ archive.id }}'
     });
 
     $("#tabs").tabs();

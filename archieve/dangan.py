@@ -485,7 +485,7 @@ class UploadImageFile(MethodView):
         rec_id = request.args.get('id', '')
         cat = request.args.get('cat', '1')
         aid = get_aid(rec_id)
-        fp = '%s\\%s' % (_UPLOAD_PATH, aid)
+        fp = '%s\\%s' % (G_UPLOAD_PATH, aid)
         check_path(fp)
         file_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
         file_name = '%s.jpg' % (file_time)

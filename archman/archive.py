@@ -1,6 +1,7 @@
 # -*- coding=UTF-8 -*-
 
 import datetime
+import os
 
 import gl
 import settings
@@ -15,17 +16,28 @@ class Archive(MethodView):
     def get(self):
         if not 'user' in session:
             return redirect('/')
+        archive_id = request.args.get('id')
         sql = '''
             select *
             from archive
             where id=:id
         '''
-        param = {'id': request.args.get('id')}
-        res = gl.db_engine.execute(text(' '.join(sql.split())), param)
+        sql = ' '.join(sql.split())
+        param = {'id': archive_id}
+        res = gl.db_engine.execute(text(sql), param)
         archive = res.fetchone()
+        sql = '''
+            select *
+            from file
+            where archive_id=:archive_id
+        '''
+        sql = ' '.join(sql.split())
+        param = {'archive_id': archive_id}
+        res = gl.db_engine.execute(text(sql), param)
+        file = res.fetchall()
         res.close()
         return render_template('archive/archive.html', User=session['user'],
-            archive=archive)
+            archive=archive, url_root=request.url_root, file=file)
 
     def post(self):
         id = request.form['id']
@@ -52,12 +64,21 @@ class Archive(MethodView):
 
 class Upload(MethodView):
     def post(self):
-        print('begin')
         category = request.args.get('category')
         archive_id = request.args.get('archive_id')
-        # path = os.path.join(settings.nginx_path, settings.FILE_DIR, archive_id)
-        # file_name =
-        # print(path)
-        # f = request.files['Filedata']
-        # f.save(path)
+        path = os.path.join(settings.nginx_path, settings.FILE_DIR, archive_id)
+        f = request.files['Filedata']
+        file_name = datetime.datetime.now().strftime('%Y%m%d%H%M%S%f')
+        file_name = '%s%s' % (file_name, settings.FILE_EXT)
+        f.save(os.path.join(path, file_name))
+        sql = '''
+            insert into file
+            (archive_id, file_name)
+            values
+            (:archive_id, :file_name)
+        '''
+        sql = ' '.join(sql.split())
+        param = {'archive_id': archive_id,
+            'file_name': file_name}
+        gl.db_engine.execute(text(sql), param)
         return '1'

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{{ config.NGINX_URL }}static/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
-<body style="background:black url({{ config.NGINX_URL }}/image/login_1.jpg);background-size:cover;">
+<body style="background:black url({{ config.NGINX_URL }}image/login_1.jpg);background-size:cover;">
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span8 offset2">
@@ -18,17 +18,17 @@
     <br />
     <br />
     <div class="row-fluid">
-      <div class="span6 offset1" style="background:gainsboro;filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;">
-        <p>受理电话:0451-84840427</p>
-        <ul class="unstyled">
-          <li><a href="{{ url }}/哈尔滨市建设项目环境影响评价文件在线技术评估系统V2.doc">建设单位用户使用手册</a></li>
-          <li><a href="{{ url }}/哈尔滨市建设项目环境影响评价技术评估工作程序.doc">哈尔滨市建设项目环境影响评价技术评估工作程序</a></li>
-          <li><a href="{{ url }}/环评文件网络受理及上传要求.doc">环评文件网络受理及上传要求</a></li>
-          <li><a href="{{ url }}/环评机构考核办法.doc">环评机构考核办法</a></li>
-          <li>受理电话:0451-84840427</li>
+      <div class="span5 offset1" style="background:gainsboro;filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;">
+        <p class="muted text-center">更新记录</p>
+        <ul>
+          {% for e in event %}
+          <li>{{ e.content }}({{ e.date }})</li>
+          {% endfor %}
         </ul>
+        <hr />
+        <p class="muted">技术支持电话：18686853420</p>
       </div>
-      <div class="span3 offset1" style="background:white;filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;">
+      <div class="span3 offset2" style="background:white;filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;">
         <form class="form-inline" action="" method='post'>
           <legend><p class=text-center><strong>系统登录</strong></p></legend>
           <p class="text-center">

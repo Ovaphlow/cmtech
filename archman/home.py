@@ -23,16 +23,26 @@ class Home(MethodView):
         '''
         param = {'identity': identity}
         res = gl.db_engine.execute(text(' '.join(sql.split())), param)
-        data = res.fetchall()
+        archive = res.fetchall()
         res.close()
-        if len(data) != 1:
+        if len(archive) != 1:
             return redirect('/')
-        return redirect('/archive?id=%s' % data[0].id)
+        return redirect('/archive?id=%s' % archive[0].id)
 
 
 class Login(MethodView):
     def get(self):
-        return render_template('login.html')
+        sql = '''
+            select *
+            from event_log
+            order by id desc
+            limit 10
+        '''
+        sql = ' '.join(sql.split())
+        res = gl.db_engine.execute(text(sql))
+        event = res.fetchall()
+        res.close()
+        return render_template('login.html', event=event)
 
     def post(self):
         acc = request.form['account']

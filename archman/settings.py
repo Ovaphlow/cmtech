@@ -9,6 +9,7 @@ NGINX_URL = '//localhost:8080/'
 nginx_path = 'd:\\srcode\\web_public'
 
 FILE_DIR = 'archman'
+FILE_EXT = '.jpg'
 
 db_user = 'cmtech'
 db_password = 'cmtech.1123'
