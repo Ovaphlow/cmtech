@@ -7,9 +7,9 @@ import os
 from sqlalchemy import create_engine
 
 cnx_cfg = {
-    'user': 'root',
-    'password': 'dsdfjk',
-    'host': '127.0.0.1',
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
     'database': 'cm_archieve',
 }
 """
@@ -29,11 +29,11 @@ cnx_cfg = {
 }
 """
 
-ARCHIEVE_FILE_URI = 'http://172.17.203.100:5000/static/upload'
+# ARCHIEVE_FILE_URI = 'http://172.17.203.100:5000/static/upload'
 # 生产环境
 # ARCHIEVE_FILE_URI = 'http://172.17.203.100:5000/static/upload'
 # 开发环境
-# ARCHIEVE_FILE_URI = 'http://127.0.0.1:5000/static/upload'
+ARCHIEVE_FILE_URI = 'http://127.0.0.1:5000/static/upload'
 
 
 db_engine = create_engine('mysql+mysqlconnector://%s:%s@%s/%s' % \
