@@ -16,9 +16,9 @@ jinja_env = jinja2.Environment(
 '''
 
 cnx_cfg = {
-    'user': 'cmtech',
-    'password': 'cmtech.1123',
-    'host': '125.211.221.215',
+    'user': 'root',
+    'password': 'dsdfjk0719',
+    'host': '127.0.0.1',
     'database': 'cm_archieve',
 }
 """
@@ -127,6 +127,7 @@ def caozuo_jilu(user_id, caozuo, neirong):
         values
             (:yh_id,:caozuo,:neirong,:riqi,:shijian)
     '''
+    # print(user_id)
     uid = int(user_id)
     param = {'yh_id': uid,
         'caozuo': caozuo,

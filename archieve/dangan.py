@@ -503,7 +503,7 @@ class UploadImageFile(MethodView):
         cursor = cnx.cursor()
         cursor.execute(sql, param)
         cnx.commit()
-        lose_db(cursor, cnx)
+        close_db(cursor, cnx)
         rotate_image(fp)
         caozuo_jilu(session['user_id'], u'上传图片', rec_id)
         return u'完成'

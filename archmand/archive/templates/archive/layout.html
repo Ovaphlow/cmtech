@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>档案管理</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{{ STATIC_URL }}static/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
+  <link href="{{ STATIC_URL }}static/font-awesome/4.1.0/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
+  <link href="{{ STATIC_URL }}static/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  <link href="{{ STATIC_URL }}static/jqueryui/1.11.1/jquery-ui.min.css" rel="stylesheet" media="screen">
+  <!-- <link rel="shortcut icon" href="{{ STATIC_URL }}image/favicon.ico"> -->
+{% block head %}{% endblock %}
+</head>
+<body style="background-color:black" {% block body_lib %}{% endblock %}>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#"><strong>哈尔滨市人力资源市场</strong></a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="/">首页</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                档案
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="/archive/import">导入基础数据</a></li>
+                <li><a href="/archive/append">录入档案信息</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                查询档案
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+              <li><a href="/search">基础数据查询</a></li>
+              <li class="divider"></li>
+              <li><a href="/search/dytx">指定月份退休人员</a></li>
+              <li class="divider"></li>
+              <li><a href="/search/scan_log">档案扫描记录查询</a></li>
+              <li class="divider"></li>
+              <li><a href="/search/invoke_log_user">档案利用记录查询</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                统计
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="divider"></li>
+                <li class="dropdown-header">&nbsp;&nbsp;档案扫描录入统计</li>
+                <li><a href="/statistics/all">总量统计</a></li>
+                <li><a href="/statistics/month">当月统计</a></li>
+                <li><a href="/statistics/time">时段统计</a></li>
+                <li><a href="/statistics/log">按档案号查看记录</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">&nbsp;&nbsp;档案利用操作统计</li>
+                <li><a href="/statistics/invode/month">当月统计</a></li>
+                <li><a href="/statistics/invoke/time">时段统计</a></li>
+                <li><a href="/statistics/invoke/log">按档案号查看记录</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav pull-right">
+            <form class="navbar-form pull-left" action="/" method="post">
+              <input type="text" class="span2 search-query" name="identity">
+              <!-- <button type="submit" class="btn">检索</button> -->
+            </form>
+            <li><a href="/user">{{ user.name }}</a></li>
+            <li><a href="/logout">退出</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="background:white url(http:{{ STATIC_URL }}image/bg_1.jpg);background-size:cover;padding-top:20px;padding-bottom:20px;">
+    <div class="row-fluid">
+      <div class="span10 offset1" style="background:white">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <div class="navbar navbar-bottom navbar-inverse">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#"><strong>档案管理系统</strong></a>
+        <div class="nav-collapse collapse">
+          <ul class="nav">
+            <li><a href="#">技术支持：(电话)18686853420；(QQ)2340538</a></li>
+          </ul>
+          <ul class="nav pull-right">
+            <li><a href="#"><strong>&copy; 成铭科技 2014</strong></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ STATIC_URL }}static/jquery/1.10.2/jquery.min.js"></script>
+  <script src="{{ STATIC_URL }}static/jqueryui/1.11.1/jquery-ui.min.js"></script>
+  <script src="{{ STATIC_URL }}static/jqueryui/1.11.1/zh-CN.js"></script>
+  <script src="{{ STATIC_URL }}static/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  {% block js_lib %}{% endblock %}
+</body>
+</html>

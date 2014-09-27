@@ -140,6 +140,7 @@ class ShangChuan(MethodView):
                 '''
                 param = (rec_id, cat, fn)
                 cursor.execute(sql, param)
+                print(session)
                 caozuo_jilu(session['user_id'], u'批量上传', rec_id)
         cnx.commit()
         close_db(cursor, cnx)

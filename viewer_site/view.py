@@ -43,7 +43,7 @@ class Home(MethodView):
         res = db_engine.execute(text(' '.join(sql.split())))
         row_archieve_scaned = res.fetchone()
         res.close()
-        return render_template('viewer_site/home.html', user_name=session['user_name'],
+        return render_template('viewer_site/home.html',
             count_1=row_user.count, count_2=row_archieve.count,
             count_3=row_archieve_scaned.count)
 
@@ -52,7 +52,7 @@ class InputArchieveId(MethodView):
     def get(self):
         err = None
         return render_template('viewer_site/input_archieve_id.html',
-            user_name=session['user_name'], error_message=err)
+            error_message=err)
 
     def post(self):
         archieve_id = request.form['archieve_id']
@@ -64,7 +64,7 @@ class InputIdentityCard(MethodView):
     def get(self):
         err = None
         return render_template('viewer_site/input_identity_card.html',
-            user_name=session['user_name'], error_message=err)
+            error_message=err)
 
     def post(self):
         identity_card = request.form['identity_card']
@@ -106,7 +106,7 @@ class ArchieveList(MethodView):
         rows = res.fetchall()
         res.close()
         return render_template('viewer_site/archieve_list.html',
-            user_name=session['user_name'], rows=rows)
+            rows=rows)
 
 
 # class User(MethodView):
@@ -119,7 +119,6 @@ class ArchieveList(MethodView):
 #         rows = res.fetchall()
 #         res.close()
 #         return render_template('viewer_site/user.html',
-#             user_name=session['user_name'],
 #             rows=rows)
 
 
@@ -168,7 +167,7 @@ class ArchieveList(MethodView):
 #         rows = res.fetchall()
 #         res.close()
 #         return render_template('viewer_site/archieve.html',
-#             user_name=session['user_name'], rows=rows)
+#             rows=rows)
 #
 #     def post(self):
 #         archieve_id = request.form['DangAnHao']
@@ -207,7 +206,7 @@ class ArchieveDetail(MethodView):
         rows = res.fetchall()
         res.close()
         return render_template('viewer_site/archieve_detail.html',
-            user_name=session['user_name'], row=row, rows=rows,
+            row=row, rows=rows,
             file_uri=ARCHIEVE_FILE_URI)
 
 
@@ -242,5 +241,4 @@ class ArchieveDetail(MethodView):
 #         rows_month = res.fetchall()
 #         res.close()
 #         return render_template('viewer_site/statistics.html',
-#             user_name=session['user_name'],
 #             rows_1=rows_1, rows_month=rows_month)
