@@ -44,5 +44,13 @@
       </div>
     </div>
   </div>
+  <script src="{{ STATIC_URL }}static/jquery/1.10.2/jquery.min.js"></script>
+  <script src="{{ STATIC_URL }}static/backstretch/jquery.backstretch.min.js"></script>
+  <script>
+    $(function() {
+        $.backstretch("{{ STATIC_URL }}/image/login1.jpg");
+    });
+  </script>
+
 </body>
 </html>

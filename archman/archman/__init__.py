@@ -1,0 +1,9 @@
+# -*- coding=UTF-8 -*-
+
+from flask import Flask
+
+app = Flask(__name__)
+
+app.config.from_object('archman.settings.DevelopmentConfig')
+
+from archman import home

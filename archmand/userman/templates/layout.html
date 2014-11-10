@@ -7,7 +7,7 @@
   <link href="{{ STATIC_URL }}static/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" media="screen">
   <link href="{{ STATIC_URL }}static/font-awesome/4.1.0/css/font-awesome-ie7.min.css" rel="stylesheet" media="screen">
   <link href="{{ STATIC_URL }}static/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
-  <link href="{{ STATIC_URL }}static/jqueryui/1.11.1/jquery-ui.min.css" rel="stylesheet" media="screen">
+  <link href="{{ STATIC_URL }}static/jqueryui/1.11.2/jquery-ui.min.css" rel="stylesheet" media="screen">
   <!-- <link rel="shortcut icon" href="{{ STATIC_URL }}image/favicon.ico"> -->
 {% block head %}{% endblock %}
 </head>
@@ -70,7 +70,7 @@
             </li>
           </ul>
           <ul class="nav pull-right">
-            <form class="navbar-form pull-left" action="/" method="post">
+            <form class="navbar-form pull-left" action="/search_archive" method="post">
               <input type="text" class="span2 search-query" name="identity">
               <!-- <button type="submit" class="btn">检索</button> -->
             </form>
@@ -82,7 +82,7 @@
     </div>
   </div>
 
-  <div class="container-fluid" style="background:white url(http:{{ STATIC_URL }}image/bg_1.jpg);background-size:cover;padding-top:20px;padding-bottom:20px;">
+  <div class="container-fluid" style="padding-top:20px;padding-bottom:20px;">
     <div class="row-fluid">
       <div class="span10 offset1" style="background:white">
         {% block content %}{% endblock %}
@@ -90,30 +90,16 @@
     </div>
   </div>
 
-  <div class="navbar navbar-bottom navbar-inverse">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#"><strong>档案管理系统</strong></a>
-        <div class="nav-collapse collapse">
-          <ul class="nav">
-            <li><a href="#">技术支持：(电话)18686853420；(QQ)2340538</a></li>
-          </ul>
-          <ul class="nav pull-right">
-            <li><a href="#"><strong>&copy; 成铭科技 2014</strong></a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
   <script src="{{ STATIC_URL }}static/jquery/1.10.2/jquery.min.js"></script>
   <script src="{{ STATIC_URL }}static/jqueryui/1.11.1/jquery-ui.min.js"></script>
   <script src="{{ STATIC_URL }}static/jqueryui/1.11.1/zh-CN.js"></script>
   <script src="{{ STATIC_URL }}static/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <script src="{{ STATIC_URL }}static/backstretch/jquery.backstretch.min.js"></script>
   {% block js_lib %}{% endblock %}
+  <script>
+    $(function() {
+        $.backstretch("{{ STATIC_URL }}image/login_1.jpg");
+    });
+  </script>
 </body>
 </html>
