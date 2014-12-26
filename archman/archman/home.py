@@ -3,7 +3,6 @@
 import gl
 
 from flask import redirect, render_template, session, request
-from flask.views import MethodView
 from sqlalchemy import text
 
 from archman import app
@@ -13,13 +12,13 @@ def hello_world():
     if request.method == 'GET':
         if not 'user' in session:
             return redirect('/login')
-        return 'hello world'
+        return render_template('home.html', User=session['user'])
     identity = request.form['identity']
     sql = '''
-        select id
-        from archive
-        where id=:identity
-        or id_card=:identity
+select *
+from archive
+where archive=:identity
+or identity=:identity
     '''
     param = {'identity': identity}
     res = gl.db_engine.execute(text(sql), param)
@@ -27,17 +26,17 @@ def hello_world():
     res.close()
     if len(archive) != 1:
         return redirect('/')
-    return redirect('/archive?id=%s' % archive[0].id)
+    return redirect('/archive/%s' % archive[0].archive)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         sql = '''
-            select *
-            from event_log
-            order by id desc
-            limit 10
+select *
+from event_log
+order by id desc
+limit 10
         '''
         sql = ' '.join(sql.split())
         res = gl.db_engine.execute(text(sql))
@@ -45,10 +44,10 @@ def login():
         res.close()
         return render_template('login.html', event=event)
     sql = '''
-        select *
-        from user
-        where account=:acc
-        and password=:pwd
+select *
+from user
+where account=:acc
+and password=:pwd
     '''
     param = {'acc': request.form['account'],
         'pwd': request.form['password']}

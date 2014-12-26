@@ -3,76 +3,78 @@
 {% block body_lib %}onload="FindReader_onclick();"{% endblock %}
 
 {% block content %}
-<h3><p>哈尔滨市人力资源市场档案管理系统</p></h3><hr />
+<blockquote>
+    <h3>哈尔滨市人力资源市场档案管理系统</h3>
+</blockquote>
+<hr>
 <p>
-  <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1" width="0" height="0"></object>
-  <textarea rows="17" name="S1" cols="82" style="display: none;"></textarea>
+    <object classid="clsid:4B3CB088-9A00-4D24-87AA-F65C58531039" id="SynCardOcx1" codebase="SynCardOcx.CAB#version=1,0,0,1" width="0" height="0"></object>
+    <textarea rows="17" name="S1" cols="82" style="display: none;"></textarea>
 </p>
 <form class="form-inline" action="" method="post">
-  <p class="text-center">
-    <label for="identity">档案号/身份证</label>
-    <input class="span3" type="text" name="identity" id="identity">
-    <!-- <input class="btn" type="button" value="读卡" name="ReadCardBtn" onclick="ReadCard_onclick()"> -->
-    <button class="btn btn-primary" type="submit">检索</button>
-  </p>
+    <p class="text-center">
+        <label for="identity">档案号/身份证</label>
+        <input class="span3" type="text" name="identity" id="identity">
+        <!-- <input class="btn" type="button" value="读卡" name="ReadCardBtn" onclick="ReadCard_onclick()"> -->
+        <button class="btn btn-primary" type="submit">检索</button>
+    </p>
 </form>
 <h4>
-  <p class="text-center"><strong>共计 0 份档案</strong></p>
-  <p class="text-center"><strong>其中 0 份档案共含有 0 个图片文件</strong></p>
+    <p class="text-center"><strong>共计 0 份档案</strong></p>
+    <p class="text-center"><strong>其中 0 份档案共含有 0 个图片文件</strong></p>
 </h4>
-<!-- <div id="container"></div> -->
 {% endblock %}
 
 {% block js_lib %}
-<script src="{{ config.NGINX_URL }}/static/highcharts/4.0.1/highcharts.js"></script>
+<script src="/static/highcharts/4.0.1/highcharts.js"></script>
 <script>
-    $(function () {
-        $('#container').highcharts({
-            chart: {
-                type: 'bar'
-            },
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: '个人统计数据'
+        },
+        subtitle: {
+            text: '数据内容'
+        },
+        xAxis: {
+            categories: [
+            {%- for row in cat_count -%}
+                {%- if loop.last -%}
+                '{{ row[0] }}'
+                {%- else -%}
+                '{{ row[0] }}',
+                {%- endif -%}
+            {%- endfor -%}
+            ]
+        },
+        yAxis: {
             title: {
-                text: '个人统计数据'
-            },
-            subtitle: {
-                text: '数据内容'
-            },
-            xAxis: {
-                categories: [
-                {%- for row in cat_count -%}
+                text: '{{ User }}'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: '数量',
+            data: [{%- for row in cat_count -%}
                     {%- if loop.last -%}
-                    '{{ row[0] }}'
+                    {{ row[1] }}
                     {%- else -%}
-                    '{{ row[0] }}',
+                    {{ row[1] }},
                     {%- endif -%}
                 {%- endfor -%}
-                ]
-            },
-            yAxis: {
-                title: {
-                    text: '{{ User }}'
-                }
-            },
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    },
-                    enableMouseTracking: false
-                }
-            },
-            series: [{
-                name: '数量',
-                data: [{%- for row in cat_count -%}
-                        {%- if loop.last -%}
-                        {{ row[1] }}
-                        {%- else -%}
-                        {{ row[1] }},
-                        {%- endif -%}
-                    {%- endfor -%}
-                ]
-            }]
-        });
+            ]
+        }]
     });
+});
 </script>
 {% endblock %}

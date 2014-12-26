@@ -1,15 +1,73 @@
 # -*- coding=UTF-8 -*-
 
-import datetime
+import time
 import os
 
 import gl
-import settings
 
 from flask import redirect, render_template, session, request
 from flask.views import MethodView
 from sqlalchemy import text
 from werkzeug import secure_filename
+
+from archman import app
+
+
+@app.route('/archive/<archive>', methods=['POST', 'GET'])
+def archive(archive):
+    if request.method == 'POST':
+        sql = '''
+update archive
+set identity=:identity, name=:name, gender=:gender, birthday=:birthday,
+    retire_date=:retire_date, female_cadre=:female_cadre,
+    special_personnel=:special_personnel
+where archive=:archive
+        '''
+        param = {
+            'identity': request.form['identity'],
+            'name': request.form['name'],
+            'gender': request.form['gender'],
+            'birthday': request.form['birthday'],
+            'retire_date': request.form['retire_date'],
+            'female_cadre': request.form['female_cadre'],
+            'special_personnel': request.form['special_personnel'],
+            'archive': archive
+        }
+        gl.db_engine.execute(text(sql), param)
+        return redirect('/archive/%s' % archive)
+
+    sql = '''
+select *
+from archive
+where archive=:archive
+    '''
+    param = {'archive': archive}
+    res = gl.db_engine.execute(text(sql), param)
+    archive = res.fetchone()
+    return render_template('archive/archive.html', User=session['user'],
+        archive=archive)
+
+
+@app.route('/archive/<archive>/upload', methods=['POST'])
+def upload(archive):
+    f = request.files['Filedata']
+    file_name = secure_filename(f.filename)
+    file_ext = file_name.rsplit('.', 1)[1]
+    file_name = '%s.%s' % (time.time(), file_ext)
+    file_path = os.path.join(app.config['NGINX_PATH'],
+        app.config['FILE_DIR'], archive, file_name)
+    f.save(file_path)
+    sql = '''
+insert
+into file
+    (archive, file_name)
+values
+    (:archive, :file_name)
+    '''
+    param = {'archive': archive,
+        'file_name': file_name}
+    gl.db_engine.execute(text(sql), param)
+    return 'Success.'
 
 
 class Archive(MethodView):

@@ -1,124 +1,129 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h3>{{ archive.name }}({{ archive.id }})</h3>
+<blockquote>
+    <h3>{{ archive.name }}({{ archive.archive }})</h3>
+</blockquote>
 <div id="tabs">
-  <ul>
-    <li><a href="#tabs-1">基本信息</a></li>
-    <li><a href="#tabs-2">档案图片</a></li>
-    <li><a href="#tabs-3">操作</a></li>
-  </ul>
-  <div id="tabs-1">
-    <form class="form-horizontal" action="" method="post">
-      <div class="control-group">
-        <label class="control-label" for="id">档案号</label>
-        <div class="controls">
-          <input type="text" id="id" class="span3" name="id" value="{{ archive.id or '' }}" readonly />
-          <a href="#" class="btn">修改</a>
+    <ul>
+        <li><a href="#tabs-1">基本信息</a></li>
+        <li><a href="#tabs-2">档案图片</a></li>
+        <li><a href="#tabs-3">操作</a></li>
+    </ul>
+    <div id="tabs-1">
+        <form class="form-horizontal" action="" method="post">
+            <div class="control-group">
+                <label class="control-label" for="id">档案号</label>
+                <div class="controls">
+                    <input type="text" id="id" class="span3" name="id" value="{{ archive.archive or '' }}" readonly />
+                    <a href="#" class="btn">修改</a>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="identity">身份证</label>
+                <div class="controls">
+                    <input type="text" id="identity" class="span6" name="identity" value="{{ archive.identity or '' }}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="name">姓名</label>
+                <div class="controls">
+                    <input type="text" id="name" class="span3" name="name" value="{{ archive.name or '' }}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="gender">性别</label>
+                <div class="controls">
+                    <select name="gender" class="span2" id="gender">
+                        <option value="男"{% if archive.gender == '男' %} selected{% endif %}>男</option>
+                        <option value="女"{% if archive.gender == '女' %} selected{% endif %}>女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="birthday">出生日期</label>
+                <div class="controls">
+                    <input type="text" id="birthday" class="span3" name="birthday" value="{{ archive.birthday or '' }}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="retire_date">预退休日期</label>
+                <div class="controls">
+                    <input type="text" id="retire_date" class="span3" name="retire_date" value="{{ archive.retire_date or '' }}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="female_cadre">女管理岗位</label>
+                <div class="controls">
+                    <select name="female_cadre" class="span2" id="female_cadre">
+                        <option value="0"{% if not archive.female_cadre %} selected{% endif %}>否</option>
+                        <option value="1"{% if archive.female_cadre %} selected{% endif %}>是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="special_personnel">特殊工种</label>
+                <div class="controls">
+                    <select name="special_personnel" class="span2" id="special_personnel">
+                        <option value="0"{% if not archive.special_personnel %} selected{% endif %}>否</option>
+                        <option value="1"{% if archive.special_personnel %} selected{% endif %}>是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="transfer_out">转出状态</label>
+                <div class="controls">
+                    <select name="transfer_out" class="span4" id="transfer_out">
+                        <option value=""{% if archive.transfer_out == "非转出状态" %} selected{% endif %}>非转出状态</option>
+                        <option value="调转"{% if archive.transfer_out == "调转" %} selected{% endif %}>转出原因：调转</option>
+                        <option value="退休"{% if archive.transfer_out == "退休" %} selected{% endif %}>转出原因：退休</option>
+                <option value="失业保险"{% if archive.transfer_out == "失业保险" %} selected{% endif %}>转出原因：失业保险</option>
+                <option value="死亡"{% if archive.transfer_out == "死亡" %} selected{% endif %}>转出原因：死亡</option>
+            </select>
+            </div>
         </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="id_card">身份证</label>
-        <div class="controls">
-          <input type="text" id="id_card" class="span6" name="id_card" value="{{ archive.id_card or '' }}" />
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">确认</button>
+            </div>
         </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="name">姓名</label>
-        <div class="controls">
-          <input type="text" id="name" class="span3" name="name" value="{{ archive.name or '' }}" />
-        </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="gender">性别</label>
-        <div class="controls">
-          <select name="gender" class="span2" id="gender">
-            <option value="男"{% if archive.gender == '男' %} selected{% endif %}>男</option>
-            <option value="女"{% if archive.gender == '女' %} selected{% endif %}>女</option>
-          </select>
-        </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="birthday">出生日期</label>
-        <div class="controls">
-          <input type="text" id="birthday" class="span3" name="birthday" value="{{ archive.birthday or '' }}" />
-        </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="retire_date">预退休日期</label>
-        <div class="controls">
-          <input type="text" id="retire_date" class="span3" name="retire_date" value="{{ archive.retire_date or '' }}" />
-        </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="female_cadre">女管理岗位</label>
-        <div class="controls">
-          <select name="female_cadre" class="span2" id="female_cadre">
-            <option value="0"{% if not archive.female_cadre %} selected{% endif %}>否</option>
-            <option value="1"{% if archive.female_cadre %} selected{% endif %}>是</option>
-          </select>
-        </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="special_personnel">特殊工种</label>
-        <div class="controls">
-          <select name="special_personnel" class="span2" id="special_personnel">
-            <option value="0"{% if not archive.special_personnel %} selected{% endif %}>否</option>
-            <option value="1"{% if archive.special_personnel %} selected{% endif %}>是</option>
-          </select>
-        </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="transfer_out">转出状态</label>
-        <div class="controls">
-          <select name="transfer_out" class="span4" id="transfer_out">
-            <option value=""{% if archive.transfer_out == "非转出状态" %} selected{% endif %}>非转出状态</option>
-            <option value="调转"{% if archive.transfer_out == "调转" %} selected{% endif %}>转出原因：调转</option>
-            <option value="退休"{% if archive.transfer_out == "退休" %} selected{% endif %}>转出原因：退休</option>
-            <option value="失业保险"{% if archive.transfer_out == "失业保险" %} selected{% endif %}>转出原因：失业保险</option>
-            <option value="死亡"{% if archive.transfer_out == "死亡" %} selected{% endif %}>转出原因：死亡</option>
-          </select>
-        </div>
-      </div>
-      <div class="control-group">
-        <div class="controls">
-          <button type="submit" class="btn btn-primary">确认</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div id="tabs-2">
-    <div class="row-fluid">
-      {% for f in file: %}
-      {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
-        <li class="span3">
-          <div class="thumbnail">
-            <a href="/chakan/{{ archive.id }}?pic_id={{ f.id }}">
-              <img alt="" src="{{ config.NGINX_URL}}archman/{{ archive.id }}/{{ f.file_name }}">
-            </a>
-            <label><input name="pic_id" type="checkbox" value="{{ f.id }}"{% if f.access == 1 %} checked{% endif %} /> 终端可见</label>
-          </div>
-        </li>
-      {% if loop.index % 4 == 0 %}</ul>{% endif %}
-      {% endfor %}
+        </form>
     </div>
-  </div>
-  <div id="tabs-3">
-    <div class="row-fluid">
-      <div class="span9">
-        <input type="file" name="file_upload" id="file_upload_1" />
-      </div>
-      <div class="span3">
-        <p><a href="#" class="btn">查询密码</a></p>
-        <p><a href="#" class="btn">删除档案</a></p>
-      </div>
+    <div id="tabs-2">
+        <div class="row-fluid">
+            {% for f in file: %}
+            {% if loop.index % 4 == 1 %}<ul class="thumbnails">{% endif %}
+            <li class="span3">
+                <div class="thumbnail">
+                    <a href="/chakan/{{ archive.id }}?pic_id={{ f.id }}">
+                        <img alt="" src="{{ config.NGINX_URL}}archman/{{ archive.id }}/{{ f.file_name }}">
+                    </a>
+                    <label>
+                        <input name="pic_id" type="checkbox" value="{{ f.id }}"{% if f.access == 1 %} checked{% endif %} />
+                        终端可见
+                    </label>
+                </div>
+            </li>
+            {% if loop.index % 4 == 0 %}</ul>{% endif %}
+            {% endfor %}
+        </div>
     </div>
-  </div>
+    <div id="tabs-3">
+        <div class="row-fluid">
+            <div class="span9">
+                <input type="file" name="file" id="file_upload_1" />
+            </div>
+            <div class="span3">
+                <p><a href="#" class="btn">查询密码</a></p>
+                <p><a href="#" class="btn">删除档案</a></p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block js_lib %}
-<script src="{{ config.NGINX_URL }}static/uploadify/3.2.1/jquery.uploadify.min.js"></script>
+<script src="/static/uploadify/3.2.1/jquery.uploadify.min.js"></script>
 <script type="text/javascript">
 $(function() {
     $("#file_upload_1").uploadify({
@@ -126,8 +131,8 @@ $(function() {
         'fileTypeDesc': '图片文件',
         'fileTypeExts': '*.jpg;',
         'fileSizeLimit': '5MB',
-        'swf': '{{ config.NGINX_URL }}static/uploadify/3.2.1/uploadify.swf',
-        'uploader': '{{ url_root }}archive/upload?category=9&archive_id={{ archive.id }}'
+        'swf': '/static/uploadify/3.2.1/uploadify.swf',
+        'uploader': '/archive/{{ archive.archive }}/upload'
     });
 
     $("#tabs").tabs();
@@ -137,18 +142,12 @@ $(function() {
        changeYear: true
     });
     $("#birthday").datepicker("option", "dateFormat", "yy-mm-dd");
-    {% if not archive.birthday %}
-    $("#birthday").datepicker("setDate", new Date());
-    {% endif %}
 
     $("#retire_date").datepicker({
        changeMonth: true,
        changeYear: true
     });
     $("#retire_date").datepicker("option", "dateFormat", "yy-mm-dd");
-    {% if not archive.birthday %}
-    $("#retire_date").datepicker("setDate", new Date());
-    {% endif %}
 });
 </script>
 {% endblock %}

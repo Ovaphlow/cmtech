@@ -19,5 +19,5 @@ class Config(object):
     DB_NAME = 'archman'
 
 
-class DevelopmentConfig(Config):
+class DevelConfig(Config):
     DEBUG = True

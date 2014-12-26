@@ -1,5 +1,7 @@
 archman/archman/static/*
-archieve/static/upload/*
+archieve/static/*
+viewer_site/static/*
+client_access/static/*
 *.pyc
 
 # C extensions
