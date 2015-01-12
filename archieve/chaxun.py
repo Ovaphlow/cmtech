@@ -218,7 +218,8 @@ class DangYueTuiXiu(MethodView):
         close_db(cursor, cnx)
         return render_template('statistics/dytx.html',
             data=result,
-            user=session['user_name'])
+            user=session['user_name'],
+            counter=len(result))
 
 
 class TeShuGongZhong(MethodView):

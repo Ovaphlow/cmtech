@@ -6,8 +6,8 @@
 <div class=row-fluid>
   <div class="span8 offset2">
     <form method="post" class="form-inline">
-      <input type="text" name="year" placeholder="年份" class="span2">
-      <select name="month" class="span2">
+      <input id="year" type="text" name="year" placeholder="年份" class="span2">
+      <select id="month" name="month" class="span2">
         <option value="01">一月</option>
         <option value="02">二月</option>
         <option value="03">三月</option>
@@ -23,6 +23,9 @@
       </select>
       <button type="submit">确认</button>
     </form>
+    {% if counter %}
+    <p class="text-center">共有 <strong>{{ counter }}</strong> 份档案</p>
+    {% endif %}
     <table class="table tabel-hover">
       <thead>
         <tr>
@@ -66,4 +69,13 @@
 
 {% endblock %}
 {% block jslib %}
+<script>
+$(function () {
+    var today = new Date();
+    document.getElementById("year").value = today.getFullYear();
+    //alert(today.getMonth());
+    m = today.getMonth();
+    document.getElementById("month").options[m].selected = true;
+});
+</script>
 {% endblock %}

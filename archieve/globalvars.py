@@ -175,3 +175,12 @@ def render_text(file_name, font_size, text, output_name, output_type):
     draw.text((10, 20), text, font=font, fill=(255, 0, 0, 255))
     img.save(output_name, output_type)
     # img.show()
+
+
+def export_retire():
+    import xlwt
+    wbk = xlwt.Workbook()
+    sheet = wbk.add_sheet('Sheet 1')
+    sheet.write(0, 1, 'test text')
+    sheet.write(1, 1, 'test text12')
+    wbk.save('test2.xls')

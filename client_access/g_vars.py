@@ -1,9 +1,9 @@
 ﻿# -*- coding=UTF-8 -*-
 
 cnx_param = {
-    'user': 'root',
-    'password': 'dsdfjk',
-    'host': '127.0.0.1',
+    'user': 'cmtech',
+    'password': 'cmtech.1123',
+    'host': '125.211.221.215',
     'database': 'cm_archieve',
 }
 """
@@ -23,7 +23,7 @@ cnx_param = {
 }
 """
 
-G_FILE_SERVER_ROOT = 'http://172.17.203.100:5000/static/upload'
+G_FILE_SERVER_ROOT = 'http://127.0.0.1:5000/static/upload'
 """
 生产环境
 G_FILE_SERVER_ROOT = 'http://172.17.203.100:5000/static/upload'
