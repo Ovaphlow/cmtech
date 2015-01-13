@@ -177,10 +177,20 @@ def render_text(file_name, font_size, text, output_name, output_type):
     # img.show()
 
 
-def export_retire():
+def export_retire(data, user_id):
     import xlwt
     wbk = xlwt.Workbook()
     sheet = wbk.add_sheet('Sheet 1')
-    sheet.write(0, 1, 'test text')
-    sheet.write(1, 1, 'test text12')
-    wbk.save('test2.xls')
+    sheet.write(0, 0, u'档案号')
+    sheet.write(0, 1, u'身份证')
+    sheet.write(0, 2, u'姓名')
+    sheet.panes_frozen = True
+    sheet.horz_split_pos = 1
+    i = 0
+    for r in data:
+        i += 1
+        sheet.write(i, 0, r[1])
+        sheet.write(i, 1, r[2])
+        sheet.write(i, 2, r[3])
+    p = os.path.join(os.getcwd(), 'static', '~73mp', '%s.xls' % user_id)
+    wbk.save(p)

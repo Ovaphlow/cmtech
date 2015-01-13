@@ -1,3 +1,4 @@
+#!usr/bin/env python
 # -*- coding=UTF-8 -*-
 
 import admin
@@ -57,6 +58,8 @@ app.add_url_rule('/chaxun/tsgz',
 app.add_url_rule('/chaxun/nglgw',
     view_func=chaxun.NvGuanLiGangWei.as_view('nglgw'))
 app.add_url_rule('/chaxun/dytx', view_func=chaxun.DangYueTuiXiu.as_view('dytx'))
+app.add_url_rule('/chaxun/dytx/export',
+    view_func=chaxun.ExportRetire.as_view('dytx.export'))
 app.add_url_rule('/tongji',
     view_func=chaxun.TongJi.as_view('tong_ji'))
 app.add_url_rule('/tongji_month',

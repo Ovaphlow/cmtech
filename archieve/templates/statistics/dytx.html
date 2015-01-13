@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class=row-fluid>
-  <div class="span8 offset2">
+  <div class="span10 offset1">
     <form method="post" class="form-inline">
       <input id="year" type="text" name="year" placeholder="年份" class="span2">
       <select id="month" name="month" class="span2">
@@ -22,6 +22,9 @@
         <option value="12">十二月</option>
       </select>
       <button type="submit">确认</button>
+      {% if year and month %}
+      <a href="/chaxun/dytx/export?year={{ year }}&month={{ month }}" target="_blank" class="btn">导出</a>
+      {% endif %}
     </form>
     {% if counter %}
     <p class="text-center">共有 <strong>{{ counter }}</strong> 份档案</p>

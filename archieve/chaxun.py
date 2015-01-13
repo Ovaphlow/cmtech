@@ -219,7 +219,9 @@ class DangYueTuiXiu(MethodView):
         return render_template('statistics/dytx.html',
             data=result,
             user=session['user_name'],
-            counter=len(result))
+            counter=len(result),
+            year=request.form['year'],
+            month=request.form['month'])
 
 
 class TeShuGongZhong(MethodView):
@@ -515,3 +517,21 @@ class InvokeLog(MethodView):
     def post(self):
         archieve_id = request.form['archieve_id']
         return redirect('/invoke_log?archieve_id=%s' % (archieve_id))
+
+
+class ExportRetire(MethodView):
+    def get(self):
+        print(session['user_id'])
+        y = request.args.get('year')
+        m = request.args.get('month')
+        sql = '''
+SELECT *
+FROM dangan
+WHERE locate(:date, YuTuiXiuRiQi)>0
+        '''
+        param = {'date': '%s-%s' % (y, m)}
+        res = db_engine.execute(text(sql), param)
+        data = res.fetchall()
+        res.close()
+        export_retire(data, session['user_id'])
+        return redirect('/static/~73mp/%s.xls' % session['user_id'])
