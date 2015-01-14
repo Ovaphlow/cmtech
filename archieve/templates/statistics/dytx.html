@@ -22,12 +22,12 @@
         <option value="12">十二月</option>
       </select>
       <button type="submit">确认</button>
-      {% if year and month %}
-      <a href="/chaxun/dytx/export?year={{ year }}&month={{ month }}" target="_blank" class="btn">导出</a>
-      {% endif %}
     </form>
-    {% if counter %}
-    <p class="text-center">共有 <strong>{{ counter }}</strong> 份档案</p>
+    {% if counter and year and month %}
+    <p class="text-center">
+        共有 <strong>{{ counter }}</strong> 份档案。
+        <a href="/chaxun/dytx/export?year={{ year }}&month={{ month }}" target="_blank">[导出]</a>
+    </p>
     {% endif %}
     <table class="table tabel-hover">
       <thead>
