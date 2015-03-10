@@ -48,11 +48,28 @@ where archive=:archive
         archive=archive)
 
 
+@app.route('/archive/append', methods=['POST'])
+def append():
+    sql = '''
+select *
+from archive
+where archive=:archive
+    '''
+    param = {'archive': request.form['g_archive']}
+    res = gl.db_engine.execute(text(sql), param)
+    print(res.rowcount)
+    if res.rowcount > 0:
+        return redirect('/')
+
+    return redirect('/archive/%s' % request.form['g_archive'])
+
+
 @app.route('/archive/<archive>/upload', methods=['POST'])
 def upload(archive):
     f = request.files['Filedata']
     file_name = secure_filename(f.filename)
     file_ext = file_name.rsplit('.', 1)[1]
+    print(gl.get_timestr())
     file_name = '%s.%s' % (time.time(), file_ext)
     file_path = os.path.join(app.config['NGINX_PATH'],
         app.config['FILE_DIR'], archive, file_name)
@@ -64,8 +81,10 @@ into file
 values
     (:archive, :file_name)
     '''
-    param = {'archive': archive,
-        'file_name': file_name}
+    param = {
+        'archive': archive,
+        'file_name': file_name
+    }
     gl.db_engine.execute(text(sql), param)
     return 'Success.'
 
@@ -76,20 +95,18 @@ class Archive(MethodView):
             return redirect('/')
         archive_id = request.args.get('id')
         sql = '''
-            select *
-            from archive
-            where id=:id
+select *
+from archive
+where id=:id
         '''
-        sql = ' '.join(sql.split())
         param = {'id': archive_id}
         res = gl.db_engine.execute(text(sql), param)
         archive = res.fetchone()
         sql = '''
-            select *
-            from file
-            where archive_id=:archive_id
+select *
+from file
+where archive_id=:archive_id
         '''
-        sql = ' '.join(sql.split())
         param = {'archive_id': archive_id}
         res = gl.db_engine.execute(text(sql), param)
         file = res.fetchall()
@@ -100,14 +117,15 @@ class Archive(MethodView):
     def post(self):
         id = request.form['id']
         sql = '''
-            update archive
-            set id_card=:id_card, name=:name, gender=:gender,
-                birthday=:birthday, retire_date=:retire_date,
-                female_cadre=:female, special_personnel=:special,
-                transfer_out=:transfer
-            where id=:id
+update archive
+set id_card=:id_card, name=:name, gender=:gender,
+    birthday=:birthday, retire_date=:retire_date,
+    female_cadre=:female, special_personnel=:special,
+    transfer_out=:transfer
+where id=:id
         '''
-        param = {'id': id,
+        param = {
+            'id': id,
             'id_card': request.form['id_card'],
             'name': request.form['name'],
             'gender': request.form['gender'],
@@ -115,8 +133,9 @@ class Archive(MethodView):
             'retire_date': request.form['retire_date'],
             'female': request.form['female_cadre'],
             'special': request.form['special_personnel'],
-            'transfer': request.form['transfer_out']}
-        gl.db_engine.execute(text(' '.join(sql.split())), param)
+            'transfer': request.form['transfer_out']
+        }
+        gl.db_engine.execute(text(sql), param)
         return redirect('/archive?id=%s' % id)
 
 
@@ -130,13 +149,14 @@ class Upload(MethodView):
         file_name = '%s%s' % (file_name, settings.FILE_EXT)
         f.save(os.path.join(path, file_name))
         sql = '''
-            insert into file
-            (archive_id, file_name)
-            values
-            (:archive_id, :file_name)
+insert into file
+    (archive_id, file_name)
+values
+    (:archive_id, :file_name)
         '''
-        sql = ' '.join(sql.split())
-        param = {'archive_id': archive_id,
-            'file_name': file_name}
+        param = {
+            'archive_id': archive_id,
+            'file_name': file_name
+        }
         gl.db_engine.execute(text(sql), param)
         return '1'
