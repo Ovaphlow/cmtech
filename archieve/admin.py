@@ -12,15 +12,14 @@ class Home(MethodView):
         if not session['user_account'] in G_ADMIN_USER:
             return redirect('/logout')
         sql = '''
-            select l.riqi,l.shijian,u.mingcheng,l.caozuo,a.danganhao
-            from caozuo_jilu as l,
-                user as u,
-                dangan as a
-            where l.yh_id=u.id
-            and l.neirong=a.id
-            order by l.id desc
-            limit 100
-        '''
+select l.riqi,l.shijian,u.mingcheng,l.caozuo,a.danganhao
+from caozuo_jilu as l,
+    user as u,
+    dangan as a
+where l.yh_id=u.id
+and l.neirong=a.id
+order by l.id desc
+limit 100'''
         cnx = connect_db()
         cursor = cnx.cursor()
         cursor.execute(' '.join(sql.split()))

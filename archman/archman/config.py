@@ -25,3 +25,8 @@ class Config(object):
 
 class DevelConfig(Config):
     DEBUG = True
+
+    DB_USER = 'cmtech'
+    DB_PASSWORD = 'cmtech.1123'
+    DB_HOST = '125.211.221.215'
+    DB_NAME = 'cm_archieve'
