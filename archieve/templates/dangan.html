@@ -1,6 +1,9 @@
 ﻿{% extends "base.html" %}
+
 {% block user %}{{ User }}{% endblock %}
+
 {% block title %}个人档案<br /><small> </small>{% endblock %}
+
 {% block content %}
 <div class="row-fluid">
   <form class="form-inline" action="/make_void/{{ id }}" method="post">

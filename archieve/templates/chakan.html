@@ -14,7 +14,7 @@
           {% endif %}
           <option value="turn">上下翻转</option>
           <option value="rotate">旋转图片</option>
-          <option value="delete">删除图片</option>
+          {% if auth['del_archieve'] %} <option value="delete">删除图片</option> {% endif %}
           <option value="movetocat1">转移到：就业类</option>
           <option value="movetocat2">转移到：职工历年调整工资审批表</option>
           <option value="movetocat3">转移到：职工登记表</option>

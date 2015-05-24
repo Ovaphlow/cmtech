@@ -273,7 +273,8 @@ class ChaKan(MethodView):
             archieve_id=rec_id,
             previous_id=previous_id,
             next_id=next_id,
-            pic_id=pic_id)
+            pic_id=pic_id,
+            auth=session['auth'])
 
 
     def post(self, rec_id):
